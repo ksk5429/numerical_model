@@ -1,9 +1,32 @@
 # Op³: OptumGX ↔ OpenSeesPy ↔ OpenFAST Integrated Numerical Modeling Framework for Offshore Wind Turbines
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-yellow.svg)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
-[![OpenFAST](https://img.shields.io/badge/OpenFAST-v4.0.2-orange.svg)](https://github.com/OpenFAST/openfast)
+[![OpenFAST](https://img.shields.io/badge/OpenFAST-v5.0.0-orange.svg)](https://github.com/OpenFAST/openfast/releases/tag/v5.0.0)
 [![OpenSeesPy](https://img.shields.io/badge/OpenSeesPy-3.7+-green.svg)](https://github.com/zhuminjie/OpenSeesPy)
+[![V&V](https://img.shields.io/badge/V%26V-121%2F121-brightgreen.svg)](docs/DEVELOPER_NOTES.md)
+[![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)](CHANGELOG.md)
+
+## v0.3.0 release highlights
+
+- **121 / 121 active V&V tests pass** (15 modules: code verification,
+  consistency, sensitivity, extended invariants, PISA, cyclic
+  degradation, HSsmall, Mode D, UQ, reproducibility snapshot, ...)
+- **4 / 4 calibration regression** against published references
+  (Jonkman 2009, Jonkman & Musial 2010, Gaertner 2020, PhD field OMA)
+- **OpenFAST v5.0.0 end-to-end** — Gunsan tripod + SoilDyn with
+  Op³ PISA-derived 6×6 stiffness, 8-module coupled simulation
+- **DLC 1.1 partial sweep 3 / 3 PASS** at U = {8, 12, 18} m/s
+- **35 / 36 DNV-ST-0126 conformance** (1 real Gunsan 1P resonance
+  finding — see developer notes)
+- **End-to-end Bayesian calibration** of NREL 5 MW OC3 tower EI:
+  posterior mean 1.014 ± 0.076, 5%-95% credible interval [0.888, 1.145]
+
+See [CHANGELOG.md](CHANGELOG.md) and [docs/DEVELOPER_NOTES.md](docs/DEVELOPER_NOTES.md)
+for the complete implementation journal of Track C phases 1 through 8.
+
+---
+
 
 **Op³** (pronounced "O-p-cubed") is an integrated numerical modeling
 framework for offshore wind turbines that connects three industry-standard

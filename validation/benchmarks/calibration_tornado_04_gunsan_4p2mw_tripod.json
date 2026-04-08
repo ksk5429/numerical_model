@@ -1,0 +1,70 @@
+{
+  "example": "04_gunsan_4p2mw_tripod",
+  "f1_baseline_hz": 0.2350342372636715,
+  "perturbation_pct": 10.0,
+  "rows": [
+    {
+      "parameter": "tower_EI",
+      "f1_baseline_hz": 0.2350342372636715,
+      "f1_plus_hz": 0.2350342372636715,
+      "f1_minus_hz": 0.23503423726367142,
+      "df_plus_pct": 0.0,
+      "df_minus_pct": -3.5427488274176217e-14,
+      "swing_pct": 3.5427488274176217e-14
+    },
+    {
+      "parameter": "hub_mass",
+      "f1_baseline_hz": 0.2350342372636715,
+      "f1_plus_hz": 0.23503423726367142,
+      "f1_minus_hz": 0.2350342372636715,
+      "df_plus_pct": -3.5427488274176217e-14,
+      "df_minus_pct": 0.0,
+      "swing_pct": -3.5427488274176217e-14
+    },
+    {
+      "parameter": "nac_cm_z",
+      "f1_baseline_hz": 0.2350342372636715,
+      "f1_plus_hz": 0.23503423726367148,
+      "f1_minus_hz": 0.23503423726367154,
+      "df_plus_pct": -1.1809162758058741e-14,
+      "df_minus_pct": 1.1809162758058741e-14,
+      "swing_pct": -2.3618325516117482e-14
+    },
+    {
+      "parameter": "blade_mass",
+      "f1_baseline_hz": 0.2350342372636715,
+      "f1_plus_hz": 0.2350342372636715,
+      "f1_minus_hz": 0.23503423726367154,
+      "df_plus_pct": 0.0,
+      "df_minus_pct": 1.1809162758058741e-14,
+      "swing_pct": -1.1809162758058741e-14
+    },
+    {
+      "parameter": "nac_yiner",
+      "f1_baseline_hz": 0.2350342372636715,
+      "f1_plus_hz": 0.2350342372636715,
+      "f1_minus_hz": 0.23503423726367154,
+      "df_plus_pct": 0.0,
+      "df_minus_pct": 1.1809162758058741e-14,
+      "swing_pct": -1.1809162758058741e-14
+    },
+    {
+      "parameter": "tower_mass",
+      "f1_baseline_hz": 0.2350342372636715,
+      "f1_plus_hz": 0.23503423726367148,
+      "f1_minus_hz": 0.23503423726367148,
+      "df_plus_pct": -1.1809162758058741e-14,
+      "df_minus_pct": -1.1809162758058741e-14,
+      "swing_pct": 0.0
+    },
+    {
+      "parameter": "nac_mass",
+      "f1_baseline_hz": 0.2350342372636715,
+      "f1_plus_hz": 0.23503423726367148,
+      "f1_minus_hz": 0.23503423726367148,
+      "df_plus_pct": -1.1809162758058741e-14,
+      "df_minus_pct": -1.1809162758058741e-14,
+      "swing_pct": 0.0
+    }
+  ]
+}

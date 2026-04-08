@@ -120,6 +120,55 @@ def build_pce_2d(
     return HermitePCE(coeffs=coeffs, order=order, n_dim=2)
 
 
+def pce_sobol_2d(pce: HermitePCE) -> dict:
+    """
+    First-order and total Sobol indices from a 2D Hermite PCE.
+
+    For the tensor-product basis :math:`\\Psi_{ij}(\\xi_1, \\xi_2) = H_i(\\xi_1) H_j(\\xi_2)`
+    the total variance decomposes as
+
+    .. math::
+        V = \\sum_{(i,j) \\neq (0,0)} i!\\,j!\\,c_{ij}^2
+
+    with partial variances grouped by which input is active:
+
+    - :math:`V_1 = \\sum_{i \\geq 1, j = 0} i!\\,c_{i0}^2`
+    - :math:`V_2 = \\sum_{i = 0, j \\geq 1} j!\\,c_{0j}^2`
+    - :math:`V_{12} = \\sum_{i \\geq 1, j \\geq 1} i!\\,j!\\,c_{ij}^2`
+
+    First-order Sobol: :math:`S_i = V_i / V`. Total Sobol:
+    :math:`S_i^T = (V_i + V_{12}) / V`.
+    """
+    if pce.n_dim != 2:
+        raise ValueError("pce_sobol_2d requires a 2D PCE")
+    V = 0.0
+    V1 = 0.0
+    V2 = 0.0
+    V12 = 0.0
+    for i in range(pce.coeffs.shape[0]):
+        for j in range(pce.coeffs.shape[1]):
+            if i == 0 and j == 0:
+                continue
+            contrib = _factorial(i) * _factorial(j) * pce.coeffs[i, j] ** 2
+            V += contrib
+            if i >= 1 and j == 0:
+                V1 += contrib
+            elif i == 0 and j >= 1:
+                V2 += contrib
+            else:
+                V12 += contrib
+    if V == 0:
+        return {"S1": 0.0, "S2": 0.0, "S1_total": 0.0, "S2_total": 0.0,
+                "V": 0.0, "V1": 0.0, "V2": 0.0, "V12": 0.0}
+    return {
+        "S1": V1 / V,
+        "S2": V2 / V,
+        "S1_total": (V1 + V12) / V,
+        "S2_total": (V2 + V12) / V,
+        "V": V, "V1": V1, "V2": V2, "V12": V12,
+    }
+
+
 def pce_mean_var(pce: HermitePCE) -> tuple[float, float]:
     """Closed-form mean and variance from Hermite PCE coefficients.
     Mean = c_0; Variance = sum_{k>=1} k! * c_k^2 ."""

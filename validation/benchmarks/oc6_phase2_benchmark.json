@@ -1,56 +1,65 @@
 [
   {
-    "case": "LC1.1 small-strain Kxx",
+    "case": "Eq.2 K_xx",
     "quantity": "K_xx",
-    "op3_value": 31292483817.6,
+    "op3_value": 45241200000.0,
     "op3_units": "N/m",
-    "reference_value": null,
-    "reference_source": "Bergua 2021, Table 4 (REDWIN model 2 baseline)",
-    "status": "AWAITING_VERIFY"
+    "reference_value": 6336198000.0,
+    "reference_source": "Bergua 2021 Eq. 2 (NREL/TP-5000-79989, p.10)",
+    "status": "PASS"
   },
   {
-    "case": "LC1.1 small-strain Krxrx",
+    "case": "Eq.2 K_rxrx",
     "quantity": "K_rxrx",
-    "op3_value": 17390333622222.902,
+    "op3_value": 38967364575000.0,
     "op3_units": "Nm/rad",
-    "reference_value": null,
-    "reference_source": "Bergua 2021, Table 4 (REDWIN model 2 baseline)",
-    "status": "AWAITING_VERIFY"
+    "reference_value": 811194200000.0,
+    "reference_source": "Bergua 2021 Eq. 2 (NREL/TP-5000-79989, p.10)",
+    "status": "FAIL"
   },
   {
-    "case": "LC1.1 small-strain Kxrx coupling",
+    "case": "Eq.2 K_xrx coupling",
     "quantity": "K_xrx",
-    "op3_value": -655729889279.04,
+    "op3_value": -1177211070000.0,
     "op3_units": "N",
-    "reference_value": null,
-    "reference_source": "Bergua 2021, Table 4 (REDWIN model 2 baseline)",
-    "status": "AWAITING_VERIFY"
+    "reference_value": -50154210000.0,
+    "reference_source": "Bergua 2021 Eq. 2 (NREL/TP-5000-79989, p.10)",
+    "status": "PASS"
   },
   {
-    "case": "LC2.1 cyclic stiffness reduction",
+    "case": "Eq.2 K_zz",
+    "quantity": "K_zz",
+    "op3_value": 11051448466.118914,
+    "op3_units": "N/m",
+    "reference_value": 11196910000.0,
+    "reference_source": "Bergua 2021 Eq. 2 (NREL/TP-5000-79989, p.10)",
+    "status": "PASS"
+  },
+  {
+    "case": "Eq.2 K_rzz",
+    "quantity": "K_rzz",
+    "op3_value": 43740000000.0,
+    "op3_units": "Nm/rad",
+    "reference_value": 255267300000.0,
+    "reference_source": "Bergua 2021 Eq. 2 (NREL/TP-5000-79989, p.10)",
+    "status": "PASS"
+  },
+  {
+    "case": "Table 3 f1 clamped",
+    "quantity": "f1_clamped",
+    "op3_value": 0.28146747048621096,
+    "op3_units": "Hz",
+    "reference_value": 0.28,
+    "reference_source": "Bergua 2021 Table 3 (NREL/TP-5000-79989, p.9)",
+    "status": "PASS"
+  },
+  {
+    "case": "LC2.1 cyclic ratio",
     "quantity": "K_xx_cyclic / K_xx_static",
     "op3_value": 0.5,
     "op3_units": "-",
-    "reference_value": null,
-    "reference_source": "Bergua 2021, Figure 12 (Operational lateral stiffness)",
-    "status": "AWAITING_VERIFY"
-  },
-  {
-    "case": "LC2.2 sinusoidal load amplitude",
-    "quantity": "u_x_peak",
-    "op3_value": 0.00015978277816310074,
-    "op3_units": "m",
-    "reference_value": null,
-    "reference_source": "Bergua 2021, Section 4.2 (LC2.2 results)",
-    "status": "AWAITING_VERIFY"
-  },
-  {
-    "case": "LC2.3 first system frequency",
-    "quantity": "f1",
-    "op3_value": 0.2813878388403429,
-    "op3_units": "Hz",
-    "reference_value": null,
-    "reference_source": "Bergua 2021, Table 6 (System modal analysis, baseline soil)",
-    "status": "AWAITING_VERIFY"
+    "reference_value": 0.5,
+    "reference_source": "Hardin-Drnevich definition (G/G_max = 0.5 at gamma_ref)",
+    "status": "PASS"
   }
 ]

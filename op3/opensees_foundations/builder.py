@@ -636,41 +636,55 @@ def run_transient_analysis(tower_model: "TowerModel",
 
 
 def run_static_condensation(tower_model: "TowerModel") -> np.ndarray:
-    """Extract the 6x6 stiffness matrix at the tower base via static condensation.
-
-    Uses OpenSees' `printA` or a finite-difference probe with unit
-    displacements at the base node. This is the matrix that OpenFAST
-    SubDyn accepts as a linear SSI interface.
     """
-    import openseespy.opensees as ops
+    Extract the 6x6 stiffness matrix at the tower base / foundation
+    interface via analytic Winkler integration.
 
-    base_node = 1000
+    The earlier version of this function used a finite-difference
+    probe with SP-imposed unit displacements at the base node; that
+    approach failed on Mode C (distributed BNWF) models because the
+    springs absorb the imposed displacement and the nodal reactions
+    read back as ~zero. The analytic Winkler integral is the correct
+    closed-form condensation for any elastic Winkler foundation and
+    matches the same expression used internally by
+    ``pisa_pile_stiffness_6x6``.
 
-    # Simple finite-difference probe: apply a unit displacement in each
-    # of the 6 DOFs and read back the reaction.
-    K = np.zeros((6, 6))
-    for dof in range(1, 7):
-        try:
-            ops.timeSeries("Linear", 9000 + dof)
-            ops.pattern("Plain", 9000 + dof, 9000 + dof)
-            ops.sp(base_node, dof, 1.0)
+    For Mode A (fixed) a diagonal dummy matrix with 1e20 is returned
+    (effectively rigid). For Mode B the stored stiffness_matrix is
+    returned directly. For Modes C / D the spring table is integrated
+    via the Winkler formula:
 
-            ops.constraints("Transformation")
-            ops.numberer("RCM")
-            ops.system("UmfPack")
-            ops.test("NormDispIncr", 1e-8, 50, 0)
-            ops.algorithm("Linear")
-            ops.integrator("LoadControl", 1.0)
-            ops.analysis("Static")
-            ops.analyze(1)
+        K_xx   = sum k(z) dz
+        K_xrx  = sum k(z) z dz
+        K_rxrx = sum k(z) z^2 dz
+    """
+    from op3.foundations import FoundationMode
 
-            reactions = [ops.nodeReaction(base_node, d) for d in range(1, 7)]
-            K[:, dof - 1] = reactions
+    foundation = tower_model.foundation
 
-            ops.remove("loadPattern", 9000 + dof)
-        except Exception:
-            pass
+    if foundation.mode == FoundationMode.FIXED:
+        return np.diag([1e20] * 6)
 
-    # Symmetrize to combat numerical noise
-    K = 0.5 * (K + K.T)
+    if foundation.mode == FoundationMode.STIFFNESS_6X6:
+        return np.asarray(foundation.stiffness_matrix, dtype=float)
+
+    # Modes C and D: analytic Winkler integration
+    if foundation.spring_table is None:
+        raise ValueError("spring_table not populated; cannot condense")
+    df = foundation.spring_table
+    z = df["depth_m"].values.astype(float)
+    k = df["k_ini_kN_per_m"].values.astype(float) * 1.0e3   # kN/m -> N/m
+    if len(z) < 2:
+        raise ValueError("need >= 2 spring rows for Winkler integration")
+    dz = float(z[1] - z[0])
+
+    Kxx = float(np.sum(k) * dz)
+    Kxrx = float(np.sum(k * z) * dz)
+    Krxrx = float(np.sum(k * z * z) * dz)
+    Kzz = 3.0 * Kxx   # consistent with _attach_distributed_bnwf convention
+    Krzz = 0.5 * Kxx
+
+    K = np.diag([Kxx, Kxx, Kzz, Krxrx, Krxrx, Krzz])
+    K[0, 4] = K[4, 0] = -Kxrx
+    K[1, 3] = K[3, 1] = Kxrx
     return K

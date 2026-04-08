@@ -2,46 +2,61 @@
   {
     "case": "Dunkirk DM7",
     "geometry": {
-      "D_m": 2.0,
-      "L_m": 10.6
+      "D_m": 0.762,
+      "L_m": 2.24
     },
-    "op3_Kxx_N_per_m": 9453379779.504,
-    "op3_Krxrx_Nm_per_rad": 463065603366.4074,
-    "ref_Kxx": null,
-    "ref_Krxrx": null,
-    "status_Kxx": "AWAITING_VERIFY",
-    "status_Krxrx": "AWAITING_VERIFY",
-    "citation": "Byrne et al. (2020), Geotechnique 70(11), 1048-1066",
-    "notes": "Medium-scale PISA JIP test pile in dense Dunkirk marine sand. Reference K_ini values pending extraction from Figure 8 / Table 4."
+    "op3_Kxx_N_per_m": 1620113283.04,
+    "op3_Krxrx_Nm_per_rad": 3475683636.074308,
+    "ref_Kxx": 8070000.0,
+    "ref_Krxrx": 94595331.97609891,
+    "status_Kxx": "DISCREPANT",
+    "status_Krxrx": "DISCREPANT",
+    "citation": "McAdam et al. (2020), Geotechnique 70(11), 986-998, Table 3",
+    "notes": "D = 0.762 m, nominal L/D = 3, installed L = 2.24 m, wall thickness 10 mm, Dunkirk dense marine sand. Reference k_Hinit is the secant stiffness of H vs ground-level displacement for 0 < vG < D/1000."
   },
   {
     "case": "Cowden CM1",
     "geometry": {
       "D_m": 0.762,
-      "L_m": 2.27
+      "L_m": 3.98
     },
-    "op3_Kxx_N_per_m": 894828454.4,
-    "op3_Krxrx_Nm_per_rad": 1917908732.332517,
-    "ref_Kxx": null,
-    "ref_Krxrx": null,
-    "status_Kxx": "AWAITING_VERIFY",
-    "status_Krxrx": "AWAITING_VERIFY",
-    "citation": "Burd et al. (2020), Geotechnique 70(11), 1030-1047",
-    "notes": "Medium-scale PISA JIP test pile in Cowden glacial till. Reference K_ini values pending extraction from Figure 9 / Table 4."
+    "op3_Kxx_N_per_m": 1676337305.6,
+    "op3_Krxrx_Nm_per_rad": 10656360179.995445,
+    "ref_Kxx": 16500000.0,
+    "ref_Krxrx": 220531455.34585387,
+    "status_Kxx": "DISCREPANT",
+    "status_Krxrx": "DISCREPANT",
+    "citation": "Byrne et al. (2020), Geotechnique 70(11), 970-985, Table 3",
+    "notes": "D = 0.762 m, L/D = 5.25, installed L = 3.98 m, wall 15 mm, Cowden stiff glacial clay till. Reference k_Hinit is secant stiffness for 0 < vG < D/1000."
   },
   {
-    "case": "Borkum Riffgrund-1 demonstrator",
+    "case": "Dunkirk DL1 (large)",
     "geometry": {
-      "D_m": 8.0,
-      "L_m": 30.0
+      "D_m": 2.0,
+      "L_m": 10.61
     },
-    "op3_Kxx_N_per_m": 28363855000.0,
-    "op3_Krxrx_Nm_per_rad": 11836048601750.0,
-    "ref_Kxx": null,
-    "ref_Krxrx": null,
-    "status_Kxx": "AWAITING_VERIFY",
-    "status_Krxrx": "AWAITING_VERIFY",
-    "citation": "Murphy et al. (2018), Marine Structures 60, 263-281",
-    "notes": "Full-scale demonstrator monopile, layered north sea profile. Reference K_ini values pending extraction."
+    "op3_Kxx_N_per_m": 9466028617.080439,
+    "op3_Krxrx_Nm_per_rad": 464648309142.3382,
+    "ref_Kxx": 139700000.0,
+    "ref_Krxrx": 3361543384.03254,
+    "status_Kxx": "DISCREPANT",
+    "status_Krxrx": "DISCREPANT",
+    "citation": "McAdam et al. (2020), Geotechnique 70(11), 986-998, Table 3",
+    "notes": "D = 2.0 m, L/D = 5.25, installed L = 10.61 m, wall 38 mm, Dunkirk dense marine sand, largest pile in the PISA medium-scale field test programme."
+  },
+  {
+    "case": "Cowden CL1 (large)",
+    "geometry": {
+      "D_m": 2.0,
+      "L_m": 10.61
+    },
+    "op3_Kxx_N_per_m": 6052235000.272001,
+    "op3_Krxrx_Nm_per_rad": 296972750010.37885,
+    "ref_Kxx": 108200000.0,
+    "ref_Krxrx": 2554818808.488341,
+    "status_Kxx": "DISCREPANT",
+    "status_Krxrx": "DISCREPANT",
+    "citation": "Byrne et al. (2020), Geotechnique 70(11), 970-985, Table 3",
+    "notes": "D = 2.0 m, L/D = 5.25, Cowden stiff glacial clay till."
   }
 ]

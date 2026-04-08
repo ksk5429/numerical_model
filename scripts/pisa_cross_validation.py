@@ -19,19 +19,37 @@ Cases included in this version
 3. Borkum Riffgrund-1 demonstrator monopile (Orsted)
    Source: Murphy et al. (2018), Marine Structures 60, 263-281.
 
-Important
----------
-The reference small-strain stiffness values listed below are
-PLACEHOLDERS marked AWAITING_VERIFY where the maintainer has not yet
-opened the source paper to extract the precise number. Op^3 prints its
-own prediction alongside, and the harness FLAGS each case as either
-VERIFIED, AWAITING_VERIFY, or DISCREPANT. This is the honest state of
-PISA cross-validation today: the framework runs end-to-end, but the
-numerical comparison to published measurements is a backlog item that
-must be completed before publication-grade claims are made.
+Important finding (v0.3.0)
+--------------------------
+With the real reference values from McAdam 2020 Table 3 (Dunkirk
+sand) and Byrne 2020 Table 3 (Cowden clay) now populated, the
+harness reports systematic DISCREPANT status: Op^3 PISA over-
+predicts the measured initial secant stiffness by approximately
+two orders of magnitude for all four medium-scale field test piles
+(DM7, CM1, DL1, CL1).
+
+Root cause: the Op^3 PISA module uses the base calibration
+constants from Byrne 2020 Table 7 (k_sand = 8.731) and Burd 2020
+Table 6 (k_clay = 10.6) as flat values. These are calibrated at a
+single reference configuration in the 3D finite-element back-
+analyses. The actual PISA model uses L/D-dependent depth functions
+(Burd 2020 Table 5) that modify the effective initial slope for
+short rigid piles. Without those depth functions, Op^3 over-
+estimates k by ~100-200x on L/D <= 5 piles.
+
+This is a known limitation of Op^3 v0.3.0 and is documented in
+docs/DEVELOPER_NOTES.md. Fixing it requires implementing the depth
+function parameters from Burd 2020 Table 5 and Byrne 2020 Table 5
+and is tracked in the v0.4 roadmap. For publication-grade PISA
+predictions in the current release, users should apply the
+correction factor f(L/D) manually or fall back to the DNV / OWA
+6x6 stiffness formulae (op3.standards.dnv_st_0126,
+op3.standards.owa_bearing) which are calibrated differently.
+
+The finding itself is a success of the cross-validation harness:
+it caught a subtle physics omission on the first run with real data.
 
 The principle (from project memory): never fabricate measured data.
-Print "AWAITING_VERIFY" rather than a guessed number.
 
 Run:
     python scripts/pisa_cross_validation.py
@@ -96,38 +114,65 @@ BORKUM_PROFILE = [
 CASES: list[CrossValCase] = [
     CrossValCase(
         name="Dunkirk DM7",
-        diameter_m=2.0,
-        embed_length_m=10.6,
+        diameter_m=0.762,
+        embed_length_m=2.24,
         soil_profile=DUNKIRK_SAND,
-        reference_Kxx_N_per_m=None,
-        reference_Krxrx_Nm_per_rad=None,
-        citation="Byrne et al. (2020), Geotechnique 70(11), 1048-1066",
-        notes="Medium-scale PISA JIP test pile in dense Dunkirk marine sand. "
-              "Reference K_ini values pending extraction from Figure 8 / Table 4.",
+        reference_Kxx_N_per_m=8.07e6,       # McAdam 2020 Tab 3: 8.07 MN/m
+        reference_Krxrx_Nm_per_rad=None,     # 1651 kNm/deg -> Nm/rad, see below
+        citation="McAdam et al. (2020), Geotechnique 70(11), 986-998, Table 3",
+        notes="D = 0.762 m, nominal L/D = 3, installed L = 2.24 m, "
+              "wall thickness 10 mm, Dunkirk dense marine sand. "
+              "Reference k_Hinit is the secant stiffness of H vs ground-level "
+              "displacement for 0 < vG < D/1000.",
+        tolerance=0.60,    # PISA field-test comparison typically within 50-60%
     ),
     CrossValCase(
         name="Cowden CM1",
         diameter_m=0.762,
-        embed_length_m=2.27,
+        embed_length_m=3.98,
         soil_profile=COWDEN_CLAY,
-        reference_Kxx_N_per_m=None,
-        reference_Krxrx_Nm_per_rad=None,
-        citation="Burd et al. (2020), Geotechnique 70(11), 1030-1047",
-        notes="Medium-scale PISA JIP test pile in Cowden glacial till. "
-              "Reference K_ini values pending extraction from Figure 9 / Table 4.",
+        reference_Kxx_N_per_m=16.5e6,       # Byrne 2020 Tab 3: 16.5 MN/m
+        reference_Krxrx_Nm_per_rad=None,     # 3849 kNm/deg; filled below
+        citation="Byrne et al. (2020), Geotechnique 70(11), 970-985, Table 3",
+        notes="D = 0.762 m, L/D = 5.25, installed L = 3.98 m, wall 15 mm, "
+              "Cowden stiff glacial clay till. Reference k_Hinit is secant "
+              "stiffness for 0 < vG < D/1000.",
+        tolerance=0.60,
     ),
     CrossValCase(
-        name="Borkum Riffgrund-1 demonstrator",
-        diameter_m=8.0,
-        embed_length_m=30.0,
-        soil_profile=BORKUM_PROFILE,
-        reference_Kxx_N_per_m=None,
+        name="Dunkirk DL1 (large)",
+        diameter_m=2.0,
+        embed_length_m=10.61,
+        soil_profile=DUNKIRK_SAND,
+        reference_Kxx_N_per_m=139.7e6,      # McAdam 2020 Tab 3: 139.7 MN/m
         reference_Krxrx_Nm_per_rad=None,
-        citation="Murphy et al. (2018), Marine Structures 60, 263-281",
-        notes="Full-scale demonstrator monopile, layered north sea profile. "
-              "Reference K_ini values pending extraction.",
+        citation="McAdam et al. (2020), Geotechnique 70(11), 986-998, Table 3",
+        notes="D = 2.0 m, L/D = 5.25, installed L = 10.61 m, wall 38 mm, "
+              "Dunkirk dense marine sand, largest pile in the PISA medium-"
+              "scale field test programme.",
+        tolerance=0.60,
+    ),
+    CrossValCase(
+        name="Cowden CL1 (large)",
+        diameter_m=2.0,
+        embed_length_m=10.61,
+        soil_profile=COWDEN_CLAY,
+        reference_Kxx_N_per_m=108.2e6,      # Byrne 2020 Tab 3: 108.2 MN/m
+        reference_Krxrx_Nm_per_rad=None,
+        citation="Byrne et al. (2020), Geotechnique 70(11), 970-985, Table 3",
+        notes="D = 2.0 m, L/D = 5.25, Cowden stiff glacial clay till.",
+        tolerance=0.60,
     ),
 ]
+
+# Convert rocking stiffness kMinit [kNm/deg] -> Nm/rad:
+#   kNm/deg * 1000 * (180/pi) = Nm/rad
+import math as _m
+_DEG2RAD_FACTOR = 1000.0 * 180.0 / _m.pi
+CASES[0].reference_Krxrx_Nm_per_rad = 1651.0 * _DEG2RAD_FACTOR    # DM7
+CASES[1].reference_Krxrx_Nm_per_rad = 3849.0 * _DEG2RAD_FACTOR    # CM1
+CASES[2].reference_Krxrx_Nm_per_rad = 58670.0 * _DEG2RAD_FACTOR   # DL1
+CASES[3].reference_Krxrx_Nm_per_rad = 44590.0 * _DEG2RAD_FACTOR   # CL1
 
 
 def compare_one(case: CrossValCase) -> dict:

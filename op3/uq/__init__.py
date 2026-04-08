@@ -4,6 +4,7 @@ from op3.uq.propagation import (
 )
 from op3.uq.pce import (
     HermitePCE, build_pce_1d, build_pce_2d,
+    pce_mean_var, pce_sobol_2d,
 )
 from op3.uq.bayesian import (
     grid_bayesian_calibration, normal_likelihood,
@@ -12,5 +13,6 @@ from op3.uq.bayesian import (
 __all__ = [
     "SoilPrior", "propagate_pisa_mc", "summarise_samples",
     "HermitePCE", "build_pce_1d", "build_pce_2d",
+    "pce_mean_var", "pce_sobol_2d",
     "grid_bayesian_calibration", "normal_likelihood",
 ]

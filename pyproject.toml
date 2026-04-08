@@ -1,0 +1,83 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "op3"
+version = "0.3.0"
+description = "OptumGX-OpenSeesPy-OpenFAST integration framework for offshore wind turbine foundations"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Kim Kyeong Sun", email = "ksk5429@snu.ac.kr" }
+]
+keywords = [
+    "offshore wind", "PISA", "SoilDyn", "OpenFAST",
+    "OpenSeesPy", "Bayesian calibration", "structural dynamics",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "numpy >= 1.24",
+    "scipy >= 1.11",
+    "pandas >= 2.0",
+    "openseespy >= 3.5",
+]
+
+[project.optional-dependencies]
+docs = ["sphinx >= 7", "alabaster"]
+test = ["pytest >= 7", "pytest-cov >= 4"]
+dev  = ["mypy >= 1.5", "ruff >= 0.1"]
+
+[project.urls]
+Homepage    = "https://github.com/ksk5429/numerical_model"
+Source      = "https://github.com/ksk5429/numerical_model"
+Issues      = "https://github.com/ksk5429/numerical_model/issues"
+Changelog   = "https://github.com/ksk5429/numerical_model/blob/main/CHANGELOG.md"
+Documentation = "https://github.com/ksk5429/numerical_model/blob/main/docs/DEVELOPER_NOTES.md"
+
+[tool.setuptools.packages.find]
+include = ["op3*"]
+exclude = ["tests*", "docs*", "paper*", "tools*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-ra --strict-markers"
+
+[tool.coverage.run]
+source = ["op3"]
+omit = ["*/tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+precision = 1
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_return_any = false
+strict_equality = true
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B"]
+ignore = ["E501"]  # line length handled by formatter

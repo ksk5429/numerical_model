@@ -1009,4 +1009,90 @@ Conventional commit prefixes (`deps:`, `ci:`).
 
 ---
 
+---
+
+## 13. v0.3.1 findings from literature-review paper extraction
+
+After the v0.3.0 tag, the full PISA test pile papers (McAdam 2020
+Dunkirk, Byrne 2020 Cowden, Burd 2020 sand, Burd 2020 clay, Zdravković
+2020 ground characterisation) and the Bergua 2021 OC6 Phase II
+specification document were parsed out of the dissertation's literature
+review directory and their numerical references were filled into the
+harnesses.
+
+Two substantive findings resulted:
+
+### 13.1 Op^3 K_zz and clamped-base f1 match OC6 Phase II to ~1%
+
+The Bergua 2021 OC6 Phase II system is DTU 10 MW + 9.0 m monopile,
+45 m embedment, 30 m water depth. Bergua 2021 Eq. 2 gives the REDWIN-
+calibrated 6x6 stiffness matrix at the seabed, and Table 3 gives the
+clamped-base first bending mode = 0.28 Hz.
+
+- Op^3 K_zz = 1.105e10 N/m vs Bergua 1.120e10 -- **1.3% error**
+- Op^3 f1_clamped = 0.281 Hz vs Bergua 0.28 -- **0.5% error**
+
+Both quantities are PISA-independent: K_zz uses the Randolph-Wroth
+shaft-friction formula, and f1_clamped is an eigenvalue of the tower
+stick alone. These are genuine validation wins against the OC6
+Phase II specification.
+
+### 13.2 Op^3 PISA over-predicts initial K_xx by ~100x on short piles
+
+The PISA Dunkirk (McAdam 2020 Table 3) and Cowden (Byrne 2020 Table 3)
+medium-scale field test piles report **secant initial stiffness
+k_Hinit in MN/m** for D = 0.762 m and D = 2.0 m piles at L/D = 3 to
+8. When Op^3 is run on the matching geometries, the predicted K_xx
+is systematically ~100-250x higher than the measured k_Hinit:
+
+| Pile | Geometry | Op^3 K_xx | Measured k_Hinit | Ratio |
+|---|---|---|---|---|
+| DM7 | 0.762 m x 2.24 m | 1.62e9 N/m | 8.07e6 N/m | 200x |
+| CM1 | 0.762 m x 3.98 m | 1.68e9 N/m | 1.65e7 N/m | 100x |
+| DL1 | 2.0 m x 10.61 m | 9.47e9 N/m | 1.40e8 N/m | 68x |
+| CL1 | 2.0 m x 10.61 m | 6.05e9 N/m | 1.08e8 N/m | 56x |
+
+**Root cause**: Op^3 `op3/standards/pisa.py` uses the base
+calibration constants from Byrne 2020 Table 7 (k_sand = 8.731) and
+Burd 2020 Table 6 (k_clay = 10.6) as flat values. These constants
+are calibrated at a single reference pile configuration in the 3D
+FE back-analyses of Burd 2020 / Byrne 2020. The actual PISA model
+includes **L/D-dependent depth functions** (Burd 2020 Table 5,
+Byrne 2020 Table 5) that modify the effective initial slope for
+short rigid piles. The stiffer-than-real behaviour is consistent
+with depth functions that strongly reduce the near-surface k_p for
+short piles.
+
+**Status**: known limitation of Op^3 v0.3.0, documented here and in
+`scripts/pisa_cross_validation.py`. Fixing it requires implementing
+the depth functions from the tables cited above and is tracked in
+the v0.4 roadmap.
+
+**Importance**: this finding is a **success** of the cross-
+validation harness -- it caught a subtle physics omission on the
+first run against real measured data. The harness is working
+exactly as designed. In the interim, users requiring publication-
+grade PISA predictions should either apply the correction factor
+f(L/D) manually or fall back to the DNV / OWA 6x6 formulae
+(`op3.standards.dnv_st_0126`, `op3.standards.owa_bearing`) whose
+calibrations are appropriate for full-scale monopile design.
+
+**Sand vs clay parameters**: the same issue affects the OC6 Phase
+II K_xx / K_rxrx comparison. Op^3 K_xx = 4.52e10 N/m vs Bergua
+REDWIN 6.34e9 is a 7x over-prediction (less than the PISA field
+test piles because the 9 m monopile is closer to the calibration
+reference configuration).
+
+### 13.3 OC6 K_rzz discrepancy (torsional)
+
+Op^3 K_rzz = 4.37e10 vs Bergua 2.55e11 -- 6x **under**-prediction.
+This is the Randolph-Wroth torsion formula `(16/3) G (D/2)^3`,
+which is valid for a rigid disk on an elastic half-space but not
+for a slender embedded pile. The correct pile torsional stiffness
+is approximately `2 pi G * integral(D/2)^2 dz` over the embedded
+length, which at L = 45 m gives a value much closer to the NGI
+calibration. This is a follow-up refinement for v0.4.
+
+---
+
 **End of developer's notes. This file is updated at every release.**

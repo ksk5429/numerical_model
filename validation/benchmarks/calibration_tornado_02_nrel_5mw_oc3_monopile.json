@@ -1,0 +1,70 @@
+{
+  "example": "02_nrel_5mw_oc3_monopile",
+  "f1_baseline_hz": 0.27535572228743155,
+  "perturbation_pct": 10.0,
+  "rows": [
+    {
+      "parameter": "tower_EI",
+      "f1_baseline_hz": 0.27535572228743155,
+      "f1_plus_hz": 0.2881765866329744,
+      "f1_minus_hz": 0.2617887387773184,
+      "df_plus_pct": 4.656109645747522,
+      "df_minus_pct": -4.927075202000408,
+      "swing_pct": 9.58318484774793
+    },
+    {
+      "parameter": "nac_mass",
+      "f1_baseline_hz": 0.27535572228743155,
+      "f1_plus_hz": 0.267159103715561,
+      "f1_minus_hz": 0.2843554072059974,
+      "df_plus_pct": -2.9767380549711095,
+      "df_minus_pct": 3.2683849254352784,
+      "swing_pct": -6.245122980406388
+    },
+    {
+      "parameter": "hub_mass",
+      "f1_baseline_hz": 0.27535572228743155,
+      "f1_plus_hz": 0.2733486064531182,
+      "f1_minus_hz": 0.2774076675023724,
+      "df_plus_pct": -0.7289174227576813,
+      "df_minus_pct": 0.7451979562636103,
+      "swing_pct": -1.4741153790212915
+    },
+    {
+      "parameter": "blade_mass",
+      "f1_baseline_hz": 0.27535572228743155,
+      "f1_plus_hz": 0.2735672431024098,
+      "f1_minus_hz": 0.2771797097395686,
+      "df_plus_pct": -0.6495158953532899,
+      "df_minus_pct": 0.6624113118060055,
+      "swing_pct": -1.3119272071592956
+    },
+    {
+      "parameter": "tower_mass",
+      "f1_baseline_hz": 0.27535572228743155,
+      "f1_plus_hz": 0.2740266016274068,
+      "f1_minus_hz": 0.2767026737226258,
+      "df_plus_pct": -0.4826922240741975,
+      "df_minus_pct": 0.48916776597372913,
+      "swing_pct": -0.9718599900479266
+    },
+    {
+      "parameter": "nac_cm_z",
+      "f1_baseline_hz": 0.27535572228743155,
+      "f1_plus_hz": 0.2745469462931383,
+      "f1_minus_hz": 0.2761677357269069,
+      "df_plus_pct": -0.29372042373936846,
+      "df_minus_pct": 0.2948961556817478,
+      "swing_pct": -0.5886165794211163
+    },
+    {
+      "parameter": "nac_yiner",
+      "f1_baseline_hz": 0.27535572228743155,
+      "f1_plus_hz": 0.27533926957120297,
+      "f1_minus_hz": 0.2753721758456542,
+      "df_plus_pct": -0.005975076926639035,
+      "df_minus_pct": 0.005975382710763865,
+      "swing_pct": -0.0119504596374029
+    }
+  ]
+}

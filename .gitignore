@@ -79,3 +79,9 @@ gunsan_4p2mw/openfast_deck_v5/*.UA.sum
 gunsan_4p2mw/openfast_deck_v5/*.out
 gunsan_4p2mw/openfast_deck_v5/*.outb
 gunsan_4p2mw/openfast_deck_v5/*.ech
+
+# Extracted paper text (local reference only; copyrighted)
+tools/papers/
+
+# Validation report timestamps (regenerate via release script)
+validation/release_report/
