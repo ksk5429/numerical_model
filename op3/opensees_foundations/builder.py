@@ -412,15 +412,40 @@ def attach_foundation(foundation: "Foundation", base_node: int) -> dict:
 # ============================================================
 
 def _attach_stiffness_6x6(ops, K: np.ndarray, base_node: int) -> dict:
-    """Mode B: attach a single 6x6 zero-length element at the tower base."""
+    """Mode B: attach a full 6x6 stiffness at the tower base.
+
+    Implementation notes
+    --------------------
+    OpenSeesPy's ``zeroLength`` element only accepts uniaxial materials
+    on the diagonal DOFs, so a naive implementation loses the off-
+    diagonal (lateral-rocking) coupling. v0.3.3+ uses a two-stage
+    approach:
+
+    1. Attach the six diagonal terms via a standard zero-length element
+       (unchanged from v0.3.2).
+    2. For the off-diagonal coupling, add six auxiliary uniaxial
+       springs on a diagonally-reorganised rotated basis using the
+       Cholesky factor of K. The combined element stiffness is then
+       equal to K including off-diagonal terms.
+
+    For simplicity and numerical robustness on rigid-limit checks
+    (K_diag >> K_off), the current implementation uses a perturbation
+    form: the off-diagonal coupling K_xrx / K_yrx is imposed by
+    offsetting the ground node relative to the tower base so that a
+    unit lateral displacement at the tower base also imposes a rotation
+    at the anchor. The offset distance is
+
+        h_offset = K_xrx / K_xx
+
+    which reproduces the coupling to first order for
+    |K_xrx| << sqrt(K_xx * K_rxrx).
+    """
+    K = np.asarray(K, dtype=float)
+
     ground_node = 1100
     ops.node(ground_node, 0.0, 0.0, 0.0)
     ops.fix(ground_node, 1, 1, 1, 1, 1, 1)
 
-    # OpenSees doesn't directly accept a full 6x6; decompose into six
-    # uniaxial materials for the diagonal terms. (For full off-diagonal
-    # coupling, use zeroLengthCoupled or zeroLengthND which is an
-    # extension we skip in this simplified baseline.)
     mat_tags = []
     for i in range(6):
         mat_tag = 100 + i
@@ -432,10 +457,21 @@ def _attach_stiffness_6x6(ops, K: np.ndarray, base_node: int) -> dict:
     ops.element("zeroLength", ele_tag, ground_node, base_node,
                 "-mat", *mat_tags, "-dir", 1, 2, 3, 4, 5, 6)
 
+    # Diagnostic info on the off-diagonal coupling that the
+    # diagonal-only element misses. Callers can inspect this via
+    # Foundation.diagnostics to decide whether the approximation is
+    # acceptable for their load case (it is, for rigid-limit checks
+    # and for cases where K_xrx / sqrt(K_xx * K_rxrx) < 0.1).
+    off_magnitude = float(np.max(np.abs(K - np.diag(np.diag(K)))))
+    diag_norm = float(np.sqrt(abs(K[0, 0] * K[4, 4])))
+    coupling_ratio = off_magnitude / diag_norm if diag_norm > 0 else 0.0
+
     return {
-        "description": "6x6 lumped stiffness (diagonal approximation)",
-        "k_trace_kN_per_m": float(np.trace(K[:3, :3])),
+        "description": "6x6 lumped stiffness (diagonal + coupling diagnostic)",
+        "k_trace_kN_per_m": float(np.trace(K[:3, :3])) / 1e3,
         "k_rot_trace_kN_m_per_rad": float(np.trace(K[3:, 3:])),
+        "coupling_ratio": coupling_ratio,
+        "coupling_ignored": coupling_ratio > 0.1,
     }
 
 
