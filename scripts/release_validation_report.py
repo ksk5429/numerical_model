@@ -96,6 +96,13 @@ STAGES: list[TestStage] = [
               optional=True),
     TestStage("solution_verification", "script",
               ["python", "scripts/solution_verification.py"]),
+    # v0.4 dissertation reconciliation layer
+    TestStage("ch7_bayesian_scour_real_mc", "script",
+              ["python", "scripts/dissertation/ch7_gunsan_bayesian_scour_real_mc.py"],
+              optional=True),   # requires PHD root
+    TestStage("ch6_cross_turbine", "script",
+              ["python", "scripts/dissertation/ch6_cross_turbine_generalization.py"],
+              optional=True),
 ]
 
 

@@ -2,7 +2,7 @@
   {
     "case": "Eq.2 K_xx",
     "quantity": "K_xx",
-    "op3_value": 45241200000.0,
+    "op3_value": 25372102500.0,
     "op3_units": "N/m",
     "reference_value": 6336198000.0,
     "reference_source": "Bergua 2021 Eq. 2 (NREL/TP-5000-79989, p.10)",
@@ -11,7 +11,7 @@
   {
     "case": "Eq.2 K_rxrx",
     "quantity": "K_rxrx",
-    "op3_value": 38967364575000.0,
+    "op3_value": 15938333731824.752,
     "op3_units": "Nm/rad",
     "reference_value": 811194200000.0,
     "reference_source": "Bergua 2021 Eq. 2 (NREL/TP-5000-79989, p.10)",
@@ -20,7 +20,7 @@
   {
     "case": "Eq.2 K_xrx coupling",
     "quantity": "K_xrx",
-    "op3_value": -1177211070000.0,
+    "op3_value": -533745551250.0,
     "op3_units": "N",
     "reference_value": -50154210000.0,
     "reference_source": "Bergua 2021 Eq. 2 (NREL/TP-5000-79989, p.10)",
@@ -29,7 +29,7 @@
   {
     "case": "Eq.2 K_zz",
     "quantity": "K_zz",
-    "op3_value": 11051448466.118914,
+    "op3_value": 15371448466.118914,
     "op3_units": "N/m",
     "reference_value": 11196910000.0,
     "reference_source": "Bergua 2021 Eq. 2 (NREL/TP-5000-79989, p.10)",
@@ -38,7 +38,7 @@
   {
     "case": "Eq.2 K_rzz",
     "quantity": "K_rzz",
-    "op3_value": 43740000000.0,
+    "op3_value": 147228495715.7331,
     "op3_units": "Nm/rad",
     "reference_value": 255267300000.0,
     "reference_source": "Bergua 2021 Eq. 2 (NREL/TP-5000-79989, p.10)",

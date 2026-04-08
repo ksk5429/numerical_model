@@ -9,15 +9,29 @@ this module turns it into a propagator that any downstream Op^3
 stage (Bayesian calibration, PCE surrogate, DLC sensitivity) can
 consume.
 
-Expected CSV schema (OptumGX MC export):
+Real CSV schema (Gunsan integrated_database_1794.csv):
 
-    run_id, G0_top_Pa, G0_bot_Pa, phi_deg, psi_deg, f1_Hz, ...
+    run, S_D, scour_m, su0, k_su, Hmax_kN, H_ratio, V_ratio,
+    f1_Hz, f1_f0, fixity_proxy
+
+1794 Monte Carlo runs sampled over:
+    scour_m  in [0.0, 4.0] m
+    su0      in [7.5, 27.8] kPa  (surface undrained shear strength)
+    k_su     in [12, 35] kPa/m   (depth gradient)
+
+outputs:
+    f1_Hz    first fore-aft bending frequency
+    f1_f0    f1 normalised by the pristine (s=0) case
+    Hmax_kN  ultimate horizontal capacity at collapse
+    H_ratio  Hmax relative to pristine
+    fixity_proxy (base rotational compliance indicator)
 
 Use
 ---
-    from op3.uq.encoder_bridge import load_encoder_mc, encoder_as_prior
-    df = load_encoder_mc("PHD/data/mc_database.csv")
-    prior = encoder_as_prior(df, columns=["G0_top_Pa", "G0_bot_Pa"])
+    from op3.uq.encoder_bridge import load_gunsan_mc
+    df = load_gunsan_mc()   # reads PHD/data/integrated_database_1794.csv
+    # Sample the real joint distribution for Bayesian updates
+    # or encoder training.
 
 ``prior`` is a list of ``SoilPrior`` objects whose mean and COV are
 statistically consistent with the database, so
@@ -38,7 +52,8 @@ from op3.uq.propagation import SoilPrior
 
 def load_encoder_mc(csv_path: str | Path) -> pd.DataFrame:
     """
-    Load the Chapter 8 OptumGX MC database.
+    Load a generic Chapter 8 MC database. For the real Gunsan case
+    use ``load_gunsan_mc()`` which auto-resolves the PHD path.
 
     Returns a pandas DataFrame. The CSV is expected to have one row
     per MC realisation; any columns beyond the minimum set are
@@ -48,9 +63,24 @@ def load_encoder_mc(csv_path: str | Path) -> pd.DataFrame:
     if not p.exists():
         raise FileNotFoundError(f"encoder MC database not found: {p}")
     df = pd.read_csv(p)
-    if "run_id" not in df.columns:
+    if "run_id" not in df.columns and "run" not in df.columns:
         df = df.reset_index().rename(columns={"index": "run_id"})
     return df
+
+
+def load_gunsan_mc() -> pd.DataFrame:
+    """
+    Load the real 1794-sample Gunsan integrated MC database from the
+    PHD SSOT (``F:/TREE_OF_THOUGHT/PHD/data/integrated_database_1794.csv``).
+
+    This is the authoritative training set for the Chapter 8 digital
+    twin encoder. The database spans scour [0, 4] m, su0 [7.5, 27.8]
+    kPa, and k_su [12, 35] kPa/m, and records f1_Hz, Hmax_kN, and
+    fixity_proxy outputs from 1794 real OptumGX + OpenSeesPy runs.
+    """
+    from op3.data_sources import gunsan_mc_database
+    p = gunsan_mc_database()
+    return pd.read_csv(p)
 
 
 def encoder_as_prior(

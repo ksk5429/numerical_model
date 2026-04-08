@@ -200,20 +200,20 @@
         "title": "1P frequency separation",
         "ref": "DNV-ST-0126 Sec 4.5.4",
         "status": "FAIL",
-        "value": 0.06833744210759776,
+        "value": 0.0031595018504780204,
         "limit": 0.1,
         "units": "-",
-        "note": "f1=0.2350 Hz, f_1P=0.2200 Hz"
+        "note": "f1=0.2207 Hz, f_1P=0.2200 Hz"
       },
       {
         "id": "C2",
         "title": "3P frequency separation",
         "ref": "DNV-ST-0126 Sec 4.5.4",
         "status": "PASS",
-        "value": 0.6438875192974675,
+        "value": 0.665613499383174,
         "limit": 0.1,
         "units": "-",
-        "note": "f1=0.2350 Hz, f_3P=0.6600 Hz"
+        "note": "f1=0.2207 Hz, f_3P=0.6600 Hz"
       },
       {
         "id": "C3",
@@ -280,7 +280,7 @@
         "title": "Calibrated against published source",
         "ref": "DNV-ST-0126 Sec 4.6",
         "status": "PASS",
-        "value": -0.0367449292472479,
+        "value": -0.09551192456104439,
         "limit": null,
         "units": "",
         "note": "ref: Gunsan field measurement (PhD dissertation Ch. 5)"

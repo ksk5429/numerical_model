@@ -154,26 +154,29 @@ def write_spring_profile():
 # Dissipation profile for Mode D
 # ============================================================
 def write_dissipation_profile():
-    print("\nWriting dissipation profile (synthetic w(z) shape)")
-    # The full plastic dissipation field would come from OptumGX. For
-    # the synthetic placeholder we use a Gaussian peak at mid-depth,
-    # which is the qualitative shape expected from a uniform clay
-    # profile at collapse.
-    depths = np.linspace(0.5, 9.0, 18)
-    # Peak near 4 m depth, decay above and below
-    w = np.exp(-((depths - 4.0) ** 2) / (2 * 2.5 ** 2))
-    w = w / w.max()
-    # D_total in kJ for documentation (proportional to w)
-    D_total = w * 250.0
+    """
+    DEPRECATED in v0.4 -- the real OptumGX Gunsan dissipation profile
+    is imported by ``scripts/import_real_optumgx_dissipation.py`` from
+    ``F:/TREE_OF_THOUGHT/PHD/data/optumgx/dissipation/``.
 
-    df = pd.DataFrame({
-        "depth_m": depths,
-        "w_z": w,
-        "D_total_kJ": D_total,
-    })
+    This stub refuses to overwrite the real data and errors loudly
+    if called when the real file is missing, to prevent any accidental
+    regression back to synthetic placeholders.
+    """
     p = DATA / "dissipation_profile.csv"
-    df.to_csv(p, index=False, float_format="%.6e")
-    print(f"  wrote {p.name}: {len(df)} rows")
+    if p.exists():
+        print(f"\nSkipping dissipation_profile.csv write: real OptumGX")
+        print(f"  data is already present at {p.name}.")
+        print(f"  To refresh from PHD, run:")
+        print(f"    python scripts/import_real_optumgx_dissipation.py")
+        return
+    raise RuntimeError(
+        "No synthetic dissipation generator in v0.4+. Run "
+        "scripts/import_real_optumgx_dissipation.py to populate "
+        "data/fem_results/dissipation_profile.csv from the real "
+        "PHD OptumGX output at "
+        "F:/TREE_OF_THOUGHT/PHD/data/optumgx/dissipation/."
+    )
 
 
 def main():

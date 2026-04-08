@@ -253,24 +253,24 @@
   },
   {
     "example": "04_gunsan_4p2mw_tripod",
-    "n_fail": 4,
+    "n_fail": 5,
     "checks": [
       {
         "id": "I7.4.4",
         "title": "1P frequency separation (>= 5%)",
         "ref": "IEC 61400-3-1 Section 7.4.4",
-        "status": "PASS",
-        "value": 0.06833744210759776,
+        "status": "FAIL",
+        "value": 0.0031595018504780204,
         "limit": 0.05,
         "units": "-",
-        "note": "f1=0.2350 Hz, f_1P=0.2200 Hz"
+        "note": "f1=0.2207 Hz, f_1P=0.2200 Hz"
       },
       {
         "id": "I7.4.5",
         "title": "Soft-stiff design (1P < f1 < 3P)",
         "ref": "IEC 61400-3-1 Section 7.4.5",
         "status": "PASS",
-        "value": 0.2350342372636715,
+        "value": 0.22069509040710517,
         "limit": 0.22,
         "units": "Hz",
         "note": "window [0.2200, 0.6600]"
