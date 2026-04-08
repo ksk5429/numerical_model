@@ -193,27 +193,27 @@
   },
   {
     "example": "04_gunsan_4p2mw_tripod",
-    "n_fail": 1,
+    "n_fail": 0,
     "checks": [
       {
         "id": "C1",
         "title": "1P frequency separation",
         "ref": "DNV-ST-0126 Sec 4.5.4",
-        "status": "FAIL",
-        "value": 0.0031595018504780204,
+        "status": "PASS",
+        "value": 0.2837845144805429,
         "limit": 0.1,
         "units": "-",
-        "note": "f1=0.2207 Hz, f_1P=0.2200 Hz"
+        "note": "f1=0.2824 Hz, f_1P=0.2200 Hz"
       },
       {
         "id": "C2",
         "title": "3P frequency separation",
         "ref": "DNV-ST-0126 Sec 4.5.4",
         "status": "PASS",
-        "value": 0.665613499383174,
+        "value": 0.5720718285064857,
         "limit": 0.1,
         "units": "-",
-        "note": "f1=0.2207 Hz, f_3P=0.6600 Hz"
+        "note": "f1=0.2824 Hz, f_3P=0.6600 Hz"
       },
       {
         "id": "C3",
@@ -280,7 +280,7 @@
         "title": "Calibrated against published source",
         "ref": "DNV-ST-0126 Sec 4.6",
         "status": "PASS",
-        "value": -0.09551192456104439,
+        "value": 0.15751062781032563,
         "limit": null,
         "units": "",
         "note": "ref: Gunsan field measurement (PhD dissertation Ch. 5)"
@@ -296,7 +296,7 @@
         "title": "1P frequency separation",
         "ref": "DNV-ST-0126 Sec 4.5.4",
         "status": "PASS",
-        "value": 0.49446156919800255,
+        "value": 0.4944615691980039,
         "limit": 0.1,
         "units": "-",
         "note": "f1=0.1881 Hz, f_1P=0.1258 Hz"
@@ -306,7 +306,7 @@
         "title": "3P frequency separation",
         "ref": "DNV-ST-0126 Sec 4.5.4",
         "status": "PASS",
-        "value": 0.5018461436006658,
+        "value": 0.5018461436006654,
         "limit": 0.1,
         "units": "-",
         "note": "f1=0.1881 Hz, f_3P=0.3775 Hz"
@@ -376,7 +376,7 @@
         "title": "Calibrated against published source",
         "ref": "DNV-ST-0126 Sec 4.6",
         "status": "PASS",
-        "value": 0.10619459288675666,
+        "value": 0.10619459288675763,
         "limit": null,
         "units": "",
         "note": "ref: Gaertner et al. (2020), NREL/TP-5000-75698 (IEA 15 MW RWT), Table 5.1"

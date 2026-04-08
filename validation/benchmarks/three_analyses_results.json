@@ -51,11 +51,11 @@
     "pushover": "OK",
     "transient": "OK",
     "freqs": [
-      0.2207,
-      0.2207,
-      2.6103
+      0.2824,
+      0.2826,
+      3.0393
     ],
-    "pushover_max_kN": 358816.17,
+    "pushover_max_kN": 586217.48,
     "transient_period_s": null,
     "errors": {}
   },
@@ -81,11 +81,11 @@
     "pushover": "OK",
     "transient": "OK",
     "freqs": [
-      0.2342,
-      0.2342,
-      2.4424
+      0.3119,
+      0.3121,
+      3.0221
     ],
-    "pushover_max_kN": 402910.84,
+    "pushover_max_kN": 709510.29,
     "transient_period_s": null,
     "errors": {}
   },
@@ -156,11 +156,11 @@
     "pushover": "OK",
     "transient": "OK",
     "freqs": [
-      0.2358,
-      0.2358,
-      2.5897
+      0.3154,
+      0.3157,
+      3.2592
     ],
-    "pushover_max_kN": 408067.87,
+    "pushover_max_kN": 725218.39,
     "transient_period_s": null,
     "errors": {}
   }

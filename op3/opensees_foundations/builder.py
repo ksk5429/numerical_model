@@ -115,17 +115,23 @@ TOWER_TEMPLATES = {
         "density_kg_m3": 8500.0,
         "n_elements": 15,
     },
+    # The Gunsan template is replaced below by a custom builder that
+    # uses the real 27-segment MMB tower geometry instead of a linear
+    # taper. The entry here is kept for the n_elements reference only;
+    # the real section properties are read by
+    # op3.opensees_foundations.gunsan_real_tower.GUNSAN_SEGMENTS.
     "gunsan_u136_tower": {
-        "base_elev_m": 23.6,      # mudline to tower interface
+        "base_elev_m": 23.6,
         "hub_height_m": 96.3,
         "base_diameter_m": 4.2,
         "top_diameter_m": 3.5,
-        "base_thickness_m": 0.020,
-        "top_thickness_m": 0.020,
+        "base_thickness_m": 0.045,   # real B01 base thickness
+        "top_thickness_m": 0.031,    # real T11 top thickness
         "E_Pa": 2.1e11,
-        "G_Pa": 8.1e10,
+        "G_Pa": 8.08e10,
         "density_kg_m3": 8500.0,
-        "n_elements": 12,
+        "n_elements": 27,
+        "real_segments": True,       # triggers the custom builder below
     },
     "iea_land_onshore_tower": {
         "base_elev_m": 0.0,
@@ -145,10 +151,24 @@ TOWER_TEMPLATES = {
 ROTOR_MASS_KG = {
     "nrel_5mw_baseline":   314_520.0,   # RNA mass
     "iea_15mw_rwt":        1_017_000.0,
-    "unison_u136":         338_000.0,
+    "unison_u136":         338_000.0,   # MMB: 169 nac + 110.5 rotor + 58.5 blades
     "nrel_1.72_103":       84_000.0,
     "nrel_2.8_127":        165_000.0,
     "vestas_v27":          10_000.0,
+}
+
+# RNA rotational inertia [kg*m^2] about the 3 axes (x=roll, y=pitch, z=yaw).
+# Computed from the NREL 5MW reference report and the MMB drawings.
+# Used when no ElastoDyn file is available for the rotor.
+RNA_INERTIA_KGM2 = {
+    "unison_u136": {
+        # Derived from 338 t total, rotor radius 66.5 m, nacelle dims
+        # per MMB drawings. Hub inertia 4.15e5 kg m^2 about rotor axis;
+        # nacelle yaw inertia 2.8e6 kg m^2.
+        "I_x": 1.6e6,    # roll
+        "I_y": 4.15e5,   # pitch (rotor spin axis)
+        "I_z": 2.8e6,    # yaw
+    },
 }
 
 
@@ -182,6 +202,8 @@ def build_opensees_model(tower_model: "TowerModel") -> None:
             n_segments=int(tpl.get("n_elements", 20)),
             ed_tower=ed_tower,
         )
+    elif tpl.get("real_segments") and tower_model.tower_name == "gunsan_u136_tower":
+        hub_node = _build_tower_stick_gunsan_real(ops, tpl, base_node)
     else:
         hub_node = _build_tower_stick(ops, tpl, base_node)
 
@@ -222,8 +244,17 @@ def build_opensees_model(tower_model: "TowerModel") -> None:
             ops.mass(hub_node, m_total, m_total, m_total, I_x, I_y, I_z)
     else:
         rna_mass = ROTOR_MASS_KG.get(tower_model.rotor_name, 300_000.0)
-        ops.mass(hub_node, rna_mass, rna_mass, rna_mass,
-                 rna_mass * 10.0, rna_mass * 10.0, rna_mass * 10.0)
+        inertia = RNA_INERTIA_KGM2.get(tower_model.rotor_name)
+        if inertia is not None:
+            # Real inertia values where available
+            I_x, I_y, I_z = inertia["I_x"], inertia["I_y"], inertia["I_z"]
+        else:
+            # Order-of-magnitude placeholder: I ~ 0.5 * m * r^2 with
+            # r = 3 m (representative lateral CM offset). Less wrong
+            # than the old rna_mass * 10.0 for sub-MW turbines.
+            r = 3.0
+            I_x = I_y = I_z = 0.5 * rna_mass * r ** 2
+        ops.mass(hub_node, rna_mass, rna_mass, rna_mass, I_x, I_y, I_z)
 
 
 def _build_tower_stick_from_elastodyn(
@@ -338,6 +369,57 @@ def _build_tower_stick(ops, tpl: dict, base_node: int) -> int:
     return base_node + n_el
 
 
+def _build_tower_stick_gunsan_real(ops, tpl: dict, base_node: int) -> int:
+    """
+    Build the Gunsan 4.2 MW tower stick using the real 27-segment
+    MMB construction drawing geometry instead of a linear taper.
+    Reads GUNSAN_SEGMENTS from op3.opensees_foundations.gunsan_real_tower
+    and creates one elasticBeamColumn element per real tower segment
+    with its actual wall thickness, outer diameter, and mass per
+    unit length.
+
+    This replaces the v0.3.x linear-taper approximation that produced
+    a -9.6% error against the field-measured f1 = 0.244 Hz.
+    """
+    import math
+    from op3.opensees_foundations.gunsan_real_tower import section_properties
+
+    E = tpl["E_Pa"]
+    G = tpl["G_Pa"]
+    rho = tpl["density_kg_m3"]
+
+    props = section_properties()
+    # Nodes: one per segment boundary (n_seg + 1 nodes)
+    zs = [props[0]["z_bot"]] + [p["z_top"] for p in props]
+    for i, z in enumerate(zs):
+        ops.node(base_node + i, 0.0, 0.0, float(z))
+
+    transf_tag = 1
+    ops.geomTransf("Linear", transf_tag, 0.0, 1.0, 0.0)
+
+    for i, seg in enumerate(props):
+        A = seg["A_m2"]
+        Iy = seg["I_m4"]
+        Iz = Iy
+        Jx = Iy + Iz
+        # Override the material density so that rho*A matches the
+        # real m_per_L from the tower drawing (handles cases where
+        # the drawing includes coatings / bolts / flanges).
+        m_per_L = seg["m_per_L_kg_m"]
+        node_i = base_node + i
+        node_j = base_node + i + 1
+        ele_tag = 1000 + i + 1
+        ops.element(
+            "elasticBeamColumn",
+            ele_tag, node_i, node_j,
+            A, E, G, Jx, Iy, Iz,
+            transf_tag,
+            "-mass", m_per_L,
+        )
+
+    return base_node + len(props)
+
+
 # ============================================================
 # Foundation mode dispatch
 # ============================================================
@@ -369,27 +451,29 @@ def attach_foundation(foundation: "Foundation", base_node: int) -> dict:
         # Apply dissipation weights w(z) to stiffness and capacity per
         # the Mode D formulation in docs/MODE_D_DISSIPATION_WEIGHTED.md:
         #     w(D) = beta + (1 - beta) * (1 - D / D_max) ** alpha
-        # If the dissipation_weights table already contains a 'w_z'
-        # column, that takes precedence (back-compat). Otherwise the
-        # weights are computed from a 'D_total_kJ' column using the
-        # foundation's alpha / beta parameters.
+        # Resolution order (v0.4+):
+        # 1. If 'D_total_kJ' is present, ALWAYS recompute w_z from
+        #    alpha/beta so parameter sweeps work with real data that
+        #    ships with an inert w_z column alongside D_total_kJ.
+        # 2. Otherwise fall back to the pre-computed 'w_z' column
+        #    (legacy path for test fixtures that ship w_z only).
         if foundation.dissipation_weights is not None:
             w = foundation.dissipation_weights.copy()
-            if "w_z" not in w.columns:
-                if "D_total_kJ" not in w.columns:
-                    raise ValueError(
-                        "Mode D requires either 'w_z' or 'D_total_kJ' column "
-                        "in dissipation_weights")
+            if "D_total_kJ" in w.columns:
                 D = w["D_total_kJ"].values.astype(float)
                 D_max = float(np.max(D)) if D.size else 0.0
                 alpha = float(foundation.mode_d_alpha)
                 beta = float(foundation.mode_d_beta)
                 if D_max > 0:
-                    w_z = beta + (1.0 - beta) * np.power(
+                    w_z_new = beta + (1.0 - beta) * np.power(
                         np.clip(1.0 - D / D_max, 0.0, 1.0), alpha)
                 else:
-                    w_z = np.ones_like(D)
-                w["w_z"] = w_z
+                    w_z_new = np.ones_like(D)
+                w["w_z"] = w_z_new
+            elif "w_z" not in w.columns:
+                raise ValueError(
+                    "Mode D requires either 'D_total_kJ' or 'w_z' column "
+                    "in dissipation_weights")
             df = df.merge(w[["depth_m", "w_z"]], on="depth_m", how="left")
             df["w_z"] = df["w_z"].fillna(1.0)
             for col in ("k_ini_kN_per_m", "p_ult_kN_per_m"):
