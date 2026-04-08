@@ -1,5 +1,6 @@
 # Op³: OptumGX ↔ OpenSeesPy ↔ OpenFAST Integrated Numerical Modeling Framework for Offshore Wind Turbines
 
+[![DOI](https://zenodo.org/badge/1204628094.svg)](https://doi.org/10.5281/zenodo.19476542)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-yellow.svg)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 [![OpenFAST](https://img.shields.io/badge/OpenFAST-v5.0.0-orange.svg)](https://github.com/OpenFAST/openfast/releases/tag/v5.0.0)
@@ -571,29 +572,33 @@ numerical_model/
   year   = {2026},
   url    = {https://github.com/ksk5429/numerical_model},
   version= {0.3.2},
-  doi    = {10.5281/zenodo.TBD},
+  doi    = {10.5281/zenodo.19476542},
 }
 ```
 
 ### Zenodo DOI
 
-A [Zenodo DOI](https://zenodo.org/) is issued automatically for every
-tagged release via the
+[![DOI](https://zenodo.org/badge/1204628094.svg)](https://doi.org/10.5281/zenodo.19476542)
+
+Op³ is archived on Zenodo for every tagged GitHub release via the
 [GitHub-Zenodo integration](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content).
 The metadata Zenodo uses is in [`.zenodo.json`](.zenodo.json) and
 [`CITATION.cff`](CITATION.cff).
 
+**Concept DOI** (always points at the latest release):
+[`10.5281/zenodo.19476542`](https://doi.org/10.5281/zenodo.19476542)
+
 Current releases:
 
 - **v0.3.2** (2026-04-08) — Track C industry-grade, see
-  [CHANGELOG.md](CHANGELOG.md)
+  [CHANGELOG.md](CHANGELOG.md). Each subsequent tag produces an
+  independent version-specific DOI underneath the concept DOI above.
 - **v0.3.1** (2026-04-08) — Real Bergua / McAdam / Byrne references
 - **v0.3.0** (2026-04-08) — Track C initial release
 
-Each tag produces an independent Zenodo record with its own DOI, plus
-a "concept DOI" that always points at the latest release. Cite the
-concept DOI for general reference and the version-specific DOI for
-reproducibility.
+Cite the **concept DOI** for general reference and the **version-
+specific DOI** (visible on the Zenodo record landing page) for
+reproducibility-critical work.
 
 ## License
 

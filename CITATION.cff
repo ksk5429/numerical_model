@@ -18,10 +18,14 @@ authors:
     given-names: "Kyeong Sun"
     affiliation: "Department of Civil and Environmental Engineering, Seoul National University"
 type: software
-version: "0.3.0"
+version: "0.3.2"
 date-released: "2026-04-08"
-license: MIT
+license: Apache-2.0
 repository-code: "https://github.com/ksk5429/numerical_model"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.19476542
+    description: "Concept DOI (always the latest release)"
 keywords:
   - offshore wind turbine
   - suction bucket foundation
