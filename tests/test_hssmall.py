@@ -173,6 +173,12 @@ def main():
     ]
     fails = 0
     for t in tests:
+        # Reset OpenSeesPy global domain between tests (Linux CI fix).
+        try:
+            import openseespy.opensees as _ops
+            _ops.wipe()
+        except Exception:
+            pass
         try:
             t()
         except AssertionError as e:

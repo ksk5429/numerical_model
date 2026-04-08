@@ -209,6 +209,15 @@ def main():
     ]
     fails = 0
     for t in tests:
+        # Reset the OpenSeesPy global domain between tests. OpenSees
+        # uses process-global state that leaks across builds, and on
+        # Linux this produces different eigenvalue orderings than on
+        # Windows if the domain is not explicitly wiped.
+        try:
+            import openseespy.opensees as ops
+            ops.wipe()
+        except Exception:
+            pass
         try:
             t()
         except AssertionError as e:
