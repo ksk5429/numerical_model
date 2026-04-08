@@ -570,11 +570,30 @@ numerical_model/
             modeling framework for offshore wind turbines},
   year   = {2026},
   url    = {https://github.com/ksk5429/numerical_model},
-  version= {1.0},
+  version= {0.3.2},
+  doi    = {10.5281/zenodo.TBD},
 }
 ```
 
-A Zenodo DOI will be issued from the v1.0 release.
+### Zenodo DOI
+
+A [Zenodo DOI](https://zenodo.org/) is issued automatically for every
+tagged release via the
+[GitHub-Zenodo integration](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content).
+The metadata Zenodo uses is in [`.zenodo.json`](.zenodo.json) and
+[`CITATION.cff`](CITATION.cff).
+
+Current releases:
+
+- **v0.3.2** (2026-04-08) — Track C industry-grade, see
+  [CHANGELOG.md](CHANGELOG.md)
+- **v0.3.1** (2026-04-08) — Real Bergua / McAdam / Byrne references
+- **v0.3.0** (2026-04-08) — Track C initial release
+
+Each tag produces an independent Zenodo record with its own DOI, plus
+a "concept DOI" that always points at the latest release. Cite the
+concept DOI for general reference and the version-specific DOI for
+reproducibility.
 
 ## License
 
