@@ -8,6 +8,8 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.12"
+  apt_packages:
+    - pandoc      # required by nbsphinx to render tutorial notebooks
 
 # Sphinx configuration
 sphinx:
@@ -20,10 +22,10 @@ formats:
   - epub
 
 # Python dependencies
+# Do NOT pip-install the op3 package itself on RTD's Ubuntu runner:
+# openseespy has no manylinux wheels and the source build fails.
+# The conf.py uses autodoc_mock_imports for openseespy, so docs
+# render without the real OpenSees library installed.
 python:
   install:
-    - method: pip
-      path: .
-      extra_requirements:
-        - docs
     - requirements: docs/sphinx/requirements.txt

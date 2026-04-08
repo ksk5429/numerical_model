@@ -47,5 +47,5 @@ Mode B factories
 Mode D formulation
 ------------------
 
-See :doc:`../MODE_D_DISSIPATION_WEIGHTED` for the formal definition of
+See `Mode D dissipation-weighted formulation <https://github.com/ksk5429/numerical_model/blob/main/docs/MODE_D_DISSIPATION_WEIGHTED.md>`_ for the formal definition of
 the dissipation-weighted distributed BNWF.

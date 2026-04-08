@@ -45,12 +45,12 @@ Foundations"* (Seoul National University, June 2026).
    :maxdepth: 2
    :caption: Tutorials
 
-   ../tutorials/01_quickstart
-   ../tutorials/02_foundation_modes
-   ../tutorials/03_uncertainty_quantification
-   ../tutorials/04_calibration
-   ../tutorials/05_soildyn_export
-   ../tutorials/06_dlc_sweep
+   tutorials/01_quickstart
+   tutorials/02_foundation_modes
+   tutorials/03_uncertainty_quantification
+   tutorials/04_calibration
+   tutorials/05_soildyn_export
+   tutorials/06_dlc_sweep
 
 .. toctree::
    :maxdepth: 2

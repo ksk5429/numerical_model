@@ -18,6 +18,13 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
+# Mock heavy / platform-specific imports so autodoc works on ReadTheDocs'
+# Ubuntu runner without pulling in openseespy (no manylinux wheels).
+autodoc_mock_imports = [
+    "openseespy",
+    "openseespy.opensees",
+]
+
 
 # -- Project information -----------------------------------------------------
 
@@ -40,14 +47,22 @@ extensions = [
     "sphinx.ext.todo",
 ]
 # Optional: nbsphinx renders the tutorial notebooks as HTML pages.
-# Only enabled if the dependency is present so local dev builds do
-# not fail if nbsphinx is missing.
+# Only enabled if BOTH nbsphinx is importable AND pandoc is on PATH
+# (nbsphinx shells out to pandoc at build time). On developer machines
+# without pandoc the extension is silently disabled so the rest of
+# the build still succeeds.
+import shutil as _shutil
 try:
     import nbsphinx  # noqa: F401
-    extensions.append("nbsphinx")
-    nbsphinx_execute = "never"     # do not execute notebooks at build time
+    if _shutil.which("pandoc") is not None:
+        extensions.append("nbsphinx")
+        nbsphinx_execute = "never"
+        nbsphinx_allow_errors = True
+    else:
+        # Exclude tutorial notebooks from the build when pandoc is missing
+        exclude_patterns_notebooks = ["tutorials/*.ipynb"]
 except ImportError:
-    pass
+    exclude_patterns_notebooks = ["tutorials/*.ipynb"]
 
 autosummary_generate = True
 autodoc_default_options = {
@@ -69,6 +84,10 @@ todo_include_todos = True
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+try:
+    exclude_patterns.extend(exclude_patterns_notebooks)
+except NameError:
+    pass
 
 
 # -- HTML output -------------------------------------------------------------
