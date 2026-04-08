@@ -8,7 +8,7 @@
 [![Version](https://img.shields.io/badge/version-0.3.2-blue.svg)](CHANGELOG.md)
 [![Documentation](https://img.shields.io/badge/docs-sphinx-blue.svg)](docs/sphinx/)
 
-**Op³** (pronounced "O-p-cubed") is a production-ready integrated numerical
+**Op³** (pronounced "O-p-three") is a production-ready integrated numerical
 modelling framework for offshore wind turbine support structures. It
 bridges three otherwise-disconnected codes — **OptumGX** (3D FE limit
 analysis, commercial), **OpenSeesPy** (structural dynamics, BSD-3-Clause),
