@@ -39,6 +39,15 @@ extensions = [
     "sphinx.ext.intersphinx",    # cross-link to numpy / scipy
     "sphinx.ext.todo",
 ]
+# Optional: nbsphinx renders the tutorial notebooks as HTML pages.
+# Only enabled if the dependency is present so local dev builds do
+# not fail if nbsphinx is missing.
+try:
+    import nbsphinx  # noqa: F401
+    extensions.append("nbsphinx")
+    nbsphinx_execute = "never"     # do not execute notebooks at build time
+except ImportError:
+    pass
 
 autosummary_generate = True
 autodoc_default_options = {
@@ -64,7 +73,13 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # -- HTML output -------------------------------------------------------------
 
-html_theme = "alabaster"
+# Prefer sphinx_rtd_theme when available (Read the Docs default);
+# fall back to alabaster for local dev installs that do not have it.
+try:
+    import sphinx_rtd_theme  # noqa: F401
+    html_theme = "sphinx_rtd_theme"
+except ImportError:
+    html_theme = "alabaster"
 html_static_path = ["_static"]
 html_title = "Op^3 -- OptumGX-OpenSeesPy-OpenFAST integration framework"
 html_short_title = "Op^3"

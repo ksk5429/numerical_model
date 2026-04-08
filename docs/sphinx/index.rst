@@ -17,15 +17,47 @@ Foundations"* (Seoul National University, June 2026).
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Getting started
 
+   environment
    getting_started
+   user_manual
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Reference
+
    foundation_modes
    standards
    uq
    openfast_coupling
-   verification
+   technical_reference
    api
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Science and validation
+
+   scientific_report
+   verification
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Tutorials
+
+   ../tutorials/01_quickstart
+   ../tutorials/02_foundation_modes
+   ../tutorials/03_uncertainty_quantification
+   ../tutorials/04_calibration
+   ../tutorials/05_soildyn_export
+   ../tutorials/06_dlc_sweep
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Operations
+
+   troubleshooting
+   contributing
 
 Getting started
 ---------------

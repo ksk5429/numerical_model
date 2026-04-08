@@ -1,0 +1,11 @@
+# Sphinx docs build dependencies for Read the Docs
+# These are in addition to the project's own ".[docs]" install
+
+sphinx >= 7.0
+alabaster >= 0.7
+sphinx-rtd-theme >= 2.0       # optional: switch to RTD theme in conf.py
+nbsphinx >= 0.9                # render notebooks in docs/tutorials/
+ipykernel >= 6.0               # notebook execution support
+numpy >= 1.24                  # needed for autodoc of op3 modules
+scipy >= 1.11
+pandas >= 2.0

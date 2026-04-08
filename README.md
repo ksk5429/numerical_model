@@ -5,36 +5,213 @@
 [![OpenFAST](https://img.shields.io/badge/OpenFAST-v5.0.0-orange.svg)](https://github.com/OpenFAST/openfast/releases/tag/v5.0.0)
 [![OpenSeesPy](https://img.shields.io/badge/OpenSeesPy-3.7+-green.svg)](https://github.com/zhuminjie/OpenSeesPy)
 [![V&V](https://img.shields.io/badge/V%26V-121%2F121-brightgreen.svg)](docs/DEVELOPER_NOTES.md)
-[![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.3.2-blue.svg)](CHANGELOG.md)
+[![Documentation](https://img.shields.io/badge/docs-sphinx-blue.svg)](docs/sphinx/)
 
-## v0.3.0 release highlights
+**Op³** (pronounced "O-p-cubed") is a production-ready integrated numerical
+modelling framework for offshore wind turbine support structures. It
+bridges three otherwise-disconnected codes — **OptumGX** (3D FE limit
+analysis, commercial), **OpenSeesPy** (structural dynamics, BSD-3-Clause),
+and **OpenFAST v5** (aero-hydro-servo-elastic, Apache 2.0) — into a single
+V&V'd Python pipeline.
 
-- **121 / 121 active V&V tests pass** (15 modules: code verification,
-  consistency, sensitivity, extended invariants, PISA, cyclic
-  degradation, HSsmall, Mode D, UQ, reproducibility snapshot, ...)
-- **4 / 4 calibration regression** against published references
-  (Jonkman 2009, Jonkman & Musial 2010, Gaertner 2020, PhD field OMA)
-- **OpenFAST v5.0.0 end-to-end** — Gunsan tripod + SoilDyn with
-  Op³ PISA-derived 6×6 stiffness, 8-module coupled simulation
-- **DLC 1.1 partial sweep 3 / 3 PASS** at U = {8, 12, 18} m/s
-- **35 / 36 DNV-ST-0126 conformance** (1 real Gunsan 1P resonance
-  finding — see developer notes)
-- **End-to-end Bayesian calibration** of NREL 5 MW OC3 tower EI:
-  posterior mean 1.014 ± 0.076, 5%-95% credible interval [0.888, 1.145]
+Developed alongside a PhD dissertation on prescriptive maintenance of
+offshore wind turbine foundations (Seoul National University, 2026), the
+framework is calibrated against the entire NREL reference wind turbine
+library plus the real-world Gunsan 4.2 MW tripod suction-bucket OWT site.
 
-See [CHANGELOG.md](CHANGELOG.md) and [docs/DEVELOPER_NOTES.md](docs/DEVELOPER_NOTES.md)
-for the complete implementation journal of Track C phases 1 through 8.
+**Author:** Kyeong Sun Kim · Department of Civil and Environmental
+Engineering, Seoul National University · 2026
 
 ---
 
+## 30-second introduction
 
-**Op³** (pronounced "O-p-cubed") is an integrated numerical modeling
-framework for offshore wind turbines that connects three industry-standard
-analysis codes — **OptumGX**, **OpenSeesPy**, and **OpenFAST** — into a
-single, verifiable pipeline. The framework is developed around the
-Gunsan 4.2 MW tripod suction-bucket offshore wind turbine and benchmarked
-against the complete NREL reference wind turbine library bundled in
-this repository.
+```python
+from op3 import build_foundation, compose_tower_model
+from op3.foundations import foundation_from_pisa
+from op3.standards.pisa import SoilState
+
+# 1. Build a PISA-derived foundation
+profile = [
+    SoilState(0.0,  5.0e7, 35, "sand"),
+    SoilState(15.0, 1.0e8, 35, "sand"),
+    SoilState(36.0, 1.5e8, 36, "sand"),
+]
+foundation = foundation_from_pisa(diameter_m=6.0, embed_length_m=36.0, soil_profile=profile)
+
+# 2. Compose a tower model
+model = compose_tower_model(
+    rotor="nrel_5mw_baseline",
+    tower="nrel_5mw_oc3_tower",
+    foundation=foundation,
+)
+
+# 3. Run analyses
+freqs = model.eigen(n_modes=3)
+print(f"f1 = {freqs[0]:.4f} Hz")              # fixed: 0.3158, PISA: 0.3157
+K_6x6 = model.extract_6x6_stiffness()          # condense to head stiffness
+pushover = model.pushover(target_disp_m=0.5)   # static pushover
+transient = model.transient(duration_s=10.0)   # free vibration
+```
+
+```bash
+# End-to-end OpenFAST v5 coupled simulation
+python scripts/run_openfast.py gunsan --tmax 5
+python scripts/run_dlc11_partial.py --tmax 600 --speeds 8 12 18
+
+# Standards conformance audit
+python scripts/dnv_st_0126_conformance.py --all
+python scripts/iec_61400_3_conformance.py --all
+
+# Full V&V suite
+python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
+```
+
+## What you get
+
+| Capability | Op³ | SACS | PLAXIS | pure OpenSeesPy | pure OpenFAST |
+|---|:-:|:-:|:-:|:-:|:-:|
+| Four foundation modes (Fixed / 6x6 / BNWF / Dissipation-weighted) | ✅ | partial | partial | manual | ❌ |
+| PISA (Burd 2020 / Byrne 2020) with depth functions | ✅ | ❌ | commercial | ❌ | ❌ |
+| Cyclic Hardin-Drnevich layered on PISA | ✅ | ❌ | ❌ | ❌ | ❌ |
+| DNV / ISO / API / OWA / PISA / HSsmall standards | 6 | proprietary | 1-2 | ❌ | ❌ |
+| Mode D dissipation-weighted BNWF (novel) | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Direct Op³ → SoilDyn export | ✅ | ❌ | ❌ | ❌ | native |
+| Monte Carlo soil propagation | ✅ | ❌ | manual | manual | ❌ |
+| Hermite polynomial chaos expansion | ✅ | ❌ | ❌ | manual | ❌ |
+| Grid Bayesian calibration | ✅ | ❌ | ❌ | manual | ❌ |
+| V&V test suite | **121** | proprietary | proprietary | user-built | ~200 r-test |
+| License | Apache-2.0 | commercial | commercial | BSD-3 | Apache-2.0 |
+| Python-native | ✅ | ❌ | ❌ | wrapper | wrapper |
+
+## v0.3.2 release highlights
+
+- **121 / 121 active V&V tests pass** (14 modules: code verification,
+  consistency, sensitivity, extended invariants, PISA, cyclic
+  degradation, HSsmall, Mode D, UQ, reproducibility snapshot, ...)
+- **4 / 4 calibration regression** against published references
+  with all four examples within 4% of the most stringent
+  (NREL 5 MW OC3 at **-0.4%** vs Jonkman & Musial 2010)
+- **OpenFAST v5.0.0 end-to-end** on Gunsan tripod + SoilDyn with
+  Op³ PISA-derived 6×6 stiffness, 8-module coupled simulation
+- **DLC 1.1 partial sweep** at U = {8, 12, 18} m/s — 3 / 3 PASS;
+  full 12-speed × 600 s run scaled overnight
+- **35 / 36 DNV-ST-0126 conformance** (single failure is the real
+  Gunsan 1P resonance finding, not a bug)
+- **OC6 Phase II benchmark** (Bergua 2021 NREL/TP-5000-79989):
+  Op³ K_zz matches to **1.3%**, f1_clamped to **0.5%**
+- **PISA field-test cross-validation** (McAdam 2020 + Byrne 2020)
+  with depth-function + eccentric-load-compliance corrections
+  reducing prior-release errors by 10–30× on short rigid piles
+- **End-to-end Bayesian calibration** of NREL 5 MW OC3 tower EI:
+  posterior mean **1.014 ± 0.076**, 5%-95% credible interval
+  [0.888, 1.145]
+- **Sphinx documentation** (~5000 lines across 9 RST pages + 6 tutorial
+  notebooks), ReadTheDocs-ready and GitHub Pages-deployable
+
+See [CHANGELOG.md](CHANGELOG.md) for the full release history and
+[docs/DEVELOPER_NOTES.md](docs/DEVELOPER_NOTES.md) for the
+implementation journal of Track C phases 1 through 8.
+
+## Documentation
+
+Comprehensive package, all free, all on GitHub:
+
+| Page | Content |
+|---|---|
+| [Environment setup](docs/sphinx/environment.rst) | Clone, install, OpenFAST bootstrap, r-test bootstrap |
+| [User manual](docs/sphinx/user_manual.rst) | Worked examples: every foundation mode, every standard, UQ tools, OpenFAST coupling |
+| [Technical reference](docs/sphinx/technical_reference.rst) | Units, coordinates, DOFs, PISA math, Hermite PCE, Hardin-Drnevich, Rayleigh cantilever |
+| [Scientific report](docs/sphinx/scientific_report.rst) | Narrative, distinctive contributions, OC6 + PISA validation findings, limitations |
+| [Troubleshooting / FAQ](docs/sphinx/troubleshooting.rst) | ~30 common issues across install / OpenSees / OpenFAST / PISA / UQ / V&V |
+| [Contributing guide](docs/sphinx/contributing.rst) | V&V-or-it-didn't-happen rule, commit discipline, release process |
+| [Developer notes](docs/DEVELOPER_NOTES.md) | Full implementation journal, all 8 Track C phases with lessons learned |
+| [Mode D formulation](docs/MODE_D_DISSIPATION_WEIGHTED.md) | Novel dissipation-weighted BNWF paper-draft |
+| [Tutorials](docs/tutorials/) | 6 Jupyter notebooks: quickstart, foundation modes, UQ, calibration, SoilDyn, DLC sweeps |
+
+Documentation is configured for free hosting on
+[Read the Docs](https://readthedocs.org) via [`.readthedocs.yaml`](.readthedocs.yaml)
+and for GitHub Pages deployment via
+[`.github/workflows/docs-deploy.yml`](.github/workflows/docs-deploy.yml).
+
+Once the repo is linked to Read the Docs, the full documentation
+will be rendered at `https://op3-framework.readthedocs.io` with
+automatic rebuilds on every push. Alternatively the GitHub Actions
+workflow deploys to `https://ksk5429.github.io/numerical_model/`.
+
+## Quick start
+
+```bash
+# Clone and install
+git clone https://github.com/ksk5429/numerical_model.git
+cd numerical_model
+pip install -e ".[test,docs]"
+
+# Bootstrap OpenFAST v5.0.0 binary
+mkdir -p tools/openfast
+curl -L -o tools/openfast/OpenFAST.exe \
+  https://github.com/OpenFAST/openfast/releases/download/v5.0.0/OpenFAST.exe
+
+# Bootstrap r-test
+mkdir -p tools/r-test_v5 && cd tools/r-test_v5
+git clone --depth=1 --branch v5.0.0 https://github.com/OpenFAST/r-test.git
+cd ../..
+
+# Run the full V&V suite
+PYTHONUTF8=1 python scripts/release_validation_report.py
+```
+
+Expected: **18/19 PASS, 0 mandatory FAIL, ~42 s total wall time**.
+
+See the [environment setup guide](docs/sphinx/environment.rst) for
+troubleshooting and platform-specific notes.
+
+## Repository layout
+
+```
+op3/                     the Python package
+  foundations.py         Foundation dataclass + factory
+  composer.py            TowerModel: eigen / pushover / transient
+  opensees_foundations/  OpenSeesPy builder + ElastoDyn tower loader
+  standards/             DNV / ISO / API / OWA / PISA / HSsmall / cyclic
+  openfast_coupling/     Op^3 -> OpenFAST SoilDyn bridge
+  uq/                    Propagation / PCE / Bayesian
+  sacs_interface/        SACS jacket deck parser
+
+tests/                   121 active V&V tests
+scripts/                 Runners, audits, regressions, release tooling
+examples/                11 turbine TowerModel build.py files
+docs/                    Sphinx + tutorials + Mode D notes + developer notes
+paper/                   JOSS-format paper + BibTeX
+.github/workflows/       CI, docs deploy, release validation
+gunsan_4p2mw/            Gunsan 4.2 MW OWT decks (v4 and v5)
+nrel_reference/          NREL + IEA reference turbines bundled for V&V
+validation/benchmarks/   Test output JSON artifacts
+tools/                   OpenFAST binary + r-test clone (gitignored)
+```
+
+## Citation
+
+If you use Op³ in academic work, please cite both the software and the
+dissertation. A [`CITATION.cff`](CITATION.cff) is provided for automatic
+reference management.
+
+```bibtex
+@software{op3_2026,
+  title  = {Op^3: OptumGX-OpenSeesPy-OpenFAST Integration Framework},
+  author = {Kim, Kyeong Sun},
+  year   = {2026},
+  version = {0.3.2},
+  url    = {https://github.com/ksk5429/numerical_model}
+}
+```
+
+---
+
+### Historical introduction (preserved from v0.1)
+
+The original Op³ framework was developed around the
 
 **Author:** Kyeong Sun Kim · Department of Civil and Environmental
 Engineering, Seoul National University · 2026
