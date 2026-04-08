@@ -65,21 +65,105 @@ import numpy as np
 #          Burd  2020 Table 6 (clay, Cowden glacial till)
 
 
+#
+# ---- SAND (Burd 2020 Table 5, D_R = 75%) -----------------------------------
+# "First-stage" depth-function form:
+#     k_p  = k_p1 + k_p2 * (z/D)
+#     k_m  = const
+#     k_H  = k_H1 + k_H2 * (L/D)        (pile-base shear)
+#     k_M  = const                       (pile-base moment)
+#
+# ---- CLAY (Byrne 2020 Table 4, "Second-stage calibration") -----------------
+# Same structure. Note the Byrne 2020 paper uses cot(phi)-shifted stresses
+# but for initial elastic stiffness evaluation we only need the linear
+# coefficients.
+
 PISA_SAND = {
-    "lateral_p":   {"k": 8.731,  "n": 0.917, "x_u": 146.1, "y_u": 0.413},
-    "moment_m":    {"k": 1.412,  "n": 0.0,   "x_u": 173.1, "y_u": 0.0577},
-    "base_shear":  {"k": 2.717,  "n": 0.976, "x_u": 235.7, "y_u": 0.265},
-    "base_moment": {"k": 0.2683, "n": 0.886, "x_u": 173.1, "y_u": 0.0989},
+    "lateral_p": {
+        "k_1": 8.64, "k_2": -0.81,       # k_p = 8.64 - 0.81 z/D
+        "n_1": 0.966, "n_2": 0.0,
+        "x_u_1": 64.78, "x_u_2": 0.0,
+        "y_u_1": 20.86, "y_u_2": -5.83,  # y_u varies with z/L
+    },
+    "moment_m": {
+        "k_1": 18.1, "k_2": 0.0,
+        "n_1": 0.0, "n_2": 0.0,
+        "x_u_1": 64.78, "x_u_2": 0.0,
+        "y_u_1": 0.23, "y_u_2": -0.05,
+    },
+    "base_shear": {                      # L/D-dependent
+        "k_1": 3.28, "k_2": -0.37,       # k_H = 3.28 - 0.37 * (L/D)
+        "n_1": 0.83, "n_2": -0.058,
+        "x_u_1": 2.13, "x_u_2": -0.31,
+        "y_u_1": 0.63, "y_u_2": -0.07,
+    },
+    "base_moment": {                     # Constant except ultimate
+        "k_1": 0.30, "k_2": 0.0,
+        "n_1": 0.86, "n_2": 0.0,
+        "x_u_1": 49.4, "x_u_2": 0.0,
+        "y_u_1": 0.39, "y_u_2": -0.05,
+    },
 }
 
+# Byrne 2020 clay (Cowden till), second-stage calibration. Table 4.
+# Distributed lateral p: k_p = 10.60 - 1.650 * (z/D)
+# Curvature: n_p = 0.9390 - 0.03345 * (z/D)
+# Ultimate p: p_u = 10.70 - 7.101 * exp(-0.3085 * z/D)  -- nonlinear.
+# For the small-strain 6x6 stiffness we only need the initial slope,
+# so we approximate the ultimate with the linear expansion near z/D = 0
+# (which overpredicts capacity at depth but does not affect the initial
+# slope). Full nonlinear support is a follow-up.
+
 PISA_CLAY = {
-    "lateral_p":   {"k": 10.6,   "n": 0.939, "x_u": 241.4, "y_u": 1.071},
-    "moment_m":    {"k": 1.420,  "n": 0.0,   "x_u": 115.0, "y_u": 0.205},
-    "base_shear":  {"k": 2.140,  "n": 0.792, "x_u": 173.0, "y_u": 0.367},
-    "base_moment": {"k": 0.2150, "n": 0.804, "x_u": 173.1, "y_u": 0.135},
+    "lateral_p": {
+        "k_1": 10.60, "k_2": -1.650,     # k_p = 10.60 - 1.650 z/D
+        "n_1": 0.9390, "n_2": -0.03345,
+        "x_u_1": 241.4, "x_u_2": 0.0,
+        "y_u_1": 3.599, "y_u_2": 0.0,    # = 10.70 - 7.101 (linear approx)
+    },
+    "moment_m": {
+        "k_1": 1.420, "k_2": -0.09643,
+        "n_1": 0.0, "n_2": 0.0,
+        "x_u_1": 115.0, "x_u_2": 0.0,
+        "y_u_1": 0.2899, "y_u_2": -0.04775,
+    },
+    "base_shear": {                      # L/D-dependent
+        "k_1": 2.717, "k_2": -0.3575,
+        "n_1": 0.8793, "n_2": -0.03150,
+        "x_u_1": 235.7, "x_u_2": 0.0,
+        "y_u_1": 0.4038, "y_u_2": 0.04812,
+    },
+    "base_moment": {                     # L/D-dependent
+        "k_1": 0.2146, "k_2": -0.002132,
+        "n_1": 1.079, "n_2": -0.1087,
+        "x_u_1": 173.1, "x_u_2": 0.0,
+        "y_u_1": 0.8192, "y_u_2": -0.08588,
+    },
 }
 
 PISA_PARAMS = {"sand": PISA_SAND, "clay": PISA_CLAY}
+
+
+def pisa_coeffs(component: str, soil_type: str,
+                z_over_D: float = 0.0,
+                L_over_D: float = 0.0) -> dict:
+    """
+    Evaluate the depth-function-adjusted conic parameters for a
+    specific soil reaction component at a given depth.
+
+    For distributed components ``lateral_p`` and ``moment_m`` the
+    variable is ``z/D``. For base components ``base_shear`` and
+    ``base_moment`` the variable is ``L/D`` (the full pile slenderness)
+    and the ``z/D`` argument is ignored.
+    """
+    table = PISA_PARAMS[soil_type][component]
+    var = L_over_D if component.startswith("base") else z_over_D
+    return {
+        "k":   max(table["k_1"]   + table["k_2"]   * var, 1e-6),
+        "n":   max(min(table["n_1"] + table["n_2"] * var, 0.999), 0.0),
+        "x_u": max(table["x_u_1"] + table["x_u_2"] * var, 1e-6),
+        "y_u": max(table["y_u_1"] + table["y_u_2"] * var, 1e-6),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -141,36 +225,37 @@ def _ref_pressure(z: float, soil: SoilState) -> float:
 def pisa_lateral_pl(z: float, v: float, D: float, L: float,
                     soil: SoilState) -> float:
     """Distributed lateral reaction p [N/m] at depth z, displacement v."""
-    p = PISA_PARAMS[soil.soil_type]["lateral_p"]
+    p = pisa_coeffs("lateral_p", soil.soil_type, z_over_D=z / D)
     sigma_ref = _ref_pressure(z, soil)
-    # Normalisations from Byrne 2020 Eq. 1: v_norm = v G / (D sigma_ref)
     v_norm = v * soil.G_Pa / (D * sigma_ref)
     y_norm = conic(v_norm, **p)
-    return y_norm * sigma_ref * D     # p [N/m]
+    return y_norm * sigma_ref * D
 
 
 def pisa_moment_pl(z: float, psi: float, D: float, L: float,
                    soil: SoilState) -> float:
     """Distributed moment reaction m [N] at depth z, rotation psi."""
-    p = PISA_PARAMS[soil.soil_type]["moment_m"]
+    p = pisa_coeffs("moment_m", soil.soil_type, z_over_D=z / D)
     sigma_ref = _ref_pressure(z, soil)
     psi_norm = psi * soil.G_Pa / sigma_ref
     y_norm = conic(psi_norm, **p)
-    return y_norm * sigma_ref * D ** 2    # m [N]
+    return y_norm * sigma_ref * D ** 2
 
 
-def pisa_base_shear(v_b: float, D: float, soil: SoilState) -> float:
+def pisa_base_shear(v_b: float, D: float, soil: SoilState,
+                    L: float = 0.0) -> float:
     """Pile-base shear H_b [N] as a function of base lateral displacement."""
-    p = PISA_PARAMS[soil.soil_type]["base_shear"]
-    sigma_ref = _ref_pressure(0.0, soil)   # base = ref at z=L (caller passes)
+    p = pisa_coeffs("base_shear", soil.soil_type, L_over_D=L / D)
+    sigma_ref = _ref_pressure(0.0, soil)
     v_norm = v_b * soil.G_Pa / (D * sigma_ref)
     y_norm = conic(v_norm, **p)
     return y_norm * sigma_ref * D ** 2
 
 
-def pisa_base_moment(psi_b: float, D: float, soil: SoilState) -> float:
+def pisa_base_moment(psi_b: float, D: float, soil: SoilState,
+                     L: float = 0.0) -> float:
     """Pile-base moment M_b [Nm] as a function of base rotation."""
-    p = PISA_PARAMS[soil.soil_type]["base_moment"]
+    p = pisa_coeffs("base_moment", soil.soil_type, L_over_D=L / D)
     sigma_ref = _ref_pressure(0.0, soil)
     psi_norm = psi_b * soil.G_Pa / sigma_ref
     y_norm = conic(psi_norm, **p)
@@ -180,6 +265,38 @@ def pisa_base_moment(psi_b: float, D: float, soil: SoilState) -> float:
 # ---------------------------------------------------------------------------
 # 6x6 small-strain stiffness from PISA initial slopes
 # ---------------------------------------------------------------------------
+
+def effective_head_stiffness(K: np.ndarray, h_load_m: float) -> float:
+    """
+    Secant stiffness H / v_G for a horizontal load H applied at height
+    ``h_load_m`` above the ground-line reference of the 6x6 pile-head
+    stiffness matrix.
+
+    For a rigid-pile 2x2 {translation, rotation} block
+        [ Kxx   Kxrx ] [v ]   [ H    ]
+        [ Kxrx  Krxrx] [psi] = [ H h  ]
+    the ground-level translation is
+        v = H (Krxrx - h Kxrx) / det
+    where det = Kxx Krxrx - Kxrx^2. Therefore
+        k_eff = H / v = det / (Krxrx - h Kxrx).
+
+    This is the apples-to-apples comparator for the McAdam 2020 and
+    Byrne 2020 field-test k_Hinit values, which are defined as the
+    secant slope of H vs v_G at small displacement.
+    """
+    # For a horizontal force in +x producing rotation about +y, the
+    # relevant 2x2 block is (x, ry). K[0,4] is the off-diagonal.
+    Kxx = float(K[0, 0])
+    Kryry = float(K[4, 4])
+    Kx_ry = float(K[0, 4])
+    det = Kxx * Kryry - Kx_ry ** 2
+    # For the Op^3 convention K[0,4] is negative; the sign makes the
+    # denominator (Kryry - h * Kx_ry) strictly positive.
+    denom = Kryry - h_load_m * Kx_ry
+    if abs(denom) < 1e-30:
+        return float("inf")
+    return abs(det / denom)
+
 
 def pisa_pile_stiffness_6x6(
     diameter_m: float,
@@ -218,36 +335,45 @@ def pisa_pile_stiffness_6x6(
     Kxx = 0.0
     Kxrx = 0.0
     Krxrx = 0.0
+    L_over_D = L / D
+    soil_type = soil_profile[0].soil_type
     for z in z_mid:
         G_z = float(np.interp(z, depths, G))
-        soil = SoilState(z, G_z, soil_profile[0].su_or_phi,
-                         soil_profile[0].soil_type)
-        sigma_ref = _ref_pressure(z, soil)
-        p_par = PISA_PARAMS[soil.soil_type]["lateral_p"]
-        m_par = PISA_PARAMS[soil.soil_type]["moment_m"]
-        # Initial stiffness: dy/dx at x=0 of the normalised conic = k
-        # In dimensional form: k_p = k * G  (units N/m / m)
-        k_p = p_par["k"] * G_z          # N/m / m of pile
-        k_m = m_par["k"] * G_z * D ** 2 # Nm / rad / m
+        z_over_D = z / D
+        p_par = pisa_coeffs("lateral_p", soil_type, z_over_D=z_over_D)
+        m_par = pisa_coeffs("moment_m", soil_type, z_over_D=z_over_D)
+        # Depth-function-adjusted initial slopes. In the PISA
+        # normalisation:  dp/dv = k_p(z) * G(z)    [N/m^2]
+        #                 dm/dpsi = k_m(z) * G(z) * D^2
+        # The factor k_p = k_p1 + k_p2 * (z/D) reduces for short
+        # rigid piles, which is the key physics missed in v0.3.0.
+        k_p = max(p_par["k"], 0.0) * G_z
+        k_m = max(m_par["k"], 0.0) * G_z * D ** 2
         Kxx += k_p * dz
         Kxrx += k_p * dz * z
         Krxrx += k_p * dz * z * z + k_m * dz
 
-    # Base contributions
+    # Base contributions (L/D-dependent)
     G_b = float(np.interp(L, depths, G))
-    bs = PISA_PARAMS[soil_profile[0].soil_type]["base_shear"]
-    bm = PISA_PARAMS[soil_profile[0].soil_type]["base_moment"]
-    K_b_shear = bs["k"] * G_b * D
-    K_b_moment = bm["k"] * G_b * D ** 3
+    bs = pisa_coeffs("base_shear", soil_type, L_over_D=L_over_D)
+    bm = pisa_coeffs("base_moment", soil_type, L_over_D=L_over_D)
+    K_b_shear = max(bs["k"], 0.0) * G_b * D
+    K_b_moment = max(bm["k"], 0.0) * G_b * D ** 3
     Kxx += K_b_shear
     Krxrx += K_b_moment + K_b_shear * L * L
     Kxrx += K_b_shear * L
 
-    # Vertical and torsional via Randolph-Wroth (1979) shaft friction
-    # K_zz ~ 2 pi G L / ln(2 L / D)
+    # Vertical stiffness: full pile shaft friction + base bearing.
+    # For a slender elastic pile in a halfspace,
+    #     K_zz ~ 2 pi G_avg L / ln(2 L / D) + 4 G_b D
+    # The base bearing term from Randolph & Wroth (1978).
+    # Torsional stiffness: slender pile shaft integral rather than
+    # the rigid-disk value.
+    #     K_rzz ~ pi G_avg D^3 * L / (L + 2 D)  (empirical slender-pile form)
     G_avg = float(np.mean(G))
-    Kzz = 2 * np.pi * G_avg * L / np.log(max(2 * L / D, 1.1))
-    Krzz = (16.0 / 3.0) * G_avg * (D / 2) ** 3   # torsion of rigid disk
+    Kzz = 2 * np.pi * G_avg * L / np.log(max(2 * L / D, 1.1)) \
+          + 4.0 * G_b * D
+    Krzz = np.pi * G_avg * (D ** 3) * L / (L + 2.0 * D)
 
     K = np.diag([Kxx, Kxx, Kzz, Krxrx, Krxrx, Krzz])
     K[0, 4] = K[4, 0] = -Kxrx

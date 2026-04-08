@@ -3,60 +3,68 @@
     "case": "Dunkirk DM7",
     "geometry": {
       "D_m": 0.762,
-      "L_m": 2.24
+      "L_m": 2.24,
+      "h_load_m": 10.0
     },
-    "op3_Kxx_N_per_m": 1620113283.04,
-    "op3_Krxrx_Nm_per_rad": 3475683636.074308,
+    "op3_Kxx_raw_N_per_m": 950595954.1639056,
+    "op3_Kxx_eff_N_per_m": 104760249.75102314,
+    "op3_Krxrx_Nm_per_rad": 3198236140.9211025,
     "ref_Kxx": 8070000.0,
     "ref_Krxrx": 94595331.97609891,
     "status_Kxx": "DISCREPANT",
     "status_Krxrx": "DISCREPANT",
-    "citation": "McAdam et al. (2020), Geotechnique 70(11), 986-998, Table 3",
+    "citation": "McAdam et al. (2020), Geotechnique 70(11), 986-998, Tables 1+3",
     "notes": "D = 0.762 m, nominal L/D = 3, installed L = 2.24 m, wall thickness 10 mm, Dunkirk dense marine sand. Reference k_Hinit is the secant stiffness of H vs ground-level displacement for 0 < vG < D/1000."
   },
   {
     "case": "Cowden CM1",
     "geometry": {
       "D_m": 0.762,
-      "L_m": 3.98
+      "L_m": 3.98,
+      "h_load_m": 10.0
     },
-    "op3_Kxx_N_per_m": 1676337305.6,
-    "op3_Krxrx_Nm_per_rad": 10656360179.995445,
+    "op3_Kxx_raw_N_per_m": 1129173771.6259844,
+    "op3_Kxx_eff_N_per_m": 61655640.831096545,
+    "op3_Krxrx_Nm_per_rad": 6178895136.902471,
     "ref_Kxx": 16500000.0,
     "ref_Krxrx": 220531455.34585387,
     "status_Kxx": "DISCREPANT",
     "status_Krxrx": "DISCREPANT",
-    "citation": "Byrne et al. (2020), Geotechnique 70(11), 970-985, Table 3",
+    "citation": "Byrne et al. (2020), Geotechnique 70(11), 970-985, Tables 1+3",
     "notes": "D = 0.762 m, L/D = 5.25, installed L = 3.98 m, wall 15 mm, Cowden stiff glacial clay till. Reference k_Hinit is secant stiffness for 0 < vG < D/1000."
   },
   {
     "case": "Dunkirk DL1 (large)",
     "geometry": {
       "D_m": 2.0,
-      "L_m": 10.61
+      "L_m": 10.61,
+      "h_load_m": 9.9
     },
-    "op3_Kxx_N_per_m": 9466028617.080439,
-    "op3_Krxrx_Nm_per_rad": 464648309142.3382,
+    "op3_Kxx_raw_N_per_m": 6829720410.403878,
+    "op3_Kxx_eff_N_per_m": 1185731834.6039972,
+    "op3_Krxrx_Nm_per_rad": 394671414109.2449,
     "ref_Kxx": 139700000.0,
     "ref_Krxrx": 3361543384.03254,
     "status_Kxx": "DISCREPANT",
     "status_Krxrx": "DISCREPANT",
-    "citation": "McAdam et al. (2020), Geotechnique 70(11), 986-998, Table 3",
+    "citation": "McAdam et al. (2020), Geotechnique 70(11), 986-998, Tables 1+3",
     "notes": "D = 2.0 m, L/D = 5.25, installed L = 10.61 m, wall 38 mm, Dunkirk dense marine sand, largest pile in the PISA medium-scale field test programme."
   },
   {
     "case": "Cowden CL1 (large)",
     "geometry": {
       "D_m": 2.0,
-      "L_m": 10.61
+      "L_m": 10.61,
+      "h_load_m": 9.9
     },
-    "op3_Kxx_N_per_m": 6052235000.272001,
-    "op3_Krxrx_Nm_per_rad": 296972750010.37885,
+    "op3_Kxx_raw_N_per_m": 5267547066.509415,
+    "op3_Kxx_eff_N_per_m": 508862621.6905978,
+    "op3_Krxrx_Nm_per_rad": 215505162426.84256,
     "ref_Kxx": 108200000.0,
     "ref_Krxrx": 2554818808.488341,
     "status_Kxx": "DISCREPANT",
     "status_Krxrx": "DISCREPANT",
-    "citation": "Byrne et al. (2020), Geotechnique 70(11), 970-985, Table 3",
+    "citation": "Byrne et al. (2020), Geotechnique 70(11), 970-985, Tables 1+3",
     "notes": "D = 2.0 m, L/D = 5.25, Cowden stiff glacial clay till."
   }
 ]

@@ -82,7 +82,8 @@ def test_mesh_convergence():
 
 
 def test_conic_plateau():
-    p = PISA_SAND["lateral_p"]
+    from op3.standards.pisa import pisa_coeffs
+    p = pisa_coeffs("lateral_p", "sand", z_over_D=0.0)
     y_at_xu = conic(p["x_u"], **p)
     y_above = conic(2.0 * p["x_u"], **p)
     print(f"  [3.4] conic plateau: y(x_u)={y_at_xu:.4f} y(2 x_u)={y_above:.4f} y_u={p['y_u']:.4f}")
@@ -91,7 +92,8 @@ def test_conic_plateau():
 
 
 def test_conic_monotone():
-    p = PISA_SAND["lateral_p"]
+    from op3.standards.pisa import pisa_coeffs
+    p = pisa_coeffs("lateral_p", "sand", z_over_D=0.0)
     xs = np.linspace(0, p["x_u"], 100)
     ys = np.array([conic(float(x), **p) for x in xs])
     diffs = np.diff(ys)
