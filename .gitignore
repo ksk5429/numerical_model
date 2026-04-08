@@ -50,3 +50,32 @@ data/optumgx_outputs/*.xlsx
 # Git trash
 *.orig
 *.rej
+
+# OpenFAST binary (52 MB, fetched by tools/openfast/install.ps1)
+tools/openfast/openfast_x64.exe
+tools/openfast/*.exe
+tools/openfast/*.dll
+
+# Large shared data directories (bootstrap via r-test clone)
+tools/r-test_v5/
+gunsan_4p2mw/5MW_Baseline/
+
+# Binary OpenFAST time-series output
+validation/openfast_runs/
+validation/dlc11_partial/
+validation/dlc61_parked/
+gunsan_4p2mw/openfast_deck_v5/*.outb
+gunsan_4p2mw/openfast_deck_v5/*.out
+
+
+# OpenFAST generated simulation outputs (not source)
+gunsan_4p2mw/openfast_deck_v5/*.sum
+gunsan_4p2mw/openfast_deck_v5/*.sum.yaml
+gunsan_4p2mw/openfast_deck_v5/*.AD.sum
+gunsan_4p2mw/openfast_deck_v5/*.ED.sum
+gunsan_4p2mw/openfast_deck_v5/*.SD.sum.yaml
+gunsan_4p2mw/openfast_deck_v5/*.SrvD.sum
+gunsan_4p2mw/openfast_deck_v5/*.UA.sum
+gunsan_4p2mw/openfast_deck_v5/*.out
+gunsan_4p2mw/openfast_deck_v5/*.outb
+gunsan_4p2mw/openfast_deck_v5/*.ech

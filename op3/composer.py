@@ -135,8 +135,8 @@ def compose_tower_model(
         'nrel_1.72_103', 'nrel_2.8_127', 'vestas_v27',
     }
     valid_towers = {
-        'nrel_5mw_tower', 'iea_15mw_tower', 'gunsan_u136_tower',
-        'iea_land_onshore_tower',
+        'nrel_5mw_tower', 'nrel_5mw_oc3_tower', 'iea_15mw_tower',
+        'gunsan_u136_tower', 'iea_land_onshore_tower',
     }
     if rotor not in valid_rotors:
         raise ValueError(f"Unknown rotor template '{rotor}'. "

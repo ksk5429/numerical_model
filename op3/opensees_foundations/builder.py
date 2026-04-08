@@ -31,6 +31,53 @@ if TYPE_CHECKING:
 # Tower templates (simplified — one stick model per turbine)
 # ============================================================
 
+from pathlib import Path as _Path
+
+_REPO_ROOT = _Path(__file__).resolve().parents[2]
+
+
+def _ed(rel: str) -> str | None:
+    p = _REPO_ROOT / rel
+    return str(p) if p.exists() else None
+
+
+# Optional NREL ElastoDyn deck per template. Each value is either a
+# string (path to main ED file; tower properties auto-resolved via
+# TwrFile) or a tuple (main_ed, tower_dat_override) when a template
+# needs a different tower file from the main deck. RNA mass + inertia
+# are always parsed from the main ED.
+TOWER_ELASTODYN: dict = {
+    # Onshore land-based 5 MW: reuse the OC3 main ED for RNA but point
+    # at the canonical NRELOffshrBsline5MW_Onshore_ElastoDyn_Tower.dat
+    # so example 01 reproduces the published 0.324 Hz fixed-base mode.
+    "nrel_5mw_tower": (
+        _ed("nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/"
+            "NRELOffshrBsline5MW_OC3Monopile_ElastoDyn.dat"),
+        _ed("nrel_reference/openfast_rtest/5MW_Baseline/"
+            "NRELOffshrBsline5MW_Onshore_ElastoDyn_Tower.dat"),
+    ),
+    # OC3 monopile reuses its own (lighter, less stiff) tower file.
+    "nrel_5mw_oc3_tower": _ed(
+        "nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/"
+        "NRELOffshrBsline5MW_OC3Monopile_ElastoDyn.dat"
+    ),
+    "iea_15mw_tower": _ed(
+        "nrel_reference/iea_15mw/OpenFAST_monopile/"
+        "IEA-15-240-RWT-Monopile_ElastoDyn.dat"
+    ),
+}
+
+
+def _resolve_ed(template_name: str) -> tuple[str | None, str | None]:
+    """Return (main_ed, tower_override) for a template name."""
+    entry = TOWER_ELASTODYN.get(template_name)
+    if entry is None:
+        return None, None
+    if isinstance(entry, tuple):
+        return entry[0], entry[1]
+    return entry, None
+
+
 TOWER_TEMPLATES = {
     "nrel_5mw_tower": {
         "base_elev_m": 10.0,      # above mudline for OC3 monopile
@@ -42,6 +89,18 @@ TOWER_TEMPLATES = {
         "E_Pa": 2.1e11,
         "G_Pa": 8.1e10,
         "density_kg_m3": 8500.0,  # effective density incl. stiffeners
+        "n_elements": 11,
+    },
+    "nrel_5mw_oc3_tower": {
+        "base_elev_m": 10.0,
+        "hub_height_m": 90.0,
+        "base_diameter_m": 6.0,
+        "top_diameter_m": 3.87,
+        "base_thickness_m": 0.027,
+        "top_thickness_m": 0.019,
+        "E_Pa": 2.1e11,
+        "G_Pa": 8.1e10,
+        "density_kg_m3": 8500.0,
         "n_elements": 11,
     },
     "iea_15mw_tower": {
@@ -114,18 +173,115 @@ def build_opensees_model(tower_model: "TowerModel") -> None:
     if tpl is None:
         raise ValueError(f"Unknown tower template: {tower_model.tower_name}")
 
-    rna_mass = ROTOR_MASS_KG.get(tower_model.rotor_name, 300_000.0)
-
     # Build tower stick nodes + elements
     base_node = 1000
-    hub_node = _build_tower_stick(ops, tpl, base_node)
+    ed_main, ed_tower = _resolve_ed(tower_model.tower_name)
+    if ed_main:
+        hub_node = _build_tower_stick_from_elastodyn(
+            ops, ed_main, base_node,
+            n_segments=int(tpl.get("n_elements", 20)),
+            ed_tower=ed_tower,
+        )
+    else:
+        hub_node = _build_tower_stick(ops, tpl, base_node)
 
     # Attach foundation
-    attach_foundation(tower_model.foundation, base_node)
+    diag = attach_foundation(tower_model.foundation, base_node)
+    if isinstance(diag, dict):
+        tower_model.foundation.diagnostics.update(diag)
 
-    # Place RNA mass at hub node
-    ops.mass(hub_node, rna_mass, rna_mass, rna_mass,
-             rna_mass * 10.0, rna_mass * 10.0, rna_mass * 10.0)
+    # Place RNA mass + inertia at hub node. Prefer ElastoDyn-parsed
+    # values when available; fall back to ROTOR_MASS_KG dict otherwise.
+    if ed_main:
+        from op3.opensees_foundations.tower_loader import load_elastodyn_rna
+        rna = load_elastodyn_rna(ed_main)
+        m_total = rna.total_rna_mass_kg
+        I_x = 0.5 * (rna.hub_iner_kgm2 + rna.nac_yiner_kgm2)
+        I_y = rna.hub_iner_kgm2
+        I_z = rna.nac_yiner_kgm2
+
+        # Rigid offset from tower top to nacelle CM:
+        #   dx = NacCMxn (downwind), dy = 0, dz = Twr2Shft + NacCMzn
+        # The eccentric mass is what raises NREL 5MW from 0.30 -> 0.32 Hz.
+        dx = rna.nac_cm_xn_m
+        dz = rna.twr2shft_m + rna.nac_cm_zn_m
+        if abs(dx) + abs(dz) > 1e-6:
+            # Place a CM node and rigid-link it to the tower top
+            tower_top_xyz = ops.nodeCoord(hub_node)
+            cm_tag = 3001
+            ops.node(
+                cm_tag,
+                float(tower_top_xyz[0] + dx),
+                float(tower_top_xyz[1]),
+                float(tower_top_xyz[2] + dz),
+            )
+            # rigidLink "beam" enslaves all 6 DOF of cm_tag to hub_node
+            ops.rigidLink("beam", hub_node, cm_tag)
+            ops.mass(cm_tag, m_total, m_total, m_total, I_x, I_y, I_z)
+        else:
+            ops.mass(hub_node, m_total, m_total, m_total, I_x, I_y, I_z)
+    else:
+        rna_mass = ROTOR_MASS_KG.get(tower_model.rotor_name, 300_000.0)
+        ops.mass(hub_node, rna_mass, rna_mass, rna_mass,
+                 rna_mass * 10.0, rna_mass * 10.0, rna_mass * 10.0)
+
+
+def _build_tower_stick_from_elastodyn(
+    ops, ed_path: str, base_node: int, n_segments: int = 20,
+    ed_tower: str | None = None,
+) -> int:
+    """
+    Build a tower stick using byte-identical distributed properties
+    parsed from an OpenFAST ElastoDyn deck. Each element receives
+    EI and mass-per-length interpolated from the NREL station table.
+
+    Convention: E is fixed at 2.1e11 Pa and I = EI/E is back-calculated
+    so that bending modes match NREL exactly. Cross-sectional area is
+    set to ``mass_kg_m / 7850`` so that ``rho * A`` reproduces the
+    distributed mass when ``rho = 7850``. Axial and torsional modes
+    are not the target of this calibration.
+    """
+    from op3.opensees_foundations.tower_loader import (
+        load_elastodyn_tower, discretise,
+    )
+
+    tpl = load_elastodyn_tower(ed_path, ed_tower=ed_tower)
+    elements = discretise(tpl, n_segments=n_segments)
+
+    E_REF = 2.1e11
+    G_REF = 8.1e10
+    RHO_STEEL = 7850.0
+
+    # Nodes
+    n_nodes = len(elements) + 1
+    z_first = elements[0]["z_bot"]
+    ops.node(base_node, 0.0, 0.0, float(z_first))
+    for i, el in enumerate(elements):
+        tag = base_node + i + 1
+        ops.node(tag, 0.0, 0.0, float(el["z_top"]))
+
+    transf_tag = 1
+    ops.geomTransf("Linear", transf_tag, 0.0, 1.0, 0.0)
+
+    for i, el in enumerate(elements):
+        m_kg_m = el["mass_kg_m"]
+        EI_fa = el["EI_fa_Nm2"]
+        EI_ss = el["EI_ss_Nm2"]
+        Iy = EI_fa / E_REF
+        Iz = EI_ss / E_REF
+        A = max(m_kg_m / RHO_STEEL, 1.0e-6)
+        Jx = Iy + Iz
+
+        ops.element(
+            "elasticBeamColumn",
+            1000 + i + 1,
+            base_node + i, base_node + i + 1,
+            A, E_REF, G_REF, Jx, Iy, Iz,
+            transf_tag,
+            "-mass", m_kg_m,
+        )
+
+    return base_node + n_nodes - 1
 
 
 def _build_tower_stick(ops, tpl: dict, base_node: int) -> int:
@@ -210,14 +366,39 @@ def attach_foundation(foundation: "Foundation", base_node: int) -> dict:
 
     if foundation.mode == FoundationMode.DISSIPATION_WEIGHTED:
         df = apply_scour_relief(foundation.spring_table, foundation.scour_depth)
-        # Apply dissipation weights w(z) to stiffness and capacity
+        # Apply dissipation weights w(z) to stiffness and capacity per
+        # the Mode D formulation in docs/MODE_D_DISSIPATION_WEIGHTED.md:
+        #     w(D) = beta + (1 - beta) * (1 - D / D_max) ** alpha
+        # If the dissipation_weights table already contains a 'w_z'
+        # column, that takes precedence (back-compat). Otherwise the
+        # weights are computed from a 'D_total_kJ' column using the
+        # foundation's alpha / beta parameters.
         if foundation.dissipation_weights is not None:
-            w = foundation.dissipation_weights
+            w = foundation.dissipation_weights.copy()
+            if "w_z" not in w.columns:
+                if "D_total_kJ" not in w.columns:
+                    raise ValueError(
+                        "Mode D requires either 'w_z' or 'D_total_kJ' column "
+                        "in dissipation_weights")
+                D = w["D_total_kJ"].values.astype(float)
+                D_max = float(np.max(D)) if D.size else 0.0
+                alpha = float(foundation.mode_d_alpha)
+                beta = float(foundation.mode_d_beta)
+                if D_max > 0:
+                    w_z = beta + (1.0 - beta) * np.power(
+                        np.clip(1.0 - D / D_max, 0.0, 1.0), alpha)
+                else:
+                    w_z = np.ones_like(D)
+                w["w_z"] = w_z
             df = df.merge(w[["depth_m", "w_z"]], on="depth_m", how="left")
             df["w_z"] = df["w_z"].fillna(1.0)
             for col in ("k_ini_kN_per_m", "p_ult_kN_per_m"):
                 if col in df.columns:
                     df[col] = df[col].values * df["w_z"].values
+            diagnostics["mode_d_alpha"] = float(foundation.mode_d_alpha)
+            diagnostics["mode_d_beta"] = float(foundation.mode_d_beta)
+            diagnostics["mode_d_w_min"] = float(df["w_z"].min())
+            diagnostics["mode_d_w_max"] = float(df["w_z"].max())
             df = df.drop(columns=["w_z"])
         diagnostics.update(_attach_distributed_bnwf(ops, df, base_node))
         diagnostics["description"] = "dissipation-weighted generalized BNWF"

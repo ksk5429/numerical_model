@@ -1,0 +1,282 @@
+[
+  {
+    "example": "01_nrel_5mw_baseline",
+    "f1_baseline_hz": 0.31580944473317624,
+    "perturbation_pct": 10.0,
+    "rows": [
+      {
+        "parameter": "tower_EI",
+        "f1_baseline_hz": 0.31580944473317624,
+        "f1_plus_hz": 0.3312237399718526,
+        "f1_minus_hz": 0.29960314558498996,
+        "df_plus_pct": 4.880884817013544,
+        "df_minus_pct": -5.131670194942647,
+        "swing_pct": 10.012555011956191
+      },
+      {
+        "parameter": "nac_mass",
+        "f1_baseline_hz": 0.31580944473317624,
+        "f1_plus_hz": 0.30663906466444174,
+        "f1_minus_hz": 0.3258537072394441,
+        "df_plus_pct": -2.90377004920877,
+        "df_minus_pct": 3.1804819880400252,
+        "swing_pct": -6.084252037248795
+      },
+      {
+        "parameter": "hub_mass",
+        "f1_baseline_hz": 0.31580944473317624,
+        "f1_plus_hz": 0.31356583162147944,
+        "f1_minus_hz": 0.31810184726570007,
+        "df_plus_pct": -0.7104325564399757,
+        "df_minus_pct": 0.725881562681146,
+        "swing_pct": -1.4363141191211217
+      },
+      {
+        "parameter": "blade_mass",
+        "f1_baseline_hz": 0.31580944473317624,
+        "f1_plus_hz": 0.31381029189835136,
+        "f1_minus_hz": 0.31784724255414076,
+        "df_plus_pct": -0.6330250308105703,
+        "df_minus_pct": 0.6452618358789866,
+        "swing_pct": -1.278286866689557
+      },
+      {
+        "parameter": "tower_mass",
+        "f1_baseline_hz": 0.31580944473317624,
+        "f1_plus_hz": 0.313925559160111,
+        "f1_minus_hz": 0.3177248908789503,
+        "df_plus_pct": -0.5965260395099675,
+        "df_minus_pct": 0.6065195888591569,
+        "swing_pct": -1.2030456283691244
+      },
+      {
+        "parameter": "nac_cm_z",
+        "f1_baseline_hz": 0.31580944473317624,
+        "f1_plus_hz": 0.3148912071748748,
+        "f1_minus_hz": 0.31673121197654025,
+        "df_plus_pct": -0.2907568388517504,
+        "df_minus_pct": 0.29187450177204294,
+        "swing_pct": -0.5826313406237934
+      },
+      {
+        "parameter": "nac_yiner",
+        "f1_baseline_hz": 0.31580944473317624,
+        "f1_plus_hz": 0.3157906013261799,
+        "f1_minus_hz": 0.3158282892083797,
+        "df_plus_pct": -0.005966701538086274,
+        "df_minus_pct": 0.005967039782287539,
+        "swing_pct": -0.011933741320373814
+      }
+    ]
+  },
+  {
+    "example": "02_nrel_5mw_oc3_monopile",
+    "f1_baseline_hz": 0.27535572228743155,
+    "perturbation_pct": 10.0,
+    "rows": [
+      {
+        "parameter": "tower_EI",
+        "f1_baseline_hz": 0.27535572228743155,
+        "f1_plus_hz": 0.2881765866329744,
+        "f1_minus_hz": 0.2617887387773184,
+        "df_plus_pct": 4.656109645747522,
+        "df_minus_pct": -4.927075202000408,
+        "swing_pct": 9.58318484774793
+      },
+      {
+        "parameter": "nac_mass",
+        "f1_baseline_hz": 0.27535572228743155,
+        "f1_plus_hz": 0.267159103715561,
+        "f1_minus_hz": 0.2843554072059974,
+        "df_plus_pct": -2.9767380549711095,
+        "df_minus_pct": 3.2683849254352784,
+        "swing_pct": -6.245122980406388
+      },
+      {
+        "parameter": "hub_mass",
+        "f1_baseline_hz": 0.27535572228743155,
+        "f1_plus_hz": 0.2733486064531182,
+        "f1_minus_hz": 0.2774076675023724,
+        "df_plus_pct": -0.7289174227576813,
+        "df_minus_pct": 0.7451979562636103,
+        "swing_pct": -1.4741153790212915
+      },
+      {
+        "parameter": "blade_mass",
+        "f1_baseline_hz": 0.27535572228743155,
+        "f1_plus_hz": 0.2735672431024098,
+        "f1_minus_hz": 0.2771797097395686,
+        "df_plus_pct": -0.6495158953532899,
+        "df_minus_pct": 0.6624113118060055,
+        "swing_pct": -1.3119272071592956
+      },
+      {
+        "parameter": "tower_mass",
+        "f1_baseline_hz": 0.27535572228743155,
+        "f1_plus_hz": 0.2740266016274068,
+        "f1_minus_hz": 0.2767026737226258,
+        "df_plus_pct": -0.4826922240741975,
+        "df_minus_pct": 0.48916776597372913,
+        "swing_pct": -0.9718599900479266
+      },
+      {
+        "parameter": "nac_cm_z",
+        "f1_baseline_hz": 0.27535572228743155,
+        "f1_plus_hz": 0.2745469462931383,
+        "f1_minus_hz": 0.2761677357269069,
+        "df_plus_pct": -0.29372042373936846,
+        "df_minus_pct": 0.2948961556817478,
+        "swing_pct": -0.5886165794211163
+      },
+      {
+        "parameter": "nac_yiner",
+        "f1_baseline_hz": 0.27535572228743155,
+        "f1_plus_hz": 0.27533926957120297,
+        "f1_minus_hz": 0.2753721758456542,
+        "df_plus_pct": -0.005975076926639035,
+        "df_minus_pct": 0.005975382710763865,
+        "swing_pct": -0.0119504596374029
+      }
+    ]
+  },
+  {
+    "example": "04_gunsan_4p2mw_tripod",
+    "f1_baseline_hz": 0.2350342372636715,
+    "perturbation_pct": 10.0,
+    "rows": [
+      {
+        "parameter": "tower_EI",
+        "f1_baseline_hz": 0.2350342372636715,
+        "f1_plus_hz": 0.2350342372636715,
+        "f1_minus_hz": 0.23503423726367142,
+        "df_plus_pct": 0.0,
+        "df_minus_pct": -3.5427488274176217e-14,
+        "swing_pct": 3.5427488274176217e-14
+      },
+      {
+        "parameter": "hub_mass",
+        "f1_baseline_hz": 0.2350342372636715,
+        "f1_plus_hz": 0.23503423726367142,
+        "f1_minus_hz": 0.2350342372636715,
+        "df_plus_pct": -3.5427488274176217e-14,
+        "df_minus_pct": 0.0,
+        "swing_pct": -3.5427488274176217e-14
+      },
+      {
+        "parameter": "nac_cm_z",
+        "f1_baseline_hz": 0.2350342372636715,
+        "f1_plus_hz": 0.23503423726367148,
+        "f1_minus_hz": 0.23503423726367154,
+        "df_plus_pct": -1.1809162758058741e-14,
+        "df_minus_pct": 1.1809162758058741e-14,
+        "swing_pct": -2.3618325516117482e-14
+      },
+      {
+        "parameter": "blade_mass",
+        "f1_baseline_hz": 0.2350342372636715,
+        "f1_plus_hz": 0.2350342372636715,
+        "f1_minus_hz": 0.23503423726367154,
+        "df_plus_pct": 0.0,
+        "df_minus_pct": 1.1809162758058741e-14,
+        "swing_pct": -1.1809162758058741e-14
+      },
+      {
+        "parameter": "nac_yiner",
+        "f1_baseline_hz": 0.2350342372636715,
+        "f1_plus_hz": 0.2350342372636715,
+        "f1_minus_hz": 0.23503423726367154,
+        "df_plus_pct": 0.0,
+        "df_minus_pct": 1.1809162758058741e-14,
+        "swing_pct": -1.1809162758058741e-14
+      },
+      {
+        "parameter": "tower_mass",
+        "f1_baseline_hz": 0.2350342372636715,
+        "f1_plus_hz": 0.23503423726367148,
+        "f1_minus_hz": 0.23503423726367148,
+        "df_plus_pct": -1.1809162758058741e-14,
+        "df_minus_pct": -1.1809162758058741e-14,
+        "swing_pct": 0.0
+      },
+      {
+        "parameter": "nac_mass",
+        "f1_baseline_hz": 0.2350342372636715,
+        "f1_plus_hz": 0.23503423726367148,
+        "f1_minus_hz": 0.23503423726367148,
+        "df_plus_pct": -1.1809162758058741e-14,
+        "df_minus_pct": -1.1809162758058741e-14,
+        "swing_pct": 0.0
+      }
+    ]
+  },
+  {
+    "example": "07_iea_15mw_monopile",
+    "f1_baseline_hz": 0.18805308079074867,
+    "perturbation_pct": 10.0,
+    "rows": [
+      {
+        "parameter": "tower_EI",
+        "f1_baseline_hz": 0.18805308079074867,
+        "f1_plus_hz": 0.19640260308281135,
+        "f1_minus_hz": 0.17916202302371242,
+        "df_plus_pct": 4.439981656750095,
+        "df_minus_pct": -4.727951134674336,
+        "swing_pct": 9.16793279142443
+      },
+      {
+        "parameter": "nac_mass",
+        "f1_baseline_hz": 0.18805308079074867,
+        "f1_plus_hz": 0.18236812735516147,
+        "f1_minus_hz": 0.19430427607556758,
+        "df_plus_pct": -3.023057857750805,
+        "df_minus_pct": 3.3241653146723853,
+        "swing_pct": -6.34722317242319
+      },
+      {
+        "parameter": "blade_mass",
+        "f1_baseline_hz": 0.18805308079074867,
+        "f1_plus_hz": 0.1861837173003368,
+        "f1_minus_hz": 0.1899798251117972,
+        "df_plus_pct": -0.9940616141736863,
+        "df_minus_pct": 1.024574717386558,
+        "swing_pct": -2.0186363315602445
+      },
+      {
+        "parameter": "tower_mass",
+        "f1_baseline_hz": 0.18805308079074867,
+        "f1_plus_hz": 0.18716824248582442,
+        "f1_minus_hz": 0.18894878181765717,
+        "df_plus_pct": -0.4705258223920474,
+        "df_minus_pct": 0.47630223506158387,
+        "swing_pct": -0.9468280574536312
+      },
+      {
+        "parameter": "nac_cm_z",
+        "f1_baseline_hz": 0.18805308079074867,
+        "f1_plus_hz": 0.1871849441739193,
+        "f1_minus_hz": 0.18892663675681273,
+        "df_plus_pct": -0.46164445335271154,
+        "df_minus_pct": 0.46452627225825005,
+        "swing_pct": -0.9261707256109616
+      },
+      {
+        "parameter": "hub_mass",
+        "f1_baseline_hz": 0.18805308079074867,
+        "f1_plus_hz": 0.1874181051060729,
+        "f1_minus_hz": 0.18869454539618444,
+        "df_plus_pct": -0.3376576879281885,
+        "df_minus_pct": 0.3411082672713769,
+        "swing_pct": -0.6787659551995655
+      },
+      {
+        "parameter": "nac_yiner",
+        "f1_baseline_hz": 0.18805308079074867,
+        "f1_plus_hz": 0.1880302487557967,
+        "f1_minus_hz": 0.1880759133939287,
+        "df_plus_pct": -0.012141271419739159,
+        "df_minus_pct": 0.01214157358338655,
+        "swing_pct": -0.02428284500312571
+      }
+    ]
+  }
+]

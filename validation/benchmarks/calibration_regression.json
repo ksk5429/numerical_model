@@ -1,0 +1,46 @@
+[
+  {
+    "example": "01_nrel_5mw_baseline",
+    "f1_hz": 0.31580944473317624,
+    "reference_hz": 0.324,
+    "error_fraction": -0.025279491564270905,
+    "tolerance": 0.05,
+    "status": "PASS",
+    "boundary_condition": "fixed",
+    "source": "Jonkman et al. (2009), NREL/TP-500-38060, Table 9-1",
+    "note": "Tower 1st fore-aft bending mode, full RNA, fixed at tower base."
+  },
+  {
+    "example": "02_nrel_5mw_oc3_monopile",
+    "f1_hz": 0.27535572228743144,
+    "reference_hz": 0.2766,
+    "error_fraction": -0.0044984732920049725,
+    "tolerance": 0.1,
+    "status": "PASS",
+    "boundary_condition": "monopile-soil-fixed-at-mudline",
+    "source": "Jonkman & Musial (2010), NREL/TP-500-47535 (OC3 Phase II), Table 7-3",
+    "note": "Coupled tower+monopile 1st bending mode, fixed at mudline; Op3 example 02 uses fixed-base monopile (no p-y springs)."
+  },
+  {
+    "example": "04_gunsan_4p2mw_tripod",
+    "f1_hz": 0.2350342372636715,
+    "reference_hz": 0.244,
+    "error_fraction": -0.0367449292472479,
+    "tolerance": 0.05,
+    "status": "PASS",
+    "boundary_condition": "tripod-suction-bucket-as-built",
+    "source": "Gunsan field measurement (PhD dissertation Ch. 5)",
+    "note": "Operational modal analysis from accelerometer array, averaged across 20,039 RANSAC windows."
+  },
+  {
+    "example": "07_iea_15mw_monopile",
+    "f1_hz": 0.18805308079074864,
+    "reference_hz": 0.17,
+    "error_fraction": 0.10619459288675666,
+    "tolerance": 0.2,
+    "status": "PASS",
+    "boundary_condition": "monopile-soil-system",
+    "source": "Gaertner et al. (2020), NREL/TP-5000-75698 (IEA 15 MW RWT), Table 5.1",
+    "note": "System-level 1st tower bending including monopile and soil flexibility. Op3 example 07 is fixed-base monopile, so a wide tolerance band is applied until distributed BNWF (Mode C) is wired in."
+  }
+]

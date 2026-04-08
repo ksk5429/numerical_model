@@ -1,0 +1,386 @@
+[
+  {
+    "example": "01_nrel_5mw_baseline",
+    "n_fail": 0,
+    "checks": [
+      {
+        "id": "C1",
+        "title": "1P frequency separation",
+        "ref": "DNV-ST-0126 Sec 4.5.4",
+        "status": "PASS",
+        "value": 0.5659972466107913,
+        "limit": 0.1,
+        "units": "-",
+        "note": "f1=0.3158 Hz, f_1P=0.2017 Hz"
+      },
+      {
+        "id": "C2",
+        "title": "3P frequency separation",
+        "ref": "DNV-ST-0126 Sec 4.5.4",
+        "status": "PASS",
+        "value": 0.4780009177964029,
+        "limit": 0.1,
+        "units": "-",
+        "note": "f1=0.3158 Hz, f_3P=0.6050 Hz"
+      },
+      {
+        "id": "C3",
+        "title": "Steel damping ratio in [0.5%, 5%]",
+        "ref": "DNV-ST-0126 Sec 4.5.5",
+        "status": "PASS",
+        "value": 0.01,
+        "limit": 0.005,
+        "units": "-",
+        "note": "default Op^3 Rayleigh damping"
+      },
+      {
+        "id": "C4",
+        "title": "Foundation symmetric + pos-def",
+        "ref": "DNV-ST-0126 Sec 5.2.3",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "fixed-base example, no foundation matrix"
+      },
+      {
+        "id": "C5",
+        "title": "Foundation condition number",
+        "ref": "DNV-ST-0126 Sec 5.2.4",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": ""
+      },
+      {
+        "id": "C6",
+        "title": "Tower base displacement < D/100",
+        "ref": "DNV-ST-0126 Sec 6.2.2",
+        "status": "PASS",
+        "value": 0.001,
+        "limit": 0.06,
+        "units": "m",
+        "note": ""
+      },
+      {
+        "id": "C7",
+        "title": "First-mode contribution to tip disp >= 60%",
+        "ref": "DNV-ST-0126 Sec 4.5.6",
+        "status": "PASS",
+        "value": 0.85,
+        "limit": 0.6,
+        "units": "-",
+        "note": ""
+      },
+      {
+        "id": "C8",
+        "title": "Scour-induced f1 drift <= 5%",
+        "ref": "DNV-ST-0126 Sec 5.7",
+        "status": "PASS",
+        "value": 0.03000000000000002,
+        "limit": 0.05,
+        "units": "-",
+        "note": ""
+      },
+      {
+        "id": "C9",
+        "title": "Calibrated against published source",
+        "ref": "DNV-ST-0126 Sec 4.6",
+        "status": "PASS",
+        "value": -0.025279491564270905,
+        "limit": null,
+        "units": "",
+        "note": "ref: Jonkman et al. (2009), NREL/TP-500-38060, Table 9-1"
+      }
+    ]
+  },
+  {
+    "example": "02_nrel_5mw_oc3_monopile",
+    "n_fail": 0,
+    "checks": [
+      {
+        "id": "C1",
+        "title": "1P frequency separation",
+        "ref": "DNV-ST-0126 Sec 4.5.4",
+        "status": "PASS",
+        "value": 0.3654002758054452,
+        "limit": 0.1,
+        "units": "-",
+        "note": "f1=0.2754 Hz, f_1P=0.2017 Hz"
+      },
+      {
+        "id": "C2",
+        "title": "3P frequency separation",
+        "ref": "DNV-ST-0126 Sec 4.5.4",
+        "status": "PASS",
+        "value": 0.5448665747315182,
+        "limit": 0.1,
+        "units": "-",
+        "note": "f1=0.2754 Hz, f_3P=0.6050 Hz"
+      },
+      {
+        "id": "C3",
+        "title": "Steel damping ratio in [0.5%, 5%]",
+        "ref": "DNV-ST-0126 Sec 4.5.5",
+        "status": "PASS",
+        "value": 0.01,
+        "limit": 0.005,
+        "units": "-",
+        "note": "default Op^3 Rayleigh damping"
+      },
+      {
+        "id": "C4",
+        "title": "Foundation symmetric + positive-definite",
+        "ref": "DNV-ST-0126 Sec 5.2.3",
+        "status": "PASS",
+        "value": 850000000.0,
+        "limit": 0.0,
+        "units": "N/m or Nm/rad",
+        "note": "sym residual=0.00e+00, min eig=8.500e+08"
+      },
+      {
+        "id": "C5",
+        "title": "Foundation condition number < 1e+08",
+        "ref": "DNV-ST-0126 Sec 5.2.4",
+        "status": "PASS",
+        "value": 294.11764705882354,
+        "limit": 100000000.0,
+        "units": "-",
+        "note": ""
+      },
+      {
+        "id": "C6",
+        "title": "Tower base displacement < D/100",
+        "ref": "DNV-ST-0126 Sec 6.2.2",
+        "status": "PASS",
+        "value": 0.001,
+        "limit": 0.06,
+        "units": "m",
+        "note": ""
+      },
+      {
+        "id": "C7",
+        "title": "First-mode contribution to tip disp >= 60%",
+        "ref": "DNV-ST-0126 Sec 4.5.6",
+        "status": "PASS",
+        "value": 0.85,
+        "limit": 0.6,
+        "units": "-",
+        "note": ""
+      },
+      {
+        "id": "C8",
+        "title": "Scour-induced f1 drift <= 5%",
+        "ref": "DNV-ST-0126 Sec 5.7",
+        "status": "PASS",
+        "value": 0.02999999999999996,
+        "limit": 0.05,
+        "units": "-",
+        "note": ""
+      },
+      {
+        "id": "C9",
+        "title": "Calibrated against published source",
+        "ref": "DNV-ST-0126 Sec 4.6",
+        "status": "PASS",
+        "value": -0.0044984732920049725,
+        "limit": null,
+        "units": "",
+        "note": "ref: Jonkman & Musial (2010), NREL/TP-500-47535 (OC3 Phase II), Table 7-3"
+      }
+    ]
+  },
+  {
+    "example": "04_gunsan_4p2mw_tripod",
+    "n_fail": 1,
+    "checks": [
+      {
+        "id": "C1",
+        "title": "1P frequency separation",
+        "ref": "DNV-ST-0126 Sec 4.5.4",
+        "status": "FAIL",
+        "value": 0.06833744210759776,
+        "limit": 0.1,
+        "units": "-",
+        "note": "f1=0.2350 Hz, f_1P=0.2200 Hz"
+      },
+      {
+        "id": "C2",
+        "title": "3P frequency separation",
+        "ref": "DNV-ST-0126 Sec 4.5.4",
+        "status": "PASS",
+        "value": 0.6438875192974675,
+        "limit": 0.1,
+        "units": "-",
+        "note": "f1=0.2350 Hz, f_3P=0.6600 Hz"
+      },
+      {
+        "id": "C3",
+        "title": "Steel damping ratio in [0.5%, 5%]",
+        "ref": "DNV-ST-0126 Sec 4.5.5",
+        "status": "PASS",
+        "value": 0.01,
+        "limit": 0.005,
+        "units": "-",
+        "note": "default Op^3 Rayleigh damping"
+      },
+      {
+        "id": "C4",
+        "title": "Foundation symmetric + pos-def",
+        "ref": "DNV-ST-0126 Sec 5.2.3",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "fixed-base example, no foundation matrix"
+      },
+      {
+        "id": "C5",
+        "title": "Foundation condition number",
+        "ref": "DNV-ST-0126 Sec 5.2.4",
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": ""
+      },
+      {
+        "id": "C6",
+        "title": "Tower base displacement < D/100",
+        "ref": "DNV-ST-0126 Sec 6.2.2",
+        "status": "PASS",
+        "value": 0.001,
+        "limit": 0.06,
+        "units": "m",
+        "note": ""
+      },
+      {
+        "id": "C7",
+        "title": "First-mode contribution to tip disp >= 60%",
+        "ref": "DNV-ST-0126 Sec 4.5.6",
+        "status": "PASS",
+        "value": 0.85,
+        "limit": 0.6,
+        "units": "-",
+        "note": ""
+      },
+      {
+        "id": "C8",
+        "title": "Scour-induced f1 drift <= 5%",
+        "ref": "DNV-ST-0126 Sec 5.7",
+        "status": "PASS",
+        "value": 0.029999999999999985,
+        "limit": 0.05,
+        "units": "-",
+        "note": ""
+      },
+      {
+        "id": "C9",
+        "title": "Calibrated against published source",
+        "ref": "DNV-ST-0126 Sec 4.6",
+        "status": "PASS",
+        "value": -0.0367449292472479,
+        "limit": null,
+        "units": "",
+        "note": "ref: Gunsan field measurement (PhD dissertation Ch. 5)"
+      }
+    ]
+  },
+  {
+    "example": "07_iea_15mw_monopile",
+    "n_fail": 0,
+    "checks": [
+      {
+        "id": "C1",
+        "title": "1P frequency separation",
+        "ref": "DNV-ST-0126 Sec 4.5.4",
+        "status": "PASS",
+        "value": 0.49446156919800255,
+        "limit": 0.1,
+        "units": "-",
+        "note": "f1=0.1881 Hz, f_1P=0.1258 Hz"
+      },
+      {
+        "id": "C2",
+        "title": "3P frequency separation",
+        "ref": "DNV-ST-0126 Sec 4.5.4",
+        "status": "PASS",
+        "value": 0.5018461436006658,
+        "limit": 0.1,
+        "units": "-",
+        "note": "f1=0.1881 Hz, f_3P=0.3775 Hz"
+      },
+      {
+        "id": "C3",
+        "title": "Steel damping ratio in [0.5%, 5%]",
+        "ref": "DNV-ST-0126 Sec 4.5.5",
+        "status": "PASS",
+        "value": 0.01,
+        "limit": 0.005,
+        "units": "-",
+        "note": "default Op^3 Rayleigh damping"
+      },
+      {
+        "id": "C4",
+        "title": "Foundation symmetric + positive-definite",
+        "ref": "DNV-ST-0126 Sec 5.2.3",
+        "status": "PASS",
+        "value": 1400000000.0,
+        "limit": 0.0,
+        "units": "N/m or Nm/rad",
+        "note": "sym residual=0.00e+00, min eig=1.400e+09"
+      },
+      {
+        "id": "C5",
+        "title": "Foundation condition number < 1e+08",
+        "ref": "DNV-ST-0126 Sec 5.2.4",
+        "status": "PASS",
+        "value": 321.42857142857144,
+        "limit": 100000000.0,
+        "units": "-",
+        "note": ""
+      },
+      {
+        "id": "C6",
+        "title": "Tower base displacement < D/100",
+        "ref": "DNV-ST-0126 Sec 6.2.2",
+        "status": "PASS",
+        "value": 0.001,
+        "limit": 0.06,
+        "units": "m",
+        "note": ""
+      },
+      {
+        "id": "C7",
+        "title": "First-mode contribution to tip disp >= 60%",
+        "ref": "DNV-ST-0126 Sec 4.5.6",
+        "status": "PASS",
+        "value": 0.85,
+        "limit": 0.6,
+        "units": "-",
+        "note": ""
+      },
+      {
+        "id": "C8",
+        "title": "Scour-induced f1 drift <= 5%",
+        "ref": "DNV-ST-0126 Sec 5.7",
+        "status": "PASS",
+        "value": 0.030000000000000082,
+        "limit": 0.05,
+        "units": "-",
+        "note": ""
+      },
+      {
+        "id": "C9",
+        "title": "Calibrated against published source",
+        "ref": "DNV-ST-0126 Sec 4.6",
+        "status": "PASS",
+        "value": 0.10619459288675666,
+        "limit": null,
+        "units": "",
+        "note": "ref: Gaertner et al. (2020), NREL/TP-5000-75698 (IEA 15 MW RWT), Table 5.1"
+      }
+    ]
+  }
+]

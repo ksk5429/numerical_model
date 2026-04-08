@@ -1,0 +1,506 @@
+[
+  {
+    "example": "01_nrel_5mw_baseline",
+    "n_fail": 4,
+    "checks": [
+      {
+        "id": "I7.4.4",
+        "title": "1P frequency separation (>= 5%)",
+        "ref": "IEC 61400-3-1 Section 7.4.4",
+        "status": "PASS",
+        "value": 0.5659972466107913,
+        "limit": 0.05,
+        "units": "-",
+        "note": "f1=0.3158 Hz, f_1P=0.2017 Hz"
+      },
+      {
+        "id": "I7.4.5",
+        "title": "Soft-stiff design (1P < f1 < 3P)",
+        "ref": "IEC 61400-3-1 Section 7.4.5",
+        "status": "PASS",
+        "value": 0.31580944473317624,
+        "limit": 0.20166666666666666,
+        "units": "Hz",
+        "note": "window [0.2017, 0.6050]"
+      },
+      {
+        "id": "I7.4.7",
+        "title": "Aerodynamic damping log dec >= 0.05",
+        "ref": "IEC 61400-3-1 Section 7.4.7",
+        "status": "PASS",
+        "value": 0.05,
+        "limit": 0.05,
+        "units": "-",
+        "note": "default placeholder; replace with measured aero damping"
+      },
+      {
+        "id": "I7.5.2",
+        "title": "Hub freeboard >= 1.5 m",
+        "ref": "IEC 61400-3-1 Section 7.5.2",
+        "status": "PASS",
+        "value": 79.0,
+        "limit": 1.5,
+        "units": "m",
+        "note": "hub=90.0 m, max wave crest=11.0 m"
+      },
+      {
+        "id": "I7.5.3",
+        "title": "Nacelle CG offset within envelope",
+        "ref": "IEC 61400-3-1 Section 7.5.3",
+        "status": "PASS",
+        "value": 1.9,
+        "limit": 5.0,
+        "units": "m",
+        "note": ""
+      },
+      {
+        "id": "I10.3.1",
+        "title": "Foundation from accepted standard",
+        "ref": "IEC 61400-3-1 Section 10.3.1",
+        "status": "PASS",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "analytical (no data needed)"
+      },
+      {
+        "id": "I10.3.5",
+        "title": "Scour depth declared (may be 0 m)",
+        "ref": "IEC 61400-3-1 Section 10.3.5",
+        "status": "PASS",
+        "value": 0.0,
+        "limit": null,
+        "units": "m",
+        "note": "design scour depth informs Op^3 model via scour_depth field"
+      },
+      {
+        "id": "I8.3 DLC1.1",
+        "title": "DLC DLC1.1 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "WARNING",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "PARTIAL"
+      },
+      {
+        "id": "I8.3 DLC1.3",
+        "title": "DLC DLC1.3 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC1.4",
+        "title": "DLC DLC1.4 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC6.1",
+        "title": "DLC DLC6.1 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC6.2",
+        "title": "DLC DLC6.2 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      }
+    ]
+  },
+  {
+    "example": "02_nrel_5mw_oc3_monopile",
+    "n_fail": 4,
+    "checks": [
+      {
+        "id": "I7.4.4",
+        "title": "1P frequency separation (>= 5%)",
+        "ref": "IEC 61400-3-1 Section 7.4.4",
+        "status": "PASS",
+        "value": 0.3654002758054452,
+        "limit": 0.05,
+        "units": "-",
+        "note": "f1=0.2754 Hz, f_1P=0.2017 Hz"
+      },
+      {
+        "id": "I7.4.5",
+        "title": "Soft-stiff design (1P < f1 < 3P)",
+        "ref": "IEC 61400-3-1 Section 7.4.5",
+        "status": "PASS",
+        "value": 0.27535572228743144,
+        "limit": 0.20166666666666666,
+        "units": "Hz",
+        "note": "window [0.2017, 0.6050]"
+      },
+      {
+        "id": "I7.4.7",
+        "title": "Aerodynamic damping log dec >= 0.05",
+        "ref": "IEC 61400-3-1 Section 7.4.7",
+        "status": "PASS",
+        "value": 0.05,
+        "limit": 0.05,
+        "units": "-",
+        "note": "default placeholder; replace with measured aero damping"
+      },
+      {
+        "id": "I7.5.2",
+        "title": "Hub freeboard >= 1.5 m",
+        "ref": "IEC 61400-3-1 Section 7.5.2",
+        "status": "PASS",
+        "value": 79.0,
+        "limit": 1.5,
+        "units": "m",
+        "note": "hub=90.0 m, max wave crest=11.0 m"
+      },
+      {
+        "id": "I7.5.3",
+        "title": "Nacelle CG offset within envelope",
+        "ref": "IEC 61400-3-1 Section 7.5.3",
+        "status": "PASS",
+        "value": 1.9,
+        "limit": 5.0,
+        "units": "m",
+        "note": ""
+      },
+      {
+        "id": "I10.3.1",
+        "title": "Foundation from accepted standard",
+        "ref": "IEC 61400-3-1 Section 10.3.1",
+        "status": "WARNING",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "CSV: F:\\GITHUB3\\numerical_model_fresh\\data\\fem_results\\K_6x6_oc3_monopile.csv"
+      },
+      {
+        "id": "I10.3.5",
+        "title": "Scour depth declared (may be 0 m)",
+        "ref": "IEC 61400-3-1 Section 10.3.5",
+        "status": "PASS",
+        "value": 0.0,
+        "limit": null,
+        "units": "m",
+        "note": "design scour depth informs Op^3 model via scour_depth field"
+      },
+      {
+        "id": "I8.3 DLC1.1",
+        "title": "DLC DLC1.1 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "WARNING",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "PARTIAL"
+      },
+      {
+        "id": "I8.3 DLC1.3",
+        "title": "DLC DLC1.3 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC1.4",
+        "title": "DLC DLC1.4 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC6.1",
+        "title": "DLC DLC6.1 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC6.2",
+        "title": "DLC DLC6.2 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      }
+    ]
+  },
+  {
+    "example": "04_gunsan_4p2mw_tripod",
+    "n_fail": 4,
+    "checks": [
+      {
+        "id": "I7.4.4",
+        "title": "1P frequency separation (>= 5%)",
+        "ref": "IEC 61400-3-1 Section 7.4.4",
+        "status": "PASS",
+        "value": 0.06833744210759776,
+        "limit": 0.05,
+        "units": "-",
+        "note": "f1=0.2350 Hz, f_1P=0.2200 Hz"
+      },
+      {
+        "id": "I7.4.5",
+        "title": "Soft-stiff design (1P < f1 < 3P)",
+        "ref": "IEC 61400-3-1 Section 7.4.5",
+        "status": "PASS",
+        "value": 0.2350342372636715,
+        "limit": 0.22,
+        "units": "Hz",
+        "note": "window [0.2200, 0.6600]"
+      },
+      {
+        "id": "I7.4.7",
+        "title": "Aerodynamic damping log dec >= 0.05",
+        "ref": "IEC 61400-3-1 Section 7.4.7",
+        "status": "PASS",
+        "value": 0.05,
+        "limit": 0.05,
+        "units": "-",
+        "note": "default placeholder; replace with measured aero damping"
+      },
+      {
+        "id": "I7.5.2",
+        "title": "Hub freeboard >= 1.5 m",
+        "ref": "IEC 61400-3-1 Section 7.5.2",
+        "status": "PASS",
+        "value": 79.0,
+        "limit": 1.5,
+        "units": "m",
+        "note": "hub=90.0 m, max wave crest=11.0 m"
+      },
+      {
+        "id": "I7.5.3",
+        "title": "Nacelle CG offset within envelope",
+        "ref": "IEC 61400-3-1 Section 7.5.3",
+        "status": "PASS",
+        "value": 1.9,
+        "limit": 5.0,
+        "units": "m",
+        "note": ""
+      },
+      {
+        "id": "I10.3.1",
+        "title": "Foundation from accepted standard",
+        "ref": "IEC 61400-3-1 Section 10.3.1",
+        "status": "WARNING",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "CSV: F:\\GITHUB3\\numerical_model_fresh\\data\\fem_results\\spring_profile_op3.csv"
+      },
+      {
+        "id": "I10.3.5",
+        "title": "Scour depth declared (may be 0 m)",
+        "ref": "IEC 61400-3-1 Section 10.3.5",
+        "status": "PASS",
+        "value": 0.0,
+        "limit": null,
+        "units": "m",
+        "note": "design scour depth informs Op^3 model via scour_depth field"
+      },
+      {
+        "id": "I8.3 DLC1.1",
+        "title": "DLC DLC1.1 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "WARNING",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "PARTIAL"
+      },
+      {
+        "id": "I8.3 DLC1.3",
+        "title": "DLC DLC1.3 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC1.4",
+        "title": "DLC DLC1.4 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC6.1",
+        "title": "DLC DLC6.1 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC6.2",
+        "title": "DLC DLC6.2 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      }
+    ]
+  },
+  {
+    "example": "07_iea_15mw_monopile",
+    "n_fail": 4,
+    "checks": [
+      {
+        "id": "I7.4.4",
+        "title": "1P frequency separation (>= 5%)",
+        "ref": "IEC 61400-3-1 Section 7.4.4",
+        "status": "PASS",
+        "value": 0.49446156919800255,
+        "limit": 0.05,
+        "units": "-",
+        "note": "f1=0.1881 Hz, f_1P=0.1258 Hz"
+      },
+      {
+        "id": "I7.4.5",
+        "title": "Soft-stiff design (1P < f1 < 3P)",
+        "ref": "IEC 61400-3-1 Section 7.4.5",
+        "status": "PASS",
+        "value": 0.18805308079074864,
+        "limit": 0.12583333333333332,
+        "units": "Hz",
+        "note": "window [0.1258, 0.3775]"
+      },
+      {
+        "id": "I7.4.7",
+        "title": "Aerodynamic damping log dec >= 0.05",
+        "ref": "IEC 61400-3-1 Section 7.4.7",
+        "status": "PASS",
+        "value": 0.05,
+        "limit": 0.05,
+        "units": "-",
+        "note": "default placeholder; replace with measured aero damping"
+      },
+      {
+        "id": "I7.5.2",
+        "title": "Hub freeboard >= 1.5 m",
+        "ref": "IEC 61400-3-1 Section 7.5.2",
+        "status": "PASS",
+        "value": 79.0,
+        "limit": 1.5,
+        "units": "m",
+        "note": "hub=90.0 m, max wave crest=11.0 m"
+      },
+      {
+        "id": "I7.5.3",
+        "title": "Nacelle CG offset within envelope",
+        "ref": "IEC 61400-3-1 Section 7.5.3",
+        "status": "PASS",
+        "value": 1.9,
+        "limit": 5.0,
+        "units": "m",
+        "note": ""
+      },
+      {
+        "id": "I10.3.1",
+        "title": "Foundation from accepted standard",
+        "ref": "IEC 61400-3-1 Section 10.3.1",
+        "status": "WARNING",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "CSV: F:\\GITHUB3\\numerical_model_fresh\\data\\fem_results\\K_6x6_iea15_monopile.csv"
+      },
+      {
+        "id": "I10.3.5",
+        "title": "Scour depth declared (may be 0 m)",
+        "ref": "IEC 61400-3-1 Section 10.3.5",
+        "status": "PASS",
+        "value": 0.0,
+        "limit": null,
+        "units": "m",
+        "note": "design scour depth informs Op^3 model via scour_depth field"
+      },
+      {
+        "id": "I8.3 DLC1.1",
+        "title": "DLC DLC1.1 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "WARNING",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "PARTIAL"
+      },
+      {
+        "id": "I8.3 DLC1.3",
+        "title": "DLC DLC1.3 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC1.4",
+        "title": "DLC DLC1.4 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC6.1",
+        "title": "DLC DLC6.1 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      },
+      {
+        "id": "I8.3 DLC6.2",
+        "title": "DLC DLC6.2 coverage",
+        "ref": "IEC 61400-3-1 Table 1",
+        "status": "FAIL",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "NOT_COVERED"
+      }
+    ]
+  }
+]

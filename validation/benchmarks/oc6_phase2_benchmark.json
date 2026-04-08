@@ -1,0 +1,56 @@
+[
+  {
+    "case": "LC1.1 small-strain Kxx",
+    "quantity": "K_xx",
+    "op3_value": 31292483817.6,
+    "op3_units": "N/m",
+    "reference_value": null,
+    "reference_source": "Bergua 2021, Table 4 (REDWIN model 2 baseline)",
+    "status": "AWAITING_VERIFY"
+  },
+  {
+    "case": "LC1.1 small-strain Krxrx",
+    "quantity": "K_rxrx",
+    "op3_value": 17390333622222.902,
+    "op3_units": "Nm/rad",
+    "reference_value": null,
+    "reference_source": "Bergua 2021, Table 4 (REDWIN model 2 baseline)",
+    "status": "AWAITING_VERIFY"
+  },
+  {
+    "case": "LC1.1 small-strain Kxrx coupling",
+    "quantity": "K_xrx",
+    "op3_value": -655729889279.04,
+    "op3_units": "N",
+    "reference_value": null,
+    "reference_source": "Bergua 2021, Table 4 (REDWIN model 2 baseline)",
+    "status": "AWAITING_VERIFY"
+  },
+  {
+    "case": "LC2.1 cyclic stiffness reduction",
+    "quantity": "K_xx_cyclic / K_xx_static",
+    "op3_value": 0.5,
+    "op3_units": "-",
+    "reference_value": null,
+    "reference_source": "Bergua 2021, Figure 12 (Operational lateral stiffness)",
+    "status": "AWAITING_VERIFY"
+  },
+  {
+    "case": "LC2.2 sinusoidal load amplitude",
+    "quantity": "u_x_peak",
+    "op3_value": 0.00015978277816310074,
+    "op3_units": "m",
+    "reference_value": null,
+    "reference_source": "Bergua 2021, Section 4.2 (LC2.2 results)",
+    "status": "AWAITING_VERIFY"
+  },
+  {
+    "case": "LC2.3 first system frequency",
+    "quantity": "f1",
+    "op3_value": 0.2813878388403429,
+    "op3_units": "Hz",
+    "reference_value": null,
+    "reference_source": "Bergua 2021, Table 6 (System modal analysis, baseline soil)",
+    "status": "AWAITING_VERIFY"
+  }
+]

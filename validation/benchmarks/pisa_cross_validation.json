@@ -1,0 +1,47 @@
+[
+  {
+    "case": "Dunkirk DM7",
+    "geometry": {
+      "D_m": 2.0,
+      "L_m": 10.6
+    },
+    "op3_Kxx_N_per_m": 9453379779.504,
+    "op3_Krxrx_Nm_per_rad": 463065603366.4074,
+    "ref_Kxx": null,
+    "ref_Krxrx": null,
+    "status_Kxx": "AWAITING_VERIFY",
+    "status_Krxrx": "AWAITING_VERIFY",
+    "citation": "Byrne et al. (2020), Geotechnique 70(11), 1048-1066",
+    "notes": "Medium-scale PISA JIP test pile in dense Dunkirk marine sand. Reference K_ini values pending extraction from Figure 8 / Table 4."
+  },
+  {
+    "case": "Cowden CM1",
+    "geometry": {
+      "D_m": 0.762,
+      "L_m": 2.27
+    },
+    "op3_Kxx_N_per_m": 894828454.4,
+    "op3_Krxrx_Nm_per_rad": 1917908732.332517,
+    "ref_Kxx": null,
+    "ref_Krxrx": null,
+    "status_Kxx": "AWAITING_VERIFY",
+    "status_Krxrx": "AWAITING_VERIFY",
+    "citation": "Burd et al. (2020), Geotechnique 70(11), 1030-1047",
+    "notes": "Medium-scale PISA JIP test pile in Cowden glacial till. Reference K_ini values pending extraction from Figure 9 / Table 4."
+  },
+  {
+    "case": "Borkum Riffgrund-1 demonstrator",
+    "geometry": {
+      "D_m": 8.0,
+      "L_m": 30.0
+    },
+    "op3_Kxx_N_per_m": 28363855000.0,
+    "op3_Krxrx_Nm_per_rad": 11836048601750.0,
+    "ref_Kxx": null,
+    "ref_Krxrx": null,
+    "status_Kxx": "AWAITING_VERIFY",
+    "status_Krxrx": "AWAITING_VERIFY",
+    "citation": "Murphy et al. (2018), Marine Structures 60, 263-281",
+    "notes": "Full-scale demonstrator monopile, layered north sea profile. Reference K_ini values pending extraction."
+  }
+]

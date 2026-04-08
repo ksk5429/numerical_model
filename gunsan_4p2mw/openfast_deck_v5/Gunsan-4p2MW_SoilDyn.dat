@@ -1,0 +1,39 @@
+------- SoilDyn v1.0 INPUT FILE ------------------------------------------------------------------------------
+Op^3 generated SoilDyn input file (CalcOption=1, 6x6 stiffness from Op^3 PISA, D=6.0 m, L=36.0 m, 4 layers)
+--------------------------------------------------------------------------------------------------------------
+      False                Echo           - Echo input data to <RootName>.ech (flag)
+      "default"            DT             - Communication interval (s) (or "default")
+      1                    CalcOption     - Calculation option  {1: Stiffness / Damping matrices, 2: P-Y curves [unavailable], 3: coupled REDWIN DLL}
+================== Parameters for Stiffness / Damping matrices [used only for CalcOption = 1] ================
+   -24.8025 0.0000 -45.0000             Location (X,Y,Z)     - the location of interface point (only one point allowed)
+Stiffness matrix (6x6)
+  3.5711e+10  0.0000e+00  0.0000e+00  0.0000e+00  -7.8607e+11  0.0000e+00
+  0.0000e+00  3.5711e+10  0.0000e+00  7.8607e+11  0.0000e+00  0.0000e+00
+  0.0000e+00  0.0000e+00  9.1027e+09  0.0000e+00  0.0000e+00  0.0000e+00
+  0.0000e+00  7.8607e+11  0.0000e+00  2.1205e+13  0.0000e+00  0.0000e+00
+  -7.8607e+11  0.0000e+00  0.0000e+00  0.0000e+00  2.1205e+13  0.0000e+00
+  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  1.4400e+10
+Damping ratio matrix (6x6)
+  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00
+  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00
+  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00
+  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00
+  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00
+  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00  0.0000e+00
+================== Parameters for P-Y curves [used only for CalcOption = 2] ==================================
+      1                    PY_numPts      - Number of PY input points on separate lines below (must match number of P-Y curves in PY_inputFile)
+---- Location (x,y,z) ------- Point InputFile -------------
+   0 0 0                   "UnusedFile"
+================== REDWIN interface for DLL [used only for CalcOption = 3] ===================================
+      2                          DLL_model      - Model used in DLL {1: , 2: , 3: }
+"UnusedDLL.dll"                  DLL_FileName   - Name/location of the dynamic library {.dll [Windows] or .so [Linux]}
+      1                          DLL_NumPoints  - Number of interface points
+---- Location (X,Y,Z) ------- PropsFile ------------- LDispFile -------------
+   0 0 0                       "UnusedProps.txt"  "UnusedLD.txt"
+====================== OUTPUT ==================================================
+      False                SumPrint       - Print summary data to <RootName>.SlD.sum (flag)
+                           OutList        - The next line(s) contains a list of output parameters.
+"SlD1Fxg, SlD1Fyg, SlD1Fzg, SlD1Mxg, SlD1Myg, SlD1Mzg"
+"SlD1TDxg,SlD1TDyg,SlD1TDzg,SlD1RDxg,SlD1RDyg,SlD1RDzg"
+END of input file (the word "END" must appear in the first 3 columns of this last OutList line)
+---------------------------------------------------------------------------------------

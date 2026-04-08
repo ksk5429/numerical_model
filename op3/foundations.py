@@ -83,6 +83,9 @@ class Foundation:
     stiffness_matrix: Optional[np.ndarray] = None
     # Dissipation weights (Mode D only)
     dissipation_weights: Optional[pd.DataFrame] = None
+    # Mode D weighting parameters: w = beta + (1-beta) * (1 - D/D_max) ** alpha
+    mode_d_alpha: float = 1.0
+    mode_d_beta: float = 0.05
     # Scour depth applied at build time
     scour_depth: float = 0.0
     # Provenance: where did the data come from
@@ -113,7 +116,12 @@ class Foundation:
         # Delayed import so that pure-data use of Foundation objects
         # does not require OpenSeesPy to be installed.
         from op3.opensees_foundations import attach_foundation
-        return attach_foundation(self, base_node)
+        diag = attach_foundation(self, base_node)
+        # Persist into the dataclass so callers (and V&V tests) can
+        # inspect the weighting parameters that were actually applied.
+        if isinstance(diag, dict):
+            self.diagnostics.update(diag)
+        return diag
 
 
 def build_foundation(
@@ -124,6 +132,8 @@ def build_foundation(
     ogx_dissipation: Optional[str | Path] = None,
     ogx_capacity: Optional[str | Path] = None,
     scour_depth: float = 0.0,
+    mode_d_alpha: float = 1.0,
+    mode_d_beta: float = 0.05,
 ) -> Foundation:
     """Construct a Foundation handle ready for the composer.
 
@@ -161,7 +171,12 @@ def build_foundation(
             f"Expected one of {[m.value for m in FoundationMode]}."
         )
 
-    foundation = Foundation(mode=mode_enum, scour_depth=scour_depth)
+    foundation = Foundation(
+        mode=mode_enum,
+        scour_depth=scour_depth,
+        mode_d_alpha=mode_d_alpha,
+        mode_d_beta=mode_d_beta,
+    )
 
     if mode_enum == FoundationMode.FIXED:
         foundation.source = "analytical (no data needed)"
@@ -230,3 +245,47 @@ def apply_scour_relief(spring_table: pd.DataFrame, scour_depth: float) -> pd.Dat
         if col in df.columns:
             df[col] = df[col].values * relief
     return df
+
+
+# ---------------------------------------------------------------------------
+# PISA convenience: build a Mode B foundation directly from soil profile
+# ---------------------------------------------------------------------------
+
+def foundation_from_pisa(
+    *,
+    diameter_m: float,
+    embed_length_m: float,
+    soil_profile: list,
+    n_segments: int = 50,
+) -> Foundation:
+    """
+    Construct a STIFFNESS_6X6 Foundation whose K matrix is derived from
+    the PISA framework (Burd 2020 / Byrne 2020). This is the canonical
+    Op^3 entry point for monopile foundations when site-specific p-y
+    curves are not available.
+
+    Parameters
+    ----------
+    diameter_m, embed_length_m
+        Pile geometry.
+    soil_profile : list[op3.standards.pisa.SoilState]
+        Layered soil definition (depth, G, su or phi, soil_type).
+    n_segments
+        Vertical discretisation for the PISA integration (default 50).
+    """
+    from op3.standards.pisa import pisa_pile_stiffness_6x6
+
+    K = pisa_pile_stiffness_6x6(
+        diameter_m=diameter_m,
+        embed_length_m=embed_length_m,
+        soil_profile=soil_profile,
+        n_segments=n_segments,
+    )
+    foundation = Foundation(mode=FoundationMode.STIFFNESS_6X6)
+    foundation.stiffness_matrix = K
+    foundation.source = (
+        f"PISA (Burd 2020 / Byrne 2020), D={diameter_m} m, "
+        f"L={embed_length_m} m, {len(soil_profile)} soil layers"
+    )
+    return foundation
+

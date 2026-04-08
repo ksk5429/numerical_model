@@ -30,7 +30,7 @@ def build():
 
     return compose_tower_model(
         rotor="nrel_5mw_baseline",
-        tower="nrel_5mw_tower",
+        tower="nrel_5mw_oc3_tower",
         foundation=foundation,
     )
 

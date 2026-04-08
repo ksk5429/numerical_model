@@ -18,6 +18,8 @@ authors:
     given-names: "Kyeong Sun"
     affiliation: "Department of Civil and Environmental Engineering, Seoul National University"
 type: software
+version: "0.3.0"
+date-released: "2026-04-08"
 license: MIT
 repository-code: "https://github.com/ksk5429/numerical_model"
 keywords:
