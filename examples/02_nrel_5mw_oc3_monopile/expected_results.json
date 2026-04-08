@@ -1,0 +1,12 @@
+{
+  "example_id": "02_nrel_5mw_oc3_monopile",
+  "title": "NREL 5MW OC3 Monopile",
+  "tier": "1",
+  "rotor": "nrel_5mw_baseline",
+  "tower": "nrel_5mw_tower",
+  "foundation_mode": "stiffness_6x6",
+  "published_f1_Hz": 0.276,
+  "published_source": "NREL TP-500-47535 (Jonkman 2010), OC3 Phase II",
+  "openfast_fst": "nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/5MW_OC3Mnpl_DLL_WTurb_WavesIrr.fst",
+  "tolerance_rel": 0.05
+}

@@ -1,0 +1,246 @@
+	coordinate (m)								
+JOINT number	x	y	z	boundary condition	Member connect				
+100	0	0	23.591	222000	Tripod	Tower			
+101	0	0	26.246	222000	Tower	Tower			
+102	0	0	28.696	222000	Tower	Tower			
+103	0	0	31.571	222000	Tower	Tower			
+104	0	0	34.471	222000	Tower	Tower			
+105	0	0	37.371	222000	Tower	Tower			
+106	0	0	39.231	222000	Tower	Tower			
+107	0	0	41.256	222000	Tower	Tower			
+108	0	0	44.276	222000	Tower	Tower			
+109	0	0	47.176	222000	Tower	Tower			
+110	0	0	50.076	222000	Tower	Tower			
+111	0	0	52.976	222000	Tower	Tower			
+112	0	0	55.876	222000	Tower	Tower			
+113	0	0	58.776	222000	Tower	Tower			
+114	0	0	61.676	222000	Tower	Tower			
+115	0	0	64.576	222000	Tower	Tower			
+116	0	0	67.571	222000	Tower	Tower			
+117	0	0	70.135	222000	Tower	Tower			
+118	0	0	73.014	222000	Tower	Tower			
+119	0	0	75.895	222000	Tower	Tower			
+120	0	0	78.778	222000	Tower	Tower			
+121	0	0	81.662	222000	Tower	Tower			
+122	0	0	84.449	222000	Tower	Tower			
+123	0	0	87.237	222000	Tower	Tower			
+124	0	0	90.026	222000	Tower	Tower			
+125	0	0	92.818	222000	Tower	Tower			
+126	0	0	94.958	222000	Tower	Tower			
+127	0	0	96.298	222000	Tower				
+200	0	0	19.8	222000	Tripod	Tripod			
+201	0	0	13.8	222000	Tripod	Tripod			
+202	0	0	11.3	222000	Tripod	Tripod	Tripod	Tripod	Tripod
+203	0	0	4.3	222000	Tripod	Tripod			
+204	0	0	-1.7	222000	Tripod	Tripod	Tripod	Tripod	Tripod
+205	0	0	-3.7	222000	Tripod				
+210	-1.263	-0.729	-2.348	222000	Tripod	Tripod			
+211	-10.029	-5.79	-2.2	222000	Tripod				
+212	-10.029	-5.79	-5.4	222000	Tripod	Tripod	Tripod		
+213	-10.029	-5.79	-6.6	222000	Tripod	Tripod	Tripod		
+214	-10.029	-5.79	-6.85	222000	Tripod	Tripod	Tripod	Tripod	
+215	-10.029	-5.79	-8.2	222222	Tripod				
+220	1.263	-0.729	-2.348	222000	Tripod	Tripod			
+221	10.029	-5.79	-2.2	222000	Tripod				
+222	10.029	-5.79	-5.4	222000	Tripod	Tripod	Tripod		
+223	10.029	-5.79	-6.6	222000	Tripod	Tripod	Tripod		
+224	10.029	-5.79	-6.85	222000	Tripod	Tripod	Tripod	Tripod	
+225	10.029	-5.79	-8.2	222222	Tripod				
+230	0	1.458	-2.348	222000	Tripod	Tripod			
+231	0	11.58	-2.2	222000	Tripod				
+232	0	11.58	-5.4	222000	Tripod	Tripod	Tripod		
+233	0	11.58	-6.6	222000	Tripod	Tripod	Tripod		
+234	0	11.58	-6.85	222000	Tripod	Tripod	Tripod	Tripod	
+235	0	11.58	-8.2	222222	Tripod				
+
+
+
+		Joint connect(m)						
+index	Member name	Joint NUM	outer diameter (m)	Section label	Joint NUM	outer diameter (m)	Section label	thickness (m)
+VERTICAL	VE1	127	3.5	TU1	126	3.527	TU2	0.031
+	VE2	126	3.527	TU3	125	3.58	TU4	0.017
+	VE3	125	3.58	TU5	124	3.65	TU6	0.017
+	VE4	124	3.65	TU7	123	3.719	TU8	0.017
+	VE5	123	3.719	TU9	122	3.788	TU10	0.0175
+	VE6	122	3.788	TU11	121	3.857	TU12	0.018
+	VE7	121	3.857	TU13	120	3.929	TU14	0.0185
+	VE8	120	3.929	TU15	119	4	TU16	0.019
+	VE9	119	4	TU17	118	4		0.021
+	V10	118	4	TU18	117	4		0.021
+	V11	117	4	TU19	116	4		0.022
+	V12	116	4	TU20	115	4		0.0235
+	V13	115	4	TU21	114	4		0.0245
+	V14	114	4	TU22	113	4		0.026
+	V15	113	4	TU23	112	4		0.0275
+	V16	112	4	TU24	111	4		0.029
+	V17	111	4	TU25	110	4		0.03
+	V18	110	4	TU26	109	4		0.032
+	V19	109	4	TU27	108	4		0.0335
+	V20	108	4	TU28	107	4		0.034
+	V21	107	4	TU29	106	4.03	TU30	0.034
+	V22	106	4.03	TU31	105	4.06	TU32	0.0345
+	V23	105	4.06	TU33	104	4.107	TU34	0.035
+	V24	104	4.107	TU35	103	4.154	TU36	0.04
+	V25	103	4.154	TU37	102	4.2	TU38	0.04
+	V26	102	4.2	TU39	101	4.2		0.045
+	V27	101	4.2	TU40	100	4.2		0.045
+	V28	100	4.2	TU41	200	4.2		0.054
+	V29	200	4.2	TU42	201	4.2		0.056
+	V30	201	4.2	TU43	202	4.2		0.056
+	V31	202	4.2	TU44	203	4.2		0.07
+	V32	203	4.2	TU45	204	3.3	TU46	0.055
+	V33	204	3.3	TU47	205	3	TU48	0.06
+BRACING	BR1	202	1.6	TU49	212	1.6		0.05
+	BR1	202	1.6	TU49	222	1.6		0.05
+	BR1	202	1.6	TU49	232	1.6		0.05
+	BR2	204	0.812	TU50	210	0.812		0.051
+	BR2	204	0.812	TU50	220	0.812		0.051
+	BR2	204	0.812	TU50	230	0.812		0.051
+	BR3	210	0.762	TU51	213	0.762		0.026
+	BR3	220	0.762	TU51	223	0.762		0.026
+	BR3	230	0.762	TU51	233	0.762		0.026
+	BR4	214	0.45	TU52	224	0.45		0.0175
+	BR4	224	0.45	TU52	234	0.45		0.0175
+	BR4	234	0.45	TU52	214	0.45		0.0175
+PILE	PI1	211	1.8	TU53	212	1.8		0.05
+	PI1	212	1.8	TU53	213	1.8		0.05
+	PI1	213	1.8	TU53	214	1.8		0.05
+	PI1	214	1.8	TU53	215	1.8		0.05
+	PI1	221	1.8	TU53	222	1.8		0.05
+	PI1	222	1.8	TU53	223	1.8		0.05
+	PI1	223	1.8	TU53	224	1.8		0.05
+	PI1	224	1.8	TU53	225	1.8		0.05
+	PI1	231	1.8	TU53	232	1.8		0.05
+	PI1	232	1.8	TU53	233	1.8		0.05
+	PI1	233	1.8	TU53	234	1.8		0.05
+	PI1	234	1.8	TU53	235	1.8		0.05
+
+
+
+UNISON 4.2 MW U136 95mHH Offshore TOWER					
+Section Name	Length of section (m)	Top diameter (m)		Bottom diameter (m)	Wall thickness (mm)
+T11	1.34	3.5		3.527	31
+T10	2.14	3.527		3.58	17
+T09	2.792	3.58		3.65	17
+T08	2.789	3.65		3.719	17
+T07	2.788	3.719		3.788	17.5
+T06	2.787	3.788		3.857	18
+T05	2.884	3.857		3.929	18.5
+T04	2.883	3.929		4	19
+T03	2.881	4		4	21
+T02	2.879	4		4	21
+T01	2.564	4		4	22
+M09	2.995	4		4	23.5
+M08	2.9	4		4	24.5
+M07	2.9	4		4	26
+M06	2.9	4		4	27.5
+M05	2.9	4		4	29
+M04	2.9	4		4	30
+M03	2.9	4		4	32
+M02	2.9	4		4	33.5
+M01	3.02	4		4	34
+B07	2.025	4		4.03	34
+B06	1.86	4.03		4.06	34.5
+B05	2.9	4.06		4.107	35
+B04	2.9	4.107		4.154	40
+B03	2.875	4.154		4.2	40
+B02	2.45	4.2		4.2	45
+B01	2.655	4.2		4.2	45
+Total	72.707				
+
+
+MMB Tripod 지지구조물				
+Section Name	Length of section (m)	Top diameter (m)	Bottom diameter (m)	Wall thickness (m)
+TP1	3.791	4.2	4.2	54
+TP2	6	4.2	4.2	56
+TP3	2.5	4.2	4.2	56
+TP4	7	4.2	4.2	70
+TP5	6	4.2	3.3	55
+TP6	2	3.3	3	60
+Total	27.291			
+VB1	17.342	1.6	1.6	50
+VB2	10.128	0.762	0.787	38.5
+HB1	18.257	0.45	0.45	17.5
+SP1	6	1.8	1.8	50
+P1	9.3	8	8	20
+S1~S5	1	8	8	25
+
+Part	Section Name	Length (m)	D_top(m)	D_bottom(m)	Thickness(mm)
+Tower Top	T11	1.34	3.5	3.527	31
+Tower Top	T10	2.14	3.527	3.58	17
+Tower Top	T09	2.792	3.58	3.65	17
+Tower Top	T08	2.789	3.65	3.719	17
+Tower Top	T07	2.788	3.719	3.788	17.5
+Tower Top	T06	2.787	3.788	3.857	18
+Tower Top	T05	2.884	3.857	3.929	18.5
+Tower Top	T04	2.883	3.929	4	19
+Tower Top	T03	2.881	4	4	21
+Tower Top	T02	2.879	4	4	21
+Tower Top	T01	2.564	4	4	22
+Tower Mid	M09	2.995	4	4	23.5
+Tower Mid	M08	2.9	4	4	24.5
+Tower Mid	M07	2.9	4	4	26
+Tower Mid	M06	2.9	4	4	27.5
+Tower Mid	M05	2.9	4	4	29
+Tower Mid	M04	2.9	4	4	30
+Tower Mid	M03	2.9	4	4	32
+Tower Mid	M02	2.9	4	4	33.5
+Tower Mid	M01	3.02	4	4	34
+Tower Bot	B07	2.025	4	4.03	34
+Tower Bot	B06	1.86	4.03	4.06	34.5
+Tower Bot	B05	2.9	4.06	4.107	35
+Tower Bot	B04	2.9	4.107	4.154	40
+Tower Bot	B03	2.875	4.154	4.2	40
+Tower Bot	B02	2.45	4.2	4.2	45
+Tower Bot	B01	2.655	4.2	4.2	45
+Tripod Main Column	TP1	3.791	4.2	4.2	54
+Tripod Main Column	TP2	6	4.2	4.2	56
+Tripod Main Column	TP3	2.5	4.2	4.2	56
+Tripod Main Column	TP4	7	4.2	4.2	70
+Tripod Main Column	TP5	6	4.2	3.3	55
+Tripod Main Column	TP6	2	3.3	3	60
+Tripod Bracing	VB1	17.342	1.6	1.6	50
+Tripod Bracing	VB2	10.128	0.762	0.787	38.5
+Tripod Bracing	HB1	18.257	0.45	0.45	17.5
+Tripod Bracing	SP1	6	1.8	1.8	50
+Suction Bucket Skirt	P1	9.3	8	8	20
+Suction Bucket Lid	S1	1	8	8	25
+
+Name	Value
+Rotor Diameter	136 m
+Blade Length	66.5 m
+Rated wind speed	11.3 m/s
+Operating rotational speed	10 rpm
+Hub Height	95 m
+cut-in wind speed	3 m/s
+cut-out wind speed	22 m/s
+Mass of Nacelle	169 tons
+Mass of Rotor	110.5 tons
+Mass of Blades	58.5 tons
+Total Mass of Rotor-Nacelle-Assembly (RNA)	338 tons
+
+
+
+Image 1: Top Section Assembly (TSA)Assembly Label: TSA (TA-004)Total Height at Top: H = +72707Top Diameter: $\Phi 3500$Section Height: 28727Platform Levels:6th Platform: H = +711075th Platform: H = +671074th Platform: H = +57806Segment Details (Top to Bottom):| Segment | Thickness (T) | Height | Outer Diameter (O.D) Top / Bottom || :--- | :--- | :--- | :--- || T11 | 31 | 1100 | $\Phi 3500$ / $\Phi 3527$ || T10 | 17 | 2140 | $\Phi 3527$ / $\Phi 3580$ || T09 | 17 | 2792 | $\Phi 3580$ / $\Phi 3650$ || T08 | 17 | 2789 | $\Phi 3650$ / $\Phi 3719$ || T07 | 17.5 | 2788 | $\Phi 3719$ / $\Phi 3788$ || T06 | 18 | 2787 | $\Phi 3788$ / $\Phi 3857$ || T05 | 18.5 | 2884 | $\Phi 3857$ / $\Phi 3929$ |Image 2: Middle Section Assembly (MSA) - Lower PartAssembly Label: MSA (MA-003)Section Height: 26315Connection Height: H = +17665Platform Level:2nd Platform: H = +16465Segment Details (Top to Bottom of view):| Segment | Thickness (T) | Height | Outer Diameter (O.D) || :--- | :--- | :--- | :--- || M06 | 27.5 | 2900 | $\Phi 4000$ || M05 | 29 | 2900 | $\Phi 4000$ || M04 | 30 | 2900 | $\Phi 4000$ || M03 | 32 | 2900 | $\Phi 4000$ || M02 | 33.5 | 2900 | $\Phi 4000$ || M01 | 34 | 2850 | $\Phi 4000$ || B07 | 34 | 1855 | $\Phi 4200$ / $\Phi 4030$ || B06 | 34.5 | 1860 | $\Phi 4030$ / $\Phi 4060$ |Image 3: Material SpecificationsMATERIALPLATES: STEEL EN 10025-2-S355J2 S1-S27FLANGES: STEEL EN 10025-3-S355NL+EN10164-Z25DOOR FRAME: STEEL EN 10025-2-S355K2+EN10164-Z25AWL OPENING FRAME: STEEL EN 10025-3-S355NL+EN10164-Z25Image 4: Assembly TablePiece No.No.DescriptionMaterialDimensionQtyWeightRemarksTSA-TOP SECTION ASSEMBLY-$\Phi 3500 \times \Phi 4000 \times 28727$1--MSA-MIDDLE SECTION WELDING ASSEMBLY-$\Phi 4000 \times \Phi 4000 \times 26315$1--BSA-BOTTOM SECTION ASSEMBLY-$\Phi 4000 \times \Phi 4200 \times 17665$1--TWA-TOWER MAIN ASSEMBLY-$\Phi 3500 \times \Phi 4200 \times 72707$1--Image 5: Top/Middle Transition SectionConnection Height (Flange): H = +43980Platform Level:3rd Platform: H = +42779Segment Details (Top to Bottom of view):| Segment | Thickness (T) | Height | Outer Diameter (O.D) || :--- | :--- | :--- | :--- || T04 | 19 | 2883 | $\Phi 3929$ / $\Phi 4000$ || T03 | 21 | 2881 | $\Phi 4000$ || T02 | 21 | 2879 | $\Phi 4000$ || T01 | 22 | 2439 | $\Phi 4000$ || M09 | 23.5 | 2870 | $\Phi 4000$ || M08 | 24.5 | 2900 | $\Phi 4000$ || M07 | 26 | 2900 | $\Phi 4000$ |Image 6: Bottom Section Assembly (BSA)Assembly Label: BSA (BA-002)Total Section Height: 17665Base Height: H = +0Platform Level:1st Platform: H = +1460Segment Details (Top to Bottom):| Segment | Thickness (T) | Height | Outer Diameter (O.D) Top / Bottom || :--- | :--- | :--- | :--- || B05 | 35 | 2900 | $\Phi 4060$ / $\Phi 4107$ || B04 | 40 | 2900 | $\Phi 4107$ / $\Phi 4154$ || B03 | 40 | 2875 | $\Phi 4154$ / $\Phi 4200$ || B02 | 45 | 2450 | $\Phi 4200$ || B01 | 45 | 2450 | $\Phi 4200$ |
+
+
+1. General Project Information & LocationStructure Type: MMB Offshore Wind Turbine Support StructureLocation CoordinatesLatitude: 35-58-9.6852Longitude: 126-30-53.6688Center Point: X=275916.7000, Y=3983405.5000Suction Bucket (SB) Coordinates:SB1: X=275922.4735, Y=3983415.5000SB2: X=275905.1530, Y=3983405.5000SB3: X=275922.4735, Y=3983395.50002. Environmental Conditions (MetOcean)Tide Levels (Design Tide)Approx. H.H.W (Max High): (+) 7.246mM.S.L (Mean Sea Level): (+) 3.623mApprox. L.L.W (Min Low): 0.000mDesign Wind Speed (Gust)1-Year Return: 32.424 m/s (at 97m), 28.521 m/s (at 23.59m)50-Year Return: 50.294 m/s (at 97m), 45.755 m/s (at 23.59m)Design Wave ($H_{max}$)1-Year Return: 6.86m ($T=8.77s$)50-Year Return: 11.10m ($T=11.16s$)Current Velocity1-Year Return: 1.174 m/s50-Year Return: 1.391 m/s3. Design Criteria & Material PropertiesSeismic ConditionsClass: 2nd Class (2등급) / Performance: Collapse PreventionReturn Period: 500 YearsSoil Type: $S_4$ (Deep stiff soil)Factors: $F_a = 1.58$, $F_v = 2.18$Unit WeightsSteel: 7.85 $ton/m^3$ (In Air) / 6.85 $ton/m^3$ (Submerged)Sea Water: 1.025 $ton/m^3$Marine Growth: 1.4 $ton/m^3$ (Thickness: 100mm surface to -10m; 50mm below -10m)Design Load Factors (ULS)Permanent Loads: 1.10 (unfavorable) / 0.90 (favorable)Variable/Environmental Loads: 1.35 (Normal ULS), 1.10 (Abnormal ULS)Material Strength (Yield Strength)S355ML: 355 MPa ($t \le 16mm$) ~ 335 MPa ($40 < t \le 63mm$)S420ML: 420 MPa ($t \le 16mm$) ~ 390 MPa ($40 < t \le 63mm$)4. Comprehensive Bill of Materials (BOM)A. Primary Structure (S420ML High Strength Steel)MemberSpecificationNet Weight (tonf)SourceTP1 ~ TP4$\phi 4200 \times 54t \sim 70t$118.352TP5 ~ TP6$\phi 3000 \sim 4200$ (Conical)39.215VB1 ~ VB3$\phi 762 \sim 1600$115.631SP1$\phi 1800 \times 50t$38.842HB1$\phi 450 \times 17.5t$10.223N1 ~ N8$\phi 1700 \sim 4060 \times 40t$30.853LP1 ~ LP9Plate 20t ~ 40t33.467LT1 ~ LT6Plate 30t ~ 40t / $\phi 850$9.300ST1 ~ ST2Plate 30t1.875Total S420ML~397.76B. Base & Secondary Structure (S355ML & SS275)MemberSpecificationNet Weight (tonf)SourceP1S355ML $\phi 8000 \times 20t$109.814S1 ~ S5S355ML Plates58.350H1 ~ H3SS275 Beams (Various)7.856D1SS275 Plate $\phi 324$1.880GRGrating12.371C. Miscellaneous Appurtenances (SS275)J-Tubes/Risers (J, E, BM Series): 5.303 tonfBoat Landing/Ladders (T1-F3): 4.095 tonfPlatforms/Beams (H4-CH2): 2.990 tonfFender Supports (T5-T9): 1.546 tonf (Includes 8 Rubber Fenders)Small Pipes (HD Series): ~0.95 tonf combined5. Corrosion Protection SystemCoating System Specification| Zone | Elevation Range | System | Thickness || :--- | :--- | :--- | :--- || Atmospheric | (+) 11.810m ~ (+) 23.591m | Epoxy rich zinc + Epoxy + PU | > 320 $\mu m$ || Splash Zone | (-) 4.230m ~ (+) 11.810m | Multi-Strength Epoxy + PU | > 660 $\mu m$ || Submerged | (-) 10.200m ~ (-) 4.230m | Epoxy + Cathodic Protection | > 350 $\mu m$ |Corrosion Allowance (25 Year Life)Splash Zone: 4.0mm (Internal), 5.5mm (External)Atmospheric/Submerged: 2.0mm (Internal), 3.5mm (External)Soil Zone: 5.0mm (Both sides, no coating)6. Applicable StandardsDomestic: KEPRI 2.5GW Project Report, Port and Fishing Port Design Standards (2014), KDS 17 10 00International:DNVGL-ST-0126: Support structures for wind turbinesDNVGL-ST-0437: Loads and site conditionsIEC-61400-3: Design requirements for offshore wind turbinesAPI RP 2A LRFD / WSD
+
+
+
+
+1. General Design & Environmental ConditionsUnit Weights & Material PropertiesSteel (In Air): 7.85 $ton/m^3$Steel (Submerged): 6.85 $ton/m^3$Seawater: 1.025 $ton/m^3$Material Strength (Yield/Tensile): Detailed for SS275, S355N, S355ML, and S420ML across thicknesses from $t \le 16mm$ to $80mm$.Seismic & Soil ConditionsSeismic Class: 2nd Class (2등급)Performance Level: Collapse Prevention (붕괴방지 수준)Return Period: 500 YearsSoil Type: $S_4$ (Deep, stiff soil)Amplification Factors: $F_a = 1.58$, $F_v = 2.18$Load Factors (ULS)Normal (Permanent/Variable/Env): 1.10(0.90) / 1.35 / 1.35Abnormal (Permanent/Variable/Env): 1.10(0.90) / 1.10 / 1.10Structure LocationLatitude: 35-58-9.6852Longitude: 126-30-53.6688Center Coordinates: X=275916.7000, Y=3983405.50002. Bill of Materials (Structural Steel)Primary Structure (S420ML)| Member | Specification | Weight (tonf) || :--- | :--- | :--- || TP1 ~ TP6 | $\phi 3000 \sim 4200$, various thickness | 157.567 (Sum) || VB1 ~ VB3 | $\phi 762 \sim 1600$ | 115.631 (Sum) || HB1 / SP1 | $\phi 450 \times 17.5t$ / $\phi 1800 \times 50t$ | 49.065 (Sum) || N1 ~ N8 | $\phi 1700 \sim 4060 \times 40t$ | 30.853 (Total) || LP1 ~ LP9 | Plate 20t ~ 40t | 33.467 (Total) || LT1 ~ LT6 | $\phi 850$ / Plate 30t~40t | 9.300 (Sum) || ST1 ~ ST2 | Plate 30t | 1.875 (Sum) |Base & Secondary Structure (S355ML / SS275)| Member | Material | Specification | Weight (tonf) || :--- | :--- | :--- | :--- || P1 | S355ML | $\phi 8000 \times 20t$ | 109.814 || S1 ~ S5 | S355ML | Various Plates | 58.350 (Sum) || H1 ~ H3 | SS275 | Beams (H-Shape) | 7.856 (Sum) || D1 | SS275 | $\phi 324 \times 16t$ | 1.880 || GR | - | Grating | 12.371 |Miscellaneous / Revision B Items (SS275)J/E/BM/R Series: Pipes and plates for J-tubes/Boat landing. Total: 5.303 tonf (Cloud Mark B).T1 ~ F3: Plates and Rods. Total: 4.095 tonf (Cloud Mark B).H4 ~ CH2: Beams, Checkered Plates. Total: 2.990 tonf.T5 ~ T9: Plates. Total: 1.546 tonf (Cloud Mark B).HD4 ~ HD8: Pipes. Total: 0.341 tonf (Cloud Mark B).Fenders: Rubber RD Type (8 EA).3. Coating & Corrosion ProtectionCoating System Specifications| Structure | Zone | Elevation Range (DL) | System | Thickness || :--- | :--- | :--- | :--- | :--- || Primary | Atmospheric | (+) 11.810m ~ 23.591m | Epoxy rich zinc + Epoxy + PU | > 320 $\mu m$ || | Splash Zone | (-) 4.230m ~ (+) 11.810m | Multi-Strength Epoxy + PU | > 660 $\mu m$ || | Submerged | (-) 10.200m ~ (-) 4.230m | Epoxy + Cathodic Protection | > 350 $\mu m$ || Appurtenances | General | Various | Epoxy rich zinc + Epoxy + PU | > 320 $\mu m$ || | Boat Landing | (-) 1.000m ~ (+) 10.150m | Multi-Strength Epoxy + PU | > 660 $\mu m$ |Corrosion Allowances (Design Life: 25 Years)Splash Zone: 4.0 mm (Internal) / 5.5 mm (External)Submerged/Atmospheric: 2.0 mm (Internal) / 3.5 mm (External)Soil Zone: 5.0 mm (Internal & External)
+
+
+
+
+1. Design & Environmental ConditionsUnit Weights (단위 중량)Steel (강재): 7.85 ton/m³ (In Air) / 6.85 ton/m³ (Submerged)Sea Water (해수): 1.025 ton/m³Seismic Conditions (내진 조건)Seismic Class: 2nd Grade (2등급)Performance Level: Collapse Prevention (붕괴방지 수준)Return Period: 500 YearsSoil Type: $S_4$ (Deep, stiff soil)Amplification Factors: Fa = 1.58, Fv = 2.18Corrosion Protection (방식 조건)Atmospheric Zone: Epoxy rich zinc + Epoxy + Polyurethane (> 320 μm)Splash Zone: Multi-Strength Epoxy + Polyurethane (> 660 μm)Submerged Zone: Epoxy + Cathodic Protection (Sacrificial Anode) (> 350 μm)Corrosion Allowance (25yr Life):Splash Zone: 4.0mm (Internal) / 5.5mm (External)Submerged/Atmospheric: 2.0mm (Internal) / 3.5mm (External)Soil Zone: 5.0mm (Internal/External)Design Load Factors (하중계수)| Condition | Type | Permanent (Struct/Equip) | Variable | Env. | Deformation | Remarks || :--- | :--- | :--- | :--- | :--- | :--- | :--- || ULS | Normal (상시) | 1.10 / 0.90 | 1.35 | 1.35 | 1.00 | DNVGL-ST-0126 || | Abnormal (이상시) | 1.10 / 0.90 | 1.10 | 1.10 | 1.00 | DNVGL-ST-0437 || SLS | Service (운영조건) | 1.00 | 1.00 | 1.00 | 1.00 | || ALS | Seismic (지진시) | 1.00 | 1.00 | 1.00 | 1.00 | |Location Coordinates (위치 좌표)Latitude: 35-58-9.6852Longitude: 126-30-53.6688CENTER: X=275916.7000, Y=3983405.50002. Bill of Materials (Material Lists)The following tables represent the "Net Weight" summaries for various structural groups.Group 1: Main Structure (S420ML)| Member | Material | Specification | Net Weight (tonf) || :--- | :--- | :--- | :--- || TP1 ~ TP4 | S420ML | $\phi 4200 \times 54t \sim 70t$ | 118.352 (Sum) || TP5 ~ TP6 | S420ML | $\phi 3000 \sim 4200$ | 39.215 (Sum) || VB1 ~ VB3 | S420ML | $\phi 762 \sim 1600$ | 115.631 (Sum) || HB1 | S420ML | $\phi 450 \times 17.5t$ | 10.223 || SP1 | S420ML | $\phi 1800 \times 50t$ | 38.842 || TOTAL | | | 322.264 |Group 2: Plates & Pipes (S355ML / SS275)| Member | Material | Specification | Net Weight (tonf) || :--- | :--- | :--- | :--- || P1 | S355ML | $\phi 8000 \times 20t$ | 109.814 || S1 ~ S5 | S355ML | Various Plates | 58.350 (Sum) || U1 ~ U4 | SS275 | Pipes & Flanges | 0.278 (Sum) || TOTAL | | | 168.441 |Group 3: LP Series Plates (S420ML)| Member | Material | Specification | Net Weight (tonf) || :--- | :--- | :--- | :--- || LP1 ~ LP9 | S420ML | Plate 20t ~ 40t | 33.467 (Total) |Group 4: N Series Plates (S420ML)| Member | Material | Specification | Net Weight (tonf) || :--- | :--- | :--- | :--- || N1 ~ N8 | S420ML | $\phi 1700 \sim 4060 \times 40t$ | 30.853 (Total) |Group 5: Secondary Steel & Gratings (SS275)| Member | Material | Specification | Net Weight (tonf) || :--- | :--- | :--- | :--- || H1 ~ H3 | SS275 | BEAM (Various sizes) | 7.856 (Sum) || D1 | SS275 | PLATE $\phi 324 \times 16t$ | 1.880 || W1 ~ W3 | SS275 | PLATE 10t ~ 30t | 0.172 (Sum) || GR | - | GRATING | 12.371 || TOTAL | | | 22.279 |Group 6: Miscellaneous Sub-Assemblies (SS275)J/E/BM/R Series (Rev B): Pipes and Plates. Total: 5.303 tonf.T1-F3 Series: Plates and Rods. Total: 4.095 tonf.H4-CH2 Series: Beams, Pipes, Checkered Plates. Total: 2.990 tonf.T5-T9 Series (Rev B): Plates. Total: 1.546 tonf.Includes Fenders (Rubber): 8 EA.HD1-BP Series: Pipe and Plate. Total: 0.607 tonf.HD4-HD8 Series (Rev B): Pipes. Total: 0.341 tonf.1. Design & Environmental ConditionsUnit Weights (단위 중량)Steel (강재): 7.85 ton/m³ (In Air) / 6.85 ton/m³ (Submerged)Sea Water (해수): 1.025 ton/m³Seismic Conditions (내진 조건)Seismic Class: 2nd Grade (2등급)Performance Level: Collapse Prevention (붕괴방지 수준)Return Period: 500 YearsSoil Type: $S_4$ (Deep, stiff soil)Amplification Factors: Fa = 1.58, Fv = 2.18Corrosion Protection (방식 조건)Atmospheric Zone: Epoxy rich zinc + Epoxy + Polyurethane (> 320 μm)Splash Zone: Multi-Strength Epoxy + Polyurethane (> 660 μm)Submerged Zone: Epoxy + Cathodic Protection (Sacrificial Anode) (> 350 μm)Corrosion Allowance (25yr Life):Splash Zone: 4.0mm (Internal) / 5.5mm (External)Submerged/Atmospheric: 2.0mm (Internal) / 3.5mm (External)Soil Zone: 5.0mm (Internal/External)Design Load Factors (하중계수)| Condition | Type | Permanent (Struct/Equip) | Variable | Env. | Deformation | Remarks || :--- | :--- | :--- | :--- | :--- | :--- | :--- || ULS | Normal (상시) | 1.10 / 0.90 | 1.35 | 1.35 | 1.00 | DNVGL-ST-0126 || | Abnormal (이상시) | 1.10 / 0.90 | 1.10 | 1.10 | 1.00 | DNVGL-ST-0437 || SLS | Service (운영조건) | 1.00 | 1.00 | 1.00 | 1.00 | || ALS | Seismic (지진시) | 1.00 | 1.00 | 1.00 | 1.00 | |Location Coordinates (위치 좌표)Latitude: 35-58-9.6852Longitude: 126-30-53.6688CENTER: X=275916.7000, Y=3983405.50002. Bill of Materials (Material Lists)The following tables represent the "Net Weight" summaries for various structural groups.Group 1: Main Structure (S420ML)| Member | Material | Specification | Net Weight (tonf) || :--- | :--- | :--- | :--- || TP1 ~ TP4 | S420ML | $\phi 4200 \times 54t \sim 70t$ | 118.352 (Sum) || TP5 ~ TP6 | S420ML | $\phi 3000 \sim 4200$ | 39.215 (Sum) || VB1 ~ VB3 | S420ML | $\phi 762 \sim 1600$ | 115.631 (Sum) || HB1 | S420ML | $\phi 450 \times 17.5t$ | 10.223 || SP1 | S420ML | $\phi 1800 \times 50t$ | 38.842 || TOTAL | | | 322.264 |Group 2: Plates & Pipes (S355ML / SS275)| Member | Material | Specification | Net Weight (tonf) || :--- | :--- | :--- | :--- || P1 | S355ML | $\phi 8000 \times 20t$ | 109.814 || S1 ~ S5 | S355ML | Various Plates | 58.350 (Sum) || U1 ~ U4 | SS275 | Pipes & Flanges | 0.278 (Sum) || TOTAL | | | 168.441 |Group 3: LP Series Plates (S420ML)| Member | Material | Specification | Net Weight (tonf) || :--- | :--- | :--- | :--- || LP1 ~ LP9 | S420ML | Plate 20t ~ 40t | 33.467 (Total) |Group 4: N Series Plates (S420ML)| Member | Material | Specification | Net Weight (tonf) || :--- | :--- | :--- | :--- || N1 ~ N8 | S420ML | $\phi 1700 \sim 4060 \times 40t$ | 30.853 (Total) |Group 5: Secondary Steel & Gratings (SS275)| Member | Material | Specification | Net Weight (tonf) || :--- | :--- | :--- | :--- || H1 ~ H3 | SS275 | BEAM (Various sizes) | 7.856 (Sum) || D1 | SS275 | PLATE $\phi 324 \times 16t$ | 1.880 || W1 ~ W3 | SS275 | PLATE 10t ~ 30t | 0.172 (Sum) || GR | - | GRATING | 12.371 || TOTAL | | | 22.279 |Group 6: Miscellaneous Sub-Assemblies (SS275)J/E/BM/R Series (Rev B): Pipes and Plates. Total: 5.303 tonf.T1-F3 Series: Plates and Rods. Total: 4.095 tonf.H4-CH2 Series: Beams, Pipes, Checkered Plates. Total: 2.990 tonf.T5-T9 Series (Rev B): Plates. Total: 1.546 tonf.Includes Fenders (Rubber): 8 EA.HD1-BP Series: Pipe and Plate. Total: 0.607 tonf.HD4-HD8 Series (Rev B): Pipes. Total: 0.341 tonf.
+
+1. MMB용 해상풍력터빈 지지지구조물 (MMB Support Structure)This section details the location and structural layout of the MMB support structure.Location: * Latitude: 35-58-9.6852Longitude: 126-30-53.6688Coordinates (X, Y):Center: 275916.7000, 3983405.5000SB1: 275922.4735, 3983415.5000SB2: 275905.1530, 3983405.5000SB3: 275922.4735, 3983395.50002. 재료표 (Material Bill)The structural components are primarily composed of S420ML steel.Member No.TypeMaterialSpecificationNet Weight (tonf)TP1 ~ TP4PLATES420ML$\phi 4200 \times 54t$ to $70t$118.352 (Total)TP5 ~ TP6PLATES420ML$\phi 3000 \sim \phi 4200$39.215 (Total)VB1 ~ VB3PLATES420ML$\phi 762 \sim \phi 1600$115.631 (Total)HB1PLATES420ML$\phi 450 \times 17.5t$10.223SP1PLATES420ML$\phi 1800 \times 50t$38.842TOTAL322.2643. 설계 및 환경 조건 (Design & Environmental Conditions)단위 중량 (Unit Weights)Steel (강재): 7.85 $ton/m^3$ (In Air) / 6.85 $ton/m^3$ (Submerged)Sea Water (해수): 1.025 $ton/m^3$내진 조건 (Seismic Conditions)Seismic Class: 2nd Class (2등급)Performance Level: Collapse Prevention (붕괴방지 수준)Return Period: 500 yearsSoil Type: $S_4$ (Deep and stiff soil)Amplification Factors: $F_a = 1.58, F_v = 2.18$4. 하중 및 저항 계수 (Load & Resistance Factors)하중계수 (Load Factors)ConditionPermanent LoadVariable LoadEnv. LoadDeform. LoadReferenceULS (Normal)1.10 / 0.901.351.351.00DNVGL-ST-0126ULS (Abnormal)1.10 / 0.901.101.101.00DNVGL-ST-0437SLS / FLS / ALS1.001.001.001.00저항계수 (Resistance Factors)Effective Stress Analysis: 1.15 (ULS), 1.0 (SLS)Total Stress Analysis: 1.25 (ULS), 1.0 (SLS)5. 방식 조건 (Corrosion Protection)보호도장 시스템 (Protective Coating)Atmospheric Zone: Epoxy rich zinc + Epoxy + Polyurethane (> 320 $\mu m$)Splash Zone: Multi-Strength Epoxy + Polyurethane (> 660 $\mu m$)Submerged Zone: Epoxy + Cathodic Protection (Sacrificial Anode) (> 350 $\mu m$)부식 허용 두께 (Corrosion Allowance)The design life is 25 years.Splash Zone: 4.0 mm (Internal) / 5.5 mm (External)Submerged/Atmospheric: 2.0 mm (Internal) / 3.5 mm (External)Soil Zone: 5.0 mm (No coating)
+
+1. MMB용 해상풍력터빈 지지지구조물 (Support Structure for MMB)The second image provides the specific geographic coordinates and layout for the structure:위도 (Latitude): 35-58-9.6852경도 (Longitude): 126-30-53.6688지점 좌표 (Point Coordinates):CENTER: X=275916.7000, Y=3983405.5000SB1: X=275922.4735, Y=3983415.5000SB2: X=275905.1530, Y=3983405.5000SB3: X=275922.4735, Y=3983395.50002. 재료 및 단위 중량 (Materials & Unit Weights)단위 중량 (Unit Weights)구분 (Category)수상 (ton/m3)수중 (ton/m3)강재 (Steel)7.856.85해수 (Sea Water)-1.025재료 조건 (Material Conditions - Strength in MPa)The yield and tensile strengths are categorized by plate thickness ($t$):S355N (EN10025-3): Yield 355 ($t \le 16mm$) to 325 ($63mm < t \le 80mm$).S420ML (EN10025-4): Yield 420 ($t \le 16mm$) to 380 ($63mm < t \le 80mm$).3. 설계 및 내진 조건 (Design & Seismic Conditions)내진 조건 (Seismic)내진등급: 2등급성능수준: 붕괴방지 수준재현주기: 500년지반종류: $S_4$ (깊고 단단한 지반)지반증폭계수: $F_a = 1.58, F_v = 2.18$하중계수 (Load Factors)하중조건 (Condition)영구하중변동하중환경하중변형하중ULS (상시)1.10 / 0.901.351.351.00SLS (운영)1.001.001.001.00ALS (지진)1.001.001.001.004. 방식 조건 (Corrosion Protection)보호도장 및 부식허용 (Coating & Allowance)해상대기부 (Atmospheric): Epoxy rich zinc + Epoxy + Polyurethane (> 320 $\mu m$).비말대 (Splash Zone): Multi-Strength Epoxy + Polyurethane (> 660 $\mu m$).수중부 (Submerged): Epoxy + 전기방식(희생양극법) (> 350 $\mu m$).부식 허용 두께 (Corrosion Allowance):설계수명: 25년.비말대 부식율: 외부 0.30 mm/yr, 내부 0.10 mm/yr.비말대 부식허용두께: 외부도장 고려 시 4.0mm (내부) / 5.5mm (외부).
+
+1. 단위 중량 (Unit Weights)구분 (Category)수상 (ton/m3) (In Air)수중 (ton/m3) (Submerged)강재 (Steel)7.856.85해수 (Sea Water)-1.0252. 재료 조건 (Material Conditions)설계기준 강도 (Design Standard Strength)This table specifies the Yield Strength (항복강도) and Tensile Strength (인장강도) in MPa based on plate thickness ($t$).사용재료 (Material)t≤16mm16mm<t≤40mm40mm<t≤63mm63mm<t≤80mmSS275275 / 410~550265 / 410~550245 / 410~550245 / 410~550S355N355 / 470~630345 / 470~630335 / 470~630325 / 470~630S355ML355 / 470~630345 / 470~630335 / 450~610325 / 440~600S420ML420 / 520~680400 / 520~680390 / 500~660380 / 480~6403. 내진 조건 (Seismic Conditions)내진등급 (Seismic Class): 2등급내진성능수준 (Performance Level): 붕괴방지 수준 (Collapse Prevention)재현주기 (Return Period): 500년 (500 years)지반종류 (Soil Type): $S_4$ (깊고 단단한 지반 - Deep stiff soil)지반증폭계수 (Soil Amplification): $F_a = 1.58$, $F_v = 2.18$4. 설계 조건 (Design Conditions)하중계수 (Load Factors)구분 (Category)하중조건 (Condition)영구하중 (Permanent)변동하중 (Variable)환경하중 (Env.)변형하중 (Deform.)비고 (Remarks)ULS상시 (Normal)1.10 / 0.901.351.351.00DNVGL-ST-0126이상시 (Abnormal)1.10 / 0.901.101.101.00DNVGL-ST-0437SLS운영조건 (Service)1.001.001.001.00FLS피로조건 (Fatigue)1.001.001.001.00ALS지진시 (Accidental)1.001.001.001.005. 방식 조건 (Corrosion Protection Conditions)보호도장 시스템 (Protective Coating System)구분 (Zone)도장시스템 (Coating System)도장 두께 (μm)해상대기부 (Atmospheric)Epoxy rich zinc + Epoxy + Polyurethane> 320비말대 (Splash Zone)Multi-Strength Epoxy + Polyurethane> 660수중부 (Submerged)Epoxy + 전기방식 (희생양극법)> 350부식허용두께 (Corrosion Allowance Thickness)설계수명 (Design Life): 25년| 구분 (Zone) | 연간부식율 (mm/yr) (Ext/Int) | 도장내구연한 (yr) | 부식허용두께 (mm) (Ext/Int) || :--- | :---: | :---: | :---: || 해상대기부 | 0.10 / 0.10 | 15 | 2.0 / 3.5 || 비말대 | 0.30 / 0.10 | 15 | 4.0 / 5.5 || 수중부 | 0.10 / 0.10 | 15 | 2.0 / 3.5 || 토중부 (Soil) | 0.10 / 0.10 | 15 | 5.0 / 5.0 |
+
+1. 주요 관련기준서 및 규정 (Major Related Standards & Regulations)구분 (Category)참고문헌 및 기준서 (References & Standards)비고 (Remarks)국내시방서 및 제기준• KEPRI 서남해 2.5GW 해상풍력 실증단지-설계근거 최종보고서한국전력 전력연구원(Domestic)• 항만 및 어항 설계기준·해설, 2014• 어항어장시설설계안내• 내진설계 일반'18 KDS 17 10 00해외시방서 및 제기준• Support structures for wind turbines'16 DNVGL-ST-0126(International)• Loads and site conditions for wind turbines'16 DNVGL-ST-0437• Certification of meteorological masts'15 DNVGL-SE-0420• Design of Offshore Wind Turbine Structures'14 DNV-OS-J101• Design of Offshore Steel Structures, General-LRFD Method'15 DNVGL-OS-C101• Environmental conditions and environmental loads'17 DNVGL-RP-C205• Corrosion Protection for Wind Turbines'16 DNVGL-RP-0416• General Guidelines for Marine Projects0001/ND• Guidelines for Marine Lifting and Lowering Operation0027/ND• AASHTO LRFD Bridge Design Specifications, 4th edition• API RP 2A LRFD 1st Edition'93 API• API RP 2A WSD'07 API• AISC 13th Edition'AISC'• Design requirements for offshore wind turbines'19 IEC-61400-3• Design of steel structures'04 NORSOK-N-0042. 환경 조건 (Environmental Conditions)2.1 설계조위 (Design Tide Levels)조위도 (cm)조위 (Tidal Level)(m)비고 (Remarks)724.6약최고고조위 (Approx. Highest High Water)7.246App. H.H.W362.3평균해수면 (Mean Sea Level)3.623M.S.L0.0약최저저조위 (Approx. Lowest Low Water)0.000App. L.L.W2.2 설계풍속 (Design Wind Speed)구분 (Category)순간풍속 [m/s] (Height: 97m)순간풍속 [m/s] (Height: 23.591m)비고 (Remarks)재현주기 1년 (1-yr return)32.42428.521WD01~12재현주기 50년 (50-yr return)50.29445.755WD21~322.3 설계파랑 (Design Wave)구분 (Category)조위 (Tide)수심 [m] (Depth)최대파고 [m] (Hmax​)주기 [sec] (Period)비고 (Remarks)재현주기 1년HSWL8.2006.868.77WV01~12재현주기 50년HSWL8.20011.1011.16WV21~322.4 설계조류속 (Design Current Velocity)구분 (Category)설계조류속 [m/s]비고 (Remarks)재현주기 1년1.174CU01~12재현주기 50년1.391CU21~322.5 해양부착생물 (Marine Growth)해저면으로부터 수위 [m] (Elevation)두께 [mm] (Thickness)단위질량 [ton/m3] (Unit Weight)E.L. (+) 0.0 ~ E.L. (-) 10.01001.4E.L. (-) 10.0 ~ 해저면 (Seabed)501.4
+

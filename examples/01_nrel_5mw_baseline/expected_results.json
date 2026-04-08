@@ -1,0 +1,12 @@
+{
+  "example_id": "01_nrel_5mw_baseline",
+  "title": "NREL 5MW Baseline (fixed base)",
+  "tier": "1",
+  "rotor": "nrel_5mw_baseline",
+  "tower": "nrel_5mw_tower",
+  "foundation_mode": "fixed",
+  "published_f1_Hz": 0.324,
+  "published_source": "NREL TP-500-38060 (Jonkman 2009)",
+  "openfast_fst": null,
+  "tolerance_rel": 0.05
+}

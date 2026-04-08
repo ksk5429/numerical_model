@@ -1,0 +1,26 @@
+# Corrected Foundation Stiffness Summary - OPTUM GX
+# Source: OptumGX FEM Plate Element Analysis (plates_V/H_scourXm_fixed.xlsx)
+# Extracted: 2026-01-11
+# Methodology: K = F/delta from step10 (20mm prescribed displacement)
+#
+# Units:
+#   scour_m: Scour depth (m)
+#   K_VV: Vertical stiffness (N/m)
+#   K_HH: Horizontal stiffness (N/m)
+#   K_MM: Moment/rocking stiffness (N*m/rad) = K_VV * R_tripod^2
+#   K_TT: Torsional stiffness (N*m/rad) = 0.6 * K_MM
+#
+# R_tripod = 11.58 m (verified from tripod_input.txt)
+#
+# CRITICAL: This file supersedes stiffness_profiles.csv which had incorrect values
+# K_HH was 98x too high, K_VV was 2.5x too low in the old file
+#
+scour_m,K_VV,K_HH,K_MM,K_TT
+0.0,611646495.7168984,273134536.6475676,82019593148.2515,49211755888.9509
+0.5,609700387.8388424,248835288.2397845,81758627087.79254,49055176252.67553
+1.0,609621820.5043082,224851493.09070686,81748091491.07391,49048854894.64434
+2.0,571822485.3819252,196265444.3270476,76679336728.7688,46007602037.26128
+2.5,592014680.4192495,212445715.23358527,79387037391.37184,47632222434.82311
+3.0,590637315.9433789,178124960.05855528,79202337773.6697,47521402664.20181
+3.5,595755414.0254132,180665220.2608673,79888656301.31741,47933193780.79044
+4.0,594478321.9909592,187790406.9276822,79717402857.02846,47830441714.21707

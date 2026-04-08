@@ -1,0 +1,12 @@
+{
+  "example_id": "03_nrel_5mw_oc4_jacket",
+  "title": "NREL 5MW OC4 Jacket",
+  "tier": "1",
+  "rotor": "nrel_5mw_baseline",
+  "tower": "nrel_5mw_tower",
+  "foundation_mode": "stiffness_6x6",
+  "published_f1_Hz": 0.314,
+  "published_source": "Popko et al. (2012), OC4 Phase I",
+  "openfast_fst": "nrel_reference/oc4_jacket/5MW_OC4Jckt_DLL_WTurb_WavesIrr_MGrowth.fst",
+  "tolerance_rel": 0.05
+}

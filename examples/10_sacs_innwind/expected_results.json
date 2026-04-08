@@ -1,0 +1,12 @@
+{
+  "example_id": "10_sacs_innwind",
+  "title": "INNWIND 10MW jacket in SACS (EU reference)",
+  "tier": "sacs",
+  "rotor": "iea_15mw_rwt",
+  "tower": "iea_15mw_tower",
+  "foundation_mode": "stiffness_6x6",
+  "published_f1_Hz": 0.295,
+  "published_source": "INNWIND.EU D4.3.1 (Von Borstel 2013)",
+  "openfast_fst": null,
+  "tolerance_rel": 0.05
+}

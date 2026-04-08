@@ -1,0 +1,32 @@
+# Op^3 framework Python dependencies
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# OpenFAST itself is NOT a Python package — download the v4.0.2 binary
+# from https://github.com/OpenFAST/openfast/releases and set the
+# OPENFAST_EXE environment variable to its path.
+#
+# OptumGX is commercial software and is NOT a runtime dependency for
+# the open-source path. OptumGX is only needed by the scripts in
+# op3/optumgx_interface/ for regenerating the committed data CSVs
+# from scratch.
+
+# Core numerical stack
+numpy>=1.26
+scipy>=1.11
+pandas>=2.1
+matplotlib>=3.8
+pyyaml>=6.0
+
+# Structural dynamics — the open-source heart of Op^3
+openseespy>=3.7
+
+# Statistics and simple ML
+scikit-learn>=1.3
+
+# Bibliography validation (for CI)
+pybtex>=0.24
+
+# Testing
+pytest>=7.0

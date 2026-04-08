@@ -1,0 +1,167 @@
+[
+  {
+    "id": "01_nrel_5mw_baseline",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.361,
+      0.361,
+      3.4203
+    ],
+    "pushover_max_kN": 913836.18,
+    "transient_period_s": null,
+    "errors": {}
+  },
+  {
+    "id": "02_nrel_5mw_oc3_monopile",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.352,
+      0.352,
+      3.2525
+    ],
+    "pushover_max_kN": 871200.82,
+    "transient_period_s": null,
+    "errors": {}
+  },
+  {
+    "id": "03_nrel_5mw_oc4_jacket",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.3582,
+      0.3582,
+      3.3647
+    ],
+    "pushover_max_kN": 900754.68,
+    "transient_period_s": null,
+    "errors": {}
+  },
+  {
+    "id": "04_gunsan_4p2mw_tripod",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.235,
+      0.235,
+      2.6851
+    ],
+    "pushover_max_kN": 405515.16,
+    "transient_period_s": null,
+    "errors": {}
+  },
+  {
+    "id": "05_nrel_5mw_on_gunsan_tripod",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.3551,
+      0.3551,
+      3.3371
+    ],
+    "pushover_max_kN": 885750.14,
+    "transient_period_s": null,
+    "errors": {}
+  },
+  {
+    "id": "06_gunsan_tower_on_monopile",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.2342,
+      0.2342,
+      2.4424
+    ],
+    "pushover_max_kN": 402910.84,
+    "transient_period_s": null,
+    "errors": {}
+  },
+  {
+    "id": "07_iea_15mw_monopile",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.218,
+      0.218,
+      1.9129
+    ],
+    "pushover_max_kN": 1083684.03,
+    "transient_period_s": null,
+    "errors": {}
+  },
+  {
+    "id": "08_iea_15mw_volturnus",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.0126,
+      0.0126,
+      0.1316
+    ],
+    "pushover_max_kN": 3970.77,
+    "transient_period_s": null,
+    "errors": {}
+  },
+  {
+    "id": "09_sacs_nrel_oc4",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.3582,
+      0.3582,
+      3.3647
+    ],
+    "pushover_max_kN": 900754.68,
+    "transient_period_s": null,
+    "errors": {}
+  },
+  {
+    "id": "10_sacs_innwind",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.2239,
+      0.2239,
+      2.0015
+    ],
+    "pushover_max_kN": 1139644.91,
+    "transient_period_s": null,
+    "errors": {}
+  },
+  {
+    "id": "11_gunsan_tower_on_jacket",
+    "build": "OK",
+    "eigen": "OK",
+    "pushover": "OK",
+    "transient": "OK",
+    "freqs": [
+      0.2358,
+      0.2358,
+      2.5897
+    ],
+    "pushover_max_kN": 408067.87,
+    "transient_period_s": null,
+    "errors": {}
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "example_id": "09_sacs_nrel_oc4",
+  "title": "NREL OC4 jacket in SACS (PLAXIS-SACS benchmark)",
+  "tier": "sacs",
+  "rotor": "nrel_5mw_baseline",
+  "tower": "nrel_5mw_tower",
+  "foundation_mode": "stiffness_6x6",
+  "published_f1_Hz": 0.314,
+  "published_source": "Popko et al. (2012), OC4 Phase I (SACS baseline)",
+  "openfast_fst": null,
+  "tolerance_rel": 0.05
+}

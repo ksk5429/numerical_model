@@ -1,0 +1,12 @@
+{
+  "example_id": "08_iea_15mw_volturnus",
+  "title": "IEA 15MW on VolturnUS-S semi-submersible (floating)",
+  "tier": "3",
+  "rotor": "iea_15mw_rwt",
+  "tower": "iea_15mw_tower",
+  "foundation_mode": "stiffness_6x6",
+  "published_f1_Hz": 0.04,
+  "published_source": "Allen et al. (2020), NREL TP-5000-76773",
+  "openfast_fst": "nrel_reference/iea_15mw/OpenFAST_volturnus/IEA-15-240-RWT-UMaineSemi.fst",
+  "tolerance_rel": 0.05
+}

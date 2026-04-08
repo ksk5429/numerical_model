@@ -1,0 +1,41 @@
+------- SubDyn v1.01.x INPUT FILE -------------------------------------------
+Gunsan 4.2MW Tripod Suction Bucket Foundation (linearized from OpenSeesPy v4)
+---------------------- SIMULATION CONTROL  ---------------------------------
+False            Echo        - Echo input data to "<RootName>.SD.ech" (flag)
+"DEFAULT"        SDdeltaT    - Local Integration Step. If "default", the glue-code time step will be used.
+3                IntMethod   - Integration Method [1/2/3/4 = RK4/AB4/ABM4/AM2].
+True             SttcSolve   - Solve dynamics about static equilibrium point
+---------------------- FEA and CRAIG-BAMPTON PARAMETERS --------------------
+3                FEMMod      - FEM switch: element model in the FEM. [1= Euler-Bernoulli(E-B); 2=Tapered E-B (unavailable); 3= 2-node Timoshenko;  4= 2-node tapered Timoshenko (unavailable)]
+1                NDiv        - Number of sub-elements per member
+True             CBMod       - [T/F] If True perform C-B reduction, else full FEM dofs will be retained.
+0                Nmodes      - Number of internal modes to retain (ignored if CBMod=False).
+1                JDampings   - Damping Ratios for each retained mode (% of critical) If Nmodes>0, flag.
+0.01
+---- STRUCTURE JOINTS: joints connect structure members ---
+2                NJoints     - Number of joints (-)
+JointID  JointXss  JointYss  JointZss    JointType  JointDirX  JointDirY  JointDirZ  JointStiff
+  (-)     (m)       (m)       (m)          (-)        (-)        (-)        (-)       (Nm/rad)
+   1      0.0       0.0      -14.0       1          0.0        0.0        0.0        0.0
+   2      0.0       0.0       0.0          1          0.0        0.0        0.0        0.0
+--- BASE REACTION JOINTS: 1/0 for locked/free DOF
+1                NReact      - Number of Joints with ¬±¬â¬Ú reactions
+RJointID   RctTDXss   RctTDYss   RctTDZss   RctRDXss   RctRDYss   RctRDZss   SSIfile [flag for each DOF: 0=free; 1=fixed]
+  1           0          0          0          0          0          0         "Gunsan-4p2MW_SSI.dat"
+--- INTERFACE JOINTS: 1/0 for DOF
+1                NInterf     - Number of interface joints locked to the Transition Piece
+IJointID   ItfTDXss   ItfTDYss   ItfTDZss   ItfRDXss   ItfRDYss   ItfRDZss
+  2           1          1          1          1          1          1
+--- MEMBERS ---
+1                NMembers    - Number of members (-)
+MemberID  MJointID1  MJointID2  MPropSetID1  MPropSetID2  MType   COSMID
+   1         1          2           1            1          1
+--- MEMBER X-SECTION PROPERTY data 1/2 [isotropic material]
+1                NPropSets   - Number of property sets (-)
+PropSetID  YoungE    ShearG    MatDens   XsecD    XsecT
+   1       2.1E+11   8.1E+10   7850.0    4.200    0.056
+--- SSI STIFFNESS FILE ---
+--- OUTPUTS ---
+True             SumPrint    - Output a summary file
+0                OutList     - List of outputs
+END

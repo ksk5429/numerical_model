@@ -1,0 +1,648 @@
+[
+  {
+    "model_id": "NREL_5MW_Baseline_rtest",
+    "path": "nrel_reference/openfast_rtest/5MW_Baseline",
+    "file_count": 64,
+    "size_mb": 28.31,
+    "status": "NO_FST",
+    "fst_path": null
+  },
+  {
+    "model_id": "NREL_5MW_OC3_Monopile",
+    "path": "nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr",
+    "file_count": 10,
+    "size_mb": 0.68,
+    "fst_path": "nrel_reference\\openfast_rtest\\5MW_OC3Mnpl_DLL_WTurb_WavesIrr\\5MW_OC3Mnpl_DLL_WTurb_WavesIrr.fst",
+    "fst_size_kb": 9.0,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "1",
+      "CompAero": "2",
+      "CompServo": "1",
+      "CompSeaSt": "1",
+      "CompHydro": "1",
+      "CompSub": "1",
+      "CompMooring": "0",
+      "CompIce": "0",
+      "CompSoil": "0",
+      "TMax": "60",
+      "DT": "0.01",
+      "NRotors": "1"
+    },
+    "referenced_files": {
+      "EDFile": "NRELOffshrBsline5MW_OC3Monopile_ElastoDyn.dat",
+      "BDBldFile": "../5MW_Baseline/NRELOffshrBsline5MW_BeamDyn.dat",
+      "InflowFile": "../5MW_Baseline/NRELOffshrBsline5MW_InflowWind_12mps.dat",
+      "AeroFile": "NRELOffshrBsline5MW_OC3Monopile_AeroDyn.dat",
+      "ServoFile": "NRELOffshrBsline5MW_OC3Monopile_ServoDyn.dat",
+      "HydroFile": "NRELOffshrBsline5MW_OC3Monopile_HydroDyn.dat",
+      "SubFile": "NRELOffshrBsline5MW_OC3Monopile_SubDyn.dat",
+      "MooringFile": "unused"
+    },
+    "elastodyn_path": "nrel_reference\\openfast_rtest\\5MW_OC3Mnpl_DLL_WTurb_WavesIrr\\NRELOffshrBsline5MW_OC3Monopile_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 63.0,
+      "HubRad": 1.5,
+      "TowerHt": 87.6,
+      "Twr2Shft": 1.96256,
+      "OverHang": -5.0191,
+      "HubMass": 56780.0,
+      "NacMass": 240000.0,
+      "ShftTilt": -5.0,
+      "RotorDiameter_m": 126.0,
+      "HubHeight_est_m": 89.56255999999999
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "NRELOffshrBsline5MW_OC3Monopile_ElastoDyn.dat",
+        "exists": true
+      },
+      "BDBldFile": {
+        "referenced": "../5MW_Baseline/NRELOffshrBsline5MW_BeamDyn.dat",
+        "exists": true
+      },
+      "InflowFile": {
+        "referenced": "../5MW_Baseline/NRELOffshrBsline5MW_InflowWind_12mps.dat",
+        "exists": true
+      },
+      "AeroFile": {
+        "referenced": "NRELOffshrBsline5MW_OC3Monopile_AeroDyn.dat",
+        "exists": true
+      },
+      "ServoFile": {
+        "referenced": "NRELOffshrBsline5MW_OC3Monopile_ServoDyn.dat",
+        "exists": true
+      },
+      "HydroFile": {
+        "referenced": "NRELOffshrBsline5MW_OC3Monopile_HydroDyn.dat",
+        "exists": true
+      },
+      "SubFile": {
+        "referenced": "NRELOffshrBsline5MW_OC3Monopile_SubDyn.dat",
+        "exists": true
+      },
+      "MooringFile": {
+        "referenced": "unused",
+        "exists": false
+      }
+    },
+    "status": "OK"
+  },
+  {
+    "model_id": "NREL_1.72-103",
+    "path": "nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST",
+    "file_count": 40,
+    "size_mb": 0.85,
+    "fst_path": "nrel_reference\\iea_scaled\\NREL-1.72-103\\OpenFAST\\NREL-1p72-103.fst",
+    "fst_size_kb": 7.7,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "1",
+      "CompAero": "2",
+      "CompServo": "1",
+      "CompHydro": "0",
+      "CompSub": "0",
+      "CompMooring": "0",
+      "CompIce": "0",
+      "TMax": "720.0",
+      "DT": "0.01"
+    },
+    "referenced_files": {
+      "EDFile": "NREL-1p72-103_ElastoDyn.dat",
+      "BDBldFile": "none",
+      "InflowFile": "NREL-1p72-103_InflowFile.dat",
+      "AeroFile": "NREL-1p72-103_AeroDyn15.dat",
+      "ServoFile": "NREL-1p72-103_ServoDyn.dat",
+      "HydroFile": "none",
+      "SubFile": "none",
+      "MooringFile": "none"
+    },
+    "elastodyn_path": "nrel_reference\\iea_scaled\\NREL-1.72-103\\OpenFAST\\NREL-1p72-103_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 51.75878693623639,
+      "HubRad": 1.3,
+      "TowerHt": 78.0,
+      "Twr2Shft": 1.5625892426828474,
+      "OverHang": -5.019096350003331,
+      "HubMass": 4779.658631571603,
+      "NacMass": 80280.28151374415,
+      "ShftTilt": -4.999629720311564,
+      "RotorDiameter_m": 103.51757387247278,
+      "HubHeight_est_m": 79.56258924268285
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "NREL-1p72-103_ElastoDyn.dat",
+        "exists": true
+      },
+      "BDBldFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "InflowFile": {
+        "referenced": "NREL-1p72-103_InflowFile.dat",
+        "exists": true
+      },
+      "AeroFile": {
+        "referenced": "NREL-1p72-103_AeroDyn15.dat",
+        "exists": true
+      },
+      "ServoFile": {
+        "referenced": "NREL-1p72-103_ServoDyn.dat",
+        "exists": true
+      },
+      "HydroFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "SubFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "MooringFile": {
+        "referenced": "none",
+        "exists": false
+      }
+    },
+    "status": "OK"
+  },
+  {
+    "model_id": "NREL_1.79-100",
+    "path": "nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST",
+    "file_count": 40,
+    "size_mb": 0.85,
+    "fst_path": "nrel_reference\\iea_scaled\\NREL-1.79-100\\OpenFAST\\NREL-1p79-100.fst",
+    "fst_size_kb": 7.7,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "1",
+      "CompAero": "2",
+      "CompServo": "1",
+      "CompHydro": "0",
+      "CompSub": "0",
+      "CompMooring": "0",
+      "CompIce": "0",
+      "TMax": "720.0",
+      "DT": "0.01"
+    },
+    "referenced_files": {
+      "EDFile": "NREL-1p79-100_ElastoDyn.dat",
+      "BDBldFile": "none",
+      "InflowFile": "NREL-1p79-100_InflowFile.dat",
+      "AeroFile": "NREL-1p79-100_AeroDyn15.dat",
+      "ServoFile": "NREL-1p79-100_ServoDyn.dat",
+      "HydroFile": "none",
+      "SubFile": "none",
+      "MooringFile": "none"
+    },
+    "elastodyn_path": "nrel_reference\\iea_scaled\\NREL-1.79-100\\OpenFAST\\NREL-1p79-100_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 50.289113530326595,
+      "HubRad": 1.3,
+      "TowerHt": 78.0,
+      "Twr2Shft": 1.5625892426828474,
+      "OverHang": -5.019096350003331,
+      "HubMass": 4504.51066175053,
+      "NacMass": 79818.91122141582,
+      "ShftTilt": -4.999629720311564,
+      "RotorDiameter_m": 100.57822706065319,
+      "HubHeight_est_m": 79.56258924268285
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "NREL-1p79-100_ElastoDyn.dat",
+        "exists": true
+      },
+      "BDBldFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "InflowFile": {
+        "referenced": "NREL-1p79-100_InflowFile.dat",
+        "exists": true
+      },
+      "AeroFile": {
+        "referenced": "NREL-1p79-100_AeroDyn15.dat",
+        "exists": true
+      },
+      "ServoFile": {
+        "referenced": "NREL-1p79-100_ServoDyn.dat",
+        "exists": true
+      },
+      "HydroFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "SubFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "MooringFile": {
+        "referenced": "none",
+        "exists": false
+      }
+    },
+    "status": "OK"
+  },
+  {
+    "model_id": "NREL_2.3-116",
+    "path": "nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST",
+    "file_count": 40,
+    "size_mb": 0.85,
+    "fst_path": "nrel_reference\\iea_scaled\\NREL-2.3-116\\OpenFAST\\NREL-2p3-116.fst",
+    "fst_size_kb": 7.7,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "1",
+      "CompAero": "2",
+      "CompServo": "1",
+      "CompHydro": "0",
+      "CompSub": "0",
+      "CompMooring": "0",
+      "CompIce": "0",
+      "TMax": "720.0",
+      "DT": "0.01"
+    },
+    "referenced_files": {
+      "EDFile": "NREL-2p3-116_ElastoDyn.dat",
+      "BDBldFile": "none",
+      "InflowFile": "NREL-2p3-116_InflowFile.dat",
+      "AeroFile": "NREL-2p3-116_AeroDyn15.dat",
+      "ServoFile": "NREL-2p3-116_ServoDyn.dat",
+      "HydroFile": "none",
+      "SubFile": "none",
+      "MooringFile": "none"
+    },
+    "elastodyn_path": "nrel_reference\\iea_scaled\\NREL-2.3-116\\OpenFAST\\NREL-2p3-116_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 58.12737169517885,
+      "HubRad": 1.3,
+      "TowerHt": 88.0,
+      "Twr2Shft": 1.5625892426828474,
+      "OverHang": -5.019096350003331,
+      "HubMass": 6258.847109086981,
+      "NacMass": 85474.66959835881,
+      "ShftTilt": -4.999629720311564,
+      "RotorDiameter_m": 116.2547433903577,
+      "HubHeight_est_m": 89.56258924268285
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "NREL-2p3-116_ElastoDyn.dat",
+        "exists": true
+      },
+      "BDBldFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "InflowFile": {
+        "referenced": "NREL-2p3-116_InflowFile.dat",
+        "exists": true
+      },
+      "AeroFile": {
+        "referenced": "NREL-2p3-116_AeroDyn15.dat",
+        "exists": true
+      },
+      "ServoFile": {
+        "referenced": "NREL-2p3-116_ServoDyn.dat",
+        "exists": true
+      },
+      "HydroFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "SubFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "MooringFile": {
+        "referenced": "none",
+        "exists": false
+      }
+    },
+    "status": "OK"
+  },
+  {
+    "model_id": "NREL_2.8-127_hh87",
+    "path": "nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87",
+    "file_count": 40,
+    "size_mb": 0.85,
+    "fst_path": "nrel_reference\\iea_scaled\\NREL-2.8-127\\OpenFAST_hh87\\NREL-2p8-127.fst",
+    "fst_size_kb": 7.7,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "1",
+      "CompAero": "2",
+      "CompServo": "1",
+      "CompHydro": "0",
+      "CompSub": "0",
+      "CompMooring": "0",
+      "CompIce": "0",
+      "TMax": "720.0",
+      "DT": "0.01"
+    },
+    "referenced_files": {
+      "EDFile": "NREL-2p8-127_ElastoDyn.dat",
+      "BDBldFile": "none",
+      "InflowFile": "NREL-2p8-127_InflowFile.dat",
+      "AeroFile": "NREL-2p8-127_AeroDyn15.dat",
+      "ServoFile": "NREL-2p8-127_ServoDyn.dat",
+      "HydroFile": "none",
+      "SubFile": "none",
+      "MooringFile": "none"
+    },
+    "elastodyn_path": "nrel_reference\\iea_scaled\\NREL-2.8-127\\OpenFAST_hh87\\NREL-2p8-127_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 63.51617418351478,
+      "HubRad": 1.3,
+      "TowerHt": 87.0,
+      "Twr2Shft": 1.5625892426828474,
+      "OverHang": -5.019096350003331,
+      "HubMass": 7727.661971481177,
+      "NacMass": 107292.70773594239,
+      "ShftTilt": -4.999629720311564,
+      "RotorDiameter_m": 127.03234836702956,
+      "HubHeight_est_m": 88.56258924268285
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "NREL-2p8-127_ElastoDyn.dat",
+        "exists": true
+      },
+      "BDBldFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "InflowFile": {
+        "referenced": "NREL-2p8-127_InflowFile.dat",
+        "exists": true
+      },
+      "AeroFile": {
+        "referenced": "NREL-2p8-127_AeroDyn15.dat",
+        "exists": true
+      },
+      "ServoFile": {
+        "referenced": "NREL-2p8-127_ServoDyn.dat",
+        "exists": true
+      },
+      "HydroFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "SubFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "MooringFile": {
+        "referenced": "none",
+        "exists": false
+      }
+    },
+    "status": "OK"
+  },
+  {
+    "model_id": "NREL_2.8-127_hh120",
+    "path": "nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120",
+    "file_count": 40,
+    "size_mb": 0.85,
+    "fst_path": "nrel_reference\\iea_scaled\\NREL-2.8-127\\OpenFAST_hh120\\NREL-2p8-127-HH120.fst",
+    "fst_size_kb": 7.7,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "1",
+      "CompAero": "2",
+      "CompServo": "1",
+      "CompHydro": "0",
+      "CompSub": "0",
+      "CompMooring": "0",
+      "CompIce": "0",
+      "TMax": "720.0",
+      "DT": "0.01"
+    },
+    "referenced_files": {
+      "EDFile": "NREL-2p8-127-HH120_ElastoDyn.dat",
+      "BDBldFile": "none",
+      "InflowFile": "NREL-2p8-127-HH120_InflowFile.dat",
+      "AeroFile": "NREL-2p8-127-HH120_AeroDyn15.dat",
+      "ServoFile": "NREL-2p8-127-HH120_ServoDyn.dat",
+      "HydroFile": "none",
+      "SubFile": "none",
+      "MooringFile": "none"
+    },
+    "elastodyn_path": "nrel_reference\\iea_scaled\\NREL-2.8-127\\OpenFAST_hh120\\NREL-2p8-127-HH120_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 63.51617418351478,
+      "HubRad": 1.3,
+      "TowerHt": 118.0,
+      "Twr2Shft": 1.5625892426828474,
+      "OverHang": -5.019096350003331,
+      "HubMass": 7570.515936277985,
+      "NacMass": 106552.21080191688,
+      "ShftTilt": -4.999629720311564,
+      "RotorDiameter_m": 127.03234836702956,
+      "HubHeight_est_m": 119.56258924268285
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "NREL-2p8-127-HH120_ElastoDyn.dat",
+        "exists": true
+      },
+      "BDBldFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "InflowFile": {
+        "referenced": "NREL-2p8-127-HH120_InflowFile.dat",
+        "exists": true
+      },
+      "AeroFile": {
+        "referenced": "NREL-2p8-127-HH120_AeroDyn15.dat",
+        "exists": true
+      },
+      "ServoFile": {
+        "referenced": "NREL-2p8-127-HH120_ServoDyn.dat",
+        "exists": true
+      },
+      "HydroFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "SubFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "MooringFile": {
+        "referenced": "none",
+        "exists": false
+      }
+    },
+    "status": "OK"
+  },
+  {
+    "model_id": "Vestas_V27",
+    "path": "nrel_reference/vestas/V27",
+    "file_count": 24,
+    "size_mb": 0.14,
+    "fst_path": "nrel_reference\\vestas\\V27\\SNLV27_F8.fst",
+    "fst_size_kb": 5.6,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "1",
+      "CompAero": "2",
+      "CompServo": "1",
+      "CompHydro": "0",
+      "CompSub": "0",
+      "CompMooring": "0",
+      "CompIce": "0",
+      "TMax": "2000",
+      "DT": "0.005"
+    },
+    "referenced_files": {
+      "EDFile": "SNLV27_ElastoDyn.dat",
+      "BDBldFile": "unused",
+      "InflowFile": "SNLV27_InflowWind.dat",
+      "AeroFile": "SNLV27_AeroDyn15F8.dat",
+      "ServoFile": "SNLV27_ServoDyn.dat",
+      "HydroFile": "unused",
+      "SubFile": "unused",
+      "MooringFile": "unused"
+    },
+    "elastodyn_path": "nrel_reference\\vestas\\V27\\SNLV27_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 13.5,
+      "HubRad": 0.5,
+      "TowerHt": 31.0,
+      "Twr2Shft": 1.05,
+      "OverHang": -1.88,
+      "HubMass": 1165.0,
+      "NacMass": 6909.5,
+      "ShftTilt": -4.05,
+      "RotorDiameter_m": 27.0,
+      "HubHeight_est_m": 32.05
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "SNLV27_ElastoDyn.dat",
+        "exists": true
+      },
+      "BDBldFile": {
+        "referenced": "unused",
+        "exists": false
+      },
+      "InflowFile": {
+        "referenced": "SNLV27_InflowWind.dat",
+        "exists": true
+      },
+      "AeroFile": {
+        "referenced": "SNLV27_AeroDyn15F8.dat",
+        "exists": false
+      },
+      "ServoFile": {
+        "referenced": "SNLV27_ServoDyn.dat",
+        "exists": true
+      },
+      "HydroFile": {
+        "referenced": "unused",
+        "exists": false
+      },
+      "SubFile": {
+        "referenced": "unused",
+        "exists": false
+      },
+      "MooringFile": {
+        "referenced": "unused",
+        "exists": false
+      }
+    },
+    "status": "OK"
+  },
+  {
+    "model_id": "Gunsan_4p2MW",
+    "path": "gunsan_4p2mw/openfast_deck",
+    "file_count": 47,
+    "size_mb": 0.93,
+    "fst_path": "gunsan_4p2mw\\openfast_deck\\Gunsan-4p2MW.fst",
+    "fst_size_kb": 4.8,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "0",
+      "CompAero": "0",
+      "CompServo": "0",
+      "CompSeaSt": "0",
+      "CompHydro": "0",
+      "CompSub": "0",
+      "CompMooring": "0",
+      "CompIce": "0",
+      "CompSoil": "0",
+      "TMax": "120",
+      "DT": "0.01",
+      "NRotors": "1"
+    },
+    "referenced_files": {
+      "EDFile": "Gunsan-4p2MW_ElastoDyn.dat",
+      "BDBldFile": "unused",
+      "InflowFile": "unused",
+      "AeroFile": "unused",
+      "ServoFile": "unused",
+      "HydroFile": "unused",
+      "SubFile": "unused",
+      "MooringFile": "unused"
+    },
+    "elastodyn_path": "gunsan_4p2mw\\openfast_deck\\Gunsan-4p2MW_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 51.75878693623639,
+      "HubRad": 1.3,
+      "TowerHt": 96.3,
+      "Twr2Shft": 1.5625892426828474,
+      "OverHang": -5.019096350003331,
+      "HubMass": 4779.658631571603,
+      "NacMass": 80280.28151374415,
+      "ShftTilt": -4.999629720311564,
+      "RotorDiameter_m": 103.51757387247278,
+      "HubHeight_est_m": 97.86258924268284
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "Gunsan-4p2MW_ElastoDyn.dat",
+        "exists": true
+      },
+      "BDBldFile": {
+        "referenced": "unused",
+        "exists": false
+      },
+      "InflowFile": {
+        "referenced": "unused",
+        "exists": false
+      },
+      "AeroFile": {
+        "referenced": "unused",
+        "exists": false
+      },
+      "ServoFile": {
+        "referenced": "unused",
+        "exists": false
+      },
+      "HydroFile": {
+        "referenced": "unused",
+        "exists": false
+      },
+      "SubFile": {
+        "referenced": "unused",
+        "exists": false
+      },
+      "MooringFile": {
+        "referenced": "unused",
+        "exists": false
+      }
+    },
+    "status": "OK"
+  }
+]
