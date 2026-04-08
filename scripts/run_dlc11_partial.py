@@ -147,10 +147,14 @@ def run_one(binary: Path, deck_path: Path, speed: float,
         log.write(f"# DLC 1.1 run, U = {speed} m/s, tmax = {tmax}\n")
         log.write(f"# command: {' '.join(cmd)}\n\n")
         log.flush()
+        # Wall-time budget is ~20x the sim time at the observed rate
+        # (0.06 sim-s per CPU-s on a modern laptop). Add a 2x safety
+        # factor and a 300 s minimum for short smoke runs.
+        wall_budget = max(300.0, 40.0 * tmax)
         proc = subprocess.run(
             cmd, cwd=str(deck_path.parent),
             stdout=log, stderr=subprocess.STDOUT,
-            timeout=1800,
+            timeout=wall_budget,
         )
     wall = (dt.datetime.now() - started).total_seconds()
 
