@@ -21,6 +21,9 @@ python scripts/verify_nrel_models.py
 |-------|------:|-----:|----------|:-----:|:---:|------------:|----------:|:------:|
 | NREL_5MW_Baseline_rtest            |  —  |   —    | *(shared data, no top-level .fst)* |    |    |   —   |   —   | 📁 data only |
 | NREL_5MW_OC3_Monopile              | 10  | 0.68 MB | `5MW_OC3Mnpl_DLL_WTurb_WavesIrr.fst` | ✓  | ✓  | 126.0 | 89.6  | ✅ |
+| NREL_5MW_OC4_Jacket_MGrowth        | 12  | 0.30 MB | `5MW_OC4Jckt_DLL_WTurb_WavesIrr_MGrowth.fst` | ✓ | ✓ | 126.0 | 90.1 | ✅ |
+| **IEA_15MW_Monopile**              | 122 | 1.93 MB | `IEA-15-240-RWT-Monopile.fst` | ✓ | ✓ | **241.9** | **148.7** | ✅ |
+| **IEA_15MW_VolturnUS**             | 34  | 6.72 MB | `IEA-15-240-RWT-UMaineSemi.fst` | ✓ |   | **241.9** | **148.7** | ✅ |
 | NREL_1.72-103                       | 40  | 0.85 MB | `NREL-1p72-103.fst`                  |    |    | 103.5 | 79.6  | ✅ |
 | NREL_1.79-100                       | 40  | 0.85 MB | `NREL-1p79-100.fst`                  |    |    | 100.6 | 79.6  | ✅ |
 | NREL_2.3-116                        | 40  | 0.85 MB | `NREL-2p3-116.fst`                   |    |    | 116.3 | 89.6  | ✅ |
@@ -29,9 +32,18 @@ python scripts/verify_nrel_models.py
 | Vestas V27 (historical baseline)    | 24  | 0.14 MB | `SNLV27_F8.fst`                      |    |    |  27.0 |  32.0 | ✅ |
 | **Gunsan 4.2 MW** (subject)         | 47  | 0.93 MB | `Gunsan-4p2MW.fst`                   |    |    | 103.5 | 97.9  | ⚠️ see note |
 
-**Total bundled**: 8 runnable OpenFAST models (+1 shared data
-directory) spanning 281 files and 6.9 MB. Every model's .fst was
+**Total bundled**: 11 runnable OpenFAST models (+1 shared data
+directory) spanning 449 files and ~15.4 MB. Every model's `.fst` was
 parsed successfully and references verified sub-files.
+
+The IEA 15MW Monopile and VolturnUS (rows in **bold**) were added in
+the v0.2 patch commit after the initial v0.1 release; they were
+downloaded directly from the official `IEAWindSystems/IEA-15-240-RWT`
+repository under Apache 2.0 with attribution preserved in
+`nrel_reference/iea_15mw/OpenFAST_*/ATTRIBUTION.md`. The auto-extracted
+rotor diameter of 241.9 m matches the published 240 m (the +1.9 m is
+the hub-to-tip radius), and the auto-extracted hub height of 148.7 m
+matches the published 150 m within the 1.3 m shaft tilt offset.
 
 ## Per-model notes
 

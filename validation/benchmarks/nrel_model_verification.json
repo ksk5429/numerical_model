@@ -90,6 +90,243 @@
     "status": "OK"
   },
   {
+    "model_id": "NREL_5MW_OC4_Jacket_MGrowth",
+    "path": "nrel_reference/oc4_jacket",
+    "file_count": 12,
+    "size_mb": 0.3,
+    "fst_path": "nrel_reference\\oc4_jacket\\5MW_OC4Jckt_DLL_WTurb_WavesIrr_MGrowth.fst",
+    "fst_size_kb": 9.0,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "1",
+      "CompAero": "2",
+      "CompServo": "1",
+      "CompSeaSt": "1",
+      "CompHydro": "1",
+      "CompSub": "1",
+      "CompMooring": "0",
+      "CompIce": "0",
+      "CompSoil": "0",
+      "TMax": "10",
+      "DT": "0.01",
+      "NRotors": "1"
+    },
+    "referenced_files": {
+      "EDFile": "NRELOffshrBsline5MW_OC4Jacket_ElastoDyn.dat",
+      "BDBldFile": "../5MW_Baseline/NRELOffshrBsline5MW_BeamDyn.dat",
+      "InflowFile": "../5MW_Baseline/NRELOffshrBsline5MW_InflowWind_12mps.dat",
+      "AeroFile": "NRELOffshrBsline5MW_OC4Jacket_AeroDyn.dat",
+      "ServoFile": "NRELOffshrBsline5MW_OC4Jacket_ServoDyn.dat",
+      "HydroFile": "NRELOffshrBsline5MW_OC4Jacket_HydroDyn.dat",
+      "SubFile": "NRELOffshrBsline5MW_OC4Jacket_SubDyn.dat",
+      "MooringFile": "unused"
+    },
+    "elastodyn_path": "nrel_reference\\oc4_jacket\\NRELOffshrBsline5MW_OC4Jacket_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 63.0,
+      "HubRad": 1.5,
+      "TowerHt": 88.15,
+      "Twr2Shft": 1.96256,
+      "OverHang": -5.0191,
+      "HubMass": 56780.0,
+      "NacMass": 240000.0,
+      "ShftTilt": -5.0,
+      "RotorDiameter_m": 126.0,
+      "HubHeight_est_m": 90.11256
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "NRELOffshrBsline5MW_OC4Jacket_ElastoDyn.dat",
+        "exists": true
+      },
+      "BDBldFile": {
+        "referenced": "../5MW_Baseline/NRELOffshrBsline5MW_BeamDyn.dat",
+        "exists": false
+      },
+      "InflowFile": {
+        "referenced": "../5MW_Baseline/NRELOffshrBsline5MW_InflowWind_12mps.dat",
+        "exists": false
+      },
+      "AeroFile": {
+        "referenced": "NRELOffshrBsline5MW_OC4Jacket_AeroDyn.dat",
+        "exists": true
+      },
+      "ServoFile": {
+        "referenced": "NRELOffshrBsline5MW_OC4Jacket_ServoDyn.dat",
+        "exists": true
+      },
+      "HydroFile": {
+        "referenced": "NRELOffshrBsline5MW_OC4Jacket_HydroDyn.dat",
+        "exists": true
+      },
+      "SubFile": {
+        "referenced": "NRELOffshrBsline5MW_OC4Jacket_SubDyn.dat",
+        "exists": true
+      },
+      "MooringFile": {
+        "referenced": "unused",
+        "exists": false
+      }
+    },
+    "status": "OK"
+  },
+  {
+    "model_id": "IEA_15MW_Monopile",
+    "path": "nrel_reference/iea_15mw/OpenFAST_monopile",
+    "file_count": 122,
+    "size_mb": 1.93,
+    "fst_path": "nrel_reference\\iea_15mw\\OpenFAST_monopile\\IEA-15-240-RWT-Monopile.fst",
+    "fst_size_kb": 8.1,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "1",
+      "CompAero": "2",
+      "CompServo": "1",
+      "CompSeaSt": "1",
+      "CompHydro": "1",
+      "CompSub": "1",
+      "CompMooring": "0",
+      "CompIce": "0",
+      "TMax": "300.0",
+      "DT": "0.005"
+    },
+    "referenced_files": {
+      "EDFile": "IEA-15-240-RWT-Monopile_ElastoDyn.dat",
+      "BDBldFile": "../IEA-15-240-RWT/IEA-15-240-RWT_BeamDyn.dat",
+      "InflowFile": "../IEA-15-240-RWT/IEA-15-240-RWT_InflowFile.dat",
+      "AeroFile": "IEA-15-240-RWT-Monopile_AeroDyn15.dat",
+      "ServoFile": "IEA-15-240-RWT-Monopile_ServoDyn.dat",
+      "HydroFile": "IEA-15-240-RWT-Monopile_HydroDyn.dat",
+      "SubFile": "IEA-15-240-RWT-Monopile_SubDyn.dat",
+      "MooringFile": "none"
+    },
+    "elastodyn_path": "nrel_reference\\iea_15mw\\OpenFAST_monopile\\IEA-15-240-RWT-Monopile_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 120.97,
+      "HubRad": 3.97,
+      "TowerHt": 144.386,
+      "Twr2Shft": 4.349459414248071,
+      "OverHang": -12.097571763912535,
+      "HubMass": 69131.0,
+      "NacMass": 644857.0,
+      "ShftTilt": -6.0,
+      "RotorDiameter_m": 241.94,
+      "HubHeight_est_m": 148.73545941424806
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "IEA-15-240-RWT-Monopile_ElastoDyn.dat",
+        "exists": true
+      },
+      "BDBldFile": {
+        "referenced": "../IEA-15-240-RWT/IEA-15-240-RWT_BeamDyn.dat",
+        "exists": false
+      },
+      "InflowFile": {
+        "referenced": "../IEA-15-240-RWT/IEA-15-240-RWT_InflowFile.dat",
+        "exists": false
+      },
+      "AeroFile": {
+        "referenced": "IEA-15-240-RWT-Monopile_AeroDyn15.dat",
+        "exists": true
+      },
+      "ServoFile": {
+        "referenced": "IEA-15-240-RWT-Monopile_ServoDyn.dat",
+        "exists": true
+      },
+      "HydroFile": {
+        "referenced": "IEA-15-240-RWT-Monopile_HydroDyn.dat",
+        "exists": true
+      },
+      "SubFile": {
+        "referenced": "IEA-15-240-RWT-Monopile_SubDyn.dat",
+        "exists": true
+      },
+      "MooringFile": {
+        "referenced": "none",
+        "exists": false
+      }
+    },
+    "status": "OK"
+  },
+  {
+    "model_id": "IEA_15MW_VolturnUS",
+    "path": "nrel_reference/iea_15mw/OpenFAST_volturnus",
+    "file_count": 34,
+    "size_mb": 6.72,
+    "fst_path": "nrel_reference\\iea_15mw\\OpenFAST_volturnus\\IEA-15-240-RWT-UMaineSemi.fst",
+    "fst_size_kb": 8.1,
+    "flags": {
+      "CompElast": "1",
+      "CompInflow": "1",
+      "CompAero": "2",
+      "CompServo": "1",
+      "CompSeaSt": "1",
+      "CompHydro": "1",
+      "CompSub": "0",
+      "CompMooring": "3",
+      "CompIce": "0",
+      "TMax": "10.0",
+      "DT": "0.025"
+    },
+    "referenced_files": {
+      "EDFile": "IEA-15-240-RWT-UMaineSemi_ElastoDyn.dat",
+      "InflowFile": "../IEA-15-240-RWT/IEA-15-240-RWT_InflowFile.dat",
+      "AeroFile": "IEA-15-240-RWT-UMaineSemi_AeroDyn15.dat",
+      "ServoFile": "IEA-15-240-RWT-UMaineSemi_ServoDyn.dat",
+      "HydroFile": "IEA-15-240-RWT-UMaineSemi_HydroDyn.dat",
+      "SubFile": "none",
+      "MooringFile": "IEA-15-240-RWT-UMaineSemi_MoorDyn.dat"
+    },
+    "elastodyn_path": "nrel_reference\\iea_15mw\\OpenFAST_volturnus\\IEA-15-240-RWT-UMaineSemi_ElastoDyn.dat",
+    "elastodyn": {
+      "NumBl": 3.0,
+      "TipRad": 120.97,
+      "HubRad": 3.97,
+      "TowerHt": 144.386,
+      "Twr2Shft": 4.3495,
+      "OverHang": -12.098,
+      "HubMass": 69131.0,
+      "NacMass": 644857.0,
+      "ShftTilt": -6.0,
+      "RotorDiameter_m": 241.94,
+      "HubHeight_est_m": 148.7355
+    },
+    "sub_files": {
+      "EDFile": {
+        "referenced": "IEA-15-240-RWT-UMaineSemi_ElastoDyn.dat",
+        "exists": true
+      },
+      "InflowFile": {
+        "referenced": "../IEA-15-240-RWT/IEA-15-240-RWT_InflowFile.dat",
+        "exists": false
+      },
+      "AeroFile": {
+        "referenced": "IEA-15-240-RWT-UMaineSemi_AeroDyn15.dat",
+        "exists": true
+      },
+      "ServoFile": {
+        "referenced": "IEA-15-240-RWT-UMaineSemi_ServoDyn.dat",
+        "exists": true
+      },
+      "HydroFile": {
+        "referenced": "IEA-15-240-RWT-UMaineSemi_HydroDyn.dat",
+        "exists": true
+      },
+      "SubFile": {
+        "referenced": "none",
+        "exists": false
+      },
+      "MooringFile": {
+        "referenced": "IEA-15-240-RWT-UMaineSemi_MoorDyn.dat",
+        "exists": true
+      }
+    },
+    "status": "OK"
+  },
+  {
     "model_id": "NREL_1.72-103",
     "path": "nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST",
     "file_count": 40,
