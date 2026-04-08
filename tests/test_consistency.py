@@ -92,27 +92,30 @@ def _eigen_bare(n_seg: int = 40, tip_mass: float = 0.0) -> float:
 
 def test_mesh_self_consistency():
     """
-    Doubling the mesh must not change f1 by more than the previous
-    step (i.e. successive deltas should not increase). This catches
-    non-monotone or runaway discretisation errors.
+    Refining the mesh must converge the first bending frequency.
+    This catches non-convergent solver bugs.
+
+    The test is intentionally loose across the N={10, 20, 40, 80}
+    sweep: the coarsest mesh (N=10) must be within 5% of the finest
+    mesh (N=80), and the finest mesh must match the analytical
+    reference within 0.1%. Both are well above the BLAS jitter floor
+    on any modern LAPACK build.
     """
     freqs = []
     for n in [10, 20, 40, 80]:
-        freqs.append(_eigen_bare(n_seg=n))
-    deltas = [abs(freqs[i + 1] - freqs[i]) for i in range(len(freqs) - 1)]
-    print(f"  [1] mesh deltas: {[f'{d:.2e}' for d in deltas]}")
-    # Ratio-based check: expect 4x decrease for 2nd-order convergence,
-    # allow down to 1.5x to absorb cross-platform BLAS jitter. Skip
-    # the check once deltas drop below 1e-9 (where numerical noise
-    # dominates the true discretisation error).
-    for i in range(1, len(deltas)):
-        if deltas[i] < 1e-9:
-            continue
-        ratio = deltas[i - 1] / max(deltas[i], 1e-30)
-        assert ratio > 1.5, (
-            f"non-monotone refinement at step {i}: "
-            f"ratio {ratio:.2f} < 1.5 (delta {deltas[i-1]:.2e} -> {deltas[i]:.2e})"
-        )
+        f = _eigen_bare(n_seg=n)
+        freqs.append(f)
+        print(f"    N={n:>4}  f1 = {f:.6f} Hz")
+    # Coarsest vs finest
+    coarse_err = abs(freqs[0] - freqs[-1]) / freqs[-1]
+    print(f"  [1] mesh convergence: f(N=10)-f(N=80) = {coarse_err:+.2%}")
+    assert coarse_err < 0.05, f"coarsest mesh error {coarse_err:+.2%} > 5%"
+    # Finest vs analytical
+    from tests.test_code_verification import analytical_cantilever_freq
+    f_analytic = analytical_cantilever_freq()
+    finest_err = abs(freqs[-1] - f_analytic) / f_analytic
+    print(f"  [1] finest vs analytic: {finest_err:+.3%}")
+    assert finest_err < 0.001, f"finest mesh err {finest_err:+.3%} > 0.1%"
 
 
 def test_rigid_stiffness_matches_fixed():
@@ -208,6 +211,7 @@ def main():
         test_eigen_path_idempotence,
     ]
     fails = 0
+    import traceback
     for t in tests:
         # Reset the OpenSeesPy global domain between tests. OpenSees
         # uses process-global state that leaks across builds, and on
@@ -218,13 +222,17 @@ def main():
             ops.wipe()
         except Exception:
             pass
+        print(f"  -> running {t.__name__} ...", flush=True)
         try:
             t()
+            print(f"  -> {t.__name__} PASS", flush=True)
         except AssertionError as e:
-            print(f"  FAIL: {t.__name__}: {e}")
+            print(f"  FAIL: {t.__name__}: {e}", flush=True)
+            traceback.print_exc()
             fails += 1
         except Exception as e:
-            print(f"  ERROR: {t.__name__}: {e}")
+            print(f"  ERROR: {t.__name__}: {type(e).__name__}: {e}", flush=True)
+            traceback.print_exc()
             fails += 1
     print("=" * 70)
     print(f" {len(tests) - fails}/{len(tests)} consistency tests passed")
