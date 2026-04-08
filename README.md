@@ -70,7 +70,7 @@ python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
 
 ## What you get
 
-| Capability | Op³ | SACS | PLAXIS | pure OpenSeesPy | pure OpenFAST |
+| Capability | Op³ | SACS | PLAXIS | OpenSeesPy | OpenFAST |
 |---|:-:|:-:|:-:|:-:|:-:|
 | Four foundation modes (Fixed / 6x6 / BNWF / Dissipation-weighted) | ✅ | partial | partial | manual | ❌ |
 | PISA (Burd 2020 / Byrne 2020) with depth functions | ✅ | ❌ | commercial | ❌ | ❌ |
@@ -600,7 +600,7 @@ does not redistribute OptumGX and contains no OptumGX binary artifacts.
 ## Author and contact
 
 Kyeong Sun Kim · Department of Civil and Environmental Engineering,
-Seoul National University · `ksk5429@snu.ac.kr`
+Seoul National University · `kyeongsunkim@snu.ac.kr`
 
 Report reproduction issues via
 [GitHub Issues](https://github.com/ksk5429/numerical_model/issues).
