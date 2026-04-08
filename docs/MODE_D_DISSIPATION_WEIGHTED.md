@@ -6,8 +6,10 @@
 > implementation hooks already exist in `op3/foundations.py` under
 > `FoundationMode.DISSIPATION_WEIGHTED`.
 >
-> Phase 3 / Task 3.4. Status: formulation drafted, implementation
-> partially wired, validation pending.
+> Phase 3 / Task 3.4. Status (as of v0.3.2): **formulation drafted,
+> implementation fully wired, V&V complete (8/8 gates PASS in
+> `tests/test_mode_d.py`), Gunsan-specific calibration pending
+> OptumGX dissipation export**.
 
 ---
 

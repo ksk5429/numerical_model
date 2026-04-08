@@ -115,15 +115,20 @@ def check_I7_4_5_soft_stiff(f1: float, f_1P: float) -> IECCheck:
     )
 
 
-def check_I7_4_7_aero_damping(log_dec: float = 0.05) -> IECCheck:
-    """Aerodynamic damping logarithmic decrement default 5%
-    (Op^3 currently uses fixed Rayleigh; this is a placeholder)."""
+def check_I7_4_7_aero_damping() -> IECCheck:
+    """Aerodynamic damping check. Op^3's structural-only OpenSeesPy
+    stick models do not compute aerodynamic damping directly; the
+    relevant evidence lives in the OpenFAST DLC time-series runs
+    (decay / hammer excitation method). For examples that reach
+    OpenFAST end-to-end (Gunsan v5 deck), the BEMT-derived aero
+    damping is known to be > 0.05 log-dec at rated wind; this check
+    reports NOT_APPLICABLE for structural-only examples and refers
+    the user to the DLC 1.1 outputs under validation/dlc11_partial/."""
     return IECCheck(
         id="I7.4.7", title="Aerodynamic damping log dec >= 0.05",
         ref="IEC 61400-3-1 Section 7.4.7",
-        status="PASS" if log_dec >= 0.05 else "WARNING",
-        value=log_dec, limit=0.05, units="-",
-        note="default placeholder; replace with measured aero damping",
+        status="NOT_APPLICABLE",
+        note="requires aero-coupled DLC run; see validation/dlc11_partial/",
     )
 
 

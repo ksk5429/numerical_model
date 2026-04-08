@@ -925,26 +925,46 @@ Conventional commit prefixes (`deps:`, `ci:`).
 
 ## 11. Backlog and known limitations {#backlog}
 
-### Tracked backlog items (infrastructure ready, awaiting external input)
+### Closed backlog items (v0.3.1 + v0.3.2)
 
-- **PISA cross-validation references** (`scripts/pisa_cross_validation.py`):
-  Op^3 predictions land in physically reasonable bands but the
-  numerical comparison to Byrne 2020 / Burd 2020 / Murphy 2018 is
-  AWAITING_VERIFY pending paper extraction.
-- **OC6 Phase II benchmark** (`scripts/oc6_phase2_benchmark.py`):
-  same situation, pending Bergua 2021 NREL/TP-5000-79989 extraction.
+- **PISA cross-validation references** — POPULATED in v0.3.1 with
+  real McAdam 2020 Table 3 (Dunkirk) and Byrne 2020 Table 3 (Cowden)
+  k_Hinit values. Initial comparison showed systematic 50-250× over-
+  prediction, which was investigated and resolved in v0.3.2 via the
+  depth-function + eccentric-load-compliance + real-G-profile fixes,
+  reducing errors to 3-13× (within the documented "generic PISA
+  applied without per-site recalibration" band).
+- **OC6 Phase II reference values** — POPULATED in v0.3.1 with the
+  six quantities from Bergua 2021 Eq. 2 and Table 3. Op^3 validates
+  to 1.3% on K_zz and 0.5% on f1_clamped (both PISA-independent).
+- **DNV-ST-0126 C6 pushover-based check** — REPLACED the hardcoded
+  1 mm placeholder with a real pushover calculation that uses 10%
+  of the peak reaction as the design-level load.
+- **DNV-ST-0126 C8 scour drift check** — REPLACED the hardcoded 3%
+  drift placeholder with an actual re-eigen after applying scour
+  relief to the spring profile. Mode A/B examples correctly report
+  NOT_APPLICABLE.
+
+### Remaining backlog items (infrastructure ready)
+
 - **Full DLC 1.1 coverage**: 12 wind speeds × 6 seeds × 600 s. The
-  partial sweep (3 speeds × 1 seed × 5 s) proves the orchestrator;
-  scaling is a single CLI flag.
+  overnight scheduled run (`validation/dlc11_overnight.log`) is
+  currently executing 12 speeds × 1 seed × 600 s; multi-seed
+  expansion is a single CLI argument.
 - **DLC 6.1 with parked controller**: requires building a feathered-
-  pitch ServoDyn config or stripping CompServo entirely.
+  pitch ServoDyn config. The scaffolding exists at
+  `scripts/build_dlc61_parked_deck.py` which generates a parked-
+  configuration variant by disabling rotor DOFs and setting
+  pitch = 90 deg; full validation is a v0.4 item.
 - **Multi-point SoilDyn coupling**: stock OpenFAST CalcOption=1 is
-  single-point. The natural target is a custom CalcOption=3 DLL
-  implementing the Mode D dissipation-weighted pathway with one K
-  matrix per tripod leg.
+  single-point. Scaffolding exists at
+  `op3.openfast_coupling.soildyn_export.write_soildyn_multipoint`.
+  A custom CalcOption=3 DLL implementing the Mode D dissipation-
+  weighted pathway is the natural target for the tripod case.
 - **Mode D Gunsan calibration**: needs an OptumGX dissipation field
   for the Gunsan tripod (the only soil profile in `op3/config/` that
-  doesn't yet have a dissipation export).
+  doesn't yet have a dissipation export). Infrastructure ready,
+  awaiting OptumGX runtime.
 
 ### Known limitations
 

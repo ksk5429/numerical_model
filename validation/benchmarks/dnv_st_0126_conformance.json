@@ -58,10 +58,10 @@
         "title": "Tower base displacement < D/100",
         "ref": "DNV-ST-0126 Sec 6.2.2",
         "status": "PASS",
-        "value": 0.001,
+        "value": 0.02,
         "limit": 0.06,
         "units": "m",
-        "note": ""
+        "note": "10% of pushover peak used as design-level load proxy"
       },
       {
         "id": "C7",
@@ -77,11 +77,11 @@
         "id": "C8",
         "title": "Scour-induced f1 drift <= 5%",
         "ref": "DNV-ST-0126 Sec 5.7",
-        "status": "PASS",
-        "value": 0.03000000000000002,
-        "limit": 0.05,
-        "units": "-",
-        "note": ""
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "foundation mode does not support scour depth"
       },
       {
         "id": "C9",
@@ -154,10 +154,10 @@
         "title": "Tower base displacement < D/100",
         "ref": "DNV-ST-0126 Sec 6.2.2",
         "status": "PASS",
-        "value": 0.001,
+        "value": 0.02,
         "limit": 0.06,
         "units": "m",
-        "note": ""
+        "note": "10% of pushover peak used as design-level load proxy"
       },
       {
         "id": "C7",
@@ -173,11 +173,11 @@
         "id": "C8",
         "title": "Scour-induced f1 drift <= 5%",
         "ref": "DNV-ST-0126 Sec 5.7",
-        "status": "PASS",
-        "value": 0.02999999999999996,
-        "limit": 0.05,
-        "units": "-",
-        "note": ""
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "foundation mode does not support scour depth"
       },
       {
         "id": "C9",
@@ -250,10 +250,10 @@
         "title": "Tower base displacement < D/100",
         "ref": "DNV-ST-0126 Sec 6.2.2",
         "status": "PASS",
-        "value": 0.001,
+        "value": 0.02,
         "limit": 0.06,
         "units": "m",
-        "note": ""
+        "note": "10% of pushover peak used as design-level load proxy"
       },
       {
         "id": "C7",
@@ -269,11 +269,11 @@
         "id": "C8",
         "title": "Scour-induced f1 drift <= 5%",
         "ref": "DNV-ST-0126 Sec 5.7",
-        "status": "PASS",
-        "value": 0.029999999999999985,
-        "limit": 0.05,
-        "units": "-",
-        "note": ""
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "foundation mode does not support scour depth"
       },
       {
         "id": "C9",
@@ -346,10 +346,10 @@
         "title": "Tower base displacement < D/100",
         "ref": "DNV-ST-0126 Sec 6.2.2",
         "status": "PASS",
-        "value": 0.001,
+        "value": 0.02,
         "limit": 0.06,
         "units": "m",
-        "note": ""
+        "note": "10% of pushover peak used as design-level load proxy"
       },
       {
         "id": "C7",
@@ -365,11 +365,11 @@
         "id": "C8",
         "title": "Scour-induced f1 drift <= 5%",
         "ref": "DNV-ST-0126 Sec 5.7",
-        "status": "PASS",
-        "value": 0.030000000000000082,
-        "limit": 0.05,
-        "units": "-",
-        "note": ""
+        "status": "NOT_APPLICABLE",
+        "value": null,
+        "limit": null,
+        "units": "",
+        "note": "foundation mode does not support scour depth"
       },
       {
         "id": "C9",
