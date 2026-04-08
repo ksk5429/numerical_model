@@ -95,7 +95,7 @@ jobs:
 
       - name: Upload V&V JSON artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: vv-artifacts-py${{ matrix.python-version }}
           path: validation/benchmarks/*.json
@@ -125,7 +125,7 @@ jobs:
         # docs-deploy.yml which deploys the output to Pages.
         run: sphinx-build -b html docs/sphinx docs/sphinx/_build/html --keep-going
       - name: Upload docs artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: op3-docs
           path: docs/sphinx/_build/html
