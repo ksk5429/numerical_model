@@ -7,7 +7,7 @@ OC3 Tripod r-test template runs in normal-production mode, which
 causes the blades to deflect into the tower when the wind speed
 exceeds ~30 m/s.
 
-This script derives a parked variant of the committed v5 Gunsan
+This script derives a parked variant of the committed v5 SiteA
 deck (or any OC3-tripod-derived deck) by:
 
   1. Copying the deck directory to a *_parked sibling
@@ -34,7 +34,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 SOURCES = {
-    "gunsan_v5": REPO_ROOT / "gunsan_4p2mw/openfast_deck_v5",
+    "site_a_v5": REPO_ROOT / "site_a_ref4mw/openfast_deck_v5",
     "oc3_tripod": REPO_ROOT / "tools/r-test_v5/r-test/glue-codes/openfast/"
                    "5MW_OC3Trpd_DLL_WSt_WavesReg",
 }
@@ -85,7 +85,7 @@ def patch_fst(fst_path: Path) -> None:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--source", choices=list(SOURCES.keys()),
-                    default="gunsan_v5")
+                    default="site_a_v5")
     ap.add_argument("--dest", default=None,
                     help="Destination directory (default: <source>_parked)")
     args = ap.parse_args()
@@ -114,7 +114,7 @@ def main():
 
     print(f"\nRun with:")
     print(f"  cd {dest}")
-    print(f"  ../../tools/openfast/OpenFAST.exe Gunsan-4p2MW.fst")
+    print(f"  ../../tools/openfast/OpenFAST.exe SiteA-Ref4MW.fst")
     return 0
 
 

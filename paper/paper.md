@@ -31,7 +31,7 @@ dynamics), and **OpenFAST v5** (open-source coupled aero-hydro-servo-
 elastic simulation). The framework was developed alongside a doctoral
 dissertation on prescriptive maintenance of offshore wind turbine
 foundations and is calibrated against the entire NREL reference wind
-turbine library plus a real-world site (Gunsan 4.2 MW, Republic of
+turbine library plus a real-world site (SiteA 4 MW class, Republic of
 Korea).
 
 `Op^3` exposes four foundation idealisations forming a hierarchy of
@@ -106,7 +106,7 @@ runs the full suite on every push.
 
 The published-source calibration regression establishes physical
 trust: NREL 5 MW fixed-base lands within 2.5 % of Jonkman 2009, NREL
-5 MW OC3 monopile within 0.4 % of Jonkman & Musial 2010, the Gunsan
+5 MW OC3 monopile within 0.4 % of Jonkman & Musial 2010, the SiteA
 field site within 3.7 % of the dissertation's own operational modal
 analysis, and IEA 15 MW within 10.6 % of Gaertner 2020 (the headroom
 absorbed by the ongoing distributed-BNWF refinement). DNV-ST-0126

@@ -312,7 +312,7 @@ def path_c_cosimulation(scour=0.0, max_steps=500):
 
     # Find the OpenFAST output for this scour level
     run_dir = SWEEP_DIR / f"S{scour:.1f}m_SD{SD:.3f}"
-    out_file = run_dir / "Gunsan-4p2MW.out"
+    out_file = run_dir / "SiteA-Ref4MW.out"
 
     if not out_file.exists():
         print(f"    ERROR: No OpenFAST output at {out_file}")

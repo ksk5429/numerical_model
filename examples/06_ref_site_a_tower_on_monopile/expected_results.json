@@ -1,0 +1,12 @@
+{
+  "example_id": "06_site_a_tower_on_monopile",
+  "title": "SiteA RT1 tower on equivalent monopile (Op^3 isolation test)",
+  "tier": "2",
+  "rotor": "ref_4mw_owt",
+  "tower": "site_a_rt1_tower",
+  "foundation_mode": "stiffness_6x6",
+  "published_f1_Hz": null,
+  "published_source": "Op^3 isolation test, not previously published",
+  "openfast_fst": null,
+  "tolerance_rel": 0.05
+}

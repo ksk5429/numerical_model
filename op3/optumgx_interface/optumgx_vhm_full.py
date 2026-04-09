@@ -2,7 +2,7 @@
 """
 OptumGX Full VHM Extraction: Vmax + Hmax + Mmax + Plate Pressures
 ==================================================================
-Builds D=8m, L=9.3m skirted circular foundation, runs all three
+Builds D=8m, L=<REDACTED_SKIRT_L>  # (proprietary, loaded at runtime)ed circular foundation, runs all three
 uniaxial probes, extracts global capacities AND plate-element
 pressure distributions for BNWF calibration.
 
@@ -20,7 +20,7 @@ import json
 # =============================================================================
 # 1. CONFIGURATION
 # =============================================================================
-D = 8.0;  R = D / 2;  S = 9.3
+D = 8.0;  R = D / 2;  S = float('nan')  # <REDACTED>
 N_SIDES = 24;  N_sectors = N_SIDES // 2
 L_dom = 20 * R;  H_dom = 15 * R
 

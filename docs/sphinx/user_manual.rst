@@ -166,7 +166,7 @@ DNV-ST-0126 monopile
    from op3.standards.dnv_st_0126 import dnv_monopile_stiffness
 
    K = dnv_monopile_stiffness(
-       diameter_m=8.0,
+       diameter_m=float('nan')  # <REDACTED>,
        embed_length_m=30.0,
        soil_type="dense_sand",
    )
@@ -206,8 +206,8 @@ Carbon Trust OWA suction bucket
    from op3.standards.owa_bearing import owa_suction_bucket_stiffness
 
    K = owa_suction_bucket_stiffness(
-       diameter_m=8.0,
-       skirt_length_m=9.3,
+       diameter_m=float('nan')  # <REDACTED>,
+       skirt_length_m=float('nan')  # <REDACTED>,
        n_buckets=3,
        spacing_m=18.0,
        soil_type="soft_clay",
@@ -221,7 +221,7 @@ PISA monopile (Burd 2020 / Byrne 2020)
    from op3.standards.pisa import SoilState, pisa_pile_stiffness_6x6
 
    K = pisa_pile_stiffness_6x6(
-       diameter_m=8.0,
+       diameter_m=float('nan')  # <REDACTED>,
        embed_length_m=30.0,
        soil_profile=[
            SoilState(0.0,  6.0e7, 35, "sand"),
@@ -382,7 +382,7 @@ Exporting a SoilDyn input file
    from op3.openfast_coupling.soildyn_export import write_soildyn_from_pisa
 
    out = write_soildyn_from_pisa(
-       "Gunsan-4p2MW_SoilDyn.dat",
+       "SiteA-Ref4MW_SoilDyn.dat",
        diameter_m=6.0,
        embed_length_m=36.0,
        soil_profile=profile,
@@ -394,14 +394,14 @@ Then in your ``.fst``:
 .. code-block:: text
 
    1   CompSoil   - Compute soil-structural dynamics (switch) {1=SoilDyn}
-   "Gunsan-4p2MW_SoilDyn.dat"   SoilFile   - Name of SoilDyn input file
+   "SiteA-Ref4MW_SoilDyn.dat"   SoilFile   - Name of SoilDyn input file
 
 Running an OpenFAST simulation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bash
 
-   python scripts/run_openfast.py gunsan --tmax 5
+   python scripts/run_openfast.py site_a --tmax 5
    python scripts/run_openfast.py oc3 --tmax 10
    python scripts/run_openfast.py iea15_monopile --tmax 60
 

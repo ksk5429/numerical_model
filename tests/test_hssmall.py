@@ -121,7 +121,7 @@ def test_end_to_end_to_K6x6():
         HSsmallParams("L2", 15.0, 35.0, "sand", 1.4e8, m_exp=0.5, phi_deg=37),
     ]
     profile = hssmall_to_pisa(layers, n_points_per_layer=4)
-    K = pisa_pile_stiffness_6x6(diameter_m=8.0, embed_length_m=30.0,
+    K = pisa_pile_stiffness_6x6(diameter_m=float('nan')  # <REDACTED>, embed_length_m=30.0,
                                 soil_profile=profile)
     eigs = np.linalg.eigvalsh(0.5 * (K + K.T))
     print(f"  [3.3.7] HSsmall->PISA->K: Kxx={K[0,0]:.3e}, min eig={eigs.min():.3e}")

@@ -1,5 +1,5 @@
 """
-Import real OptumGX Gunsan dissipation + spring parameters into the
+Import real OptumGX SiteA dissipation + spring parameters into the
 Op^3 Mode C / Mode D pipeline.
 
 Replaces the v0.1 synthetic Gaussian placeholders at
@@ -10,7 +10,7 @@ working directory at
 ``F:/TREE_OF_THOUGHT/PHD/data/optumgx/dissipation/``.
 
 Source files (copied verbatim into ``data/fem_results/`` with the
-``gunsan_real_*`` prefix for provenance):
+``site_a_real_*`` prefix for provenance):
 
   - ``spring_params_v4_dissipation.csv`` (19 rows, 0.5 -> 9.5 m depth)
     columns: z_m, su_kPa, w_dissip, Np, k_ini_kNm3, p_ult_kNm,
@@ -47,14 +47,14 @@ import pandas as pd
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data/fem_results"
 
-D_BUCKET_M = 8.0   # Gunsan suction bucket diameter
+D_BUCKET_M = 8.0   # SiteA suction bucket diameter
 
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
 
-    src_params = DATA_DIR / "gunsan_real_spring_params.csv"
-    src_diss = DATA_DIR / "gunsan_real_dissipation_skirt.csv"
+    src_params = DATA_DIR / "site_a_real_spring_params.csv"
+    src_diss = DATA_DIR / "site_a_real_dissipation_skirt.csv"
 
     if not src_params.exists():
         raise FileNotFoundError(
@@ -126,7 +126,7 @@ def main():
 
     print()
     print("=" * 72)
-    print(" Both files are now the REAL OptumGX Gunsan output.")
+    print(" Both files are now the REAL OptumGX SiteA output.")
     print(" No synthetic placeholders remain.")
     print("=" * 72)
 

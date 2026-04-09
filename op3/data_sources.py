@@ -4,7 +4,7 @@ PHD dissertation data source resolver (single source of truth).
 The Op^3 framework is the *computational engine* for the Kim 2026
 PhD dissertation, but the dissertation's authoritative data (field
 OMA, raw OptumGX output, the 1794-sample MC encoder database, the
-Gunsan site characterisation) lives at
+SiteA site characterisation) lives at
 
     F:/TREE_OF_THOUGHT/PHD/
 
@@ -35,7 +35,7 @@ Reproducibility policy
 The author's machine has PHD present; scripts that call
 ``find_phd_data`` will pick up the live dissertation data.
 Reviewer machines without PHD get a graceful fallback to the
-committed v0.3.2 snapshots under ``data/fem_results/gunsan_real_*``
+committed v0.3.2 snapshots under ``data/fem_results/site_a_real_*``
 so the V&V suite and the calibration regression still pass.
 
 Never maintain two authoritative copies of the same file. If a
@@ -148,31 +148,31 @@ def find_phd_data(*candidates: str, op3_fallback: Optional[str] = None) -> Path:
 # Canonical PHD data paths (the SSOT contract)
 # ---------------------------------------------------------------------------
 
-def gunsan_spring_params() -> Path:
-    """Real OptumGX Gunsan spring parameters (v4 dissipation pipeline)."""
+def site_a_spring_params() -> Path:
+    """Real OptumGX SiteA spring parameters (v4 dissipation pipeline)."""
     return find_phd_data(
         "data/optumgx/dissipation/spring_params_v4_dissipation.csv",
-        op3_fallback="data/fem_results/gunsan_real_spring_params.csv",
+        op3_fallback="data/fem_results/site_a_real_spring_params.csv",
     )
 
 
-def gunsan_dissipation_skirt() -> Path:
-    """Real OptumGX Gunsan dissipation field (Vmax case, skirt-only)."""
+def site_a_dissipation_skirt() -> Path:
+    """Real OptumGX SiteA dissipation field (Vmax case, skirt-only)."""
     return find_phd_data(
         "data/optumgx/dissipation/dissipation_skirt_Vmax.csv",
-        op3_fallback="data/fem_results/gunsan_real_dissipation_skirt.csv",
+        op3_fallback="data/fem_results/site_a_real_dissipation_skirt.csv",
     )
 
 
-def gunsan_fn_vs_scour() -> Path:
-    """Real OptumGX Gunsan f1 vs scour sweep (9 scour depths)."""
+def site_a_fn_vs_scour() -> Path:
+    """Real OptumGX SiteA f1 vs scour sweep (9 scour depths)."""
     return find_phd_data(
         "data/optumgx/dissipation/fn_vs_scour_v4_dissipation.csv",
-        op3_fallback="data/fem_results/gunsan_real_fn_vs_scour.csv",
+        op3_fallback="data/fem_results/site_a_real_fn_vs_scour.csv",
     )
 
 
-def gunsan_mc_database() -> Path:
+def site_a_mc_database() -> Path:
     """
     Real 1794-sample OptumGX MC database used by the Ch8 digital
     twin encoder. Authoritative at PHD/data/integrated_database_1794.csv;
@@ -184,14 +184,14 @@ def gunsan_mc_database() -> Path:
     )
 
 
-def gunsan_field_oma() -> Path:
+def site_a_field_oma() -> Path:
     """
-    Gunsan 20039-RANSAC-window field operational modal analysis
+    SiteA 20039-RANSAC-window field operational modal analysis
     database (Ch. 5).
     """
     return find_phd_data(
-        "data/field/gunsan_ransac_windows.csv",
-        "data/field/gunsan_ransac_windows.parquet",
+        "data/field/site_a_ransac_windows.csv",
+        "data/field/site_a_ransac_windows.parquet",
     )
 
 

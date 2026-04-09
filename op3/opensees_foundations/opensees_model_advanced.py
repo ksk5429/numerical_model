@@ -462,7 +462,7 @@ class HSDStiffnessLoader:
 
     def __init__(
         self,
-        bucket_length: float = 9.3,
+        bucket_length: float = float('nan')  # <REDACTED>,
         bucket_diameter: float = 8.0,
         hsd_file_path: Optional[str] = None
     ):
@@ -907,7 +907,7 @@ def get_config() -> Dict[str, Any]:
     return {
         'structural': {
             'bucket_diameter': 8.0,
-            'bucket_length': 9.3,
+            'bucket_length': float('nan')  # <REDACTED>,
             'skirt_thickness': 0.040,
             'lid_thickness': 0.050,
             'water_depth': 11.81,
@@ -1727,8 +1727,8 @@ def create_sample_hsd_csv(output_path: str) -> None:
 
     This generates a CSV file that can be used with the file-based loader.
     """
-    bucket_length = 9.3
-    bucket_diameter = 8.0
+    bucket_length = float('nan')  # <REDACTED>
+    bucket_diameter = float('nan')  # <REDACTED>
     n_slices = 19
 
     scour_depths = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0]
@@ -1813,7 +1813,7 @@ if __name__ == "__main__":
         print()
 
         # Demonstrate HSD loader functionality
-        loader = HSDStiffnessLoader(bucket_length=9.3, bucket_diameter=8.0)
+        loader = HSDStiffnessLoader(bucket_length=float('nan')  # <REDACTED>, bucket_diameter=float('nan')  # <REDACTED>)
 
         print("HSD Loader Test (Synthetic Data):")
         print("-" * 40)

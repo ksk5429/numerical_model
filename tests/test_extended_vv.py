@@ -363,7 +363,7 @@ def test_modeB_modeC_convergence_SKIP():
 def test_openfast_round_trip_SKIP():
     """[2.17] PARTIALLY CLOSED in validation/openfast_runs/ and
     validation/dlc11_partial/. Op^3 -> SoilDyn -> OpenFAST v5.0.0
-    runs end-to-end on the Gunsan tripod and DLC 1.1 partial sweep.
+    runs end-to-end on the SiteA tripod and DLC 1.1 partial sweep.
     Full bit-exact round-trip (Op^3 direct eigen == OpenFAST eigen)
     is a v0.4 extension because OpenFAST does not expose structural
     eigenvalues as a parseable output without a Linearization run."""

@@ -1,7 +1,7 @@
 # Op³ Foundation Module Study
 
 This document reports the quantitative comparison of the four
-OpenSeesPy foundation modules on the same Gunsan 4.2 MW tower and
+OpenSeesPy foundation modules on the same SiteA 4 MW class tower and
 across the full scour range from 0 to 4 m. The study answers three
 questions an external researcher will ask:
 
@@ -114,7 +114,7 @@ is in the tower model or the foundation model.
 
 ```bash
 python examples/01_compare_foundation_modes.py \
-  --site op3/config/gunsan_site.yaml \
+  --site op3/config/site_a_site.yaml \
   --scour 0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0 \
   --modes fixed,stiffness_6x6,distributed_bnwf,dissipation_weighted \
   --output foundation_mode_comparison.csv

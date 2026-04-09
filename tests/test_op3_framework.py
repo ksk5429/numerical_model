@@ -19,7 +19,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA = REPO_ROOT / "data"
 NREL = REPO_ROOT / "nrel_reference"
-GUNSAN = REPO_ROOT / "gunsan_4p2mw"
+SITE_A = REPO_ROOT / "site_a_ref4mw"
 
 
 # ============================================================
@@ -50,8 +50,8 @@ class TestNRELReferencePresence:
         assert d.exists()
         assert any(d.rglob("*.fst"))
 
-    def test_gunsan_openfast_deck_exists(self):
-        fst = GUNSAN / "openfast_deck" / "Gunsan-4p2MW.fst"
+    def test_site_a_openfast_deck_exists(self):
+        fst = SITE_A / "openfast_deck" / "SiteA-Ref4MW.fst"
         assert fst.exists()
 
 
@@ -69,7 +69,7 @@ class TestFSTParsing:
         "nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/NREL-2p3-116.fst",
         "nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/NREL-2p8-127.fst",
         "nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/NREL-2p8-127-HH120.fst",
-        "gunsan_4p2mw/openfast_deck/Gunsan-4p2MW.fst",
+        "site_a_ref4mw/openfast_deck/SiteA-Ref4MW.fst",
     ]
 
     @pytest.mark.parametrize("fst_rel", FST_FILES)
@@ -142,7 +142,7 @@ class TestSSOTConfig:
 
     def test_yaml_exists_and_parses(self):
         import yaml
-        cfg = yaml.safe_load((REPO_ROOT / "op3" / "config" / "gunsan_site.yaml").read_text())
+        cfg = yaml.safe_load((REPO_ROOT / "op3" / "config" / "site_a_site.yaml").read_text())
         assert cfg is not None
         assert isinstance(cfg, dict)
 
@@ -164,7 +164,7 @@ class TestDocumentationIntegrity:
         "docs/FRAMEWORK.md",
         "docs/OPTUMGX_BOUNDARY.md",
         "validation/benchmarks/NREL_BENCHMARK.md",
-        "validation/benchmarks/GUNSAN_VS_NREL.md",
+        "validation/benchmarks/SITE_A_VS_NREL.md",
         "validation/benchmarks/FOUNDATION_MODE_STUDY.md",
     ]
 

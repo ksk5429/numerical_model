@@ -1,5 +1,5 @@
 """
-Convert Gunsan AeroDyn + Airfoils to OpenFAST v4.0.2 Format
+Convert SiteA AeroDyn + Airfoils to OpenFAST v4.0.2 Format
 =============================================================
 Systematic conversion of all aerodynamic input files.
 
@@ -20,27 +20,27 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding='utf-8')
 
 
-def convert_aerodyn(input_path, output_path, blade_file="Gunsan-4p2MW_AeroDyn15_blade.dat",
+def convert_aerodyn(input_path, output_path, blade_file="SiteA-Ref4MW_AeroDyn15_blade.dat",
                     airfoil_dir="Airfoils"):
     """Convert AeroDyn v15.03 to v4.0.2 format using OC3 as template."""
 
-    # Read from ORIGINAL Gunsan AeroDyn (not the copy that may be overwritten)
-    original = Path("f:/TREE_OF_THOUGHT/PHD/openfast/Gunsan_4p2MW/Gunsan-4p2MW_AeroDyn15.dat")
+    # Read from ORIGINAL SiteA AeroDyn (not the copy that may be overwritten)
+    original = Path("f:/TREE_OF_THOUGHT/PHD/openfast/SiteA_Ref4MW/SiteA-Ref4MW_AeroDyn15.dat")
     src = original if original.exists() else input_path
-    gunsan_lines = open(src, 'r', encoding='utf-8', errors='replace').readlines()
+    site_a_lines = open(src, 'r', encoding='utf-8', errors='replace').readlines()
 
-    # Extract Gunsan-specific values
+    # Extract SiteA-specific values
     num_af = 0
     af_files = []
     num_bld_nds = 0
 
-    # Parse the Gunsan file for values we need to preserve
+    # Parse the SiteA file for values we need to preserve
     in_af_section = False
     in_blade_section = False
     tower_lines = []
     in_tower = False
 
-    for line in gunsan_lines:
+    for line in site_a_lines:
         l = line.strip()
         if 'NumAFfiles' in l and 'AFNames' not in l:
             num_af = int(l.split()[0])
@@ -68,7 +68,7 @@ def convert_aerodyn(input_path, output_path, blade_file="Gunsan-4p2MW_AeroDyn15_
         af_name = Path(af).name
         fixed_af_files.append(f"{airfoil_dir}/{af_name}")
 
-    print(f"  Gunsan AeroDyn: {num_af} airfoils, blade={blade_file}")
+    print(f"  SiteA AeroDyn: {num_af} airfoils, blade={blade_file}")
     for af in fixed_af_files[:3]:
         print(f"    {af}")
     if len(fixed_af_files) > 3:
@@ -76,7 +76,7 @@ def convert_aerodyn(input_path, output_path, blade_file="Gunsan-4p2MW_AeroDyn15_
 
     # Now build the v4.0.2 AeroDyn file
     content = f"""------- AERODYN INPUT FILE --------------------------------------------------------------------------
-Gunsan 4.2MW UNISON U136 - AeroDyn v4.0.2 format (converted from v15.03)
+SiteA 4MW Reference 4 MW OWT - AeroDyn v4.0.2 format (converted from v15.03)
 ======  General Options  ============================================================================
 False                  Echo        - Echo the input to "<rootname>.AD.ech"? (flag)
 "default"              DTAero      - Time interval for aerodynamic calculations {{or "default"}} (s)
@@ -199,15 +199,15 @@ def verify_airfoil_files(airfoil_dir):
 
 def deploy_calibrated_model(template_dir, output_dir):
     """
-    Deploy a fully calibrated Gunsan model with all v4.0.2 files.
+    Deploy a fully calibrated SiteA model with all v4.0.2 files.
     """
     if output_dir.exists():
         shutil.rmtree(output_dir)
     shutil.copytree(template_dir, output_dir)
 
     # 1. Copy calibrated ElastoDyn v4
-    src_ed = Path("f:/TREE_OF_THOUGHT/PHD/openfast/Gunsan_4p2MW/Gunsan-4p2MW_ElastoDyn_v4.dat")
-    dst_ed = output_dir / "Gunsan-4p2MW_ElastoDyn.dat"
+    src_ed = Path("f:/TREE_OF_THOUGHT/PHD/openfast/SiteA_Ref4MW/SiteA-Ref4MW_ElastoDyn_v4.dat")
+    dst_ed = output_dir / "SiteA-Ref4MW_ElastoDyn.dat"
     if src_ed.exists():
         txt = open(src_ed, 'r', encoding='utf-8', errors='replace').read()
         txt = txt.replace('\u2014', '-').replace('\u2013', '-')
@@ -215,21 +215,21 @@ def deploy_calibrated_model(template_dir, output_dir):
             f.write(txt)
 
     # 2. Copy calibrated tower
-    src_tw = Path("f:/TREE_OF_THOUGHT/PHD/openfast/Gunsan_4p2MW/Gunsan-4p2MW_ElastoDyn_tower_calibrated.dat")
+    src_tw = Path("f:/TREE_OF_THOUGHT/PHD/openfast/SiteA_Ref4MW/SiteA-Ref4MW_ElastoDyn_tower_calibrated.dat")
     if src_tw.exists():
-        shutil.copy2(src_tw, output_dir / "Gunsan-4p2MW_ElastoDyn_tower.dat")
+        shutil.copy2(src_tw, output_dir / "SiteA-Ref4MW_ElastoDyn_tower.dat")
 
     # 3. Convert AeroDyn
     convert_aerodyn(
-        output_dir / "Gunsan-4p2MW_AeroDyn15.dat",
-        output_dir / "Gunsan-4p2MW_AeroDyn15.dat",
-        blade_file="Gunsan-4p2MW_AeroDyn15_blade.dat",
+        output_dir / "SiteA-Ref4MW_AeroDyn15.dat",
+        output_dir / "SiteA-Ref4MW_AeroDyn15.dat",
+        blade_file="SiteA-Ref4MW_AeroDyn15_blade.dat",
         airfoil_dir="Airfoils"
     )
 
     # 4. Create InflowWind (steady 8 m/s)
     inflow_content = """------- InflowWind INPUT FILE -----------------------------------------------
-Steady 8 m/s wind for Gunsan 4.2MW
+Steady 8 m/s wind for SiteA 4MW
 ---------------------------------------------------------------------------------------------------------------
 False         Echo           - Echo input data (flag)
           1   WindType       - 1=steady
@@ -283,12 +283,12 @@ False         TowerFile
 "Wind1VelX,Wind1VelY,Wind1VelZ"
 END
 """
-    with open(output_dir / "Gunsan-4p2MW_InflowWind.dat", 'w') as f:
+    with open(output_dir / "SiteA-Ref4MW_InflowWind.dat", 'w') as f:
         f.write(inflow_content)
 
     # 5. Write .fst with wind + aero enabled
     fst_content = f"""------- OpenFAST EXAMPLE INPUT FILE -------------------------------------------
-Gunsan 4.2MW FULLY CALIBRATED - Wind + SubDyn + SSI (v4.0.2)
+SiteA 4MW FULLY CALIBRATED - Wind + SubDyn + SSI (v4.0.2)
 ---------------------- SIMULATION CONTROL --------------------------------------
 False         Echo            - Echo input data to <RootName>.ech (flag)
 "FATAL"       AbortLevel      - Error level when simulation should abort
@@ -320,16 +320,16 @@ False         Echo            - Echo input data to <RootName>.ech (flag)
          14   WtrDpth         - Water depth (m)
           0   MSL2SWL         - MSL to SWL offset (m)
 ---------------------- INPUT FILES ---------------------------------------------
-"Gunsan-4p2MW_ElastoDyn.dat"       EDFile
+"SiteA-Ref4MW_ElastoDyn.dat"       EDFile
 "unused"      BDBldFile(1)
 "unused"      BDBldFile(2)
 "unused"      BDBldFile(3)
-"Gunsan-4p2MW_InflowWind.dat"      InflowFile
-"Gunsan-4p2MW_AeroDyn15.dat"       AeroFile
+"SiteA-Ref4MW_InflowWind.dat"      InflowFile
+"SiteA-Ref4MW_AeroDyn15.dat"       AeroFile
 "unused"      ServoFile
 "unused"      SeaStFile
 "unused"      HydroFile
-"Gunsan-4p2MW_SubDyn.dat"          SubFile
+"SiteA-Ref4MW_SubDyn.dat"          SubFile
 "unused"      MooringFile
 "unused"      IceFile
 ---------------------- OUTPUT --------------------------------------------------
@@ -361,7 +361,7 @@ False         LinOutMod
 False         VTK_fields
          15   VTK_fps
 """
-    with open(output_dir / "Gunsan-4p2MW.fst", 'w') as f:
+    with open(output_dir / "SiteA-Ref4MW.fst", 'w') as f:
         f.write(fst_content)
 
     print(f"\n  Deployed fully calibrated model to: {output_dir}")
@@ -370,24 +370,24 @@ False         VTK_fields
 
 if __name__ == '__main__':
     print("=" * 65)
-    print("  Full Gunsan Model Calibration for v4.0.2")
+    print("  Full SiteA Model Calibration for v4.0.2")
     print("=" * 65)
 
-    GUNSAN = Path(r"f:\TREE_OF_THOUGHT\PHD\openfast\Gunsan_4p2MW")
+    SITE_A = Path(r"f:\TREE_OF_THOUGHT\PHD\openfast\SiteA_Ref4MW")
     RESULTS = Path(r"f:\TREE_OF_THOUGHT\PHD\openfast\coupling_results")
 
     # Verify airfoils exist
-    verify_airfoil_files(GUNSAN / "Airfoils")
+    verify_airfoil_files(SITE_A / "Airfoils")
 
     # Deploy calibrated model
-    cal_dir = RESULTS / "gunsan_fully_calibrated"
-    deploy_calibrated_model(GUNSAN, cal_dir)
+    cal_dir = RESULTS / "site_a_fully_calibrated"
+    deploy_calibrated_model(SITE_A, cal_dir)
 
     # Generate SubDyn with SSI
     sys.path.insert(0, str(Path(__file__).parent))
-    from build_gunsan_subdyn import write_subdyn
+    from build_site_a_subdyn import write_subdyn
     write_subdyn(
-        cal_dir / "Gunsan-4p2MW_SubDyn.dat",
+        cal_dir / "SiteA-Ref4MW_SubDyn.dat",
         ssi_files=["SSI_bucket1.dat", "SSI_bucket2.dat", "SSI_bucket3.dat"]
     )
 
@@ -402,12 +402,12 @@ if __name__ == '__main__':
     OPENFAST = Path(r"f:\TREE_OF_THOUGHT\PHD\openfast\openfast_x64.exe")
     print(f"\n  Running OpenFAST (fully calibrated, wind+SubDyn, 120s)...")
     result = subprocess.run(
-        [str(OPENFAST), str(cal_dir / "Gunsan-4p2MW.fst")],
+        [str(OPENFAST), str(cal_dir / "SiteA-Ref4MW.fst")],
         capture_output=True, text=True, timeout=900,
         cwd=str(cal_dir)
     )
 
-    out = cal_dir / "Gunsan-4p2MW.out"
+    out = cal_dir / "SiteA-Ref4MW.out"
     if out.exists() and out.stat().st_size > 10000:
         print(f"  SUCCESS: {out.stat().st_size / 1e6:.1f} MB output")
     else:

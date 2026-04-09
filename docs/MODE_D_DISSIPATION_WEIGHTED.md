@@ -8,7 +8,7 @@
 >
 > Phase 3 / Task 3.4. Status (as of v0.3.2): **formulation drafted,
 > implementation fully wired, V&V complete (8/8 gates PASS in
-> `tests/test_mode_d.py`), Gunsan-specific calibration pending
+> `tests/test_mode_d.py`), SiteA-specific calibration pending
 > OptumGX dissipation export**.
 
 ---
@@ -182,10 +182,10 @@ the following conditions hold:
 
 2. **Monotonicity**: increasing $\alpha$ at fixed $D(z)$ must
    monotonically lower the head 6×6 stiffness diagonal. *Test plan*:
-   parameter sweep $\alpha \in \{0, 0.5, 1, 2, 4\}$ on the Gunsan
+   parameter sweep $\alpha \in \{0, 0.5, 1, 2, 4\}$ on the SiteA
    tripod, verify $K_{xx}(\alpha)$ is monotone decreasing.
 
-3. **Calibration against Gunsan field data**: with $\beta = 0.05$
+3. **Calibration against SiteA field data**: with $\beta = 0.05$
    fixed, fit $\alpha$ to minimise the residual between Op³ Mode D
    prediction and the field-measured first natural frequency
    (`f1 = 0.244 Hz`). The fitted $\alpha$ should be in the
@@ -193,7 +193,7 @@ the following conditions hold:
    suction-bucket foundations.
 
 4. **Cross-validation against an independent monopile case**:
-   apply the calibrated $(\alpha, \beta)$ from Gunsan to one of the
+   apply the calibrated $(\alpha, \beta)$ from SiteA to one of the
    PISA test piles (Dunkirk DM7 or Cowden CM1) and verify the
    prediction stays within the documented 30 % tolerance band of the
    measured stiffness. This is the same band already used by the

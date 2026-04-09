@@ -66,19 +66,19 @@ REFERENCES: dict[str, Reference] = {
         note="Coupled tower+monopile 1st bending mode, fixed at mudline; "
              "Op3 example 02 uses fixed-base monopile (no p-y springs).",
     ),
-    "04_gunsan_4p2mw_tripod": Reference(
-        example_id="04_gunsan_4p2mw_tripod",
+    "04_site_a_ref4mw_tripod": Reference(
+        example_id="04_site_a_ref4mw_tripod",
         f1_hz=0.244,
         tolerance=0.18,
         boundary_condition="tripod-suction-bucket-as-built",
-        source="Gunsan field measurement (PhD dissertation Ch. 5)",
+        source="SiteA field measurement (PhD dissertation Ch. 5)",
         note="Operational modal analysis from accelerometer array, "
              "20,039 RANSAC windows. v0.4 uses the REAL OptumGX "
              "dissipation + spring profile from "
              "PHD/data/optumgx/dissipation/ AND the real 27-segment "
-             "Gunsan tower geometry from MMB/tower_information.txt "
+             "SiteA tower geometry from ProjA/tower_information.txt "
              "(OD 4.2 -> 3.5 m, t 45 -> 17 mm, H = 71.67 m, "
-             "total 210 t, MMB drawings TWA 72707 mm). Fixed-base "
+             "total 210 t, ProjA drawings TWA 72707 mm). Fixed-base "
              "f1 is 0.317 Hz; Mode C (single-bucket distributed "
              "BNWF) gives 0.282 Hz. The residual gap to the "
              "field-measured 0.244 Hz is attributable to the tripod "

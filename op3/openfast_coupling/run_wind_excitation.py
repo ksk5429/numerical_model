@@ -18,7 +18,7 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding='utf-8')
 
 OPENFAST = Path(r"f:\TREE_OF_THOUGHT\PHD\openfast\openfast_x64.exe")
-TEMPLATE = Path(r"f:\TREE_OF_THOUGHT\PHD\openfast\coupling_results\gunsan_pathA_final")
+TEMPLATE = Path(r"f:\TREE_OF_THOUGHT\PHD\openfast\coupling_results\site_a_pathA_final")
 RESULTS = Path(r"f:\TREE_OF_THOUGHT\PHD\openfast\coupling_results\wind_test")
 RESULTS.mkdir(parents=True, exist_ok=True)
 
@@ -157,9 +157,9 @@ def setup_excitation_test(name, scour, excitation_type='impulse', wind_speed=8.0
     shutil.copytree(TEMPLATE, test_dir)
 
     # Copy v4 ElastoDyn
-    src_ed = Path("f:/TREE_OF_THOUGHT/PHD/openfast/Gunsan_4p2MW/Gunsan-4p2MW_ElastoDyn_v4.dat")
+    src_ed = Path("f:/TREE_OF_THOUGHT/PHD/openfast/SiteA_Ref4MW/SiteA-Ref4MW_ElastoDyn_v4.dat")
     if src_ed.exists():
-        shutil.copy2(src_ed, test_dir / "Gunsan-4p2MW_ElastoDyn.dat")
+        shutil.copy2(src_ed, test_dir / "SiteA-Ref4MW_ElastoDyn.dat")
 
     # Copy SSI files for this scour level
     SD = scour / 8.0
@@ -173,7 +173,7 @@ def setup_excitation_test(name, scour, excitation_type='impulse', wind_speed=8.0
     comp_aero = 2 if excitation_type in ['steady', 'combined'] else 0
 
     fst_content = f"""------- OpenFAST EXAMPLE INPUT FILE -------------------------------------------
-Gunsan 4.2MW - {excitation_type} excitation - S={scour:.1f}m
+SiteA 4MW - {excitation_type} excitation - S={scour:.1f}m
 ---------------------- SIMULATION CONTROL --------------------------------------
 False         Echo            - Echo input data to <RootName>.ech (flag)
 "FATAL"       AbortLevel      - Error level when simulation should abort
@@ -205,16 +205,16 @@ False         Echo            - Echo input data to <RootName>.ech (flag)
          14   WtrDpth         - Water depth (m)
           0   MSL2SWL         - MSL to SWL offset (m)
 ---------------------- INPUT FILES ---------------------------------------------
-"Gunsan-4p2MW_ElastoDyn.dat"    EDFile
+"SiteA-Ref4MW_ElastoDyn.dat"    EDFile
 "unused"      BDBldFile(1)
 "unused"      BDBldFile(2)
 "unused"      BDBldFile(3)
-"Gunsan-4p2MW_InflowWind.dat"    InflowFile
-"Gunsan-4p2MW_AeroDyn15.dat"    AeroFile
+"SiteA-Ref4MW_InflowWind.dat"    InflowFile
+"SiteA-Ref4MW_AeroDyn15.dat"    AeroFile
 "unused"      ServoFile
 "unused"      SeaStFile
 "unused"      HydroFile
-"Gunsan-4p2MW_SubDyn.dat"      SubFile
+"SiteA-Ref4MW_SubDyn.dat"      SubFile
 "unused"      MooringFile
 "unused"      IceFile
 ---------------------- OUTPUT --------------------------------------------------
@@ -246,11 +246,11 @@ False         LinOutMod
 False         VTK_fields
          15   VTK_fps
 """
-    with open(test_dir / "Gunsan-4p2MW.fst", 'w') as f:
+    with open(test_dir / "SiteA-Ref4MW.fst", 'w') as f:
         f.write(fst_content)
 
     # --- Modify ElastoDyn for initial displacement ---
-    ed_path = test_dir / "Gunsan-4p2MW_ElastoDyn.dat"
+    ed_path = test_dir / "SiteA-Ref4MW_ElastoDyn.dat"
     if ed_path.exists():
         ed_text = open(ed_path, 'r', encoding='utf-8', errors='replace').read()
         if excitation_type in ['impulse', 'combined']:
@@ -275,7 +275,7 @@ False         VTK_fields
     # --- Create InflowWind file for steady wind ---
     if excitation_type in ['steady', 'combined']:
         create_steady_wind_inflow(
-            test_dir / "Gunsan-4p2MW_InflowWind.dat",
+            test_dir / "SiteA-Ref4MW_InflowWind.dat",
             wind_speed=wind_speed, ref_height=96.3
         )
 
@@ -284,7 +284,7 @@ False         VTK_fields
 
 def run_and_extract(test_dir, name, scour):
     """Run OpenFAST and extract f1."""
-    fst = test_dir / "Gunsan-4p2MW.fst"
+    fst = test_dir / "SiteA-Ref4MW.fst"
     print(f"    Running ({name}, S={scour:.0f}m, 120s)...", end=" ", flush=True)
 
     try:
@@ -294,7 +294,7 @@ def run_and_extract(test_dir, name, scour):
             cwd=str(test_dir)
         )
 
-        out_file = test_dir / "Gunsan-4p2MW.out"
+        out_file = test_dir / "SiteA-Ref4MW.out"
         if out_file.exists() and out_file.stat().st_size > 1000:
             names, data = read_text_output(out_file)
             if names is not None and data is not None and len(data) > 100:
@@ -349,7 +349,7 @@ def run_and_extract(test_dir, name, scour):
 if __name__ == '__main__':
     print("=" * 70)
     print("  Wind Excitation Investigation for Natural Frequency Extraction")
-    print("  Gunsan 4.2MW with Path A Full 6x6 SSI")
+    print("  SiteA 4MW with Path A Full 6x6 SSI")
     print("=" * 70)
 
     all_results = {}

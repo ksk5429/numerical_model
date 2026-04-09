@@ -26,7 +26,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 sys.path.insert(0, str(Path(__file__).parent))
 
 from config import BUCKET, STIFFNESS, PARAMS, COUPLING_OUTPUT, SPRING_PARAMS
-from build_gunsan_subdyn import (
+from build_site_a_subdyn import (
     NODES, MEMBERS, LUMPED_MASSES, REACT_NODES, INTERFACE_NODE,
     E, G, RHO, build_property_sets
 )
@@ -184,7 +184,7 @@ def write_distributed_subdyn(output_path, scour=0.0, ssi_dir=None):
         lines.append(s)
 
     w("----------- SubDyn MultiMember Support Structure Input File ---------------------------")
-    w(f"Gunsan 4.2MW - DISTRIBUTED BNWF - Scour={scour:.1f}m - {n_depths} spring nodes per bucket")
+    w(f"SiteA 4MW - DISTRIBUTED BNWF - Scour={scour:.1f}m - {n_depths} spring nodes per bucket")
     w("-------------------------- SIMULATION CONTROL -----------------------------------------")
     w('False            Echo        - Echo input data to "<rootname>.SD.ech" (flag)')
     w('"DEFAULT"        SDdeltaT    - Local Integration Step.')
@@ -313,8 +313,8 @@ if __name__ == '__main__':
     print("  Distributed BNWF in SubDyn")
     print("=" * 65)
 
-    TEMPLATE = COUPLING_OUTPUT / "gunsan_pathA_final"
-    DIST_DIR = COUPLING_OUTPUT / "gunsan_distributed"
+    TEMPLATE = COUPLING_OUTPUT / "site_a_pathA_final"
+    DIST_DIR = COUPLING_OUTPUT / "site_a_distributed"
 
     if DIST_DIR.exists():
         try: shutil.rmtree(DIST_DIR)
@@ -324,26 +324,26 @@ if __name__ == '__main__':
         shutil.copytree(TEMPLATE, DIST_DIR)
 
     # Copy v4 ElastoDyn
-    src_ed = Path("f:/TREE_OF_THOUGHT/PHD/openfast/Gunsan_4p2MW/Gunsan-4p2MW_ElastoDyn_v4.dat")
+    src_ed = Path("f:/TREE_OF_THOUGHT/PHD/openfast/SiteA_Ref4MW/SiteA-Ref4MW_ElastoDyn_v4.dat")
     if src_ed.exists():
-        shutil.copy2(src_ed, DIST_DIR / "Gunsan-4p2MW_ElastoDyn.dat")
+        shutil.copy2(src_ed, DIST_DIR / "SiteA-Ref4MW_ElastoDyn.dat")
 
     # Generate distributed SubDyn
     n_springs = write_distributed_subdyn(
-        DIST_DIR / "Gunsan-4p2MW_SubDyn.dat",
+        DIST_DIR / "SiteA-Ref4MW_SubDyn.dat",
         scour=0.0,
         ssi_dir=DIST_DIR
     )
 
     # Write .fst
-    fst_src = TEMPLATE / "Gunsan-4p2MW.fst"
+    fst_src = TEMPLATE / "SiteA-Ref4MW.fst"
     if fst_src.exists():
-        shutil.copy2(fst_src, DIST_DIR / "Gunsan-4p2MW.fst")
+        shutil.copy2(fst_src, DIST_DIR / "SiteA-Ref4MW.fst")
 
     # Run OpenFAST
     print(f"\n  Running OpenFAST with distributed BNWF ({n_springs} springs)...")
     OPENFAST = Path(r"f:\TREE_OF_THOUGHT\PHD\openfast\openfast_x64.exe")
-    fst = DIST_DIR / "Gunsan-4p2MW.fst"
+    fst = DIST_DIR / "SiteA-Ref4MW.fst"
 
     result = subprocess.run(
         [str(OPENFAST), str(fst)],

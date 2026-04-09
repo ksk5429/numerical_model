@@ -192,7 +192,7 @@
     ]
   },
   {
-    "example": "04_gunsan_4p2mw_tripod",
+    "example": "04_site_a_ref4mw_tripod",
     "n_fail": 0,
     "checks": [
       {
@@ -283,7 +283,7 @@
         "value": 0.15751062781032563,
         "limit": null,
         "units": "",
-        "note": "ref: Gunsan field measurement (PhD dissertation Ch. 5)"
+        "note": "ref: SiteA field measurement (PhD dissertation Ch. 5)"
       }
     ]
   },

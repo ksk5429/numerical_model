@@ -58,7 +58,7 @@ ax1.text(0.02, 0.805, '20% capacity reduction', fontsize=9, color='gray')
 ax1.set_xlabel('Normalised scour depth, $S/D$')
 ax1.set_ylabel('Normalised value (capacity or frequency)')
 ax1.set_title('VHM Capacity vs Natural Frequency Degradation Under Scour\n'
-              'Gunsan 4.2 MW Tripod OWT ($D=8$ m, $L=9.3$ m)')
+              'SiteA 4 MW class Tripod OWT ($D=8$ m, $L=9.3$ m)')
 ax1.set_xlim(-0.02, 0.65)
 ax1.set_ylim(0.7, 1.02)
 ax1.legend(loc='lower left', framealpha=0.9)
@@ -104,7 +104,7 @@ for i, s in enumerate(scour):
                   textcoords="offset points", xytext=(0, 10),
                   ha='center', fontsize=9)
 
-fig2.suptitle('VHM Capacity Degradation with Scour (Gunsan 4.2 MW)', y=1.02)
+fig2.suptitle('VHM Capacity Degradation with Scour (SiteA 4 MW class)', y=1.02)
 fig2.tight_layout()
 fig2.savefig(OUTPUT_DIR / 'Fig5_absolute_capacity_vs_scour.png', dpi=300, bbox_inches='tight')
 print(f"Saved: Fig5_absolute_capacity_vs_scour.png")

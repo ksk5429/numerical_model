@@ -45,7 +45,7 @@
     "errors": {}
   },
   {
-    "id": "04_gunsan_4p2mw_tripod",
+    "id": "04_site_a_ref4mw_tripod",
     "build": "OK",
     "eigen": "OK",
     "pushover": "OK",
@@ -60,7 +60,7 @@
     "errors": {}
   },
   {
-    "id": "05_nrel_5mw_on_gunsan_tripod",
+    "id": "05_nrel_5mw_on_site_a_tripod",
     "build": "OK",
     "eigen": "OK",
     "pushover": "OK",
@@ -75,7 +75,7 @@
     "errors": {}
   },
   {
-    "id": "06_gunsan_tower_on_monopile",
+    "id": "06_site_a_tower_on_monopile",
     "build": "OK",
     "eigen": "OK",
     "pushover": "OK",
@@ -150,7 +150,7 @@
     "errors": {}
   },
   {
-    "id": "11_gunsan_tower_on_jacket",
+    "id": "11_site_a_tower_on_jacket",
     "build": "OK",
     "eigen": "OK",
     "pushover": "OK",

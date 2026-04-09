@@ -9,7 +9,7 @@ this module turns it into a propagator that any downstream Op^3
 stage (Bayesian calibration, PCE surrogate, DLC sensitivity) can
 consume.
 
-Real CSV schema (Gunsan integrated_database_1794.csv):
+Real CSV schema (SiteA integrated_database_1794.csv):
 
     run, S_D, scour_m, su0, k_su, Hmax_kN, H_ratio, V_ratio,
     f1_Hz, f1_f0, fixity_proxy
@@ -28,8 +28,8 @@ outputs:
 
 Use
 ---
-    from op3.uq.encoder_bridge import load_gunsan_mc
-    df = load_gunsan_mc()   # reads PHD/data/integrated_database_1794.csv
+    from op3.uq.encoder_bridge import load_site_a_mc
+    df = load_site_a_mc()   # reads PHD/data/integrated_database_1794.csv
     # Sample the real joint distribution for Bayesian updates
     # or encoder training.
 
@@ -52,8 +52,8 @@ from op3.uq.propagation import SoilPrior
 
 def load_encoder_mc(csv_path: str | Path) -> pd.DataFrame:
     """
-    Load a generic Chapter 8 MC database. For the real Gunsan case
-    use ``load_gunsan_mc()`` which auto-resolves the PHD path.
+    Load a generic Chapter 8 MC database. For the real SiteA case
+    use ``load_site_a_mc()`` which auto-resolves the PHD path.
 
     Returns a pandas DataFrame. The CSV is expected to have one row
     per MC realisation; any columns beyond the minimum set are
@@ -68,9 +68,9 @@ def load_encoder_mc(csv_path: str | Path) -> pd.DataFrame:
     return df
 
 
-def load_gunsan_mc() -> pd.DataFrame:
+def load_site_a_mc() -> pd.DataFrame:
     """
-    Load the real 1794-sample Gunsan integrated MC database from the
+    Load the real 1794-sample SiteA integrated MC database from the
     PHD SSOT (``F:/TREE_OF_THOUGHT/PHD/data/integrated_database_1794.csv``).
 
     This is the authoritative training set for the Chapter 8 digital
@@ -78,8 +78,8 @@ def load_gunsan_mc() -> pd.DataFrame:
     kPa, and k_su [12, 35] kPa/m, and records f1_Hz, Hmax_kN, and
     fixity_proxy outputs from 1794 real OptumGX + OpenSeesPy runs.
     """
-    from op3.data_sources import gunsan_mc_database
-    p = gunsan_mc_database()
+    from op3.data_sources import site_a_mc_database
+    p = site_a_mc_database()
     return pd.read_csv(p)
 
 

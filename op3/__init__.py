@@ -17,7 +17,7 @@ Public API:
     # Compose a full tower + foundation model
     model = compose_tower_model(
         rotor='nrel_5mw',
-        tower='gunsan_u136',
+        tower='site_a_rt1',
         foundation=foundation,
     )
 
@@ -27,7 +27,7 @@ Public API:
     # Cross-compare across the 4 foundation modes
     results = cross_compare(
         rotor='nrel_5mw',
-        tower='gunsan_u136',
+        tower='site_a_rt1',
         scour_levels=[0.0, 0.5, 1.0, 1.5, 2.0],
     )
 """

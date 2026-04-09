@@ -1,0 +1,70 @@
+------- ELASTODYN V1.00.* TOWER INPUT FILE -------------------------------------
+SiteA 4MW tower - calibrated for SubDyn interface at z=19.8m
+---------------------- TOWER PARAMETERS ----------------------------------------
+         29   NTwInpSt    - Number of input stations to specify tower geometry
+          1   TwrFADmp(1) - Tower 1st fore-aft mode structural damping ratio (%)
+          1   TwrFADmp(2) - Tower 2nd fore-aft mode structural damping ratio (%)
+          1   TwrSSDmp(1) - Tower 1st side-to-side mode structural damping ratio (%)
+          1   TwrSSDmp(2) - Tower 2nd side-to-side mode structural damping ratio (%)
+---------------------- TOWER ADJUSTMUNT FACTORS --------------------------------
+          1   FAStTunr(1) - Tower fore-aft modal stiffness tuner, 1st mode (-)
+          1   FAStTunr(2) - Tower fore-aft modal stiffness tuner, 2nd mode (-)
+          1   SSStTunr(1) - Tower side-to-side stiffness tuner, 1st mode (-)
+          1   SSStTunr(2) - Tower side-to-side stiffness tuner, 2nd mode (-)
+          1   AdjTwMa     - Factor to adjust tower mass density (-)
+          1   AdjFASt     - Factor to adjust tower fore-aft stiffness (-)
+          1   AdjSSSt     - Factor to adjust tower side-to-side stiffness (-)
+---------------------- DISTRIBUTED TOWER PROPERTIES ----------------------------
+HtFract       TMassDen         TwFAStif       TwSSStif
+(-)           (kg/m)           (Nm^2)         (Nm^2)  
+0.000000000000000e+00  5.7973815772e+03  3.1742015627e+11  3.1742015627e+11
+4.955685115950744e-02  5.7973815772e+03  3.1742015627e+11  3.1742015627e+11
+8.426364087950008e-02  4.8416386182e+03  2.6622921804e+11  2.6622921804e+11
+1.162906219770451e-01  4.8416386182e+03  2.6622921804e+11  2.6622921804e+11
+1.538733038772256e-01  4.3088576872e+03  2.3749764893e+11  2.3749764893e+11
+1.917827917069727e-01  4.2612116647e+03  2.2970639592e+11  2.2970639592e+11
+2.296922795367199e-01  3.6904951778e+03  1.9489586131e+11  1.9489586131e+11
+2.540066406964888e-01  3.5962324422e+03  1.8560499796e+11  1.8560499796e+11
+2.804779209913985e-01  3.5181408703e+03  1.7892291936e+11  1.7892291936e+11
+3.199560772830662e-01  3.4917284013e+03  1.7492349418e+11  1.7492349418e+11
+3.578655651128134e-01  3.4408131884e+03  1.7241591078e+11  1.7241591078e+11
+3.957750529425605e-01  3.2879898659e+03  1.6488167596e+11  1.6488167596e+11
+4.336845407723078e-01  3.0840441740e+03  1.5480919574e+11  1.5480919574e+11
+4.715940286020548e-01  2.9819936442e+03  1.4976143788e+11  1.4976143788e+11
+5.095035164318021e-01  2.8288207450e+03  1.4217538200e+11  1.4217538200e+11
+5.474130042615494e-01  2.6755313202e+03  1.3457199977e+11  1.3457199977e+11
+5.853224920912964e-01  2.5221253697e+03  1.2695126482e+11  1.2695126482e+11
+6.244738424533974e-01  2.4197899996e+03  1.2186112144e+11  1.2186112144e+11
+6.579910585897671e-01  2.2661898399e+03  1.1421140668e+11  1.1421140668e+11
+6.956260294386781e-01  2.1637249969e+03  1.0910191897e+11  1.0910191897e+11
+7.332871447619546e-01  2.1637249969e+03  1.0910191897e+11  1.0910191897e+11
+7.709744045595964e-01  1.9586399435e+03  9.8859681411e+10  9.8859681411e+10
+8.086747365944208e-01  1.8733237845e+03  9.1234164519e+10  9.1234164519e+10
+8.451070616225260e-01  1.7893670908e+03  8.3987677002e+10  8.3987677002e+10
+8.815524588878140e-01  1.7086213246e+03  7.7361239553e+10  7.7361239553e+10
+9.180109283902846e-01  1.6296493371e+03  7.1128967267e+10  7.1128967267e+10
+9.545086146043034e-01  1.5992749977e+03  6.7225463410e+10  6.7225463410e+10
+9.824832021752202e-01  1.5684604506e+03  6.3414044849e+10  6.3414044849e+10
+1.000000000000000e+00  2.8063507254e+03  1.0924191201e+11  1.0924191201e+11
+---------------------- TOWER FORE-AFT MODE SHAPES ------------------------------
+    0.8274    TwFAM1Sh(2) - Mode 1, coefficient of x^2 term
+    1.0389    TwFAM1Sh(3) -       , coefficient of x^3 term
+    -1.6314    TwFAM1Sh(4) -       , coefficient of x^4 term
+    1.1184    TwFAM1Sh(5) -       , coefficient of x^5 term
+    -0.3533    TwFAM1Sh(6) -       , coefficient of x^6 term
+    -51.0126    TwFAM2Sh(2) - Mode 2, coefficient of x^2 term
+    -11.1787    TwFAM2Sh(3) -       , coefficient of x^3 term
+    162.3715    TwFAM2Sh(4) -       , coefficient of x^4 term
+    -121.1310    TwFAM2Sh(5) -       , coefficient of x^5 term
+    21.9508    TwFAM2Sh(6) -       , coefficient of x^6 term
+---------------------- TOWER SIDE-TO-SIDE MODE SHAPES --------------------------
+    0.8274    TwSSM1Sh(2) - Mode 1, coefficient of x^2 term
+    1.0389    TwSSM1Sh(3) -       , coefficient of x^3 term
+    -1.6314    TwSSM1Sh(4) -       , coefficient of x^4 term
+    1.1184    TwSSM1Sh(5) -       , coefficient of x^5 term
+    -0.3533    TwSSM1Sh(6) -       , coefficient of x^6 term
+    -51.0126    TwSSM2Sh(2) - Mode 2, coefficient of x^2 term
+    -11.1787    TwSSM2Sh(3) -       , coefficient of x^3 term
+    162.3715    TwSSM2Sh(4) -       , coefficient of x^4 term
+    -121.1310    TwSSM2Sh(5) -       , coefficient of x^5 term
+    21.9508    TwSSM2Sh(6) -       , coefficient of x^6 term

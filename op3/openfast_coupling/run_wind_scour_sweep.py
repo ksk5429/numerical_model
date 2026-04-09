@@ -1,7 +1,7 @@
 """
 Wind-Excited Scour Sweep with ROSCO Controller
 ===============================================
-Run OC3 5MW + Gunsan SSI at multiple scour levels with steady wind.
+Run OC3 5MW + SiteA SSI at multiple scour levels with steady wind.
 Extract f1 (tower bending mode) from FFT of tower-top displacement.
 Compare with OpenSeesPy eigenvalue at each scour level.
 """
@@ -20,7 +20,7 @@ from config import BUCKET, STIFFNESS, PARAMS, COUPLING_OUTPUT
 from opensees_stiffness_extractor import StiffnessExtractor, SSIWriter
 
 OPENFAST = Path(r"f:\TREE_OF_THOUGHT\PHD\openfast\openfast_x64.exe")
-TEMPLATE = COUPLING_OUTPUT / "oc3_with_gunsan_ssi"
+TEMPLATE = COUPLING_OUTPUT / "oc3_with_site_a_ssi"
 SWEEP_DIR = COUPLING_OUTPUT / "wind_scour_sweep"
 
 # OpenSeesPy reference (from v4 dissipation model eigenvalue)
@@ -155,7 +155,7 @@ def run_scour_level(scour, extractor):
 
 if __name__ == '__main__':
     print("=" * 70)
-    print("  Wind-Excited Scour Sweep: OC3 5MW + Gunsan SSI + ROSCO")
+    print("  Wind-Excited Scour Sweep: OC3 5MW + SiteA SSI + ROSCO")
     print("=" * 70)
 
     SWEEP_DIR.mkdir(parents=True, exist_ok=True)

@@ -1,12 +1,12 @@
 """
 OpenSees Digital Twin - Spine-with-Ribs Architecture (v3.0 Port)
 =================================================================
-STRICT PORT from F:\FEM\OPENSEES\gunsan_digital_twin_v3.py
+STRICT PORT from F:\FEM\OPENSEES\site_a_digital_twin_v3.py
 
 This module implements the validated "Spine with Ribs" suction bucket
-architecture from the Gunsan 4.2MW OWT Digital Twin v3.0.
+architecture from the SiteA 4MW OWT Digital Twin v3.0.
 
-KEY PORTED FEATURES FROM LEGACY gunsan_digital_twin_v3.py:
+KEY PORTED FEATURES FROM LEGACY site_a_digital_twin_v3.py:
   1. "Spine with Ribs" bucket architecture (NOT simple beam)
      - Backbone (spine): Vertical beam elements along bucket centerline
      - Ribs: 12 rigid spokes at each depth level (N_SPOKES=12)
@@ -25,7 +25,7 @@ DESIGN PRINCIPLES:
 
 Units: SI (N, m, kg, Pa)
 
-Author: Ported from gunsan_digital_twin_v3.py
+Author: Ported from site_a_digital_twin_v3.py
 Version: 3.0.0 (Strict Port)
 """
 
@@ -117,7 +117,7 @@ def get_alpha(depth: float, scour_depth: float) -> float:
     """
     Calculate stress relief degradation factor.
 
-    PORTED EXACTLY from gunsan_digital_twin_v3.py get_alpha().
+    PORTED EXACTLY from site_a_digital_twin_v3.py get_alpha().
 
     Physics:
         When scour removes overburden, the effective stress decreases:
@@ -156,7 +156,7 @@ def get_pipe_section_properties(D: float, t: float) -> Dict[str, float]:
     """
     Calculate section properties for hollow circular (pipe) section.
 
-    PORTED from gunsan_digital_twin_v3.py.
+    PORTED from site_a_digital_twin_v3.py.
 
     Args:
         D: Outer diameter (m)
@@ -180,9 +180,9 @@ def get_pipe_section_properties(D: float, t: float) -> Dict[str, float]:
 
 class OpenSeesModel:
     """
-    Digital Twin of the Gunsan 4.2MW OWT using OpenSeesPy.
+    Digital Twin of the SiteA 4MW OWT using OpenSeesPy.
 
-    PORTED from gunsan_digital_twin_v3.py GunSanDigitalTwinV3 class.
+    PORTED from site_a_digital_twin_v3.py GunSanDigitalTwinV3 class.
     UPGRADED for SSI Calibration (v7.1): Soil plug mass, added mass, γ scaling.
 
     Implements the "Spine with Ribs" suction bucket architecture:
@@ -210,12 +210,12 @@ class OpenSeesModel:
 
     # Soil plug parameters (saturated marine soil)
     # CORRECTED (2026-01-10): Changed from 1900.0 to 1700.0 kg/m³
-    # Based on weighted average of Gunsan marine clay layers (see gunsan_site.yaml)
+    # Based on weighted average of SiteA marine clay layers (see site_a_site.yaml)
     # Layer 1 (0-4m): γ=16.5 kN/m³ → ρ=1682 kg/m³
     # Layer 2 (4-9.3m): γ=17.2 kN/m³ → ρ=1753 kg/m³
     # Weighted average: 1723 kg/m³ ≈ 1700 kg/m³
     # Reference: MODULE6_MASS_STIFFNESS_SCIENTIFIC_JUSTIFICATION.md
-    SOIL_DENSITY_KGM3 = 1700.0  # kg/m³ (Gunsan marine clay weighted average)
+    SOIL_DENSITY_KGM3 = 1700.0  # kg/m³ (SiteA marine clay weighted average)
 
     # Hydrodynamic added mass coefficient (DNV-RP-C205)
     CM_CYLINDER = 1.0  # Added mass coefficient for cylinders
@@ -265,7 +265,7 @@ class OpenSeesModel:
         # Bucket geometry from SSOT (NOT hardcoded)
         self._bucket_d = self._bucket.diameter_m      # 8.0m
         self._bucket_r = self._bucket.radius_m        # 4.0m
-        self._bucket_l = self._bucket.skirt_length_m  # 9.3m
+        self._bucket_l = self._bucket.skirt_length_m  # <REDACTED>
         self._skirt_t = self._bucket.wall_thickness_m # 0.020m
 
         # Discretization parameters (PORTED from v3)
@@ -340,7 +340,7 @@ class OpenSeesModel:
         """
         Build the complete 3D OpenSees model.
 
-        PORTED from gunsan_digital_twin_v3.py build_model().
+        PORTED from site_a_digital_twin_v3.py build_model().
         UPGRADED for Differential Scour (v4.0), Exact Geometry (v5.0),
         and Corrosion Allowance (v7.0).
 
@@ -503,7 +503,7 @@ class OpenSeesModel:
         """
         Build the tapered tower structure.
 
-        PORTED from gunsan_digital_twin_v3.py _build_tower().
+        PORTED from site_a_digital_twin_v3.py _build_tower().
         UPGRADED for Corrosion Allowance (v7.0).
         """
         n_nodes = 0
@@ -570,7 +570,7 @@ class OpenSeesModel:
         """
         Build the tripod substructure.
 
-        PORTED from gunsan_digital_twin_v3.py _build_tripod().
+        PORTED from site_a_digital_twin_v3.py _build_tripod().
         UPGRADED for Corrosion Allowance (v7.0).
         """
         n_elements = 0
@@ -644,7 +644,7 @@ class OpenSeesModel:
         """
         Build a single Wheel-and-Spoke suction bucket.
 
-        PORTED from gunsan_digital_twin_v3.py _build_bucket().
+        PORTED from site_a_digital_twin_v3.py _build_bucket().
         UPGRADED for Exact Geometry (v5.0) - z_top now passed from interface nodes.
 
         Architecture: "Spine with Ribs"
@@ -1091,7 +1091,7 @@ class OpenSeesModel:
         models because the foundation stiffness is much higher than tower
         stiffness, making the system insensitive to foundation changes.
         """
-        # Reference frequency at S=0 (from SSOT gunsan_site.yaml)
+        # Reference frequency at S=0 (from SSOT site_a_site.yaml)
         f0 = 0.24358  # Hz
 
         # Bucket diameter (from geometry)
@@ -1150,7 +1150,7 @@ class OpenSeesModel:
 
         Args:
             load_kn: Horizontal thrust load at hub (kN). Default: 450kN
-                     (typical rated thrust for 4.2MW turbine)
+                     (typical rated thrust for 4MW turbine)
             direction: Load direction ('x' or 'y'). Default: 'x'
 
         Returns:
@@ -1429,7 +1429,7 @@ class OpenSeesModel:
         """
         Get the current spring stiffness at a specific depth (for validation).
 
-        PORTED from gunsan_digital_twin_v3.py get_spring_stiffness_at_depth().
+        PORTED from site_a_digital_twin_v3.py get_spring_stiffness_at_depth().
 
         Args:
             bucket_id: Bucket identifier (1, 2, or 3)
@@ -1784,7 +1784,7 @@ if __name__ == "__main__":
     print("  " + "-" * 48)
 
     # SSOT baseline frequency
-    f0_ssot = 0.24358  # Hz (from SSOT gunsan_site.yaml)
+    f0_ssot = 0.24358  # Hz (from SSOT site_a_site.yaml)
     f0_tolerance = 0.005  # ±0.5% tolerance
 
     test_scour_depths = [0.0, 0.5, 1.0, 2.0, 3.0, 4.0]

@@ -28,7 +28,7 @@ CPT_FILE = PROJECT_ROOT / 'site_data' / 'CPT-3.xlsx'
 # Foundation geometry
 D = 8.0         # diameter [m]
 R = D / 2
-L_SKIRT = 9.3   # skirt depth [m]
+L_SKIRT = <REDACTED_SKIRT_L>  # (proprietary, loaded at runtime) depth [m]
 DZ = 0.5        # discretization [m]
 
 # Water and soil constants
@@ -44,7 +44,7 @@ RHO_SOIL = 1.85         # bulk density [g/cm3 = Mg/m3]
 NU = 0.3                # Poisson's ratio
 
 # Seabed depth (for sigma_v calculation)
-WATER_DEPTH = 14.0      # m (Gunsan site approximate)
+WATER_DEPTH = 14.0      # m (SiteA site approximate)
 MUDLINE_DEPTH = 0.0     # reference: mudline = 0
 
 

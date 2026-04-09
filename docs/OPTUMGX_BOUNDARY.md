@@ -87,7 +87,7 @@ downstream is fully open-source.
 
 These CSVs were generated **once** by the author running OptumGX in
 batch mode over the Latin Hypercube parameter envelope described in
-Chapter 6 of the dissertation (1,794 samples drawn from the Gunsan
+Chapter 6 of the dissertation (1,794 samples drawn from the SiteA
 CPT profile distribution × 9 scour levels, with ~0.4% failed runs).
 The generation process is not reproducible without an OptumGX
 license, but the outputs are committed directly to the repository so
@@ -169,10 +169,10 @@ natural frequency and the mode shape.
 python op3/openfast_coupling/opensees_stiffness_extractor.py
 
 # Build the SubDyn input file for OpenFAST
-python op3/openfast_coupling/build_gunsan_subdyn.py --scour 0.0
+python op3/openfast_coupling/build_site_a_subdyn.py --scour 0.0
 
 # Run OpenFAST for 60 s of simulated time
-$OPENFAST_EXE gunsan_4p2mw/openfast_deck/Gunsan-4p2MW.fst
+$OPENFAST_EXE site_a_ref4mw/openfast_deck/SiteA-Ref4MW.fst
 ```
 
 Same — no OptumGX license required, because the stiffness matrix
@@ -199,7 +199,7 @@ If you have an OptumGX academic license and the `optumgx` Python API:
    profile. A license holder can swap in a different constitutive
    model (Mohr-Coulomb, Hoek-Brown, user-defined) and regenerate
    the capacity envelope.
-3. **Apply to a different site.** Replace `config/gunsan_site.yaml`
+3. **Apply to a different site.** Replace `config/site_a_site.yaml`
    with a different site's geometry and soil, rerun OptumGX, and
    the downstream OpenSeesPy and OpenFAST pipelines pick up the new
    CSVs automatically.
@@ -227,7 +227,7 @@ combination of technical and practical factors:
    is purpose-built for limit analysis. Replicating this in OpenSees
    would require substantial development effort.
 
-3. **Practical engineering workflow.** The Gunsan project started
+3. **Practical engineering workflow.** The SiteA project started
    with an existing OptumGX workflow from the design phase. Rebuilding
    the capacity database in a different solver was not a scientifically
    productive use of dissertation time. The decision was to accept

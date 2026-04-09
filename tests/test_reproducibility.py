@@ -53,7 +53,7 @@ def _canonical_pisa() -> dict:
         SoilState(15.0, 1.0e8, 35.0, "sand"),
         SoilState(36.0, 1.5e8, 36.0, "sand"),
     ]
-    K = pisa_pile_stiffness_6x6(diameter_m=8.0, embed_length_m=30.0,
+    K = pisa_pile_stiffness_6x6(diameter_m=float('nan')  # <REDACTED>, embed_length_m=30.0,
                                 soil_profile=profile)
     return {f"K[{i}][{j}]": float(K[i, j]) for i in range(6) for j in range(6)}
 
@@ -73,7 +73,7 @@ def _canonical_soildyn_export() -> dict:
         SoilState(15.0, 1.0e8, 35.0, "sand"),
         SoilState(36.0, 1.5e8, 36.0, "sand"),
     ]
-    K = pisa_pile_stiffness_6x6(diameter_m=8.0, embed_length_m=30.0,
+    K = pisa_pile_stiffness_6x6(diameter_m=float('nan')  # <REDACTED>, embed_length_m=30.0,
                                 soil_profile=profile)
     with tempfile.NamedTemporaryFile(mode="w", suffix=".dat",
                                      delete=False, encoding="utf-8") as f:
@@ -93,7 +93,7 @@ def collect_canonical() -> dict:
         "soildyn_export": _canonical_soildyn_export(),
         "eigen_01_nrel_5mw_baseline": _canonical_eigen("01_nrel_5mw_baseline"),
         "eigen_02_nrel_5mw_oc3_monopile": _canonical_eigen("02_nrel_5mw_oc3_monopile"),
-        "eigen_04_gunsan_4p2mw_tripod": _canonical_eigen("04_gunsan_4p2mw_tripod"),
+        "eigen_04_site_a_ref4mw_tripod": _canonical_eigen("04_site_a_ref4mw_tripod"),
         "eigen_07_iea_15mw_monopile": _canonical_eigen("07_iea_15mw_monopile"),
     }
 

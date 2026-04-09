@@ -7,7 +7,7 @@ choices:
     (rotor template) x (tower template) x (foundation module)
 
 The rotor and tower templates live in `op3.opensees_foundations.templates`
-and map to published reference designs (NREL 5MW, IEA 15MW, Unison U136,
+and map to published reference designs (NREL 5MW, IEA 15MW, Reference 4 MW OWT,
 etc.). The foundation module is one of the four Op^3 foundation modes
 from `op3.foundations`.
 
@@ -112,11 +112,11 @@ def compose_tower_model(
     ----------
     rotor : str
         Name of a rotor template. Valid values:
-            'nrel_5mw_baseline', 'iea_15mw_rwt', 'unison_u136',
+            'nrel_5mw_baseline', 'iea_15mw_rwt', 'ref_4mw_owt',
             'nrel_1.72_103', 'nrel_2.8_127', 'vestas_v27'
     tower : str
         Name of a tower template. Valid values:
-            'nrel_5mw_tower', 'iea_15mw_tower', 'gunsan_u136_tower',
+            'nrel_5mw_tower', 'iea_15mw_tower', 'site_a_rt1_tower',
             'iea_land_onshore_tower'
     foundation : Foundation
         A Foundation handle from `build_foundation()`.
@@ -131,12 +131,12 @@ def compose_tower_model(
         which will trigger `.build()` internally.
     """
     valid_rotors = {
-        'nrel_5mw_baseline', 'iea_15mw_rwt', 'unison_u136',
+        'nrel_5mw_baseline', 'iea_15mw_rwt', 'ref_4mw_owt',
         'nrel_1.72_103', 'nrel_2.8_127', 'vestas_v27',
     }
     valid_towers = {
         'nrel_5mw_tower', 'nrel_5mw_oc3_tower', 'iea_15mw_tower',
-        'gunsan_u136_tower', 'iea_land_onshore_tower',
+        'site_a_rt1_tower', 'iea_land_onshore_tower',
     }
     if rotor not in valid_rotors:
         raise ValueError(f"Unknown rotor template '{rotor}'. "

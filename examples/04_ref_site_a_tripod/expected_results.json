@@ -1,0 +1,12 @@
+{
+  "example_id": "04_site_a_ref4mw_tripod",
+  "title": "SiteA 4 MW class on tripod suction bucket (as built)",
+  "tier": "2",
+  "rotor": "ref_4mw_owt",
+  "tower": "site_a_rt1_tower",
+  "foundation_mode": "distributed_bnwf",
+  "published_f1_Hz": 0.244,
+  "published_source": "Kim (2026), this dissertation, centrifuge + field OMA",
+  "openfast_fst": "site_a_ref4mw/openfast_deck/SiteA-Ref4MW.fst",
+  "tolerance_rel": 0.05
+}

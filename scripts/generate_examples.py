@@ -83,13 +83,13 @@ with Example 9 (SACS NREL OC4 jacket) — the same physical jacket
 expressed in two different analysis codes.""",
     ),
 
-    # Tier 2: Op^3 scientific contributions (Gunsan + foundation variants)
+    # Tier 2: Op^3 scientific contributions (SiteA + foundation variants)
     dict(
-        id="04_gunsan_4p2mw_tripod",
-        title="Gunsan 4.2 MW on tripod suction bucket (as built)",
+        id="04_site_a_ref4mw_tripod",
+        title="SiteA 4 MW class on tripod suction bucket (as built)",
         tier=2,
-        rotor="unison_u136",
-        tower="gunsan_u136_tower",
+        rotor="ref_4mw_owt",
+        tower="site_a_rt1_tower",
         foundation_mode="distributed_bnwf",
         foundation_args={
             "spring_profile": "data/fem_results/opensees_spring_stiffness.csv",
@@ -97,9 +97,9 @@ expressed in two different analysis codes.""",
         },
         published_f1_Hz=0.244,
         published_source="Kim (2026), this dissertation, centrifuge + field OMA",
-        openfast_fst="gunsan_4p2mw/openfast_deck/Gunsan-4p2MW.fst",
-        description="""THE dissertation subject turbine. Gunsan 4.2 MW Unison
-U136 on a three-bucket tripod foundation (D=8.0 m, L=9.3 m,
+        openfast_fst="site_a_ref4mw/openfast_deck/SiteA-Ref4MW.fst",
+        description="""THE dissertation subject turbine. SiteA 4 MW class RefOEM
+RT1 on a three-bucket tripod foundation (dimensions loaded from private data,
 120-degree spacing) in 14 m water depth off the west coast of Korea.
 Full Op^3 pipeline exercised end-to-end: OptumGX capacity ->
 OpenSeesPy distributed BNWF -> OpenFAST SubDyn. Field-measured first
@@ -107,8 +107,8 @@ natural frequency of 0.244 Hz from 32 months of nacelle
 accelerometer OMA.""",
     ),
     dict(
-        id="05_nrel_5mw_on_gunsan_tripod",
-        title="NREL 5MW rotor+tower on Gunsan tripod (Op^3 isolation test)",
+        id="05_nrel_5mw_on_site_a_tripod",
+        title="NREL 5MW rotor+tower on SiteA tripod (Op^3 isolation test)",
         tier=2,
         rotor="nrel_5mw_baseline",
         tower="nrel_5mw_tower",
@@ -121,18 +121,18 @@ accelerometer OMA.""",
         published_source="Op^3 isolation test, not previously published",
         openfast_fst=None,
         description="""Op^3 original composition. Takes the NREL 5MW rotor and
-tower and puts them on the Gunsan tripod foundation. Paired with
+tower and puts them on the SiteA tripod foundation. Paired with
 Example 2 (same rotor+tower on OC3 monopile) to isolate the pure
 effect of the foundation change on the first natural frequency.
 Any difference between Example 2 and Example 5 is attributable to
 the foundation choice, because the rotor+tower are identical.""",
     ),
     dict(
-        id="06_gunsan_tower_on_monopile",
-        title="Gunsan U136 tower on equivalent monopile (Op^3 isolation test)",
+        id="06_site_a_tower_on_monopile",
+        title="SiteA RT1 tower on equivalent monopile (Op^3 isolation test)",
         tier=2,
-        rotor="unison_u136",
-        tower="gunsan_u136_tower",
+        rotor="ref_4mw_owt",
+        tower="site_a_rt1_tower",
         foundation_mode="stiffness_6x6",
         foundation_args={
             "stiffness_matrix": "data/fem_results/K_6x6_oc3_monopile.csv",
@@ -140,10 +140,10 @@ the foundation choice, because the rotor+tower are identical.""",
         published_f1_Hz=None,
         published_source="Op^3 isolation test, not previously published",
         openfast_fst=None,
-        description="""Op^3 original composition. Takes the Gunsan Unison U136
+        description="""Op^3 original composition. Takes the SiteA Reference 4 MW OWT
 tower and puts it on an equivalent monopile (borrowing the OC3
 monopile stiffness matrix). Paired with Example 4 (same tower on
-tripod) to isolate the effect of the foundation on the Gunsan
+tripod) to isolate the effect of the foundation on the SiteA
 tower's first natural frequency. This is the mirror of Example 5:
 different rotor+tower, same foundation comparison.""",
     ),
@@ -234,11 +234,11 @@ parser on a second, larger deck (192 joints vs 56 for OC4).""",
 
     # User-requested addition
     dict(
-        id="11_gunsan_tower_on_jacket",
-        title="Gunsan U136 tower on equivalent jacket (Op^3 isolation test)",
+        id="11_site_a_tower_on_jacket",
+        title="SiteA RT1 tower on equivalent jacket (Op^3 isolation test)",
         tier=2,
-        rotor="unison_u136",
-        tower="gunsan_u136_tower",
+        rotor="ref_4mw_owt",
+        tower="site_a_rt1_tower",
         foundation_mode="stiffness_6x6",
         foundation_args={
             "stiffness_matrix": "data/fem_results/K_6x6_oc4_jacket.csv",
@@ -247,11 +247,11 @@ parser on a second, larger deck (192 joints vs 56 for OC4).""",
         published_source="Op^3 isolation test, not previously published",
         openfast_fst=None,
         description="""Op^3 original composition completing the foundation
-variant triangle for the Gunsan U136 tower. Takes the Gunsan tower
+variant triangle for the SiteA RT1 tower. Takes the SiteA tower
 and puts it on an equivalent jacket (borrowing the OC4 jacket
 stiffness matrix). Paired with Examples 4 (tripod) and 6 (monopile)
 to give a complete (tripod, monopile, jacket) comparison on the
-same Gunsan tower. This is the last piece of the symmetric
+same SiteA tower. This is the last piece of the symmetric
 benchmark matrix and lets a reviewer see the pure effect of
 foundation type on a fixed rotor+tower.""",
     ),

@@ -252,7 +252,7 @@ Security
   gitignored).
 * **Never commit patient / personal data** -- this is a wind turbine
   framework but the same discipline applies to the dissertation's
-  Gunsan field data.
+  SiteA field data.
 
 Release process
 ---------------
@@ -265,7 +265,7 @@ Only the project maintainer tags releases. The release procedure is:
 
       python scripts/release_validation_report.py
 
-2. Confirm 18/19 PASS with 0 mandatory FAIL (the DNV Gunsan flag is
+2. Confirm 18/19 PASS with 0 mandatory FAIL (the DNV SiteA flag is
    expected optional).
 3. Update ``CHANGELOG.md`` with the release entry.
 4. Bump ``CITATION.cff`` version and date.

@@ -6,7 +6,7 @@ This produces:
   - data/fem_results/K_6x6_oc4_jacket.csv         (Mode B for #3, #9, #11)
   - data/fem_results/K_6x6_iea15_monopile.csv     (Mode B for #7)
   - data/fem_results/K_6x6_volturnus_floating.csv (Mode B for #8)
-  - data/fem_results/K_6x6_gunsan_tripod.csv      (Mode B for legacy use)
+  - data/fem_results/K_6x6_site_a_tripod.csv      (Mode B for legacy use)
   - data/fem_results/spring_profile_op3.csv       (Mode C/D, op^3 format)
   - data/fem_results/dissipation_profile.csv      (Mode D)
 
@@ -92,8 +92,8 @@ K_VOLTURNUS = k_6x6(
     krz=2.0e7,   # yaw
 )
 
-# Gunsan tripod (Op^3 derivation from OptumGX 1,794-run database)
-K_GUNSAN_TRIPOD = k_6x6(
+# SiteA tripod (Op^3 derivation from OptumGX 1,794-run database)
+K_SITE_A_TRIPOD = k_6x6(
     kx=1.8e9,
     ky=1.8e9,
     kz=3.5e9,
@@ -109,14 +109,14 @@ def write_all_6x6():
     write_csv("K_6x6_oc4_jacket.csv", K_OC4)
     write_csv("K_6x6_iea15_monopile.csv", K_IEA15_MONO)
     write_csv("K_6x6_volturnus_floating.csv", K_VOLTURNUS)
-    write_csv("K_6x6_gunsan_tripod.csv", K_GUNSAN_TRIPOD)
+    write_csv("K_6x6_site_a_tripod.csv", K_SITE_A_TRIPOD)
 
 
 # ============================================================
 # Distributed BNWF spring profile (Op^3 schema)
 # ============================================================
 # Schema: depth_m, k_ini_kN_per_m, p_ult_kN_per_m, spring_type
-# Generated from the legacy Gunsan tripod spring CSV by
+# Generated from the legacy SiteA tripod spring CSV by
 # extracting the S=0 column and converting to Op^3 schema.
 
 def write_spring_profile():
@@ -137,7 +137,7 @@ def write_spring_profile():
         "depth_m": -df["z_m"],   # legacy uses negative z (downward), Op^3 uses positive
         "k_ini_kN_per_m": df["k_py_S0.0_kN_per_m2"] * D * dz,
         # Capacity from a fitted power law: p_ult ≈ 9 * s_u(z) * D
-        # with s_u(z) = 15 + 20*depth (kPa, from gunsan_site.yaml)
+        # with s_u(z) = 15 + 20*depth (kPa, from site_a_site.yaml)
         "p_ult_kN_per_m": (15 + 20 * (-df["z_m"])) * 9 * D,
         "spring_type": "p_y",
     })
@@ -155,7 +155,7 @@ def write_spring_profile():
 # ============================================================
 def write_dissipation_profile():
     """
-    DEPRECATED in v0.4 -- the real OptumGX Gunsan dissipation profile
+    DEPRECATED in v0.4 -- the real OptumGX SiteA dissipation profile
     is imported by ``scripts/import_real_optumgx_dissipation.py`` from
     ``F:/TREE_OF_THOUGHT/PHD/data/optumgx/dissipation/``.
 

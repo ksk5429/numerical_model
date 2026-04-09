@@ -801,11 +801,11 @@
     "status": "OK"
   },
   {
-    "model_id": "Gunsan_4p2MW",
-    "path": "gunsan_4p2mw/openfast_deck",
+    "model_id": "SiteA_Ref4MW",
+    "path": "site_a_ref4mw/openfast_deck",
     "file_count": 47,
     "size_mb": 0.93,
-    "fst_path": "gunsan_4p2mw\\openfast_deck\\Gunsan-4p2MW.fst",
+    "fst_path": "site_a_ref4mw\\openfast_deck\\SiteA-Ref4MW.fst",
     "fst_size_kb": 4.8,
     "flags": {
       "CompElast": "1",
@@ -823,7 +823,7 @@
       "NRotors": "1"
     },
     "referenced_files": {
-      "EDFile": "Gunsan-4p2MW_ElastoDyn.dat",
+      "EDFile": "SiteA-Ref4MW_ElastoDyn.dat",
       "BDBldFile": "unused",
       "InflowFile": "unused",
       "AeroFile": "unused",
@@ -832,7 +832,7 @@
       "SubFile": "unused",
       "MooringFile": "unused"
     },
-    "elastodyn_path": "gunsan_4p2mw\\openfast_deck\\Gunsan-4p2MW_ElastoDyn.dat",
+    "elastodyn_path": "site_a_ref4mw\\openfast_deck\\SiteA-Ref4MW_ElastoDyn.dat",
     "elastodyn": {
       "NumBl": 3.0,
       "TipRad": 51.75878693623639,
@@ -848,7 +848,7 @@
     },
     "sub_files": {
       "EDFile": {
-        "referenced": "Gunsan-4p2MW_ElastoDyn.dat",
+        "referenced": "SiteA-Ref4MW_ElastoDyn.dat",
         "exists": true
       },
       "BDBldFile": {

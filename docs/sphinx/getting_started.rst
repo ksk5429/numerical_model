@@ -45,7 +45,7 @@ End-to-end OpenFAST run
 
 .. code-block:: bash
 
-   python scripts/run_openfast.py gunsan
+   python scripts/run_openfast.py site_a
    python scripts/run_dlc11_partial.py --tmax 5
    python scripts/run_dlc61_parked.py --vmax 50
 

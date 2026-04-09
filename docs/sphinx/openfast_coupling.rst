@@ -27,7 +27,7 @@ End-to-end example
        SoilState(36.0, 1.5e8, 36, "sand"),
    ]
    write_soildyn_from_pisa(
-       "Gunsan-4p2MW_SoilDyn.dat",
+       "SiteA-Ref4MW_SoilDyn.dat",
        diameter_m=6.0, embed_length_m=36.0,
        soil_profile=profile,
        location_xyz=(-24.80, 0.0, -45.0),
@@ -38,7 +38,7 @@ Then in the OpenFAST .fst:
 .. code-block:: text
 
    1   CompSoil   - Compute soil-structural dynamics (switch) {1=SoilDyn}
-   "Gunsan-4p2MW_SoilDyn.dat"   SoilFile
+   "SiteA-Ref4MW_SoilDyn.dat"   SoilFile
 
 Reference paper
 ---------------

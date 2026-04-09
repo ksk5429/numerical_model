@@ -30,7 +30,7 @@ python scripts/verify_nrel_models.py
 | NREL_2.8-127 (hub 87 m)             | 40  | 0.85 MB | `NREL-2p8-127.fst`                   |    |    | 127.0 | 88.6  | ✅ |
 | NREL_2.8-127 (hub 120 m)            | 40  | 0.85 MB | `NREL-2p8-127-HH120.fst`             |    |    | 127.0 | 119.6 | ✅ |
 | Vestas V27 (historical baseline)    | 24  | 0.14 MB | `SNLV27_F8.fst`                      |    |    |  27.0 |  32.0 | ✅ |
-| **Gunsan 4.2 MW** (subject)         | 47  | 0.93 MB | `Gunsan-4p2MW.fst`                   |    |    | 103.5 | 97.9  | ⚠️ see note |
+| **SiteA 4 MW class** (subject)         | 47  | 0.93 MB | `SiteA-Ref4MW.fst`                   |    |    | 103.5 | 97.9  | ⚠️ see note |
 
 **Total bundled**: 11 runnable OpenFAST models (+1 shared data
 directory) spanning 449 files and ~15.4 MB. Every model's `.fst` was
@@ -70,11 +70,11 @@ matches the published 150 m within the 1.3 m shaft tilt offset.
 - Foundation: OC3 monopile in 20 m water depth, fixed base at the
   seabed (no soil-structure interaction in the base deck).
 - **This is the most important benchmark in the repository** for the
-  Gunsan model because it is the only NREL reference that activates
+  SiteA model because it is the only NREL reference that activates
   the `CompHydro + CompSub` chain and exercises the SubDyn
   substructure interface. Any changes to the Op³ SubDyn bridge should
   first be verified against the OC3 deck before being applied to the
-  Gunsan deck.
+  SiteA deck.
 - Simulation: 60 s regression run with `DT = 0.0125 s` and irregular
   wave excitation via the built-in JONSWAP spectrum.
 
@@ -91,10 +91,10 @@ matches the published 150 m within the 1.3 m shaft tilt offset.
   blade, airfoil polars, DISCON controller settings, and Cp-Ct-Cq
   lookup tables. All bundled at ~850 KB per model.
 - Relevance: these provide the **blade aerodynamic and control
-  templates** that the Gunsan model inherits as a starting point
+  templates** that the SiteA model inherits as a starting point
   before site-specific calibration. The NREL 1.72-103 airfoil set,
-  in particular, is directly used by the Gunsan deck (see note on
-  Gunsan rotor below).
+  in particular, is directly used by the SiteA deck (see note on
+  SiteA rotor below).
 
 ### Vestas V27 (historical baseline)
 
@@ -108,38 +108,38 @@ matches the published 150 m within the 1.3 m shaft tilt offset.
   (OpenFAST 2.x); both are runnable with v4.0.2 after the automatic
   format upgrade.
 
-### Gunsan 4.2 MW (subject under test) — verification caveats
+### SiteA 4 MW class (subject under test) — verification caveats
 
-- Path: `gunsan_4p2mw/openfast_deck/`
+- Path: `site_a_ref4mw/openfast_deck/`
 - **What the verification script finds:** rotor diameter 103.5 m,
   hub height 97.9 m. This is the ElastoDyn file inherited from the
   NREL 1.72-103 template and has **not** been updated to the final
-  Gunsan geometry. The `.fst` deck is structurally complete and will
+  SiteA geometry. The `.fst` deck is structurally complete and will
   run to completion, but the rotor aerodynamic and blade structural
   properties are placeholders.
-- **What the real Gunsan specification is** (from
-  [`op3/config/gunsan_site.yaml`](../../op3/config/gunsan_site.yaml)):
-  - Rotor: UNISON U136, diameter 136.0 m, 3 blades
+- **What the real SiteA specification is** (from
+  [`op3/config/site_a_site.yaml`](../../op3/config/site_a_site.yaml)):
+  - Rotor: Reference 4 MW OWT, diameter 136.0 m, 3 blades
   - Hub height: 96.3 m above MSL
-  - Rated power: 4.2 MW at 11 m/s
+  - Rated power: 4 MW class at 11 m/s
   - Rotor speed: 13.2 rpm rated
   - Tower: 28 tapered sections, OD 4.2 m base → 3.5 m top, material S420ML
   - Foundation: tripod with three 8 m diameter suction buckets, skirt
     length 9.3 m, 120° spacing
 - **Calibration status:** the tower ElastoDyn file
-  (`Gunsan-4p2MW_ElastoDyn_tower_calibrated.dat`) has been updated to
-  the real Gunsan tower dimensions, but the blade definition and
+  (`SiteA-Ref4MW_ElastoDyn_tower_calibrated.dat`) has been updated to
+  the real SiteA tower dimensions, but the blade definition and
   rotor `TipRad` parameter still point at the NREL 1.72-103 blade.
   This is documented in
-  [`gunsan_4p2mw/openfast_deck/README.md`](../../gunsan_4p2mw/openfast_deck/README.md)
+  [`site_a_ref4mw/openfast_deck/README.md`](../../site_a_ref4mw/openfast_deck/README.md)
   as a known limitation to be resolved before any aerodynamic
-  prediction from the Gunsan OpenFAST deck is used in publication.
+  prediction from the SiteA OpenFAST deck is used in publication.
   **Structural natural frequency predictions are valid** because they
   depend on the tower inertia (which is calibrated) and the foundation
   stiffness (which is the subject of the whole Op³ framework and is
   validated independently in the OpenSeesPy BNWF module). Aerodynamic
   power, thrust, and time-domain rotor response are **not yet
-  calibrated** to the real UNISON U136 rotor.
+  calibrated** to the real Reference 4 MW OWT rotor.
 
 ## Module enablement matrix
 
@@ -157,17 +157,17 @@ module.
 | NREL 2.8-127 (hh87)  |   ✓   |   ✓    |  ✓   |   ✓   |       |       |     |         |     |
 | NREL 2.8-127 (hh120) |   ✓   |   ✓    |  ✓   |   ✓   |       |       |     |         |     |
 | Vestas V27           |   ✓   |   ✓    |  ✓   |   ✓   |       |       |     |         |     |
-| **Gunsan 4.2 MW**    |   ✓   | *off*  | *off*| *off* | *off* | *off* | *off* |       |     |
+| **SiteA 4 MW class**    |   ✓   | *off*  | *off*| *off* | *off* | *off* | *off* |       |     |
 
-The Gunsan deck currently has all modules except ElastoDyn set to
+The SiteA deck currently has all modules except ElastoDyn set to
 *off*. This is because the bundled deck is a skeleton that runs the
-structural dynamics only. The full offshore-coupled Gunsan simulation
+structural dynamics only. The full offshore-coupled SiteA simulation
 is produced at runtime by
-[`op3/openfast_coupling/build_gunsan_subdyn.py`](../../op3/openfast_coupling/build_gunsan_subdyn.py),
+[`op3/openfast_coupling/build_site_a_subdyn.py`](../../op3/openfast_coupling/build_site_a_subdyn.py),
 which generates a new `.fst` with HydroDyn and SubDyn activated and
 the foundation stiffness matrix injected from the OpenSeesPy BNWF
 model. This runtime generation is deliberate: it keeps the committed
-Gunsan deck as a clean, always-runnable template and defers the
+SiteA deck as a clean, always-runnable template and defers the
 site-specific module activation to the coupling step.
 
 ## What this benchmark proves, and what it does not prove
@@ -182,7 +182,7 @@ site-specific module activation to the coupling step.
    the published NREL specifications (within 1% tolerance on the
    scaled IEA family).
 4. The OC3 monopile deck activates the complete CompHydro + CompSub
-   chain, providing a benchmark for the Gunsan SubDyn bridge.
+   chain, providing a benchmark for the SiteA SubDyn bridge.
 
 **Not proven by this benchmark alone:**
 
@@ -195,8 +195,8 @@ site-specific module activation to the coupling step.
 2. Steady-state performance curves (Cp, Ct vs tip-speed-ratio) and
    time-domain dynamic response have not been compared across models.
    That is the subject of
-   [`validation/benchmarks/GUNSAN_VS_NREL.md`](GUNSAN_VS_NREL.md),
-   which reports the head-to-head numerical comparison between Gunsan
+   [`validation/benchmarks/SITE_A_VS_NREL.md`](SITE_A_VS_NREL.md),
+   which reports the head-to-head numerical comparison between SiteA
    and the NREL 5 MW OC3 monopile.
 
 ## CI workflow

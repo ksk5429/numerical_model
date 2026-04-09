@@ -5,7 +5,7 @@ Invokes the authoritative training script at
 ``F:/TREE_OF_THOUGHT/PHD/code/ch8_supervised.py``. The PHD script
 trains the dim1 correlation = 0.9976 supervised encoder on the
 real 1794-sample OptumGX MC database (which is now accessible via
-``op3.uq.encoder_bridge.load_gunsan_mc()``).
+``op3.uq.encoder_bridge.load_site_a_mc()``).
 
 Run
 ---

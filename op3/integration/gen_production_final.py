@@ -29,7 +29,7 @@ SCOUR_DEPTHS = %%SCOUR_LIST%%
 N_RUNS = 200
 SEED = 42
 
-D = 8.0; R = 4.0; S = 9.3; N_sectors = 12
+D = 8.0; R = 4.0; S = float('nan')  # <REDACTED>; N_sectors = 12
 L_dom = 20 * R; H_dom = 15 * R
 N_el = 6000; N_el_start = 3000; fan_angle = 30
 

@@ -84,7 +84,7 @@ STAGES: list[TestStage] = [
               ["python", "scripts/test_three_analyses.py"]),
     TestStage("dnv_st_0126", "audit",
               ["python", "scripts/dnv_st_0126_conformance.py", "--all"],
-              optional=True),   # 1 known Gunsan 1P resonance flag is expected
+              optional=True),   # 1 known SiteA 1P resonance flag is expected
     TestStage("iec_61400_3", "audit",
               ["python", "scripts/iec_61400_3_conformance.py", "--all"],
               optional=True),
@@ -98,7 +98,7 @@ STAGES: list[TestStage] = [
               ["python", "scripts/solution_verification.py"]),
     # v0.4 dissertation reconciliation layer
     TestStage("ch7_bayesian_scour_real_mc", "script",
-              ["python", "scripts/dissertation/ch7_gunsan_bayesian_scour_real_mc.py"],
+              ["python", "scripts/dissertation/ch7_site_a_bayesian_scour_real_mc.py"],
               optional=True),   # requires PHD root
     TestStage("ch6_cross_turbine", "script",
               ["python", "scripts/dissertation/ch6_cross_turbine_generalization.py"],

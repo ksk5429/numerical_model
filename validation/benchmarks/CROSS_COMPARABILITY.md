@@ -14,14 +14,14 @@ benchmarks that nobody else in the published literature has provided.
 | 1   | NREL 5MW Baseline (fixed)                    | 1     | nrel_5mw_baseline   | nrel_5mw_tower      | fixed               | 0.324                    |
 | 2   | NREL 5MW OC3 Monopile                        | 1     | nrel_5mw_baseline   | nrel_5mw_tower      | OC3 monopile        | 0.276                    |
 | 3   | NREL 5MW OC4 Jacket                          | 1     | nrel_5mw_baseline   | nrel_5mw_tower      | OC4 jacket          | 0.314                    |
-| 4   | **Gunsan 4.2 MW (as built)**                  | 2     | unison_u136         | gunsan_u136_tower   | tripod 3 × bucket   | **0.244** (field OMA)   |
-| 5   | NREL 5MW on Gunsan tripod                    | 2     | nrel_5mw_baseline   | nrel_5mw_tower      | tripod 3 × bucket   | Op^3 prediction         |
-| 6   | Gunsan tower on monopile                     | 2     | unison_u136         | gunsan_u136_tower   | OC3-equiv monopile  | Op^3 prediction         |
+| 4   | **SiteA 4 MW class (as built)**                  | 2     | ref_4mw_owt         | site_a_rt1_tower   | tripod 3 × bucket   | **0.244** (field OMA)   |
+| 5   | NREL 5MW on SiteA tripod                    | 2     | nrel_5mw_baseline   | nrel_5mw_tower      | tripod 3 × bucket   | Op^3 prediction         |
+| 6   | SiteA tower on monopile                     | 2     | ref_4mw_owt         | site_a_rt1_tower   | OC3-equiv monopile  | Op^3 prediction         |
 | 7   | IEA 15MW monopile                            | 3     | iea_15mw_rwt        | iea_15mw_tower      | IEA-15 monopile     | 0.17                     |
 | 8   | IEA 15MW VolturnUS-S floating                | 3     | iea_15mw_rwt        | iea_15mw_tower      | semi-submersible    | 0.04                     |
 | 9   | NREL OC4 jacket (SACS deck)                   | SACS  | nrel_5mw_baseline   | nrel_5mw_tower      | jacket via SACS     | 0.314                    |
 | 10  | INNWIND 10MW jacket (SACS deck)               | SACS  | iea_15mw_rwt        | iea_15mw_tower      | jacket via SACS     | 0.295                    |
-| 11  | **Gunsan tower on jacket**                    | 2     | unison_u136         | gunsan_u136_tower   | OC4-equiv jacket    | Op^3 prediction         |
+| 11  | **SiteA tower on jacket**                    | 2     | ref_4mw_owt         | site_a_rt1_tower   | OC4-equiv jacket    | Op^3 prediction         |
 
 The reference frequency column is the published value where one
 exists, or "Op^3 prediction" for the new compositions in Examples
@@ -47,7 +47,7 @@ these examples is **attributable entirely to the foundation**.
 | 1       | Fixed base                   | NREL TP-500-38060        | 0.324   |
 | 2       | OC3 monopile (20 m water)    | OC3 Phase II             | 0.276   |
 | 3       | OC4 jacket (50 m water)      | OC4 Phase I              | 0.314   |
-| 5       | Gunsan tripod (Op^3)         | Op^3 prediction          | TBD     |
+| 5       | SiteA tripod (Op^3)         | Op^3 prediction          | TBD     |
 
 The pattern this matrix should reveal is:
 
@@ -57,13 +57,13 @@ fixed base > jacket > monopile > tripod
 
 with the jacket sitting closer to the fixed base because of its
 multi-leg redundancy. The Op^3 prediction for Example 5 (NREL 5MW on
-Gunsan tripod) tests whether Op^3's tripod foundation model produces
+SiteA tripod) tests whether Op^3's tripod foundation model produces
 a frequency in the expected window between the OC3 monopile and the
-Gunsan as-built case (~0.25-0.27 Hz).
+SiteA as-built case (~0.25-0.27 Hz).
 
-### Matrix B: same Gunsan U136 tower across foundations
+### Matrix B: same SiteA RT1 tower across foundations
 
-Holds the rotor + tower constant (Unison U136 + Gunsan tower) and
+Holds the rotor + tower constant (Reference 4 MW OWT + SiteA tower) and
 varies only the foundation. The mirror of Matrix A.
 
 | Example | Foundation                  | f₁ source                | f₁ (Hz) |
@@ -72,7 +72,7 @@ varies only the foundation. The mirror of Matrix A.
 | 6       | Equivalent monopile          | Op^3 prediction          | TBD     |
 | 11      | Equivalent jacket            | Op^3 prediction          | TBD     |
 
-This matrix tests whether the Gunsan tower would have a higher
+This matrix tests whether the SiteA tower would have a higher
 first natural frequency on a monopile or jacket foundation than on
 its actual tripod. The expected pattern is:
 
@@ -112,7 +112,7 @@ The Mode C and Mode D values for Examples 4 and 5 are the most
 important rows in this table because they exercise the **full Op^3
 pipeline**: OptumGX 3D limit analysis -> distributed BNWF spring
 calibration -> OpenSeesPy eigenvalue. Examples 4 and 5 share the
-same OptumGX outputs (the Gunsan capacity envelope) but apply them
+same OptumGX outputs (the SiteA capacity envelope) but apply them
 to different rotor + tower combinations, demonstrating the
 modularity of the foundation module.
 
@@ -143,7 +143,7 @@ the full fidelity spectrum of how soil-structure interaction can
 be represented in a structural dynamics analysis. By exposing all
 four modes through the same Python API, Op^3 lets a researcher
 quantify how much the foundation modeling choice matters for any
-specific question — and shows that for the Gunsan scour-monitoring
+specific question — and shows that for the SiteA scour-monitoring
 application, the difference between Mode B (linear K) and Mode D
 (full plastic dissipation) is approximately 5% in first natural
 frequency at the operating point but >20% in the inferred scour
@@ -167,7 +167,7 @@ by switching to that specific foundation.
 | OC3 monopile (#2)  | 0.276   | -0.048                        | -14.8%              |
 | Tripod (#5)        | TBD     | TBD                           | TBD                 |
 
-### Gunsan U136 tower (from Matrix B)
+### SiteA RT1 tower (from Matrix B)
 
 | Foundation type      | f₁ (Hz) | Foundation effect on f₁ (Hz) | Effect (% of equivalent fixed) |
 |----------------------|:-------:|:-----------------------------:|:-----------------------------:|
@@ -176,7 +176,7 @@ by switching to that specific foundation.
 | Equivalent monopile (#6) | TBD | TBD                           | TBD                           |
 | Tripod as built (#4) | 0.244   | -0.076                        | -23.8%                        |
 
-\* The Gunsan equivalent fixed-base frequency is computed by Op^3
+\* The SiteA equivalent fixed-base frequency is computed by Op^3
 Mode A on the same tower template with no foundation; it is not a
 published value.
 
@@ -187,12 +187,12 @@ knowledge, not available in any published OWT framework:
 
 1. **Eleven examples spanning four foundation types** (fixed,
    monopile, jacket, tripod, semi-submersible floating) and four
-   power classes (0.55 MW Vestas V27 in nrel_reference, 4.2 MW
-   Gunsan, 5 MW NREL, 15 MW IEA).
+   power classes (0.55 MW Vestas V27 in nrel_reference, 4 MW class
+   SiteA, 5 MW NREL, 15 MW IEA).
 
 2. **Two complete symmetric isolation matrices** that decouple the
    foundation effect from the rotor + tower effect. Matrix A holds
-   the NREL 5MW constant; Matrix B holds the Gunsan U136 constant.
+   the NREL 5MW constant; Matrix B holds the SiteA RT1 constant.
    No published OWT comparison study has both matrices.
 
 3. **Four foundation fidelity modes** (A → D) selectable at runtime

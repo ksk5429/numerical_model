@@ -11,15 +11,15 @@ no executor is available.
 
 Usage
 -----
-    python scripts/run_openfast.py gunsan
+    python scripts/run_openfast.py site_a
     python scripts/run_openfast.py oc3 --tmax 10
-    python scripts/run_openfast.py gunsan --binary "C:\\openfast\\openfast_x64.exe"
+    python scripts/run_openfast.py site_a --binary "C:\\openfast\\openfast_x64.exe"
 
 Output
 ------
     validation/openfast_runs/<deck>_<timestamp>/
         run_log.txt
-        Gunsan-4p2MW.out          (only if binary present)
+        SiteA-Ref4MW.out          (only if binary present)
         run_metadata.json
 
 Exit codes
@@ -50,7 +50,7 @@ sys.path.insert(0, str(REPO_ROOT))
 # ---------------------------------------------------------------------------
 
 DECKS = {
-    "gunsan": REPO_ROOT / "gunsan_4p2mw/openfast_deck/Gunsan-4p2MW.fst",
+    "site_a": REPO_ROOT / "site_a_ref4mw/openfast_deck/SiteA-Ref4MW.fst",
     "oc3":    REPO_ROOT / "nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/5MW_OC3Mnpl_DLL_WTurb_WavesIrr.fst",
     "oc4":    REPO_ROOT / "nrel_reference/oc4_jacket/5MW_OC4Jckt_DLL_WTurb_WavesIrr_MGrowth.fst",
     "iea15_monopile": REPO_ROOT / "nrel_reference/iea_15mw/OpenFAST_monopile/IEA-15-240-RWT-Monopile.fst",

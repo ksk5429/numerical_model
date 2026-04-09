@@ -120,7 +120,7 @@ def check_I7_4_7_aero_damping() -> IECCheck:
     stick models do not compute aerodynamic damping directly; the
     relevant evidence lives in the OpenFAST DLC time-series runs
     (decay / hammer excitation method). For examples that reach
-    OpenFAST end-to-end (Gunsan v5 deck), the BEMT-derived aero
+    OpenFAST end-to-end (SiteA v5 deck), the BEMT-derived aero
     damping is known to be > 0.05 log-dec at rated wind; this check
     reports NOT_APPLICABLE for structural-only examples and refers
     the user to the DLC 1.1 outputs under validation/dlc11_partial/."""

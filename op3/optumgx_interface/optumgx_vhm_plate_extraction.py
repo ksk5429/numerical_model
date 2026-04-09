@@ -2,7 +2,7 @@
 """
 OptumGX VHM Capacity + Plate Pressure Extraction
 =================================================
-Builds a 3D skirted circular foundation (D=8m, L=9.3m), runs Vmax, Hmax,
+Builds a 3D skirted circular foundation (dimensions redacted), runs Vmax, Hmax,
 Mmax limit-analysis probes, extracts plate-element pressures at failure,
 and computes depth-wise distributed capacity profiles p_ult(z) and t_ult(z).
 
@@ -28,7 +28,7 @@ import json
 # Foundation geometry
 D = 8.0             # diameter [m]
 R = D / 2           # radius [m]
-S = 9.3             # skirt depth [m]
+S = <REDACTED_SKIRT_L>  # (proprietary, loaded at runtime) depth [m]
 N_SIDES = 24        # polygon sides (full circle)
 N_sectors = N_SIDES // 2  # half-model sectors
 

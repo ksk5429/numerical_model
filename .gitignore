@@ -58,27 +58,27 @@ tools/openfast/*.dll
 
 # Large shared data directories (bootstrap via r-test clone)
 tools/r-test_v5/
-gunsan_4p2mw/5MW_Baseline/
+ref_site_a/5MW_Baseline/
 
 # Binary OpenFAST time-series output
 validation/openfast_runs/
 validation/dlc11_partial/
 validation/dlc61_parked/
-gunsan_4p2mw/openfast_deck_v5/*.outb
-gunsan_4p2mw/openfast_deck_v5/*.out
+ref_site_a/openfast_deck_v5/*.outb
+ref_site_a/openfast_deck_v5/*.out
 
 
 # OpenFAST generated simulation outputs (not source)
-gunsan_4p2mw/openfast_deck_v5/*.sum
-gunsan_4p2mw/openfast_deck_v5/*.sum.yaml
-gunsan_4p2mw/openfast_deck_v5/*.AD.sum
-gunsan_4p2mw/openfast_deck_v5/*.ED.sum
-gunsan_4p2mw/openfast_deck_v5/*.SD.sum.yaml
-gunsan_4p2mw/openfast_deck_v5/*.SrvD.sum
-gunsan_4p2mw/openfast_deck_v5/*.UA.sum
-gunsan_4p2mw/openfast_deck_v5/*.out
-gunsan_4p2mw/openfast_deck_v5/*.outb
-gunsan_4p2mw/openfast_deck_v5/*.ech
+ref_site_a/openfast_deck_v5/*.sum
+ref_site_a/openfast_deck_v5/*.sum.yaml
+ref_site_a/openfast_deck_v5/*.AD.sum
+ref_site_a/openfast_deck_v5/*.ED.sum
+ref_site_a/openfast_deck_v5/*.SD.sum.yaml
+ref_site_a/openfast_deck_v5/*.SrvD.sum
+ref_site_a/openfast_deck_v5/*.UA.sum
+ref_site_a/openfast_deck_v5/*.out
+ref_site_a/openfast_deck_v5/*.outb
+ref_site_a/openfast_deck_v5/*.ech
 
 # Extracted paper text (local reference only; copyrighted)
 tools/papers/

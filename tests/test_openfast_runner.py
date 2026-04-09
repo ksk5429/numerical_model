@@ -46,10 +46,10 @@ def test_all_decks_validate():
 
 
 def test_unused_subfiles_skipped():
-    """Gunsan deck has all aero/hydro/sub modules off; the literal
+    """SiteA deck has all aero/hydro/sub modules off; the literal
     'unused' refs must NOT be flagged as missing."""
-    v = validate_deck(DECKS["gunsan"])
-    print(f"  [4.1.3] gunsan refs={len(v['referenced_files'])}, missing={len(v['missing_subfiles'])}")
+    v = validate_deck(DECKS["site_a"])
+    print(f"  [4.1.3] site_a refs={len(v['referenced_files'])}, missing={len(v['missing_subfiles'])}")
     assert v["ok"]
     assert v["missing_subfiles"] == []
 

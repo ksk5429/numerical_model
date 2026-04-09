@@ -1,0 +1,31 @@
+------- HydroDyn INPUT FILE ------------------------------------------------
+SiteA 4MW - Minimal HydroDyn (wave loads on substructure)
+FALSE            Echo           - Echo input data
+---------------------- ENVIRONMENTAL CONDITIONS ----------------------------
+14.0             WtrDpth        - Water depth (m)
+1025.0           WtrDens        - Water density (kg/m^3)
+---------------------- WAVES -----------------------------------------------
+0                WaveMod        - Wave kinematics model [0=none; 1=regular; 2=JONSWAP]
+3600.0           WaveTMax       - Analysis length for incident wave (s)
+0.25             WaveDT         - Time step for incident wave (s)
+1.0              WaveHs         - Significant wave height (m) [used for WaveMod=2]
+8.0              WaveTp         - Peak spectral period (s) [used for WaveMod=2]
+0.0              WaveDir        - Incident wave propagation heading direction (deg)
+123456789        WaveSeed(1)    - First random seed
+1011121314       WaveSeed(2)    - Second random seed
+TRUE             WaveNDAmp      - Flag for normally distributed amplitudes
+"none"           GHWvFile       - Root name for GH wave data
+--- CURRENT ---
+0                CurrMod        - Current profile model [0=none; 1=standard; 2=user]
+0.0              CurrSSV0       - Sub-surface current velocity (m/s)
+--- FLOATING PLATFORM ---
+0                PtfmSgF
+0                PtfmSwF
+0                PtfmHvF
+0                PtfmRF
+0                PtfmPF
+0                PtfmYF
+--- OUTPUT ---
+0                NMOutputs
+0                OutList
+END

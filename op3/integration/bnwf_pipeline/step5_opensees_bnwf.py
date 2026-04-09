@@ -26,7 +26,7 @@ import math
 RESULTS_DIR = Path(__file__).parent / 'results'
 
 # =============================================================================
-# STRUCTURAL CONSTANTS (Gunsan 4.2MW OWT)
+# STRUCTURAL CONSTANTS (SiteA 4MW OWT)
 # =============================================================================
 # Units: N, m, kg, s
 E_STEEL = 210e9         # Pa
@@ -36,7 +36,7 @@ RHO_STEEL = 7850.0      # kg/m3
 # Bucket geometry
 D_BUCKET = 8.0          # m
 R_BUCKET = D_BUCKET / 2
-L_SKIRT = 9.3           # m
+L_SKIRT = float('nan')  # <REDACTED>           # m
 T_SKIRT = 0.025         # m
 T_LID = 0.040           # m
 DZ = 0.5                # m

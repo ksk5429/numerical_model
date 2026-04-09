@@ -703,7 +703,7 @@ class SequentialCosimulation:
         results = {
             'description': 'Sequential co-simulation framework',
             'status': 'FRAMEWORK_READY',
-            'note': ('Full implementation requires OpenFAST Gunsan model '
+            'note': ('Full implementation requires OpenFAST SiteA model '
                      'to produce displacement time-histories first. '
                      'Run Path A -> OpenFAST -> extract displacements -> '
                      'feed to this co-simulation driver.'),
@@ -711,7 +711,7 @@ class SequentialCosimulation:
 
         if verbose:
             print(f"\n  Framework status: READY")
-            print(f"  Prerequisite: OpenFAST Gunsan model with Path A stiffness")
+            print(f"  Prerequisite: OpenFAST SiteA model with Path A stiffness")
             print(f"  Workflow: OpenFAST run -> extract u(t) -> feed here -> compare F_nl vs F_lin")
 
         return results
@@ -831,5 +831,5 @@ if __name__ == '__main__':
     print(f"  Output: {COUPLING_OUTPUT}/")
     print(f"\n  Next steps:")
     print(f"    1. Run scour sweep: extractor.scour_sweep()")
-    print(f"    2. Generate Gunsan SubDyn with Path A stiffness")
+    print(f"    2. Generate SiteA SubDyn with Path A stiffness")
     print(f"    3. Run OpenFAST -> extract displacements -> feed to Path C")

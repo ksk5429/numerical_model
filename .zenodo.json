@@ -1,6 +1,6 @@
 {
   "title": "Op^3: OptumGX-OpenSeesPy-OpenFAST Integration Framework for Offshore Wind Turbines",
-  "description": "<p>Op^3 (pronounced O-p-cubed) is an integrated numerical modelling framework for offshore wind turbine support structures. It bridges three otherwise-disconnected codes &mdash; OptumGX (3D FE limit analysis, commercial), OpenSeesPy (structural dynamics, BSD-3-Clause), and OpenFAST v5 (aero-hydro-servo-elastic, Apache 2.0) &mdash; into a single V&amp;V'd Python pipeline.</p><p>Four foundation modes span the hierarchy from rigid base (Mode A) to a novel dissipation-weighted formulation (Mode D). Calibrated against the NREL reference wind turbine library and the Gunsan 4.2 MW field site, with 121 active V&amp;V tests, 4 calibration regression tests, and end-to-end OpenFAST v5 SoilDyn coupling.</p><p>Developed alongside a PhD dissertation on prescriptive maintenance of offshore wind turbine foundations (Seoul National University, 2026).</p>",
+  "description": "<p>Op^3 (pronounced O-p-cubed) is an integrated numerical modelling framework for offshore wind turbine support structures. It bridges three otherwise-disconnected codes &mdash; OptumGX (3D FE limit analysis, commercial), OpenSeesPy (structural dynamics, BSD-3-Clause), and OpenFAST v5 (aero-hydro-servo-elastic, Apache 2.0) &mdash; into a single V&amp;V'd Python pipeline.</p><p>Four foundation modes span the hierarchy from rigid base (Mode A) to a novel dissipation-weighted formulation (Mode D). Calibrated against the NREL reference wind turbine library and the SiteA 4 MW class field site, with 121 active V&amp;V tests, 4 calibration regression tests, and end-to-end OpenFAST v5 SoilDyn coupling.</p><p>Developed alongside a PhD dissertation on prescriptive maintenance of offshore wind turbine foundations (Seoul National University, 2026).</p>",
   "upload_type": "software",
   "access_right": "open",
   "license": "Apache-2.0",
@@ -20,7 +20,7 @@
     "uncertainty quantification",
     "NREL reference wind turbine",
     "IEA 15 MW",
-    "Gunsan 4.2 MW",
+    "SiteA 4 MW class",
     "DNV-ST-0126",
     "IEC 61400-3"
   ],

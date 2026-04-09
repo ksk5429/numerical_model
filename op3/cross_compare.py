@@ -12,7 +12,7 @@ Usage:
     from op3 import cross_compare
     df = cross_compare(
         rotor='nrel_5mw_baseline',
-        tower='gunsan_u136_tower',
+        tower='site_a_rt1_tower',
         scour_levels=[0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0],
         spring_profile='data/fem_results/opensees_spring_stiffness.csv',
         stiffness_matrix='data/fem_results/K_6x6_baseline.csv',

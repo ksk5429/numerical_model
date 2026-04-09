@@ -59,8 +59,8 @@ MODELS = [
      "nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120", None),
     ("Vestas_V27",
      "nrel_reference/vestas/V27", None),
-    ("Gunsan_4p2MW",
-     "gunsan_4p2mw/openfast_deck", "Gunsan-4p2MW.fst"),
+    ("SiteA_Ref4MW",
+     "site_a_ref4mw/openfast_deck", "SiteA-Ref4MW.fst"),
 ]
 
 

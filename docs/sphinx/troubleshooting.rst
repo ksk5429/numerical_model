@@ -126,7 +126,7 @@ Your deck was authored against OpenFAST v4.0.x or earlier. The v5
 deck format requires ``NRotors``, ``CompSoil``, and ``MirrorRotor``
 in the feature switches block. Either:
 
-1. Use the v5 deck under ``gunsan_4p2mw/openfast_deck_v5/`` (already
+1. Use the v5 deck under ``site_a_ref4mw/openfast_deck_v5/`` (already
    in the correct format), or
 2. Regenerate your deck against the v5.0.0 r-test templates:
 
@@ -177,7 +177,7 @@ To get a proper DLC 6.1 run, build a parked-configuration variant:
 
 .. code-block:: bash
 
-   python scripts/build_dlc61_parked_deck.py --source gunsan_v5
+   python scripts/build_dlc61_parked_deck.py --source site_a_v5
 
 This copies the deck to a ``*_parked`` sibling, sets
 ``CompServo = 0`` in the ``.fst``, and disables all rotor DOFs with
@@ -251,7 +251,7 @@ to be at or below the seabed. For the OC3 Tripod template
 .. code-block:: python
 
    write_soildyn_from_pisa(
-       "Gunsan_SoilDyn.dat",
+       "SiteA_SoilDyn.dat",
        diameter_m=6.0, embed_length_m=36.0,
        soil_profile=profile,
        location_xyz=(0.0, 0.0, -45.0),   # <= mudline

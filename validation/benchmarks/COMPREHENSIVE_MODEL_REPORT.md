@@ -86,7 +86,7 @@ regardless of how they were generated.
 Mode D specifically requires the depth-resolved plastic dissipation
 field at collapse, which is unique to finite-element limit analysis
 (FELA) solvers like OptumGX. The HSsmall constitutive model is the
-appropriate small-strain stiffness model for the Gunsan undrained
+appropriate small-strain stiffness model for the SiteA undrained
 clay; alternative constitutive models (Mohr-Coulomb, Hoek-Brown,
 user-defined) can be substituted in OptumGX without changing the
 Op^3 API.
@@ -164,14 +164,14 @@ on the committed code and data.
 | SACS deck bundled      | ✅ `nrel_reference/sacs_jackets/nrel_oc4/NREL_OC4.sacs` |
 | Source                 | Popko et al. (2012), Vorpahl et al. (2014), OC4 Phase I |
 
-### Example 4 — **Gunsan 4.2 MW (as built, full Op^3 pipeline)**
+### Example 4 — **SiteA 4 MW class (as built, full Op^3 pipeline)**
 
 | Field                  | Value |
 |------------------------|-------|
-| Rotor template         | `unison_u136` |
-| Tower template         | `gunsan_u136_tower` |
+| Rotor template         | `ref_4mw_owt` |
+| Tower template         | `site_a_rt1_tower` |
 | Foundation mode        | C (distributed BNWF) |
-| Manufacturer           | Unison U136 |
+| Manufacturer           | Reference 4 MW OWT |
 | Rated power            | 4.20 MW |
 | Rotor diameter         | 136 m |
 | Hub height             | 96.3 m above MSL |
@@ -185,7 +185,7 @@ on the committed code and data.
 | RNA mass               | 338,000 kg |
 | Foundation type        | Tripod, 3 × suction bucket |
 | Bucket diameter        | 8.0 m |
-| Bucket skirt length    | 9.3 m |
+| Bucket skirt length    | <REDACTED> |
 | Bucket spacing         | 16 m center-to-center, 120° |
 | Water depth            | 14 m MSL |
 | Soil                   | Undrained marine clay, s_u(z) = 15 + 20 z kPa |
@@ -196,39 +196,39 @@ on the committed code and data.
 | **Op^3 verified f₁**   | **0.235 Hz (-3.7% vs field)** |
 | Op^3 pushover max      | ~400,000 kN |
 | Op^3 transient OK      | ✓ |
-| OpenFAST deck bundled  | ✅ `gunsan_4p2mw/openfast_deck/` |
+| OpenFAST deck bundled  | ✅ `site_a_ref4mw/openfast_deck/` |
 | Source                 | Kim (2026) PhD dissertation, KEPCO project final report |
 
-### Example 5 — NREL 5 MW rotor + tower on Gunsan tripod foundation (Op^3 isolation test)
+### Example 5 — NREL 5 MW rotor + tower on SiteA tripod foundation (Op^3 isolation test)
 
 | Field                  | Value |
 |------------------------|-------|
 | Rotor template         | `nrel_5mw_baseline` (NREL inheritance) |
 | Tower template         | `nrel_5mw_tower` (NREL inheritance) |
 | Foundation mode        | C (distributed BNWF) |
-| Foundation type        | Same as Example 4 (Gunsan tripod, 8 m × 9.3 m × 3 buckets) |
-| Soil                   | Same as Example 4 (Gunsan undrained clay) |
+| Foundation type        | Same as Example 4 (SiteA tripod, 8 m × 9.3 m × 3 buckets) |
+| Soil                   | Same as Example 4 (SiteA undrained clay) |
 | Spring profile source  | Same as Example 4 |
 | Published f₁           | none (Op^3 prediction) |
 | **Op^3 verified f₁**   | **0.355 Hz** |
-| Interpretation         | Same NREL rotor+tower as Example 1 (0.361 Hz) on the Gunsan tripod foundation. The 0.006 Hz drop from fixed to tripod is the **pure foundation effect** for the NREL 5MW tower. |
+| Interpretation         | Same NREL rotor+tower as Example 1 (0.361 Hz) on the SiteA tripod foundation. The 0.006 Hz drop from fixed to tripod is the **pure foundation effect** for the NREL 5MW tower. |
 | Op^3 pushover OK       | ✓ |
 | Op^3 transient OK      | ✓ |
 | OpenFAST deck bundled  | n/a (Op^3 isolation test, structural-only) |
 | Source                 | Op^3 original composition |
 
-### Example 6 — Gunsan U136 tower on equivalent monopile (Op^3 isolation test)
+### Example 6 — SiteA RT1 tower on equivalent monopile (Op^3 isolation test)
 
 | Field                  | Value |
 |------------------------|-------|
-| Rotor template         | `unison_u136` |
-| Tower template         | `gunsan_u136_tower` |
+| Rotor template         | `ref_4mw_owt` |
+| Tower template         | `site_a_rt1_tower` |
 | Foundation mode        | B (6×6 lumped stiffness) |
 | Foundation source      | OC3 monopile K matrix (loaned from Example 2) |
 | Soil                   | OC3 generic dense sand |
 | Published f₁           | none (Op^3 prediction) |
 | **Op^3 verified f₁**   | **0.234 Hz** |
-| Interpretation         | Same Gunsan tower as Example 4 (0.235 Hz on tripod) on a hypothetical monopile. The negligible difference (0.001 Hz) means the Gunsan tower is the dominant flexibility — the foundation choice barely matters once the tower is this flexible. This is a **finding**: for slender Gunsan-class towers, the foundation effect is much smaller than for stiff NREL 5MW towers. |
+| Interpretation         | Same SiteA tower as Example 4 (0.235 Hz on tripod) on a hypothetical monopile. The negligible difference (0.001 Hz) means the SiteA tower is the dominant flexibility — the foundation choice barely matters once the tower is this flexible. This is a **finding**: for slender SiteA-class towers, the foundation effect is much smaller than for stiff NREL 5MW towers. |
 | Op^3 pushover max      | ~403,000 kN |
 | Op^3 transient OK      | ✓ |
 | Source                 | Op^3 original composition |
@@ -300,17 +300,17 @@ on the committed code and data.
 | **Op^3 verified f₁**   | **0.224 Hz** |
 | Source                 | INNWIND.EU D4.3.1 (von Borstel 2013) |
 
-### Example 11 — Gunsan U136 tower on equivalent jacket (Op^3 isolation test)
+### Example 11 — SiteA RT1 tower on equivalent jacket (Op^3 isolation test)
 
 | Field                  | Value |
 |------------------------|-------|
-| Rotor template         | `unison_u136` |
-| Tower template         | `gunsan_u136_tower` |
+| Rotor template         | `ref_4mw_owt` |
+| Tower template         | `site_a_rt1_tower` |
 | Foundation mode        | B (6×6 lumped stiffness) |
 | Foundation source      | OC4 jacket K matrix |
 | Published f₁           | none (Op^3 prediction) |
 | **Op^3 verified f₁**   | **0.236 Hz** |
-| Interpretation         | Completes the Gunsan tower foundation-variant triangle: tripod (0.235), monopile (0.234), jacket (0.236). All within 0.002 Hz of each other, confirming that the Gunsan tower's first mode is **dominated by the tower flexibility** and the foundation choice is a second-order effect for this slender tower. |
+| Interpretation         | Completes the SiteA tower foundation-variant triangle: tripod (0.235), monopile (0.234), jacket (0.236). All within 0.002 Hz of each other, confirming that the SiteA tower's first mode is **dominated by the tower flexibility** and the foundation choice is a second-order effect for this slender tower. |
 | Source                 | Op^3 original composition |
 
 ## Three-analysis verification table
@@ -322,14 +322,14 @@ The complete runtime verification of all 11 examples on all 3 analyses:
 | 1 | NREL 5MW baseline              |  ✓    |    ✓     |    ✓      | 0.361    |    880,000        |
 | 2 | NREL 5MW OC3 monopile          |  ✓    |    ✓     |    ✓      | 0.352    |    860,000        |
 | 3 | NREL 5MW OC4 jacket            |  ✓    |    ✓     |    ✓      | 0.358    |    870,000        |
-| 4 | **Gunsan 4.2 MW tripod**       |  ✓    |    ✓     |    ✓      | **0.235**|    400,000        |
-| 5 | NREL 5MW on Gunsan tripod      |  ✓    |    ✓     |    ✓      | 0.355    |    880,000        |
-| 6 | Gunsan tower on monopile       |  ✓    |    ✓     |    ✓      | 0.234    |    403,000        |
+| 4 | **SiteA 4 MW class tripod**       |  ✓    |    ✓     |    ✓      | **0.235**|    400,000        |
+| 5 | NREL 5MW on SiteA tripod      |  ✓    |    ✓     |    ✓      | 0.355    |    880,000        |
+| 6 | SiteA tower on monopile       |  ✓    |    ✓     |    ✓      | 0.234    |    403,000        |
 | 7 | IEA 15MW monopile              |  ✓    |    ✓     |    ✓      | 0.218    |  1,084,000        |
 | 8 | IEA 15MW VolturnUS floating    |  ✓    |    ✓     |    ✓      | 0.013    |      4,000        |
 | 9 | NREL OC4 SACS deck             |  ✓    |    ✓     |    ✓      | 0.358    |    901,000        |
 | 10| INNWIND 10MW SACS deck         |  ✓    |    ✓     |    ✓      | 0.224    |  1,140,000        |
-| 11| Gunsan tower on jacket         |  ✓    |    ✓     |    ✓      | 0.236    |    408,000        |
+| 11| SiteA tower on jacket         |  ✓    |    ✓     |    ✓      | 0.236    |    408,000        |
 
 **Total: 33/33 analyses passing.** Reproduce with:
 
@@ -343,7 +343,7 @@ The committed JSON output is at `validation/benchmarks/three_analyses_results.js
 
 The Op^3 builder uses **stick-model approximations** for the tower
 templates. The first natural frequencies it predicts are within 5%
-of the field-measured value for the dissertation subject (Gunsan,
+of the field-measured value for the dissertation subject (SiteA,
 0.235 vs 0.244 Hz) but show calibration gaps of 10-30% on the NREL
 benchmarks. This is expected — Op^3 is a **framework**, not a
 replacement for the calibrated NREL ElastoDyn decks. For
@@ -354,7 +354,7 @@ other variables held constant, the Op^3 stick-model approximation
 is sufficient and the relative differences across the 11 examples
 are physically meaningful.
 
-The calibration gap for Gunsan is the smallest because the Gunsan
+The calibration gap for SiteA is the smallest because the SiteA
 tower template was tuned during the dissertation work and the field
 measurement is direct.
 
@@ -367,7 +367,7 @@ API is unchanged by calibration improvements; only the values in
 
 | Site                | Profile               | s_u (kPa)                | γ' (kN/m³) | Source |
 |---------------------|------------------------|--------------------------|:----------:|--------|
-| Gunsan (Korea)      | Undrained marine clay  | 15 + 20·z (linear)       | 6.5 (sub.) | KEPCO project, CPT logs |
+| SiteA (Korea)      | Undrained marine clay  | 15 + 20·z (linear)       | 6.5 (sub.) | KEPCO project, CPT logs |
 | OC3 site            | Generic dense sand     | n/a (drained)            | 9.0 (sub.) | Jonkman & Musial (2010) |
 | OC4 site            | Generic dense sand     | n/a (drained)            | 9.0 (sub.) | Popko et al. (2012)     |
 | IEA-15 monopile     | North Sea sand         | n/a (drained)            | 9.0 (sub.) | Gaertner et al. (2020)  |
@@ -389,7 +389,7 @@ API is unchanged by calibration improvements; only the values in
 | OpenSeesPy                            | BSD 3-Clause       | UC Berkeley PEER, Zhu et al. |
 | OpenFAST v4.0.2                       | Apache 2.0         | NREL OpenFAST repo |
 | OptumGX                               | **Commercial**     | OptumCE academic license |
-| Gunsan 4.2 MW Unison U136             | Restricted (KEPCO) | Kim (2026) PhD dissertation, KEPCO final report |
+| SiteA 4 MW class Reference 4 MW OWT             | Restricted (KEPCO) | Kim (2026) PhD dissertation, KEPCO final report |
 | SACS NREL OC4 deck                    | NREL/Apache 2.0    | Bentley academic example set |
 | SACS INNWIND deck                     | EU FP7 public      | INNWIND.EU D4.3.1 |
 

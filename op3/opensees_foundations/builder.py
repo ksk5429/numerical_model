@@ -115,12 +115,12 @@ TOWER_TEMPLATES = {
         "density_kg_m3": 8500.0,
         "n_elements": 15,
     },
-    # The Gunsan template is replaced below by a custom builder that
-    # uses the real 27-segment MMB tower geometry instead of a linear
+    # The SiteA template is replaced below by a custom builder that
+    # uses the real 27-segment ProjA tower geometry instead of a linear
     # taper. The entry here is kept for the n_elements reference only;
     # the real section properties are read by
-    # op3.opensees_foundations.gunsan_real_tower.GUNSAN_SEGMENTS.
-    "gunsan_u136_tower": {
+    # op3.opensees_foundations.site_a_real_tower.SITE_A_SEGMENTS.
+    "site_a_rt1_tower": {
         "base_elev_m": 23.6,
         "hub_height_m": 96.3,
         "base_diameter_m": 4.2,
@@ -151,19 +151,19 @@ TOWER_TEMPLATES = {
 ROTOR_MASS_KG = {
     "nrel_5mw_baseline":   314_520.0,   # RNA mass
     "iea_15mw_rwt":        1_017_000.0,
-    "unison_u136":         338_000.0,   # MMB: 169 nac + 110.5 rotor + 58.5 blades
+    "ref_4mw_owt":         338_000.0,   # ProjA: 169 nac + 110.5 rotor + 58.5 blades
     "nrel_1.72_103":       84_000.0,
     "nrel_2.8_127":        165_000.0,
     "vestas_v27":          10_000.0,
 }
 
 # RNA rotational inertia [kg*m^2] about the 3 axes (x=roll, y=pitch, z=yaw).
-# Computed from the NREL 5MW reference report and the MMB drawings.
+# Computed from the NREL 5MW reference report and the ProjA drawings.
 # Used when no ElastoDyn file is available for the rotor.
 RNA_INERTIA_KGM2 = {
-    "unison_u136": {
+    "ref_4mw_owt": {
         # Derived from 338 t total, rotor radius 66.5 m, nacelle dims
-        # per MMB drawings. Hub inertia 4.15e5 kg m^2 about rotor axis;
+        # per ProjA drawings. Hub inertia 4.15e5 kg m^2 about rotor axis;
         # nacelle yaw inertia 2.8e6 kg m^2.
         "I_x": 1.6e6,    # roll
         "I_y": 4.15e5,   # pitch (rotor spin axis)
@@ -202,8 +202,8 @@ def build_opensees_model(tower_model: "TowerModel") -> None:
             n_segments=int(tpl.get("n_elements", 20)),
             ed_tower=ed_tower,
         )
-    elif tpl.get("real_segments") and tower_model.tower_name == "gunsan_u136_tower":
-        hub_node = _build_tower_stick_gunsan_real(ops, tpl, base_node)
+    elif tpl.get("real_segments") and tower_model.tower_name == "site_a_rt1_tower":
+        hub_node = _build_tower_stick_site_a_real(ops, tpl, base_node)
     else:
         hub_node = _build_tower_stick(ops, tpl, base_node)
 
@@ -369,11 +369,11 @@ def _build_tower_stick(ops, tpl: dict, base_node: int) -> int:
     return base_node + n_el
 
 
-def _build_tower_stick_gunsan_real(ops, tpl: dict, base_node: int) -> int:
+def _build_tower_stick_site_a_real(ops, tpl: dict, base_node: int) -> int:
     """
-    Build the Gunsan 4.2 MW tower stick using the real 27-segment
-    MMB construction drawing geometry instead of a linear taper.
-    Reads GUNSAN_SEGMENTS from op3.opensees_foundations.gunsan_real_tower
+    Build the SiteA 4 MW class tower stick using the real 27-segment
+    ProjA construction drawing geometry instead of a linear taper.
+    Reads SITE_A_SEGMENTS from op3.opensees_foundations.site_a_real_tower
     and creates one elasticBeamColumn element per real tower segment
     with its actual wall thickness, outer diameter, and mass per
     unit length.
@@ -382,7 +382,7 @@ def _build_tower_stick_gunsan_real(ops, tpl: dict, base_node: int) -> int:
     a -9.6% error against the field-measured f1 = 0.244 Hz.
     """
     import math
-    from op3.opensees_foundations.gunsan_real_tower import section_properties
+    from op3.opensees_foundations.site_a_real_tower import section_properties
 
     E = tpl["E_Pa"]
     G = tpl["G_Pa"]

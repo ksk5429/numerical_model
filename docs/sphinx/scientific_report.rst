@@ -142,7 +142,7 @@ currently unavailable), and CalcOption = 3 (REDWIN DLL). Op\ :sup:`3`
 exports any foundation handle directly to the CalcOption = 1 format
 via ``op3.openfast_coupling.soildyn_export.write_soildyn_input``.
 
-We demonstrated this end-to-end on the Gunsan 4.2 MW tripod deck: a
+We demonstrated this end-to-end on the SiteA 4 MW class tripod deck: a
 five-second coupled simulation with 8 modules (ElastoDyn + InflowWind
 + AeroDyn + ServoDyn + SeaState + HydroDyn + SubDyn + SoilDyn with
 Op\ :sup:`3` PISA-derived 6x6 K) ran to completion in 1.89 minutes wall
@@ -198,7 +198,7 @@ Four turbines, all from published sources:
      - 0.2766
      - Jonkman & Musial 2010 NREL/TP-500-47535 Tab 7-3
      - -0.4%
-   * - Gunsan 4.2 MW tripod
+   * - SiteA 4 MW class tripod
      - 0.2350
      - 0.2440
      - PhD Ch.5 field OMA, 20 039 RANSAC windows
@@ -353,7 +353,7 @@ is the first result.
      - 9
      - 4
      - 35 / 36
-     - Single failure is the Gunsan 1P resonance flag (real
+     - Single failure is the SiteA 1P resonance flag (real
        engineering finding, not a bug)
    * - IEC 61400-3-1 (2019)
      - 7 + 5 DLC
@@ -364,7 +364,7 @@ is the first result.
 The single DNV-ST-0126 failure is documented in the DNV conformance
 JSON artifact and highlighted in the dissertation Chapter 7 as
 motivation for the prescriptive maintenance framework: any scour
-event lowering Gunsan's first frequency by more than ~10% pushes
+event lowering SiteA's first frequency by more than ~10% pushes
 the turbine into 1P resonance territory.
 
 4.5 Reproducibility
@@ -375,7 +375,7 @@ The Op\ :sup:`3` reproducibility snapshot pins six canonical outputs:
 1. The full 6x6 PISA K matrix for a reference (D=8m, L=30m, 3-layer)
    configuration.
 2. The first three eigenvalues for NREL 5 MW fixed base, NREL 5 MW
-   OC3, Gunsan 4.2 MW, and IEA 15 MW monopile.
+   OC3, SiteA 4 MW class, and IEA 15 MW monopile.
 3. A SHA-256 hash of a deterministic SoilDyn export (.dat file
    bytes).
 
@@ -533,8 +533,8 @@ validation report.
   (overnight run scheduled)
 * **DLC 6.1 with proper parked controller** (scaffold already in
   ``scripts/build_dlc61_parked_deck.py``)
-* **Mode D Gunsan calibration** pending OptumGX dissipation export
-  for the Gunsan tripod foundation
+* **Mode D SiteA calibration** pending OptumGX dissipation export
+  for the SiteA tripod foundation
 * **Custom SoilDyn DLL** implementing Mode D (CalcOption = 3
   pathway) for multi-point tripod coupling
 * **JOSS submission** -- paper draft is in ``paper/paper.md``,

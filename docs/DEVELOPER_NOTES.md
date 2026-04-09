@@ -83,8 +83,8 @@ op3/
 tests/                          14 test modules, 121 active V&V gates
 scripts/                        runners, audits, regressions
 examples/                       11 turbine TowerModel build.py files
-gunsan_4p2mw/openfast_deck/     v4 ElastoDyn-only Gunsan deck
-gunsan_4p2mw/openfast_deck_v5/  v5 OC3-tripod-derived Gunsan deck (with SoilDyn variant)
+site_a_ref4mw/openfast_deck/     v4 ElastoDyn-only SiteA deck
+site_a_ref4mw/openfast_deck_v5/  v5 OC3-tripod-derived SiteA deck (with SoilDyn variant)
 nrel_reference/                 NREL 5MW + IEA 15MW + IEA-scaled + Vestas + SACS jackets
 validation/benchmarks/          calibration / DNV / IEC / OC6 / PISA cross-val JSON
 docs/                           Sphinx + tutorials + Mode D notes + developer notes
@@ -179,7 +179,7 @@ to specific paper / table / clause:
 |---|---|---|---|
 | NREL 5 MW fixed | 0.316 Hz | 0.324 Hz | Jonkman 2009, Tab 9-1 (-2.5%) |
 | NREL 5 MW OC3 monopile | 0.275 Hz | 0.277 Hz | Jonkman & Musial 2010, Tab 7-3 (**-0.4%**) |
-| Gunsan 4.2 MW tripod | 0.235 Hz | 0.244 Hz | PhD Ch.5 field OMA (-3.7%) |
+| SiteA 4 MW class tripod | 0.235 Hz | 0.244 Hz | PhD Ch.5 field OMA (-3.7%) |
 | IEA 15 MW monopile | 0.188 Hz | 0.170 Hz | Gaertner 2020, Tab 5.1 (+10.6%) |
 
 The script exits non-zero if any example exceeds its tolerance band.
@@ -506,11 +506,11 @@ and v4 — see "Binary version archaeology" below.
 
 Other features:
 
-- Deck registry for 5 runnable examples (gunsan, oc3, oc4,
+- Deck registry for 5 runnable examples (site_a, oc3, oc4,
   iea15_monopile, iea15_volturnus).
 - Static deck validation reuses `verify_nrel_models.parse_fst_flags()`,
   with two important refinements: (a) `unused`/`none` strings are
-  skipped (Gunsan deck has `CompXxx=0` → all sub-files literally
+  skipped (SiteA deck has `CompXxx=0` → all sub-files literally
   named `unused`), (b) basename fallback search in the deck's parent
   and grandparent directories for the IEA 15 MW `_shared_*` directory
   rename quirk.
@@ -523,11 +523,11 @@ Other features:
 ### Binary version archaeology (lessons learned the hard way)
 
 This was the hardest debugging session of the entire Track C work.
-The Gunsan deck heading says "OpenFAST v4 format" but it actually
+The SiteA deck heading says "OpenFAST v4 format" but it actually
 includes `NRotors`, `CompSoil`, `MirrorRotor`, and the new ElastoDyn
 `PtfmYDOF` field, all of which are v5+ extensions.
 
-| Binary | Result on Gunsan deck | Reason |
+| Binary | Result on SiteA deck | Reason |
 |---|---|---|
 | v4.0.2 | `Invalid numerical input ... CompServo` | NRotors / CompSoil unknown |
 | v4.1.2 | same | same |
@@ -535,23 +535,23 @@ includes `NRotors`, `CompSoil`, `MirrorRotor`, and the new ElastoDyn
 | v5.0.0 | `Invalid logical input ... PtfmYDOF` | progress! .fst parsed; ElastoDyn dies |
 | **v5.0.0 (with v5 r-test deck)** | **runs end-to-end ✓** | matched format |
 
-**Resolution:** rebuild the Gunsan deck against the v5.0.0 OC3 Tripod
-r-test as the canonical template (`gunsan_4p2mw/openfast_deck_v5/`).
-The v4 Gunsan deck (`gunsan_4p2mw/openfast_deck/`) is preserved as a
+**Resolution:** rebuild the SiteA deck against the v5.0.0 OC3 Tripod
+r-test as the canonical template (`site_a_ref4mw/openfast_deck_v5/`).
+The v4 SiteA deck (`site_a_ref4mw/openfast_deck/`) is preserved as a
 historical artifact.
 
-### Task 4.1+ — v5 Gunsan deck
+### Task 4.1+ — v5 SiteA deck
 
-**Directory:** `gunsan_4p2mw/openfast_deck_v5/`
+**Directory:** `site_a_ref4mw/openfast_deck_v5/`
 
 Built by copying `5MW_OC3Trpd_DLL_WSt_WavesReg/` from the v5.0.0
 r-test, renaming all files from `NRELOffshrBsline5MW_OC3Tripod_*` to
-`Gunsan-4p2MW_*`, replacing the title heading, and shortening TMax to
+`SiteA-Ref4MW_*`, replacing the title heading, and shortening TMax to
 5 s for verification runs. The shared `5MW_Baseline/` directory is
 copied alongside (29 MB; `.gitignore`'d to keep the repo small —
 users bootstrap it via `git clone --branch v5.0.0 OpenFAST/r-test`).
 
-**End-to-end test result:** The OC3 Tripod r-test (and its Gunsan
+**End-to-end test result:** The OC3 Tripod r-test (and its SiteA
 copy) runs to completion with all 8 modules engaged: ElastoDyn +
 InflowWind + AeroDyn + ServoDyn + SeaState + HydroDyn + SubDyn (Craig-
 Bampton 948 DOF → 12 modes + 6 DOFs) + DISCON.dll Bladed controller.
@@ -581,8 +581,8 @@ weighted formulation).
 
 **End-to-end SoilDyn run:**
 
-- Generated `Gunsan-4p2MW_SoilDyn.dat` from `pisa_pile_stiffness_6x6()`
-  with the Gunsan tripod soil profile
+- Generated `SiteA-Ref4MW_SoilDyn.dat` from `pisa_pile_stiffness_6x6()`
+  with the SiteA tripod soil profile
 - Coupling location: SubDyn joint 1 at (-24.80, 0, -45.0) (one of the
   three tripod base nodes)
 - OpenFAST v5.0.0 ran the full coupled simulation (8 modules + Op^3
@@ -645,15 +645,15 @@ Implements 9 clauses (C1–C9) from DNV-ST-0126 §4.5.4 / §4.5.5 / §4.5.6
 informative:
 
 ```
-[XX] C1  Gunsan 4.2 MW 1P frequency separation: f1=0.235 Hz, f_1P=0.220 Hz
+[XX] C1  SiteA 4 MW class 1P frequency separation: f1=0.235 Hz, f_1P=0.220 Hz
          |Δf|/f_1P = 6.8%, required ≥ 10%
 ```
 
-The Gunsan tripod sits 6.8% above its rotor 1P frequency — within
+The SiteA tripod sits 6.8% above its rotor 1P frequency — within
 the IEC 5% but below the stricter DNV 10%. This is a physical
 constraint of the as-built site and motivates the prescriptive
 maintenance framework: any scour event lowering f1 by ~10% pushes
-Gunsan into 1P resonance.
+SiteA into 1P resonance.
 
 ### Task 4.5 — IEC 61400-3 conformance scoping
 
@@ -661,7 +661,7 @@ Gunsan into 1P resonance.
 
 Audits structural-design (§7) and foundation (§10) provisions plus a
 DLC coverage matrix for §8. **Result:** structural and foundation
-provisions all PASS for all 4 examples (notably Gunsan passes the
+provisions all PASS for all 4 examples (notably SiteA passes the
 IEC 5% 1P-separation rule). 16 "hard FAIL"s are entirely DLC
 coverage gaps for DLC 1.3 / 1.4 / 6.1 / 6.2, which are explicit
 backlog items, not bugs.
@@ -752,7 +752,7 @@ stiffness parameter against a published reference in the Op^3
 codebase. The posterior is centered essentially at 1.0 (the
 published values are correct) with a 13% credible interval at the
 90% level. The same harness can be retargeted to any of the 11
-examples or to the Gunsan field-measured 0.244 Hz.
+examples or to the SiteA field-measured 0.244 Hz.
 
 ---
 
@@ -769,7 +769,7 @@ A pinned snapshot test harness with 6 canonical outputs:
 | `pisa_8m_30m_3layer` | All 36 entries of a 6×6 PISA K matrix |
 | `eigen_01_nrel_5mw_baseline` | First 3 frequencies of example 01 |
 | `eigen_02_nrel_5mw_oc3_monopile` | First 3 frequencies of example 02 |
-| `eigen_04_gunsan_4p2mw_tripod` | First 3 frequencies of example 04 |
+| `eigen_04_site_a_ref4mw_tripod` | First 3 frequencies of example 04 |
 | `eigen_07_iea_15mw_monopile` | First 3 frequencies of example 07 |
 | `soildyn_export` | SHA-256 hash of a deterministic SoilDyn .dat |
 
@@ -911,8 +911,8 @@ Conventional commit prefixes (`deps:`, `ci:`).
 
 | OpenFAST end-to-end | Status |
 |---|---|
-| Gunsan v5 tripod (8 modules) | ✓ runs normally |
-| Gunsan v5 + SoilDyn (Op^3 PISA) | ✓ runs normally |
+| SiteA v5 tripod (8 modules) | ✓ runs normally |
+| SiteA v5 + SoilDyn (Op^3 PISA) | ✓ runs normally |
 | DLC 1.1 partial (8/12/18 m/s) | ✓ 3/3 PASS |
 | DLC 6.1 parked (50 m/s) | ✓ pipeline OK; physical PARTIAL |
 
@@ -961,8 +961,8 @@ Conventional commit prefixes (`deps:`, `ci:`).
   `op3.openfast_coupling.soildyn_export.write_soildyn_multipoint`.
   A custom CalcOption=3 DLL implementing the Mode D dissipation-
   weighted pathway is the natural target for the tripod case.
-- **Mode D Gunsan calibration**: needs an OptumGX dissipation field
-  for the Gunsan tripod (the only soil profile in `op3/config/` that
+- **Mode D SiteA calibration**: needs an OptumGX dissipation field
+  for the SiteA tripod (the only soil profile in `op3/config/` that
   doesn't yet have a dissipation export). Infrastructure ready,
   awaiting OptumGX runtime.
 
@@ -973,7 +973,7 @@ Conventional commit prefixes (`deps:`, `ci:`).
   interacts awkwardly with BNWF anchor topology; the Mode C → 6×6
   closure is done analytically via the Winkler integral instead. See
   `tests/test_backlog_closure.py::_condense_spring_profile_to_6x6`.
-- The v4 Gunsan deck (`gunsan_4p2mw/openfast_deck/`) is preserved as a
+- The v4 SiteA deck (`site_a_ref4mw/openfast_deck/`) is preserved as a
   historical artifact but does not run on any current OpenFAST binary.
   Use the v5 deck (`openfast_deck_v5/`) for all simulation work.
 - The shared 5MW_Baseline directory is gitignored (29 MB) and must be
@@ -981,7 +981,7 @@ Conventional commit prefixes (`deps:`, `ci:`).
   ```
   mkdir -p tools/r-test_v5 && cd tools/r-test_v5
   git clone --depth=1 --branch v5.0.0 https://github.com/OpenFAST/r-test.git
-  cp -r r-test/glue-codes/openfast/5MW_Baseline ../../gunsan_4p2mw/
+  cp -r r-test/glue-codes/openfast/5MW_Baseline ../../site_a_ref4mw/
   ```
 
 ---

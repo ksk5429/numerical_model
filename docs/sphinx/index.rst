@@ -82,7 +82,7 @@ Run the bundled examples
 
    python scripts/test_three_analyses.py
    python scripts/calibration_regression.py
-   python scripts/run_openfast.py gunsan
+   python scripts/run_openfast.py site_a
    python scripts/run_dlc11_partial.py
    python scripts/dnv_st_0126_conformance.py --all
 

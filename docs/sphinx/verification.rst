@@ -78,7 +78,7 @@ Calibration regression
      - 0.277
      - Jonkman & Musial 2010 NREL/TP-500-47535
      - -0.4%
-   * - Gunsan 4.2 MW tripod
+   * - SiteA 4 MW class tripod
      - 0.235
      - 0.244
      - PhD Ch. 5 field OMA
@@ -93,7 +93,7 @@ Standards conformance
 ---------------------
 
 DNV-ST-0126 audit (9 clauses x 4 examples = 36 checks): **35/36 PASS**.
-The single failure is the Gunsan tripod 1P frequency separation
+The single failure is the SiteA tripod 1P frequency separation
 (6.8% < 10% required), which is a real engineering finding.
 
 IEC 61400-3 audit (12 clauses x 4 examples = 48 checks): structural

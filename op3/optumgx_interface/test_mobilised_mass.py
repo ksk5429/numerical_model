@@ -12,7 +12,7 @@ import re
 import time
 import json
 
-D = 8.0; R = D/2; S = 9.3
+D = 8.0; R = D/2; S = float('nan')  # <REDACTED>
 N_sectors = 12
 L_dom = 20*R; H_dom = 15*R
 su0 = 15.0; k_su = 20.0; gamma = 10.0; a_int = 0.67

@@ -6,7 +6,7 @@ abstract: >-
   for offshore wind turbines that connects OptumGX 3D FE limit analysis,
   OpenSeesPy 1D beam-on-nonlinear-Winkler-foundation structural dynamics,
   and OpenFAST aero-hydro-servo-elastic whole-turbine simulation into a
-  single verifiable pipeline. Developed around the Gunsan 4.2 MW tripod
+  single verifiable pipeline. Developed around the SiteA 4 MW class tripod
   suction bucket offshore wind turbine and benchmarked against the
   complete NREL reference wind turbine library. Offers four selectable
   foundation modules in OpenSeesPy (fixed, 6x6 lumped stiffness,
@@ -37,7 +37,7 @@ keywords:
   - PISA
   - soil-structure interaction
   - NREL reference wind turbine
-  - Gunsan 4.2 MW
+  - SiteA 4 MW class
 references:
   - type: thesis
     authors:

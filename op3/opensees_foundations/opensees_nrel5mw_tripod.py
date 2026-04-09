@@ -5,8 +5,8 @@ Builds the same structure as SubDyn in OpenFAST, for comparison.
 
 Purpose:
   1. Validate: OpenSeesPy eigenvalue vs OpenFAST eigenvalue
-  2. Framework: prove OpenSeesPy can model any tripod (not just Gunsan)
-  3. Compare: NREL 5MW fixed base vs Gunsan 4.2MW with SSI springs
+  2. Framework: prove OpenSeesPy can model any tripod (not just SiteA)
+  3. Compare: NREL 5MW fixed base vs SiteA 4MW with SSI springs
 
 Structure from: NRELOffshrBsline5MW_OC3Tripod_SubDyn.dat
   - 158 joints
@@ -257,7 +257,7 @@ except Exception as e:
         freqs = [0] * 6
 
 # ═══════════════════════════════════════════════════════════════════
-# COMPARISON WITH OPENFAST AND GUNSAN
+# COMPARISON WITH OPENFAST AND SITE_A
 # ═══════════════════════════════════════════════════════════════════
 
 print(f"\n{'='*65}")
@@ -274,18 +274,18 @@ print(f"    Reference (OC3):  {f1_ref:.4f} Hz")
 if freqs[0] > 0:
     print(f"    Error:            {abs(freqs[0] - f1_ref) / f1_ref * 100:.1f}%")
 
-print(f"\n  Gunsan 4.2MW (v4 dissipation):")
+print(f"\n  SiteA 4MW (v4 dissipation):")
 print(f"    OpenSeesPy f1:    0.2367 Hz")
 print(f"    Field measured:   0.2436 Hz")
 print(f"    Error:            2.8%")
 
 print(f"\n  Key differences:")
 print(f"    NREL: fixed base at z=-45m (no soil flexibility)")
-print(f"    Gunsan: BNWF springs from OptumGX (real SSI)")
+print(f"    SiteA: BNWF springs from OptumGX (real SSI)")
 print(f"    NREL: 158 SubDyn joints + tower")
-print(f"    Gunsan: 52 structural + 216 spring nodes")
+print(f"    SiteA: 52 structural + 216 spring nodes")
 
 print(f"\n  Both models built in OpenSeesPy.")
-print(f"  The Gunsan model adds soil-structure interaction")
+print(f"  The SiteA model adds soil-structure interaction")
 print(f"  that the NREL reference completely lacks.")
 print(f"{'='*65}")

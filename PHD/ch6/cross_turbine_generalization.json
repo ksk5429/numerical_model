@@ -1,0 +1,63 @@
+{
+  "task": "D - Cross-turbine generalization",
+  "n_references": 6,
+  "results": [
+    {
+      "example": "01_nrel_5mw_baseline",
+      "f1_op3_hz": 0.31580944473317624,
+      "f1_ref_hz": 0.324,
+      "error_abs_hz": -0.008190555266823774,
+      "error_rel_pct": -2.5279491564270904,
+      "source": "Jonkman 2009 NREL/TP-500-38060 Tab 9-1",
+      "notes": "Fixed-base 1st fore-aft tower bending mode."
+    },
+    {
+      "example": "02_nrel_5mw_oc3_monopile",
+      "f1_op3_hz": 0.27535572228743144,
+      "f1_ref_hz": 0.2766,
+      "error_abs_hz": -0.0012442777125685756,
+      "error_rel_pct": -0.44984732920049725,
+      "source": "Jonkman & Musial 2010 NREL/TP-500-47535 Tab 7-3",
+      "notes": "Coupled tower+monopile 1st mode fixed at mudline."
+    },
+    {
+      "example": "04_gunsan_4p2mw_tripod",
+      "f1_op3_hz": 0.28243259318571945,
+      "f1_ref_hz": 0.244,
+      "error_abs_hz": 0.038432593185719455,
+      "error_rel_pct": 15.751062781032562,
+      "source": "This dissertation Ch. 5 field OMA (20039 RANSAC windows)",
+      "notes": "Operational modal analysis of real Gunsan 4.2 MW OWT."
+    },
+    {
+      "example": "07_iea_15mw_monopile",
+      "f1_op3_hz": 0.1880530807907488,
+      "f1_ref_hz": 0.17,
+      "error_abs_hz": 0.0180530807907488,
+      "error_rel_pct": 10.619459288675763,
+      "source": "Gaertner et al. 2020 NREL/TP-5000-75698 Tab 5.1",
+      "notes": "System-level with monopile + soil flexibility."
+    },
+    {
+      "example": "03_nrel_5mw_oc4_jacket",
+      "f1_op3_hz": 0.3130746643058299,
+      "f1_ref_hz": 0.313,
+      "error_abs_hz": 7.466430582991901e-05,
+      "error_rel_pct": 0.023854410808280834,
+      "source": "Popko et al. 2014 OC4 Phase I final report",
+      "notes": "Coupled tower+jacket 1st bending mode."
+    },
+    {
+      "example": "08_iea_15mw_volturnus",
+      "f1_op3_hz": 0.011763197012926389,
+      "f1_ref_hz": 0.105,
+      "error_abs_hz": -0.09323680298707361,
+      "error_rel_pct": -88.79695522578439,
+      "source": "Allen et al. 2020 NREL/TP-5000-76773 Tab 5.2",
+      "notes": "Semi-submersible with mooring; very low f1."
+    }
+  ],
+  "mean_abs_error_pct": 19.694854698654762,
+  "bias_pct": -10.896729205149228,
+  "max_abs_error_pct": 88.79695522578439
+}

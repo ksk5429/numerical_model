@@ -1,5 +1,5 @@
 # SSOT_REAL_FINAL.txt
-# INTEGRATED STRUCTURAL MODEL: MMB OFFSHORE WIND TURBINE
+# INTEGRATED STRUCTURAL MODEL: ProjA OFFSHORE WIND TURBINE
 # SOURCES: 
 #   1. Geometry: Autocad Coordinate File
 #   2. Properties: Manufacturer Drawing  (Primary Truth)

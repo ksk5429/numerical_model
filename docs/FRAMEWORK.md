@@ -139,7 +139,7 @@ model = build_tower_model(
 
 The 6×6 matrix encodes translational stiffness `(Kxx, Kyy, Kzz)`,
 rotational stiffness `(Krx, Kry, Krz)`, and translational-rotational
-coupling terms. For the Gunsan tripod, all three foundation nodes
+coupling terms. For the SiteA tripod, all three foundation nodes
 are condensed into a single equivalent matrix at the tower base
 using the **static condensation** procedure in
 `op3/openfast_coupling/opensees_stiffness_extractor.py`.
@@ -269,7 +269,7 @@ K_ssi = model.extract_6x6_stiffness(condense_to_node='tower_base')
 
 # Write SubDyn input file
 write_subdyn_file(
-    'gunsan_4p2mw/openfast_deck/Gunsan-4p2MW_SubDyn.dat',
+    'site_a_ref4mw/openfast_deck/SiteA-Ref4MW_SubDyn.dat',
     K_ssi=K_ssi,
     scour_depth=0.0,
 )
@@ -311,7 +311,7 @@ profile, material properties, environmental conditions — lives in
 exactly one file:
 
 ```
-op3/config/gunsan_site.yaml
+op3/config/site_a_site.yaml
 ```
 
 This is a strict convention. No constants are hardcoded in any
@@ -320,7 +320,7 @@ SSOT YAML via:
 
 ```python
 from op3.config import load_site_config
-cfg = load_site_config('op3/config/gunsan_site.yaml')
+cfg = load_site_config('op3/config/site_a_site.yaml')
 D = cfg['foundation']['bucket_diameter_m']
 L = cfg['foundation']['skirt_length_m']
 ```
@@ -356,9 +356,9 @@ The framework has four independent verification levels:
    D should agree within ~5% for the same input data; Mode A (fixed)
    provides the upper bound.
 
-4. **NREL benchmark comparison.** The Gunsan model is benchmarked
+4. **NREL benchmark comparison.** The SiteA model is benchmarked
    against the NREL 5MW OC3 monopile deck in
-   `validation/benchmarks/GUNSAN_VS_NREL.md`. The Gunsan model's
+   `validation/benchmarks/SITE_A_VS_NREL.md`. The SiteA model's
    tower + rotor structural dynamics should behave qualitatively
    like the OC3 model's in any mode where both models share the
    same physical setup.
@@ -369,12 +369,12 @@ The framework is designed so that porting to a new turbine touches
 only the SSOT configuration and the OptumGX upstream step. Specific
 steps:
 
-1. Create a new YAML file modeled on `op3/config/gunsan_site.yaml`
+1. Create a new YAML file modeled on `op3/config/site_a_site.yaml`
    with the new turbine's geometry, soil profile, rotor mass, tower
    properties, and water depth.
 2. Run OptumGX over the new parameter envelope (requires a license)
    and write the output CSVs to `data/fem_results/` with the same
-   schema as the committed Gunsan CSVs.
+   schema as the committed SiteA CSVs.
 3. Run the OpenSeesPy foundation module of choice (A-D) with the
    new SSOT YAML. The OpenSeesPy code itself does not need to
    change.

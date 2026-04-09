@@ -150,7 +150,7 @@ Expected output:
 
     18/19 PASS  |  0 FAIL  |  1 optional  |  ~42 s total
 
-The single optional failure is the Gunsan 1P resonance flag on
+The single optional failure is the SiteA 1P resonance flag on
 DNV-ST-0126 audit -- this is a documented real engineering finding,
 not a software bug. See :doc:`verification` for the full explanation.
 
@@ -185,10 +185,10 @@ OpenSeesPy eigen crashes with ``WARNING: symbolic analysis returns -8``
   ``ops.wipe()`` before the rebuild. The ``tests/conftest.py`` autouse
   fixture handles this automatically for pytest runs.
 
-OpenFAST v5 rejects a Gunsan v4 deck with ``Invalid numerical input``
+OpenFAST v5 rejects a SiteA v4 deck with ``Invalid numerical input``
   The v4 deck format differs from v5 (missing ``NRotors``,
   ``CompSoil``, ``MirrorRotor``). Use the v5 deck under
-  ``gunsan_4p2mw/openfast_deck_v5/`` instead.
+  ``site_a_ref4mw/openfast_deck_v5/`` instead.
 
 Korean UTF-8 text prints as ``mojibake`` in stdout
   Set ``PYTHONUTF8=1`` before running any script. This enables Python

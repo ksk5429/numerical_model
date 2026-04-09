@@ -24,7 +24,7 @@ development plan.
   (`op3/standards/hssmall.py`), and Mode D dissipation-weighted
   formulation wired through `_attach_distributed_bnwf`.
 - **Phase 4 OpenFAST**: end-to-end runner with binary discovery,
-  v5.0.0 Gunsan deck built from the OC3 Tripod r-test, SoilDyn export
+  v5.0.0 SiteA deck built from the OC3 Tripod r-test, SoilDyn export
   bridge (`op3/openfast_coupling/soildyn_export.py`), DLC 1.1 partial
   sweep, DLC 6.1 parked extreme runner, DNV-ST-0126 + IEC 61400-3
   conformance audits.
@@ -48,8 +48,8 @@ development plan.
 
 ### Verified
 
-- OpenFAST v5.0.0 Gunsan tripod end-to-end
-- OpenFAST v5.0.0 Gunsan + SoilDyn with Op^3 PISA-derived 6x6 stiffness
+- OpenFAST v5.0.0 SiteA tripod end-to-end
+- OpenFAST v5.0.0 SiteA + SoilDyn with Op^3 PISA-derived 6x6 stiffness
 - DLC 1.1 partial sweep at U = {8, 12, 18} m/s
 
 ### Backlog (tracked, not blocking)
