@@ -4,6 +4,58 @@ All notable changes to Op^3 are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this
 project uses [Semantic Versioning](https://semver.org/).
 
+## [1.0.0-rc1] - 2026-04-09
+
+First release candidate of the integrated tool. Ships all Tier-1
+deliverables of the Option C2 industrial-release plan.
+
+### Added
+
+- **op3_viz web application**: six-tab Dash + Plotly 3D viewer
+  (3D Viewer, Bayesian Scour, Mode D, PCE Surrogate, DLC 1.1
+  Time-series, **Compliance & Actions**).
+- **.op3proj project file format** (): YAML
+  schema v1.0 with round-trip save/load, schema-version validation,
+  and dataclass-based  /  /  / 
+  /  /  /  subrecords.
+- **Sample project library**: three committed samples under
+   covering Gunsan 4.2 MW (private), NREL 5 MW
+  on OC3 monopile (public), and IEA 15 MW on monopile (public).
+- **Report generator** (): Quarto-backed DOCX +
+  PDF export from any  state, with provenance footer.
+- **Compliance tab wiring** (): in-UI
+  buttons that dispatch the existing DNV-ST-0126 and IEC 61400-3
+  conformance scripts and the DLC 1.1 overnight runner.
+- **PyInstaller standalone build** (): onedir
+  Windows build of the full application; does not bundle the
+  private data tree, which stays behind the 
+  environment variable.
+- **Test coverage**: suite grew from 15 to 20 passing tests with
+  the addition of .
+
+### Changed
+
+- Version bump  in  and
+  .
+- README and CITATION.cff reference the new integrated framework
+  title and the  tag.
+
+### Removed
+
+- **Korean-language UI locale scope** was dropped from Phase 2 at
+  user direction. The application is English-only for the rc1
+  milestone; a separate i18n layer is not part of v1.0.
+
+### Fixed
+
+- IP-scrub follow-up: removed seven residual proprietary CSVs
+  (, ,
+  , ,
+  ) that had survived the Phase A
+  rename-only pass. The framework now raises a clear
+   on public clones without the private data
+  tree instead of falling back to synthetic values.
+
 ## [0.3.0] - 2026-04-08
 
 The "Track C industry-grade" release. Closes Phases 1-7 of the Op^3
