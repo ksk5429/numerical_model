@@ -1,0 +1,34 @@
+[
+  {
+    "epoch": 1,
+    "mean": 0.1293,
+    "std": 0.09,
+    "p05": 0.0068,
+    "p95": 0.2952,
+    "action": "continue_monitoring"
+  },
+  {
+    "epoch": 2,
+    "mean": 0.1348,
+    "std": 0.0807,
+    "p05": 0.0126,
+    "p95": 0.2756,
+    "action": "continue_monitoring"
+  },
+  {
+    "epoch": 3,
+    "mean": 0.3585,
+    "std": 0.0408,
+    "p05": 0.2856,
+    "p95": 0.4193,
+    "action": "inspect"
+  },
+  {
+    "epoch": 4,
+    "mean": 0.4414,
+    "std": 0.0377,
+    "p05": 0.3812,
+    "p95": 0.5048,
+    "action": "inspect"
+  }
+]

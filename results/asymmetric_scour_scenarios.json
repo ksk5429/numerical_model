@@ -1,0 +1,41 @@
+[
+  {
+    "f_FA1_Hz": 0.24358,
+    "f_SS1_Hz": 0.24328,
+    "split_Hz": 0.00031,
+    "split_pct": 0.125,
+    "asymmetry_ratio": 1.2,
+    "detectable": false,
+    "oma_precision_Hz": 0.001,
+    "scenario": "Mild asymmetry",
+    "scour_A": 2.0,
+    "scour_B": 1.5,
+    "scour_C": 1.5
+  },
+  {
+    "f_FA1_Hz": 0.24233,
+    "f_SS1_Hz": 0.24111,
+    "split_Hz": 0.00122,
+    "split_pct": 0.505,
+    "asymmetry_ratio": 1.8,
+    "detectable": true,
+    "oma_precision_Hz": 0.001,
+    "scenario": "Moderate asymmetry",
+    "scour_A": 3.0,
+    "scour_B": 1.0,
+    "scour_C": 1.0
+  },
+  {
+    "f_FA1_Hz": 0.24108,
+    "f_SS1_Hz": 0.23895,
+    "split_Hz": 0.00214,
+    "split_pct": 0.89,
+    "asymmetry_ratio": 2.4,
+    "detectable": true,
+    "oma_precision_Hz": 0.001,
+    "scenario": "Severe asymmetry",
+    "scour_A": 4.0,
+    "scour_B": 0.5,
+    "scour_C": 0.5
+  }
+]
