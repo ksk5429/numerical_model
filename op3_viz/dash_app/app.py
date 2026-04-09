@@ -190,6 +190,64 @@ def _tab_pce() -> html.Div:
                     style={"padding": "10px 14px"})
 
 
+def _tab_compliance() -> html.Div:
+    """Compliance & Actions tab: run DNV/IEC audits + dispatch DLC sweeps.
+
+    Wires the existing audit scripts under ``scripts/`` so the engineer
+    can trigger a DNV-ST-0126 or IEC 61400-3 conformance check and a
+    DLC 1.1 sweep from the web UI without touching the terminal.
+    """
+    return html.Div([
+        html.Div([
+            html.H3("Compliance audits",
+                    style={"marginTop": "0", "color": "#d0d4dc"}),
+            html.Button("Run DNV-ST-0126 audit", id="btn_dnv",
+                        n_clicks=0,
+                        style={"marginRight": "10px", "padding": "8px 14px",
+                               "backgroundColor": "#2b7a78", "color": "#fff",
+                               "border": "none", "borderRadius": "6px",
+                               "cursor": "pointer"}),
+            html.Button("Run IEC 61400-3 audit", id="btn_iec",
+                        n_clicks=0,
+                        style={"padding": "8px 14px",
+                               "backgroundColor": "#2b7a78", "color": "#fff",
+                               "border": "none", "borderRadius": "6px",
+                               "cursor": "pointer"}),
+            html.Pre(id="audit_out",
+                     style={"marginTop": "12px", "padding": "10px",
+                            "backgroundColor": "#1a1e27",
+                            "color": "#d0d4dc",
+                            "whiteSpace": "pre-wrap",
+                            "fontSize": "11px", "maxHeight": "300px",
+                            "overflowY": "auto"}),
+        ], style={"padding": "14px"}),
+        html.Hr(style={"borderColor": "#2a2f3a"}),
+        html.Div([
+            html.H3("DLC 1.1 sweep dispatch",
+                    style={"color": "#d0d4dc"}),
+            html.Div(
+                "Launches the OpenFAST runner in the background against "
+                "the 6-wind-speed DLC 1.1 grid. Watch the DLC 1.1 "
+                "Time-series tab for results when the sweep completes.",
+                style={"opacity": 0.7, "fontSize": "12px",
+                       "marginBottom": "10px"},
+            ),
+            html.Button("Dispatch DLC 1.1 (6 wind speeds)",
+                        id="btn_dlc_run", n_clicks=0,
+                        style={"padding": "8px 14px",
+                               "backgroundColor": "#c68b17", "color": "#fff",
+                               "border": "none", "borderRadius": "6px",
+                               "cursor": "pointer"}),
+            html.Pre(id="dlc_dispatch_out",
+                     style={"marginTop": "12px", "padding": "10px",
+                            "backgroundColor": "#1a1e27",
+                            "color": "#d0d4dc",
+                            "whiteSpace": "pre-wrap",
+                            "fontSize": "11px"}),
+        ], style={"padding": "14px"}),
+    ])
+
+
 def _tab_dlc() -> html.Div:
     runs = discover_runs()
     default_run = runs[0]["value"] if runs else None
@@ -308,6 +366,13 @@ def create_app() -> Dash:
                         selected_style={"backgroundColor": "#0f1117",
                                         "color": "#4aa3ff",
                                         "borderTop": "2px solid #4aa3ff"}),
+                dcc.Tab(label="Compliance & Actions", value="compliance",
+                        children=[_tab_compliance()],
+                        style={"backgroundColor": "#1a1e27",
+                               "color": "#d0d4dc"},
+                        selected_style={"backgroundColor": "#0f1117",
+                                        "color": "#4aa3ff",
+                                        "borderTop": "2px solid #4aa3ff"}),
             ]),
         ],
     )
@@ -327,6 +392,40 @@ def create_app() -> Dash:
     )
     def _update_dlc(run_path, channels):
         return figure_dlc(run_path, channels or [])
+
+    @app.callback(
+        Output("audit_out", "children"),
+        Input("btn_dnv", "n_clicks"),
+        Input("btn_iec", "n_clicks"),
+        prevent_initial_call=True,
+    )
+    def _run_audit(n_dnv, n_iec):
+        import dash
+        from ..compliance import run_dnv_audit, run_iec_audit
+        trig = dash.callback_context.triggered_id
+        if trig == "btn_dnv":
+            result = run_dnv_audit()
+        elif trig == "btn_iec":
+            result = run_iec_audit()
+        else:
+            return ""
+        import json as _json
+        return _json.dumps(result, indent=2)[:3000]
+
+    @app.callback(
+        Output("dlc_dispatch_out", "children"),
+        Input("btn_dlc_run", "n_clicks"),
+        prevent_initial_call=True,
+    )
+    def _dispatch_dlc(n):
+        from ..compliance import dispatch_dlc_run
+        result = dispatch_dlc_run(
+            family="1.1",
+            wind_speeds=[6.0, 8.0, 11.4, 15.0, 19.0, 25.0],
+            tmax_s=120.0,
+        )
+        import json as _json
+        return _json.dumps(result, indent=2)
 
     return app
 
