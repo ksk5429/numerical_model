@@ -1,0 +1,2690 @@
+schema_version: '1.0'
+op3_version: 1.0.0-rc1
+total_entries: 537
+total_bytes: 55962192
+entries:
+- path: data/fem_results/K_6x6_iea15_monopile.csv
+  sha256: e2c50fd35fd87358df058396d1a2271c80ee43a36eae026b6d76c153aac87d1e
+  bytes: 474
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/K_6x6_innwind_jacket.csv
+  sha256: ed79633f7d1121f7836673d4db322e72994e577cd511a4ab92701fd639d03a53
+  bytes: 474
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/K_6x6_oc3_monopile.csv
+  sha256: 49acb19a8248d3fb6716246e721436d81527838f02fe507788e6b7cdc961d5f1
+  bytes: 474
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/K_6x6_oc4_jacket.csv
+  sha256: a8e834f0d1376c8677d712b7804891908c25fd8bce960dfccbfd9c08d93ba8c0
+  bytes: 474
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/K_6x6_volturnus_floating.csv
+  sha256: 27c17b193a356ab996a4577f4df1f8d6d63c1f0f634cb8ee594ce4bb9a084923
+  bytes: 474
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/Scour_Stiffness_Matrix_Master.csv
+  sha256: 582f074a39034c002a42d4aee86fad113086d03c7dd9b65301f738a8e75ea51c
+  bytes: 10807
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/Scour_Stiffness_Matrix_Smoothed.csv
+  sha256: d522a59e90aa107f93625101d293e7b846fbb3343440ad31e3879ff469a2b54e
+  bytes: 14169
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/alpha_fem_py.csv
+  sha256: 0b02e7c9210c78e3d13ef3d0abfb7f704b9e45a7b3108df0291da81ebb939565
+  bytes: 6266
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/alpha_fem_tz.csv
+  sha256: 86760f61e450bfd8e9708721f4b49feaee2d7aac8a38c0aee34b744b67c1c7e8
+  bytes: 6036
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/alpha_lookup_py.csv
+  sha256: afcc54057e18e5d4c5ae896028fc1fb24373e740f6d9c2461167f5fbf8d1bef3
+  bytes: 20304
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/alpha_lookup_table.csv
+  sha256: 181274c532d4ccd11acdb1db8cae5959035c749d89b6b252031c20dc9edb44d8
+  bytes: 40150
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/alpha_lookup_tz.csv
+  sha256: 74a275655b77b885a049928956f3d2d60fb7d1cecc81e29cf795ac55902f05c4
+  bytes: 19959
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/degradation_FEM_vs_theory.csv
+  sha256: 530e2fe4ddc4da2b68642639353ba2e2bd0b132e9f9579736f21d05ffd245866
+  bytes: 25778
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/gen1_spring_profile_from_excel.csv
+  sha256: c09d72dabb01017e2e8e876732f610c13ac3536559b69dea54027ab1cb14b5f6
+  bytes: 1017
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/opensees_lid_stiffness.csv
+  sha256: 4b8b64d521d2d46aaaf6dfb7f17e84e36aa9204ef32513fe4c12adf0c6966caa
+  bytes: 839
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/opensees_lid_stiffness_physics_based.csv
+  sha256: 637a1a9a8139620d29b07e9d5e8a6e7b79bbb2d331d6c93d19a93ec8a428041c
+  bytes: 706
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/opensees_spring_stiffness.csv
+  sha256: f3353355dcbf3044d9b94f08b45887e297c6e30e5cdfe01d9c4efe1940fb0174
+  bytes: 6813
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/opensees_spring_stiffness_physics_based.csv
+  sha256: fec738635c898ad75a13335b02057ffd90002c577a0eaff8943f21dec8143428
+  bytes: 13393
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/opensees_spring_stiffness_smoothed.csv
+  sha256: 33c32ec1460861bc6ed42d7ebe026728de3f57453ce880ee6c01da9667ecfc38
+  bytes: 4326
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/opensees_stiffness_global_regression.csv
+  sha256: a3b0266f716e69b8c52bad19d1636f3b067ec81c7cf8f1a7a6acb901d34a19d9
+  bytes: 2837
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/opensees_stiffness_powerlaw.csv
+  sha256: d5fe4a3f112ce6e4e8856a4e3d9ddd796398ece3c3f9e34774a3fdfcef7154b0
+  bytes: 3111
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/power_law_parameters.csv
+  sha256: 7ac703bf8721afc1974dd7f32728c692aa79ddc2dacd86e6ea0e361df089e0fe
+  bytes: 1090
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/power_law_parameters_smoothed.csv
+  sha256: e96e08b59f222d595e9361b130d83c41aeb2c12b6f8efc9b2a6b0c1fc71e1a32
+  bytes: 1131
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/spring_profile_op3.csv
+  sha256: 2a94fbc25421cd2c1af61f1c3e74c1275a59b52785bb31e86e6ac6b62c92df2f
+  bytes: 963
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/stiffness_optum_correct.csv
+  sha256: dd62dd2ddd1fd06a5829f2cf3daed479d6268571788b68fd84349d589827b0ea
+  bytes: 1241
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/stiffness_summary.csv
+  sha256: 751e7d95f86849dba5e510b7228948667a22f6135f70984d48d32e4db56b4d9c
+  bytes: 1329
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/stiffness_summary_TEMPLATE.csv
+  sha256: 8cfbd35b076a24fe9265a985f13dd0d50038c2b5a6fe7dc2db6ecce6aa91b878
+  bytes: 862
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/stiffness_summary_correct.csv
+  sha256: a1b1fff76e13ad7cd6b9801278d74990c1213374cef5c0c86abb19b321203300
+  bytes: 1603
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/stiffness_summary_from_plates.csv
+  sha256: 30e738604c4224b8c3ed9bb7aafb6c846d188f23ec112b07f6bbf142bbe199bb
+  bytes: 2840
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: data/fem_results/vh_analysis_summary.csv
+  sha256: f598d27709c78555f09af247fba5cfccaebd44b8a84dcc7055619f94ea3ac4ba
+  bytes: 2993
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/IEA-15-240-RWT-Monopile.fst
+  sha256: 0fe58133d4fd134991d38e137a6c5330f7ac2c69fa9479caa1966657d514a3eb
+  bytes: 8098
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/IEA-15-240-RWT-Monopile_AeroDyn15.dat
+  sha256: a647bebd9044ad4b7a2d87adba843b02a1a125f9ebdebc3e88ab2b44dc2634d7
+  bytes: 15907
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/IEA-15-240-RWT-Monopile_ElastoDyn.dat
+  sha256: be58f41b85580db71c66fc2de1eaafc768e0cb96b206d95c7a61aeaf3c48e934
+  bytes: 16416
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/IEA-15-240-RWT-Monopile_ElastoDyn_tower.dat
+  sha256: 65c9ce4d5639e63cbea6e0104ee2663e34f32f4493144e7dc6162ca746a78d2c
+  bytes: 4928
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/IEA-15-240-RWT-Monopile_HydroDyn.dat
+  sha256: b8409058ee4bdbd2e8a2db5f10b20c4a85262c9e78fd752eae2f3f113dfae97e
+  bytes: 17971
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/IEA-15-240-RWT-Monopile_SeaState.dat
+  sha256: 3c843150b5697d5d21d0fde78612076ad280dd9e77b085f2aefa42555c9ae57c
+  bytes: 9874
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/IEA-15-240-RWT-Monopile_ServoDyn.dat
+  sha256: 57d984b3f113e55cad2accd27a49ea0b2c046a3467e4630d14b2ac671188c5bc
+  bytes: 12817
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/IEA-15-240-RWT-Monopile_SubDyn.dat
+  sha256: 3e197191ff1bcfd245c779bd7bd431964cf0071ab7bf4ede7a6f31d6cb8ed71b
+  bytes: 14151
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF00_Coords.txt
+  sha256: 37ae9c2e3f20a2d13dace7c70994592b9aaeff92a7da1bb135fa0656291a4522
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF01_Coords.txt
+  sha256: 437b7193f478718d05464a847d10a6b1035b28c0b8d14026820d1a846170bb8d
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF02_Coords.txt
+  sha256: da1ca505014674c5f22bd3d44c990c37f95812138927e221d8ef64f561f87b42
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF03_Coords.txt
+  sha256: 8786144e8bfebdd6632e0d1594be4f75a0fad2594394e9947c73bfa66a8902e3
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF04_Coords.txt
+  sha256: aa348c6bbde4dd384be9998f19cc7b1cac431dcc8efa48f8f6fa29978988e84b
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF05_Coords.txt
+  sha256: 3261eb732e0f5f70f9f0802412d50934d45c06ec0d8a350b641e39568baff4b6
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF06_Coords.txt
+  sha256: fea45c17880f75060201d4975e8dedee8487648b056a5b70ecd5c2bab9c3665f
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF07_Coords.txt
+  sha256: 1ba86a9b7f819feea4069cf9c315fa720cb18154b3727420414c2f247a1a6c0f
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF08_Coords.txt
+  sha256: 98f884f9481ae5a0f45661e044ebc1c96be0e19d671223598745143aa111d14b
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF09_Coords.txt
+  sha256: d761e9f681b1df99b08444d5e72fc7601916ff3394e2399e9e032d9d96b1dcbd
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF10_Coords.txt
+  sha256: 8462a25fec12884c80eb0bdbadc63f80163ee7976ba92308ab2f1c3a5b2cbbc0
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF11_Coords.txt
+  sha256: c2e24ed4bc72027da8c8fe1fdb6747aa067a37dd8561a07c09b327ecceaf0432
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF12_Coords.txt
+  sha256: 81b03787fbef2632a7c364fc5c62affe6a84283df172df2c52742a4116b1e3d2
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF13_Coords.txt
+  sha256: eeea98425b4dd0c467233ab828b7c007c516f0c0aa7249321d9958c55024b48a
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF14_Coords.txt
+  sha256: 9d1a2c3b4b8fdf1c421e81e161966216c50cbc56ee712f4222267d9e2020722a
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF15_Coords.txt
+  sha256: 63196aea02f74f5086b9e5aed032419b20a8e596c85da7ceeb5b4ae646e39ed6
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF16_Coords.txt
+  sha256: bdd2121691435c5b22787aefc7e6649e2b63c5392de6de59d1cfebb5c84cd52f
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF17_Coords.txt
+  sha256: 511267637cdaf1113df1e5d6eb720acf431716e2331a7539a091523039916635
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF18_Coords.txt
+  sha256: de90c418b67c6a66746dcf6d28dd4820ea5a00546ba8317b11033634592b1863
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF19_Coords.txt
+  sha256: 57cf507058a1493c2fc230754b56559aa6533b4312c84e71b53a0f9cf0bac561
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF20_Coords.txt
+  sha256: a949c88859cd1d4eb71ac2b142b86f59e6af96092e6d70a8d267c224338f2dfe
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF21_Coords.txt
+  sha256: 953c3de668c66bfa9e5ab21052c3f630f8ce9e2a607c6ca49e55de37740d262c
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF22_Coords.txt
+  sha256: c74bf263516f727d245975a1c351456f544a967920e6bc70e3154ed033fc304d
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF23_Coords.txt
+  sha256: 96c32673113837b8ebc0c62eef88af981e064aee4d89cd4f40f86138f9f8c433
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF24_Coords.txt
+  sha256: a326db8ef4faf3077bb182c464f92ea558a6ec0ee14f9a13cf65800d8221bdbe
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF25_Coords.txt
+  sha256: 8de024b37fa2989717cc35594522bfdaaa789b6823c30971dbbb9b16309be1d2
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF26_Coords.txt
+  sha256: 19fb34c8b7239597cf1144fecc6b459d76c66f70f9119367707430b6242e4533
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF27_Coords.txt
+  sha256: 34ef4fe92b31400d20cb2f3ae358f8368b17dd7fd1c02e5ecfbdce9c0ce0026d
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF28_Coords.txt
+  sha256: f0d2b81c31c04f351e539226d29614da2e2581c3131970f7e70c19798d0f5aab
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF29_Coords.txt
+  sha256: f56c978bb48ccb02b6ce5270a49d344152927ac8ddf92b9d0545dc2718383f8b
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF30_Coords.txt
+  sha256: df8abb860bd217f8852d82b8d33ce84aa451eb050fe4eb1c05fc2a1cb465ed10
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF31_Coords.txt
+  sha256: 8d1327a940b3eeb059128cfcdee97d7f71d8581199abed4c2bdef19410eeae18
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF32_Coords.txt
+  sha256: c65e8ef53fbe326a962dcecb6c6ae9148fe61a9440f08297286419cf24567a2c
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF33_Coords.txt
+  sha256: 31fa3c03ea4cc3ee9485e51a596ec0e0e0cc6640b5dbc01c5af71dad1d86156a
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF34_Coords.txt
+  sha256: f1b3cb1b4aa518ff5725d553dbdeff6a34cd7f343842cc5905221a04510e56fe
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF35_Coords.txt
+  sha256: b23dc52179207ce21ac5200a166f5c7f412e1041f503530846f85f526ea5e53d
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF36_Coords.txt
+  sha256: 1310019a095107ae5b8d27215850a85fdefc311b8f5b7780cc3ce7cc76139478
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF37_Coords.txt
+  sha256: e635aa08d14b32657c77dd3af461f45d8d7a7c13c1e35aa6a4d295a953a1fa8c
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF38_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF39_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF40_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF41_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF42_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF43_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF44_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF45_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF46_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF47_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF48_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AF49_Coords.txt
+  sha256: 71fdc4d5b95eab82c514b96db2f41c6f28db0fb21300236eabdcda90ab406728
+  bytes: 9209
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_00.dat
+  sha256: 5ddfe074b8e65dd7db4a40dd758f4c67dcb97ef0e1c6073ec448348da73f8d84
+  bytes: 19199
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_01.dat
+  sha256: c5e3fff0bc7ebe5c240d6b426d4fed4531791be2e0e553effb50892621dfdc7d
+  bytes: 19199
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_02.dat
+  sha256: 9167f236f7496b4a648ec7569720e0bc2fd37c4e1000dcc2c2af9b6e3366d256
+  bytes: 19199
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_03.dat
+  sha256: 5e870e1c3127a9d07ce1efa35d38fa592a6a8b56c219e710e8c80ffeeff919b0
+  bytes: 19199
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_04.dat
+  sha256: de57b8ea0047dcfcbca2bcb601e92b4f793c05672c404985979599e4439ff484
+  bytes: 19199
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_05.dat
+  sha256: 751792c26e8158b610e425ebab120ed281270e43f6184a8881b8bf7a55a670f6
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_06.dat
+  sha256: 08bbab2e628306baedb2d486a1a9875e26c6562bf0c74a94c71388d0c06dc240
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_07.dat
+  sha256: 56633f39d9306537ace45c8c29afef02f7796eb20a6831d672a73e58f25b8130
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_08.dat
+  sha256: 8649d2792a962a5b22d331873949665c253da5285016452d79aa741b1d5ee154
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_09.dat
+  sha256: 20a6c3100ba729a314390cf4637c82c33bd3cb35a9905a9944942d8385ae5b08
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_10.dat
+  sha256: 58301c7eeab0b9756ddc722f19419420b66a86d3eb2601aee241fc91e3420ba6
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_11.dat
+  sha256: e2af3e15bd02aacc7996edc66f755c5bce2d5599ba3dad5ec7100ff1549771c4
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_12.dat
+  sha256: 6d1ebd045567efe2b7f510c93199302ebc187130fcdbed2011398200f5c884c5
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_13.dat
+  sha256: bd0bea121f25c7bcafcc90c703c25938b7a8a587000e72fb18b3b66944dea36a
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_14.dat
+  sha256: d73e1586f364d67581c3edd167bf8869e329ec432401a50dc9c39e9a415b3188
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_15.dat
+  sha256: 4f671a3121e6c2e1703e2c59119bef37a862bdc361452c5e795a826b55de105b
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_16.dat
+  sha256: 896239077bd559177e88288ea99054ec7aee87c1e5a517ce495a8225b102c34d
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_17.dat
+  sha256: 9cfca553e2d5193ed106ddbd49bd1226dfc6fb452987ec429458c75471fa7252
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_18.dat
+  sha256: 66a1e96a79c403730e1a5c317eb0077d600f10ff458b9867068e8fa52ae8a2bc
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_19.dat
+  sha256: 6f20d0af4821f75a1cefcc4485cd7167b8c675a56b992d0c7b770a07bc5ffde6
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_20.dat
+  sha256: df91207493ef1493e51e5a3602669758e4dbbafc7933a476db792c15b960928a
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_21.dat
+  sha256: c7cc4e4b4715b1eb8ecb7462361731ad96871cbe0331964b1ba55ac2ec10dacb
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_22.dat
+  sha256: a49dff6631fece5d7c06bb5fad94fa9ec91cfb6a0213d4dd2ad95d0d295120c7
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_23.dat
+  sha256: 9521e39e26838f7e7f9ae8a858bf5c3f1e08fd3f99fb1c777b9f27fb752592c6
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_24.dat
+  sha256: ed274455e361e5eee75832c38def63c7fa60b1d561bf035e2ef9cbce846a7041
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_25.dat
+  sha256: bc21ee65398a8db595c7173ed98d8630da03d14867f1889f4bec058363a8cfbd
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_26.dat
+  sha256: 31d126c79925c839853724891481b52ebfa5958b8bd5168b0bb7505869c2ec20
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_27.dat
+  sha256: 16eb18cfb78017537eb71382428695af268d5f75b92ed8d20b2b4d88cb7e9ce0
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_28.dat
+  sha256: 0b07f30331d5b027c3868ed952c6d1fb6c0c506762e5c8f688d2f55f0328161e
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_29.dat
+  sha256: 48c591bdaf3297b9c1714d874aae62c99fefd2cd3053babf8f8f0be6736c3ab5
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_30.dat
+  sha256: b1d20cfe2d8ae485999700b7b38461da17966f639d472b0c34266bb186823cfa
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_31.dat
+  sha256: a9c3b6cce3dcb007ebaee61aac68141832f35030c299b39d0a3be73faf326a78
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_32.dat
+  sha256: f559f04dbaf56ae1efc6ff7d9664bd7c0ca30db9d767a85217f22451cbbc0474
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_33.dat
+  sha256: 3c24be2f147f25955013da2852cc5fbb36fa62af3ca850b5c88f11ffa1ab56c5
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_34.dat
+  sha256: 1d8390a4eb0f241eb2bd31ed5423c068b7a6392230331719278bc5eda0d8912c
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_35.dat
+  sha256: 35c691da1a2d6fdb2deb2457c6d478312a9dbc7d19358e2614344325035ca47d
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_36.dat
+  sha256: 83f526cdb0ccbe9c37b702e89a3bdb81d5ef5f51c076dadb6de36d470ad44a0c
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_37.dat
+  sha256: f2a7d8ca610b30a43355393c1ba79d7313b0c7b2a082a31ca2b386118804bde8
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_38.dat
+  sha256: 23b4c97b1d79bac2d11e4c717e59f06e945f072c8a9e849dbd35706eab4171d8
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_39.dat
+  sha256: 5bc7b748048494668274eb7c2f00e84dcc0b8151b67ff1da6c045697d217c502
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_40.dat
+  sha256: 3d2ec140569277e186d45be087a28de93e2a35b611e8fa22fc71841dc93c9dd1
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_41.dat
+  sha256: 7a811aaea49e23ffb5507693b91650ee5393f80a753fbdd50161e5805e01cb72
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_42.dat
+  sha256: 23597a94bf2c39ecd108d62e04761de81df94e12b8c123824b6556e8b7b3db13
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_43.dat
+  sha256: 81693b341b5e6a645e1bb0a4b94d19af445ea70881cb795b670b771da774b512
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_44.dat
+  sha256: b0eb121aa22567987adfa211e6029affbe3319b2a7881d168bcf73ca75d562ed
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_45.dat
+  sha256: 546737d283bbd3ee8dbff033d0ba1a41dc0141e34377f4ca6f5f91cf1f944f1e
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_46.dat
+  sha256: c178b50d57d29a668fe098a32fcb06e253039b5f13a798d240f050852a74f2d7
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_47.dat
+  sha256: d296705f0c30442bd357d06aec2a46ae0581173bc08382ce1ba091d21db9e541
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_48.dat
+  sha256: 586c2b173e3a5323ad947a5231d9abe6ee9d41d9a2d5ff841a85c967eff81bd0
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Airfoils/IEA-15-240-RWT_AeroDyn15_Polar_49.dat
+  sha256: e46bb35036b8828a269250a0d1ff988b68fcc5e1fd7a3389a48fb825cb54e2dd
+  bytes: 24536
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/Cp_Ct_Cq.IEA15MW.txt
+  sha256: 536345ba152428c42aac6bcee87d11f23685a31d2c9c1d264adb8df61fff25e1
+  bytes: 32916
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/IEA-15-240-RWT_AeroDyn15_blade.dat
+  sha256: ed8eaaa11813946594bc791e9c808eba18d8078bf9409956814a00ba3c3ccef0
+  bytes: 9300
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/IEA-15-240-RWT_BeamDyn.dat
+  sha256: 26ffeb76c34a8dc176e83f19b4bd47cbf4d15b946c13e69e43d253f2dcc83428
+  bytes: 7151
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/IEA-15-240-RWT_BeamDyn_blade.dat
+  sha256: bbc76b78ba2a09fbe863663dbb807e9cdbe000af423441580874e694bce28608
+  bytes: 48120
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/IEA-15-240-RWT_ElastoDyn_blade.dat
+  sha256: d36381fc1b69c68c3c66a741c42a1c5bbe657856cfe2146e69bcd7791357033d
+  bytes: 9247
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_monopile/_shared_IEA-15-240-RWT/IEA-15-240-RWT_InflowFile.dat
+  sha256: 347486be0a90ecf1e0eb578e16f18538813157f3905284c45233f8c61c102968
+  bytes: 7602
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_volturnus/HydroData/IEA-15-240-RWT-UMaineSemi.3
+  sha256: a6fd78f6cb35dcbb79ab82982cee5c5abd11ca6ddc44b6f6f8d657032fb1ed35
+  bytes: 2042400
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_volturnus/IEA-15-240-RWT-UMaineSemi.fst
+  sha256: 3272b34650ac21653c8009a9261502561c2e37dde4014ac3808a7895e640bef9
+  bytes: 8129
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_volturnus/IEA-15-240-RWT-UMaineSemi_AeroDyn15.dat
+  sha256: 53d1599d285f5b53085d74fe8fa8ab733fdf763381b9a9591b950fd744334d3f
+  bytes: 15367
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_volturnus/IEA-15-240-RWT-UMaineSemi_ElastoDyn.dat
+  sha256: cccddfd87b8e07cccb2ee83128261c5db46101d65cdf3583b6e0053034783a34
+  bytes: 15540
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_volturnus/IEA-15-240-RWT-UMaineSemi_ElastoDyn_tower.dat
+  sha256: 3ee47d83552e865fe9d06fcd24269856be2a1e3f881a2c5b22e4b385d1ed8aa5
+  bytes: 4042
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_volturnus/IEA-15-240-RWT-UMaineSemi_HydroDyn.dat
+  sha256: 0960e4b09fb9ba58a393e7cc7c4e12caa19fde80ed6c1ff2b62121980abd7d94
+  bytes: 17748
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_volturnus/IEA-15-240-RWT-UMaineSemi_MAP.dat
+  sha256: 0ed1177c66807286517641bde5f9dfd34f830e83b0b4772f5c82329c18e57e8f
+  bytes: 1026
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_volturnus/IEA-15-240-RWT-UMaineSemi_MoorDyn.dat
+  sha256: 606c681b051f793026bed56e4b8f349f93c9763cb7c0dba4326d4fba815d7d8b
+  bytes: 3590
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_volturnus/IEA-15-240-RWT-UMaineSemi_SeaState.dat
+  sha256: 0e9f10e4aecbeb5adae44ce2ec5910ff1427552b87a235edb2cb4be91b038241
+  bytes: 9948
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_15mw/OpenFAST_volturnus/IEA-15-240-RWT-UMaineSemi_ServoDyn.dat
+  sha256: 322a033e3564d39b354cce7031a45237968f96b93e1b25973fff3a483e79169c
+  bytes: 12724
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_00.dat
+  sha256: d77479c5ba962e4661e169779f13ae1ae7802da87ccf0ec41fb8b529078bf831
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_01.dat
+  sha256: 4fc9212bf930beb8848b31cdd757415106b274ae82e9d3daab48f1a1e1b27cbb
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_02.dat
+  sha256: 96f9dd82890c89c82d2a90061c1f7a8d70e7e93634112c8291fd1f7350d0ce5c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_03.dat
+  sha256: acac0fda8945723414fb3f00fe3a0bf21c89bd07a286292f41d1bcbb0157017e
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_04.dat
+  sha256: bd2d23f1885df9008af5e267337663a41a0942d5a175f60b6ead6ee0017ddf9f
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_05.dat
+  sha256: 7ce24332f99227208a3ff15ed5a560c3b171cf44dfe0ad144177713a8e750aa2
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_06.dat
+  sha256: a1df5b82d9ee5bba5dc440adfb9bf0a2c846c64ad9246ec2d0a3475d47b7d33d
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_07.dat
+  sha256: cbf313f88153b54652b7c8f43304af83e9d207bd922ed4ba5e7f098f4a8562f2
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_08.dat
+  sha256: 8302deb88305dcfee6d99be5eed8a0a6bc0d2d6715bbcd7987cbe539103c71d6
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_09.dat
+  sha256: bdf9317cfce9ab58f2ba59bd523397b81b1c32e5fb822eb33d9fd5d736e8525b
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_10.dat
+  sha256: e6bffcce2196310b5240daa8f3afa29e2312dabcd83e1eb75ca1ab6de1f5be85
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_11.dat
+  sha256: 30dcd668641048183de263206649a29859d4544067448f38f44a86ad70d65e5c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_12.dat
+  sha256: 1fe3ca10f2e9723d352046493882a11685970c8109bf91109d1c6732ecdc100a
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_13.dat
+  sha256: b8553b725cfe341ab0cac9af54b41afea581e9df84857a4e1abe4c6af0497df2
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_14.dat
+  sha256: fb58f75ebb195c47a8ec71b946d8b547a488ca7a61a86ff8aaf1f18310494f1c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_15.dat
+  sha256: c5bc20f086fe7fc2409b49fb2f98e73f0f6ea17abdf281a32d9dd194a232b44b
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_16.dat
+  sha256: c4ec7b2f32203087e3ca23b344d56d827c51469effa950f09a94612eb7d2816c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_17.dat
+  sha256: 88ea8eaaf3a92a28a0025a4b45bce7b40c0244428be00495bc68560404834e5e
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_18.dat
+  sha256: d49ad57a0e8432024145cd2d4a8811cc0faf97633a9c10fa501e179668ff39e2
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_19.dat
+  sha256: 754f783d806a295745ae56dc7b5fa2cc2757ac564d46b73b47bc37588b682d96
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_20.dat
+  sha256: f45e6e6115c1e94803521a2a9a03d2f746e694dd799944e23e97d4c7b1a85fc4
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_21.dat
+  sha256: e5a2da38b7799fba916d9f3419f2ca7d89d35f950f0de80004977897e9b7317a
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_22.dat
+  sha256: f0889854137865c44bb741d8c53685ad8b98b6d2c5f82c36767e1827fb70aa06
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_23.dat
+  sha256: 121d70f3d809e23c998304b9200c60d8a383881b016f9e12759233cd55e1de6c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_24.dat
+  sha256: 8463f10aeaeae362ce2428c97501e931595943c996eaca3948f35b42ec5a52dc
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_25.dat
+  sha256: ea28c406d0c4d3cbcd015f0824b92b1f8f639b66e550fba833c08e9cef39671b
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_26.dat
+  sha256: 2ef1f6c51d1be7f2baad0329d1489cd4bf9c7efc32e9c4243b8654c9af76b80c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_27.dat
+  sha256: 925cf58ebd333f3f240a2e74a6320023fe9af92776f869fa14fd170c8c1e0c20
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_28.dat
+  sha256: 0d917a983e8cc4fe962faa7c34dedca423cb101fe803286dab82ad4cebde1759
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/Airfoils/NREL-1p72-103_AeroDyn15_Polar_29.dat
+  sha256: c24d2d66a02490b3554ea8d9da93c16c108900a0c8ce54d70c0916b3e0a78eaa
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/NREL-1p72-103.fst
+  sha256: 86922cce401d59497741e3bf71d79356d1134628be39c9f38e0bd1a54cb41d85
+  bytes: 7667
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/NREL-1p72-103_AeroDyn15.dat
+  sha256: 989d2910af70f31f0df3acd80756ed765cea537ea89e5ad74b2a925809bc6131
+  bytes: 12221
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/NREL-1p72-103_AeroDyn15_blade.dat
+  sha256: 2e55a65e031aa961cc56d911860fc26db6390b192df5d1afe9938b83bb17e6a7
+  bytes: 4943
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/NREL-1p72-103_Cp_Ct_Cq.txt
+  sha256: 708846aa2ae756af6b51c06b2fd02df9c5a0613a9152d73239e77ce41aec309a
+  bytes: 14484
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/NREL-1p72-103_ElastoDyn.dat
+  sha256: c209493be9b69158ec89e9d9afb2bf79550938a2a4d01e26154d2b3a31e93b34
+  bytes: 14723
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/NREL-1p72-103_ElastoDyn_blade.dat
+  sha256: 243dc119134bba2b69a92b04327a4a2062e118dd80320dcc0a19467aeac3ddb4
+  bytes: 6553
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/NREL-1p72-103_ElastoDyn_tower.dat
+  sha256: 80ecd0a5139ca660750c2f6a9f9f308f48cad933ac5b7d1502a25eb2d4e3000e
+  bytes: 4042
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/NREL-1p72-103_InflowFile.dat
+  sha256: a23cb8ae4bf25dd7e8f9004a1432d581245b559edec00c30e447a863697f09f1
+  bytes: 7754
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.72-103/OpenFAST/NREL-1p72-103_ServoDyn.dat
+  sha256: e0fd0505ab0a13d719f7ccb95297f397bf77da51c79f186da4c0e1558fc29f42
+  bytes: 12868
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_00.dat
+  sha256: d77479c5ba962e4661e169779f13ae1ae7802da87ccf0ec41fb8b529078bf831
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_01.dat
+  sha256: 4fc9212bf930beb8848b31cdd757415106b274ae82e9d3daab48f1a1e1b27cbb
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_02.dat
+  sha256: 96f9dd82890c89c82d2a90061c1f7a8d70e7e93634112c8291fd1f7350d0ce5c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_03.dat
+  sha256: 7f21a7e630ed95b14d9a0e057906f0b5a3718248dfcd1737fe303c0a0f4c449d
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_04.dat
+  sha256: 3698dd8ee2d1ad3dffac35f30642cc2736110ef7a576523acf11d9bb6c01c2fb
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_05.dat
+  sha256: 1a1c63ff755432584d6f11e2905c708bd7873f36d36b4f364cd0662cff29e62f
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_06.dat
+  sha256: ee36e890e128de1abbd3dc70b738fbf258dfbc046302dd93a9a159a3387c714a
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_07.dat
+  sha256: e683554d2971c3b8fea907a10ca0948f5c6ffdef8c7998215eca8617afd62c4c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_08.dat
+  sha256: e0fd2289436b65c3b34ae762a6488b177487b41e8ee6f6da5239f804580ac583
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_09.dat
+  sha256: 4c429ea4cf05f54c95aa7ad41924721431451f9dce71840a8a57afd01932c2fe
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_10.dat
+  sha256: 750877097dadd99369685d818bafda5afb5e4ece973a3db28df4ad73197f62f1
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_11.dat
+  sha256: 0af037d3ee93eb676c0839eb9ca116d45d54bdfde0a579cc663cc76138aa2764
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_12.dat
+  sha256: 069f0c4a4cfdfe14e4374667eee5e4986d0dc6b6692fc27e93f4c24d09c735ee
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_13.dat
+  sha256: b8553b725cfe341ab0cac9af54b41afea581e9df84857a4e1abe4c6af0497df2
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_14.dat
+  sha256: fb58f75ebb195c47a8ec71b946d8b547a488ca7a61a86ff8aaf1f18310494f1c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_15.dat
+  sha256: c5bc20f086fe7fc2409b49fb2f98e73f0f6ea17abdf281a32d9dd194a232b44b
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_16.dat
+  sha256: c4ec7b2f32203087e3ca23b344d56d827c51469effa950f09a94612eb7d2816c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_17.dat
+  sha256: 88ea8eaaf3a92a28a0025a4b45bce7b40c0244428be00495bc68560404834e5e
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_18.dat
+  sha256: d49ad57a0e8432024145cd2d4a8811cc0faf97633a9c10fa501e179668ff39e2
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_19.dat
+  sha256: 754f783d806a295745ae56dc7b5fa2cc2757ac564d46b73b47bc37588b682d96
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_20.dat
+  sha256: f45e6e6115c1e94803521a2a9a03d2f746e694dd799944e23e97d4c7b1a85fc4
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_21.dat
+  sha256: e5a2da38b7799fba916d9f3419f2ca7d89d35f950f0de80004977897e9b7317a
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_22.dat
+  sha256: f0889854137865c44bb741d8c53685ad8b98b6d2c5f82c36767e1827fb70aa06
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_23.dat
+  sha256: 121d70f3d809e23c998304b9200c60d8a383881b016f9e12759233cd55e1de6c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_24.dat
+  sha256: 8463f10aeaeae362ce2428c97501e931595943c996eaca3948f35b42ec5a52dc
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_25.dat
+  sha256: ea28c406d0c4d3cbcd015f0824b92b1f8f639b66e550fba833c08e9cef39671b
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_26.dat
+  sha256: 2ef1f6c51d1be7f2baad0329d1489cd4bf9c7efc32e9c4243b8654c9af76b80c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_27.dat
+  sha256: 925cf58ebd333f3f240a2e74a6320023fe9af92776f869fa14fd170c8c1e0c20
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_28.dat
+  sha256: 0d917a983e8cc4fe962faa7c34dedca423cb101fe803286dab82ad4cebde1759
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/Airfoils/NREL-1p79-100_AeroDyn15_Polar_29.dat
+  sha256: c24d2d66a02490b3554ea8d9da93c16c108900a0c8ce54d70c0916b3e0a78eaa
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/NREL-1p79-100.fst
+  sha256: 48920dbd32ef1a316c6603949690aa019aa1fed9e3adb96afd1a2a9db7910ed5
+  bytes: 7667
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/NREL-1p79-100_AeroDyn15.dat
+  sha256: 5cff1b3efc991e933b22e7c43658078e52b13c4116824e02cd3664d623bd05a1
+  bytes: 12221
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/NREL-1p79-100_AeroDyn15_blade.dat
+  sha256: 9988d3679e72793258578e9b8da4c7b79870c0b2452567016828ea928fd2469b
+  bytes: 4943
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/NREL-1p79-100_Cp_Ct_Cq.txt
+  sha256: c3c77d22891ff90d7e7283b3cf1117aa967b859fe4243a22397e0326d7843572
+  bytes: 14487
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/NREL-1p79-100_ElastoDyn.dat
+  sha256: 4a86e5cdc0e6c88b8a0a39aad21f1681b48d65ea342cc09acedb9cf838d086a5
+  bytes: 14723
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/NREL-1p79-100_ElastoDyn_blade.dat
+  sha256: feb6485fac7492491f859ee25010ba385595bfb938ea2a7614d47be74720cebd
+  bytes: 6553
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/NREL-1p79-100_ElastoDyn_tower.dat
+  sha256: 0033d05a4038ce6a01c6489a493bd6731c6bb530c5d3a7dea38b19a4dc1ce832
+  bytes: 4042
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/NREL-1p79-100_InflowFile.dat
+  sha256: c450b44bbbfed9f82e6353c1f4bd6aaae745725eca62b6bf136dbfa66a6eddeb
+  bytes: 7754
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-1.79-100/OpenFAST/NREL-1p79-100_ServoDyn.dat
+  sha256: 9896d3bb6c0770f3cf974a528c72e1136a8721094ac5b2471c77c95caf85cd3b
+  bytes: 12868
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_00.dat
+  sha256: d77479c5ba962e4661e169779f13ae1ae7802da87ccf0ec41fb8b529078bf831
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_01.dat
+  sha256: 4fc9212bf930beb8848b31cdd757415106b274ae82e9d3daab48f1a1e1b27cbb
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_02.dat
+  sha256: 96f9dd82890c89c82d2a90061c1f7a8d70e7e93634112c8291fd1f7350d0ce5c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_03.dat
+  sha256: 4554e3a493e35df7da25c2a8de2badccb41d9e87c25587479c499fa1bb961c98
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_04.dat
+  sha256: 7e712cd248de64940e36de86348b7098766f410bb4daffaf4cfba73f460cf0e1
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_05.dat
+  sha256: 96d097cbe41056d34e6e0ddf44f3e9c71c949c5f0962102334b837263761fa38
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_06.dat
+  sha256: 4939b5e64f21dec1324fc85fa35b50de317c0105d1c25cb9c73279cec08d2143
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_07.dat
+  sha256: 8cfda460a433ef991328190cb5873d4339f9f35e45c9bfe4ed2b264a1a53d38f
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_08.dat
+  sha256: e5ca89230370767b9fdda66ad50b363177ff793f78ed702f668de290eea41bcc
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_09.dat
+  sha256: 274a756e0ea4e2ed8c43acdb25015726d639593cf2341f291b3549e6dca0976d
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_10.dat
+  sha256: b9200743b711aedbe5eb24f1949b07e9c9b5d710a37afe7fb3a36307a489c391
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_11.dat
+  sha256: 68f13a2c23a601758487200a5537a8456cc0348882bd89460ce7d879eed18580
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_12.dat
+  sha256: 1b3b60997bd161559d876404dcae5067543393b1a2437365938cfb293070180e
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_13.dat
+  sha256: b8553b725cfe341ab0cac9af54b41afea581e9df84857a4e1abe4c6af0497df2
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_14.dat
+  sha256: fb58f75ebb195c47a8ec71b946d8b547a488ca7a61a86ff8aaf1f18310494f1c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_15.dat
+  sha256: c5bc20f086fe7fc2409b49fb2f98e73f0f6ea17abdf281a32d9dd194a232b44b
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_16.dat
+  sha256: c4ec7b2f32203087e3ca23b344d56d827c51469effa950f09a94612eb7d2816c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_17.dat
+  sha256: 88ea8eaaf3a92a28a0025a4b45bce7b40c0244428be00495bc68560404834e5e
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_18.dat
+  sha256: d49ad57a0e8432024145cd2d4a8811cc0faf97633a9c10fa501e179668ff39e2
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_19.dat
+  sha256: 754f783d806a295745ae56dc7b5fa2cc2757ac564d46b73b47bc37588b682d96
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_20.dat
+  sha256: f45e6e6115c1e94803521a2a9a03d2f746e694dd799944e23e97d4c7b1a85fc4
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_21.dat
+  sha256: e5a2da38b7799fba916d9f3419f2ca7d89d35f950f0de80004977897e9b7317a
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_22.dat
+  sha256: f0889854137865c44bb741d8c53685ad8b98b6d2c5f82c36767e1827fb70aa06
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_23.dat
+  sha256: 121d70f3d809e23c998304b9200c60d8a383881b016f9e12759233cd55e1de6c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_24.dat
+  sha256: 8463f10aeaeae362ce2428c97501e931595943c996eaca3948f35b42ec5a52dc
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_25.dat
+  sha256: ea28c406d0c4d3cbcd015f0824b92b1f8f639b66e550fba833c08e9cef39671b
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_26.dat
+  sha256: 2ef1f6c51d1be7f2baad0329d1489cd4bf9c7efc32e9c4243b8654c9af76b80c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_27.dat
+  sha256: 925cf58ebd333f3f240a2e74a6320023fe9af92776f869fa14fd170c8c1e0c20
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_28.dat
+  sha256: 0d917a983e8cc4fe962faa7c34dedca423cb101fe803286dab82ad4cebde1759
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/Airfoils/NREL-2p3-116_AeroDyn15_Polar_29.dat
+  sha256: c24d2d66a02490b3554ea8d9da93c16c108900a0c8ce54d70c0916b3e0a78eaa
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/NREL-2p3-116.fst
+  sha256: 58eb72ec0dadb5a919a5658a3fd9cfb0404a9da369e06294ccc17406f4728e12
+  bytes: 7663
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/NREL-2p3-116_AeroDyn15.dat
+  sha256: 7e410f31695e7ab3150dc560087b01d01d3ac2c7e435b2aeb87e3f7c96865afb
+  bytes: 12187
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/NREL-2p3-116_AeroDyn15_blade.dat
+  sha256: 25e1c12487d422cccd5c45b0a470b779ec17abf0c975c8fac1de624be5762077
+  bytes: 4943
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/NREL-2p3-116_Cp_Ct_Cq.txt
+  sha256: 310679e3f084d82d81f4c9d63098927a8dc7dc0294ff7a7185a80c55f36e9e57
+  bytes: 14498
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/NREL-2p3-116_ElastoDyn.dat
+  sha256: a8017a3ec3305c940f6541be833f0a29fcf695d135b9d74184fa23b44d592566
+  bytes: 14719
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/NREL-2p3-116_ElastoDyn_blade.dat
+  sha256: 76fda5672038271e766d406b7b4cac5686a9996f2eca46e7da1d549731e975a7
+  bytes: 6553
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/NREL-2p3-116_ElastoDyn_tower.dat
+  sha256: 828b19dff20725e216bc17ada58ef50b99e8600d1d0beebc9a251e05fa068281
+  bytes: 4042
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/NREL-2p3-116_InflowFile.dat
+  sha256: 48fe3fe8846bd47091cb6ad490b5d73192102fb9badf6f4bc6c7f228b5d0c23a
+  bytes: 7750
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.3-116/OpenFAST/NREL-2p3-116_ServoDyn.dat
+  sha256: 3b7ddfdd1faf29bbaabdaf314bc525c000fe7dda6d7361e70fd2553c4e8ddbdc
+  bytes: 12867
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_00.dat
+  sha256: d77479c5ba962e4661e169779f13ae1ae7802da87ccf0ec41fb8b529078bf831
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_01.dat
+  sha256: 9d59daf7866f2461c8c929f06eedbf0024de84e94f82ea7cc491c152485fd245
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_02.dat
+  sha256: 786869bd76a5906f2d7b75cb75e41c3a0bb1e82a3da4d28c9e17d8aa0cb81403
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_03.dat
+  sha256: 26f7b8b996f0b71402a18d5cbf39650ac3040868f707a278f706b74589b56655
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_04.dat
+  sha256: 5e77f2f945d487fd3824d2f2fd5aa08d883d3123c96e2e372156882648acb310
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_05.dat
+  sha256: 5619223899bee1715cddc0798773cddcdd29fc8558cfa39336dc9befdee4a633
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_06.dat
+  sha256: df89b6687c2e333df338d940b6c233a4d8c2fdde01a8d5b0f0eb3ac58e04fd8c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_07.dat
+  sha256: 5dd23fade63ab189000e889140dc6aa73e1203a66251a2b37504fb60b01cdd31
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_08.dat
+  sha256: 11b020d25590643bdc24a489df9d3e12f488740a78324a575ddb60f9d8854520
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_09.dat
+  sha256: e8b4281a75a6a15a408b9073c896406e8b0db45c2233192541f402b24d60832c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_10.dat
+  sha256: 3372011a70b31d2c848ce1804d5627d88b11368b0f395069589dc2bc5b59ef73
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_11.dat
+  sha256: 4b94c211340a1061dfb710b7fff28a2281b529d3444920e1569ff537355ebdbb
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_12.dat
+  sha256: c5d72dd4a952f3877b3f3d68599aebff2d9d057c7dcccd352c5052c585f0a7b7
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_13.dat
+  sha256: bdd471a63e7fc304090aa105637da30f78408b5b69d58f0a72c4187b0363606c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_14.dat
+  sha256: 5db2262a775d0b42d5a784aae28f34931908d8fb738306b037b10cc18a21b028
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_15.dat
+  sha256: bb6dce3ac391adeb876cb81da9afda76f7dc35977a64588bdec9dafaa3eb31a9
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_16.dat
+  sha256: aa6576bbdf58c1c9417113e5ad0d71d92f7994274372d546aa58ec685fd3b989
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_17.dat
+  sha256: 0de84ca26c3e33cd0c1211151f39ef55f9f6c494cb42d9cf912a64d6b4e8ed9a
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_18.dat
+  sha256: e89e29f04e50577e3ad95fcc626a2e103f65c2f50d30efa68002d2e574b39793
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_19.dat
+  sha256: 222ffdf0f0459392ffa46287c7aa76a7840acabc18f31f550f84c8597c67a532
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_20.dat
+  sha256: 8ce9ec0bebcae1e5efda9774156b2999ffbce5cb96292254997adc325a9aeb42
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_21.dat
+  sha256: db4b7cf56213340205bd1e4f69e329cc9a6dfd907a5542e869bcffd3626f390c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_22.dat
+  sha256: c9ed8012da32201a9a81e4f8c6a0ca4661cf60767f47650055ad91de439a1ec7
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_23.dat
+  sha256: c189ac389b90eaa1b86c7f71b0c70b05a7ecd31cc51d4fc6c13417faa00a6507
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_24.dat
+  sha256: 7e14fd5d2f468b7a27f198c8d326991d8e58285de6af7e9f60fcb5efaf650f6c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_25.dat
+  sha256: b4cc8f2abbe8a1ba9546dcf6f2bab2d32f00d5ee19622de4e8c5c6576af56bb3
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_26.dat
+  sha256: 7f8d899490a5abb198378e2366165c6c03d2a18cdd223ffb3f2398f8a02a3086
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_27.dat
+  sha256: 22d81b2ef80f117df88467673a9486fff94141bd76e5347cee600bd1f6b09a83
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_28.dat
+  sha256: d4833907632dad20f67002dcc0a9ace242901bd7cc82522872bb047782426ce1
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/Airfoils/NREL-2p8-127-HH120_AeroDyn15_Polar_29.dat
+  sha256: bcf2e6fb293b6ddb7e23e50848cf5293fa09e59f74ea9133f7ec98c02bf621c9
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/NREL-2p8-127-HH120.fst
+  sha256: 3641beead973f2ddc51aaae98f0aeec3c1e2c5351863a1acd12a3e4e78d4b626
+  bytes: 7687
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/NREL-2p8-127-HH120_AeroDyn15.dat
+  sha256: 4f38c35f4797e12f649914430af5b6840f4aea84cb1e261b42922c645be5dbf7
+  bytes: 12391
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/NREL-2p8-127-HH120_AeroDyn15_blade.dat
+  sha256: 73cb1e6e3f72b08c3c2e874d024f5efb19626e4cd9b4e32b692739ccde2d7d21
+  bytes: 4943
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/NREL-2p8-127-HH120_Cp_Ct_Cq.txt
+  sha256: c8bccf140365abdaff2ccc85f3841a7acb95c83470a251282862e8db003d0c1b
+  bytes: 14472
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/NREL-2p8-127-HH120_ElastoDyn.dat
+  sha256: 5593ddb6ff09792cce3da58946d592e289547ff02fdd8bc34872fa85ddbf2da3
+  bytes: 14743
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/NREL-2p8-127-HH120_ElastoDyn_blade.dat
+  sha256: 8d2418d3fca414de382bf8f52754c60cef69dad15ae026bc42c7302df1322fbb
+  bytes: 6553
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/NREL-2p8-127-HH120_ElastoDyn_tower.dat
+  sha256: d0e3fc417749ebed13ad3a6dd1b3971f4e465578ea65afa762594e2850b91b9b
+  bytes: 4042
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/NREL-2p8-127-HH120_InflowFile.dat
+  sha256: ed69c6f2488b5d68b2cd23dbb5b1aa68ff329457279a8959c812bbae38e81158
+  bytes: 7678
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh120/NREL-2p8-127-HH120_ServoDyn.dat
+  sha256: 1b99594e6a7304547796816554fdd7ffffeab5b9a67124b734a6780fd2230011
+  bytes: 12905
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_00.dat
+  sha256: d77479c5ba962e4661e169779f13ae1ae7802da87ccf0ec41fb8b529078bf831
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_01.dat
+  sha256: 9d59daf7866f2461c8c929f06eedbf0024de84e94f82ea7cc491c152485fd245
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_02.dat
+  sha256: 786869bd76a5906f2d7b75cb75e41c3a0bb1e82a3da4d28c9e17d8aa0cb81403
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_03.dat
+  sha256: 8a85b5eae8dab26511297f9cff3d3ad193085d25d6dd77ec2a3ec9154b7b5a23
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_04.dat
+  sha256: 6df2a8cd8f49c5f148393f979157f2feb18e80d3d64731ae3c0e1f3585b7e5ba
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_05.dat
+  sha256: 9775be99a72d7bea570f7ceb41ef3358ae95a241584bb058577e1151b2bbd1c9
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_06.dat
+  sha256: d10cc7ee0a71e8ee479f95e1f4bd0b1d74f467473751357df4f39e9f25eb946d
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_07.dat
+  sha256: 75c6d21a802c876306471ec31b2e9d35533a4130f2d01f204cf2e2f165aa3762
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_08.dat
+  sha256: e7d15d5f7554d3020d9bd6bef638fdbbdf04146e20bdf20770c75da1f8fa82c7
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_09.dat
+  sha256: ad1b7325aa67ae256ea3ff971f1f4ef33e42d00bafc4ebb8c554544199891a85
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_10.dat
+  sha256: 221294faf389a0e566684fb8eb7ae1dccfe32ff5637503295463555b3e668d1e
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_11.dat
+  sha256: 637f58ba429afd28d1b2a373b3069df3d23cb9213a44ad624e6010b4b46585c6
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_12.dat
+  sha256: b43c4c9bd5adde92f87931d30aa15a40344fffe93d4fd1650f9816dcc245f8ae
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_13.dat
+  sha256: 53d917dacc10c74cdbee6f70f8ebcb7ffbcb347cdc9c8a4f42fe924c19c91bca
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_14.dat
+  sha256: 5db2262a775d0b42d5a784aae28f34931908d8fb738306b037b10cc18a21b028
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_15.dat
+  sha256: bb6dce3ac391adeb876cb81da9afda76f7dc35977a64588bdec9dafaa3eb31a9
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_16.dat
+  sha256: aa6576bbdf58c1c9417113e5ad0d71d92f7994274372d546aa58ec685fd3b989
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_17.dat
+  sha256: 0de84ca26c3e33cd0c1211151f39ef55f9f6c494cb42d9cf912a64d6b4e8ed9a
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_18.dat
+  sha256: e89e29f04e50577e3ad95fcc626a2e103f65c2f50d30efa68002d2e574b39793
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_19.dat
+  sha256: 222ffdf0f0459392ffa46287c7aa76a7840acabc18f31f550f84c8597c67a532
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_20.dat
+  sha256: 8ce9ec0bebcae1e5efda9774156b2999ffbce5cb96292254997adc325a9aeb42
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_21.dat
+  sha256: db4b7cf56213340205bd1e4f69e329cc9a6dfd907a5542e869bcffd3626f390c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_22.dat
+  sha256: c9ed8012da32201a9a81e4f8c6a0ca4661cf60767f47650055ad91de439a1ec7
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_23.dat
+  sha256: c189ac389b90eaa1b86c7f71b0c70b05a7ecd31cc51d4fc6c13417faa00a6507
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_24.dat
+  sha256: 7e14fd5d2f468b7a27f198c8d326991d8e58285de6af7e9f60fcb5efaf650f6c
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_25.dat
+  sha256: b4cc8f2abbe8a1ba9546dcf6f2bab2d32f00d5ee19622de4e8c5c6576af56bb3
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_26.dat
+  sha256: 7f8d899490a5abb198378e2366165c6c03d2a18cdd223ffb3f2398f8a02a3086
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_27.dat
+  sha256: 22d81b2ef80f117df88467673a9486fff94141bd76e5347cee600bd1f6b09a83
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_28.dat
+  sha256: d4833907632dad20f67002dcc0a9ace242901bd7cc82522872bb047782426ce1
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/Airfoils/NREL-2p8-127_AeroDyn15_Polar_29.dat
+  sha256: bcf2e6fb293b6ddb7e23e50848cf5293fa09e59f74ea9133f7ec98c02bf621c9
+  bytes: 24779
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/NREL-2p8-127.fst
+  sha256: 1dfbee44f447e1694c9f533d03d9bfb8181b3f200570515403e01cbfe8ecf805
+  bytes: 7663
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/NREL-2p8-127_AeroDyn15.dat
+  sha256: 1467062db54cbc540d031a56157726fcd4020bced1b3d03e0c01441879f16074
+  bytes: 12187
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/NREL-2p8-127_AeroDyn15_blade.dat
+  sha256: b2d74be36649747f640cd56d27bbc053985196c0e48c30bedae9ed44aba84e98
+  bytes: 4943
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/NREL-2p8-127_Cp_Ct_Cq.txt
+  sha256: 95800b6d0fe39ea252c8328c145335c76fa6e9176719677f77e4a778a638df7e
+  bytes: 14485
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/NREL-2p8-127_ElastoDyn.dat
+  sha256: cb7ce452b37f39888ed5cf010cd40b1ee1f9f243d392bf3cfdfa0793ce8c2bb8
+  bytes: 14719
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/NREL-2p8-127_ElastoDyn_blade.dat
+  sha256: 0fe9e5c0ee89033e8e5e3a186a6e9a0885c8bd9f567a17a48630388ea109182c
+  bytes: 6553
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/NREL-2p8-127_ElastoDyn_tower.dat
+  sha256: c7fdf4f7fe750a69a504addb104a1b40df1731be5682a5eba7fcb651917a2475
+  bytes: 4042
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/NREL-2p8-127_InflowFile.dat
+  sha256: b4b2bcbd26f8cf26eda3900068c97e450b1d5013e2e080914c6d3f28a2391c97
+  bytes: 7682
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/iea_scaled/NREL-2.8-127/OpenFAST_hh87/NREL-2p8-127_ServoDyn.dat
+  sha256: b2ac4d993fa2093299aa46c94dc3c5755def9cc277bff31a087fdb69ce9b593f
+  bytes: 12899
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/oc4_jacket/5MW_OC4Jckt_DLL_WTurb_WavesIrr_MGrowth.fst
+  sha256: cd58d4c9669e8e2b5a2c18eb433736667c7abd2eca11386632550c00b435f369
+  bytes: 8969
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/oc4_jacket/NRELOffshrBsline5MW_OC4Jacket_AeroDyn.dat
+  sha256: 072f69d1507bcb411f0e430967a120780fb035f932c3792b57ea491234b1537e
+  bytes: 12648
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/oc4_jacket/NRELOffshrBsline5MW_OC4Jacket_ElastoDyn.dat
+  sha256: 9e136f80178feed759ba1097affe98e5bde5ce8434232e7a61095b88131d4800
+  bytes: 16240
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/oc4_jacket/NRELOffshrBsline5MW_OC4Jacket_ElastoDyn_Tower.dat
+  sha256: 3af41af93b70e33b0810ad7f313b233e538e53df7ba92f397d0a2407d8b96fe5
+  bytes: 4068
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/oc4_jacket/NRELOffshrBsline5MW_OC4Jacket_HydroDyn.dat
+  sha256: e18d17ce3f7002142cb777e90f877d44e28592c1e4a9d12fe1ae77f9e04329c7
+  bytes: 36240
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/oc4_jacket/NRELOffshrBsline5MW_OC4Jacket_HydroDyn_withIce.dat
+  sha256: 624e960e033b5c22894ba48d53ab8c2c3d12e14b0ff80e8e518168346b7a84d1
+  bytes: 34767
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/oc4_jacket/NRELOffshrBsline5MW_OC4Jacket_ServoDyn.dat
+  sha256: 23cca06da63c8d85f7d2c38311a7416ace2d5d0e43ff4580ba51a1294271d9b3
+  bytes: 13056
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/oc4_jacket/NRELOffshrBsline5MW_OC4Jacket_SubDyn.dat
+  sha256: b2c56227f93af02f78b20f795d5d30c1d346f260b3f69c38ff9fe6558843b173
+  bytes: 29470
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/oc4_jacket/SeaState.dat
+  sha256: 96414f4acff405bce32d7f8f91f35be1f88e98681762da659d69f7efe65d3bd1
+  bytes: 10251
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/openfast_rtest/5MW_Baseline/AeroData/Cylinder1.dat
+  sha256: 4ade21f61d2f28e0e94562e7208e40e562a4aafdeccb2d961b66a0b3a3b7a48b
+  bytes: 711
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/AeroData/Cylinder2.dat
+  sha256: 591d1336452ad993392675f0a7a761c5f16346125b4e0e0a93093e6f341ce37e
+  bytes: 711
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/AeroData/DU21_A17.dat
+  sha256: 9e4932a047b009c0618f86a4f28538e704395aba635be33179cc185b453eef8a
+  bytes: 6035
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/AeroData/DU25_A17.dat
+  sha256: 32a4bde2acfb312e5b61a4ae165d8c250380d38b64142fff5761aff27de55d6e
+  bytes: 5999
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/AeroData/DU30_A17.dat
+  sha256: 8930a1771ecaa2bfd961c460c73e161c56e399dd2dad2b706b1305dd0a8527f4
+  bytes: 6071
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/AeroData/DU35_A17.dat
+  sha256: 5bcfde38d38ac1c8a9ca5ffb46e764aa58f2410ef2839344c2496ea5c4d65478
+  bytes: 5783
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/AeroData/DU40_A17.dat
+  sha256: c831d56ead68b1786b536df979b0ed61c768ab664f829588f55738d3d54824d1
+  bytes: 5819
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/AeroData/NACA64_A17.dat
+  sha256: 4252d2d30db1d4574d292f8afcd08e3524c0beaa74c79ce8c45681c5c3a88652
+  bytes: 5497
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/Cylinder1.dat
+  sha256: 8cd740babf3de2449b28504335625382be076d40e3feedb3c04753820751873a
+  bytes: 7026
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/Cylinder1_coords.txt
+  sha256: 3a3a40c1eee741786357bab6fb49ae37b925dcf47a16aec083e8712c5b3bb595
+  bytes: 8396
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/Cylinder2.dat
+  sha256: feeb9fb175dc918fccf580d9acf7a2238d86485e90af2d25f9bda3fdf4c450fc
+  bytes: 7095
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/Cylinder2_coords.txt
+  sha256: 57928cf1f02057e34f45b00c71fc2468d7fc4d63605047a62907e25dee4637e0
+  bytes: 8400
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/DU21_A17.dat
+  sha256: 2ad661a5f04e87285b8c7f79e9e0b67765ce0f876a9597f604935eb6c47fa2f6
+  bytes: 12679
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/DU21_A17_coords.txt
+  sha256: b4d6350614b0fbbd6262ec340c78ee8eb0562ddfc8cf6bdf222228e739392ca4
+  bytes: 7865
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/DU25_A17.dat
+  sha256: 52fcce2a8fd1159f38cdd1a8bfd365f79e3060e66ea91d5ab8fbce1f16ec20a7
+  bytes: 12601
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/DU25_A17_coords.txt
+  sha256: 08e7d345ef3e066f059f1fcf5f9b779e6a7e455ff2f6944931b227916d7730e7
+  bytes: 8060
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/DU30_A17.dat
+  sha256: 113387e58db28716aa9d2e1b023200fc32354095651c53042e3615ec6093ff82
+  bytes: 12720
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/DU30_A17_coords.txt
+  sha256: fb63e89e1c53c3278cd420a5ab36402a4d609850f1869f4013848a041e7a5c93
+  bytes: 8066
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/DU35_A17.dat
+  sha256: 701cff83e01a187209ff788a3fc4bfb9b8592546462a5aec2f0df54701d05763
+  bytes: 12406
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/DU35_A17_coords.txt
+  sha256: cdbb3d2d5735b0fd6be7a9c4b4439ba2ac6e78c3652657ef4090739c2dc0877a
+  bytes: 8066
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/DU40_A17.dat
+  sha256: 002e2176cf03eda520b160d5a46ce0f5f42125f892c9d0e1fd3c40424d249324
+  bytes: 12445
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/DU40_A17_coords.txt
+  sha256: 5008c9aa91ada47cad7badd9330ba36c72010bdbf0450852cf5ed81c92cf6579
+  bytes: 8066
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/NACA64_A17.dat
+  sha256: acfbf90a0aa479f560911d89b31ec20d02284496a74ecfc9b8ad0534c5d472b9
+  bytes: 12098
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Airfoils/NACA64_A17_coords.txt
+  sha256: c91942a4843516ab7f1b17a34162d21dbc400fbb4011b60f83a83acf08c8bdec
+  bytes: 8272
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/HydroData/Barge.3
+  sha256: 00d37c7fc0ad6be45fb7f87ac226aff743db9d2609b1824986e0d1c5702c08ea
+  bytes: 2042400
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/HydroData/Spar.3
+  sha256: 76e3e22d3a8db60a999a2009e05b8242ba1955d3671f8f0325ffe01716b355a0
+  bytes: 2042400
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/HydroData/marin_semi.3
+  sha256: 8ae9d7e7b88c5426190292d9283a0a004ee89c6f219ff93fa8d53087ecad6fb1
+  bytes: 10171152
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/HydroData/tlpmit.3
+  sha256: 3a8042b0492be2061a58eda4f01d4631c882dc19e4d4a38367b3cc0433dd9f02
+  bytes: 2042400
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/IceDyn_Input.dat
+  sha256: 181bf880b4b41eb73166752e6202542e8eb054fa2f7534bb7cb75b8244bb647d
+  bytes: 5133
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/IceFloe_IEC_Crushing.dat
+  sha256: ae2b7df51cb9353e8211e81fc9aa95aa54aaa3a9ba128c6bbbc6b3c416794efa
+  bytes: 1022
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/NRELOffshrBsline5MW_AeroDyn_blade.dat
+  sha256: 10b9ee4fa6cca5082b9a7be43945386524fabbd01616edef000b1efb65271161
+  bytes: 4546
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/NRELOffshrBsline5MW_BeamDyn.dat
+  sha256: cf6e28111dd2f73eb62e35893fc34c173d1e0a099f671e7e66ba62f20c57d13d
+  bytes: 7039
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/NRELOffshrBsline5MW_BeamDyn_Blade.dat
+  sha256: c7610d1c23877457c1ed75734a91a4ae3c0fb0264ee4e5e49ccca17882e04975
+  bytes: 58819
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/NRELOffshrBsline5MW_Blade.dat
+  sha256: 615b5352843f118e85c02616f8a0ae401e34c1df07d6dd3ed6f77bdd3d4198b5
+  bytes: 8049
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_12mps.dat
+  sha256: 97b504764260e293c65b292759a7bdd4d8b55943ca7c15a39fc65aa402f28548
+  bytes: 7655
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady13mps.dat
+  sha256: 88a0803a6e978dad79e383941f272a58f1f7661562a84a2abd10b83b673b4464
+  bytes: 7571
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat
+  sha256: 8a3b1ca32027924c6eb6713d884972b864a38a56c2b971a7e31af689ccfc3ce6
+  bytes: 7603
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/NRELOffshrBsline5MW_Monopile_IEC_Crushing.inp
+  sha256: 2d075101eb0b0100f37ff7aeb2a365f02ec61fca6486bb4a485611297fdb55a5
+  bytes: 525
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/NRELOffshrBsline5MW_Onshore_ElastoDyn_Tower.dat
+  sha256: 86821e9795ee5dff15914a71919bacd33debe14b276211c120e5289b821666c3
+  bytes: 3469
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/NRELOffshrBsline5MW_ServoDyn_StC.dat
+  sha256: c09f838c268e1938f36c10d7eee4d26d48f947e0b165fb52d5c7fbaee903dbb8
+  bytes: 9859
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/ServoData/DISCON/CMakeLists.txt
+  sha256: 099d702ea25ec6dba92b95c1963364c42af42d88e5cb5228d2bea3b8426c8631
+  bytes: 3062
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/ServoData/DISCON_ITI/CMakeLists.txt
+  sha256: ceac34f8dd3868287e9638112a14951fe8b6e9c6ff5691d5bb852e589dcf5a1f
+  bytes: 3107
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/ServoData/DISCON_OC3/CMakeLists.txt
+  sha256: 375ef9774950fb09bcb11bad6e004c4be61c848f3faeff1b58f079ae902e912a
+  bytes: 3112
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_Baseline/Wind/90m_12mps_twr.inp
+  sha256: 898a7731d1d8f9674d9942f44642898563fd36e0b2d4ab9011eb4f0934daa012
+  bytes: 7305
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/5MW_OC3Mnpl_DLL_WTurb_WavesIrr.fst
+  sha256: 1d09363400d2c4d3fbb3387df72bda130b1560e1d7e353ad81ab62238a34222d
+  bytes: 9010
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/NRELOffshrBsline5MW_OC3Monopile_AeroDyn.dat
+  sha256: f60785f6b50f693d77e05c6cd3bda77fbfd6ad7659fe8ab4e6e6bf9855633177
+  bytes: 12941
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/NRELOffshrBsline5MW_OC3Monopile_ElastoDyn.dat
+  sha256: 7f366be9ee5d90c9d90b326c801bc875e15153614153789c17a1b4fe4167715c
+  bytes: 16137
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/NRELOffshrBsline5MW_OC3Monopile_ElastoDyn_Tower.dat
+  sha256: 89ddc127f715f3df80d46309698ecd605d4512778b8e2e00863c8fa6e1efe7f9
+  bytes: 3483
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/NRELOffshrBsline5MW_OC3Monopile_HydroDyn.dat
+  sha256: bef8a222480849f047df65557483a145cd468fbe3947c0d278551fd1dd412b83
+  bytes: 18363
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/NRELOffshrBsline5MW_OC3Monopile_ServoDyn.dat
+  sha256: 64c4b36b1011718cbc8cdb4d15598223546efaf3385415779cfd8b2a97cf038a
+  bytes: 13045
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/NRELOffshrBsline5MW_OC3Monopile_SubDyn.dat
+  sha256: 02c310d3efeb493a5605e657681073d3519230ca5099e226517e4c39c7c3c3f0
+  bytes: 11390
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/openfast_rtest/5MW_OC3Mnpl_DLL_WTurb_WavesIrr/SeaState.dat
+  sha256: 617b085762474d8bc17f3e8235ba9a2ff31f50f80f3d10a4a0b4db472be7e902
+  bytes: 10308
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL OpenFAST r-test regression suite
+- path: nrel_reference/vestas/V27/AeroData_AD15/63-214.txt
+  sha256: 82f14ab6b24e2da731d5a7cec03db6975763b77dbcdfd62e06913de52849404b
+  bytes: 1775
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/AeroData_AD15/63-218.txt
+  sha256: 9e6dc63e70eee53d537c460c62a5b0bdc4eadf52d4f24e3a14ab92c894780a3b
+  bytes: 1776
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/AeroData_AD15/63-224.txt
+  sha256: faed591710ea7809d697a1536caf6904eec32f678ce4ca3f88a2debb243795e5
+  bytes: 1777
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/AeroData_AD15/63-235.txt
+  sha256: 6608e050a7b61adc3f1edeccbb90ccff219c1ae523aa7e9c38bd9b8fef382b4c
+  bytes: 1778
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/AeroData_AD15/AD_1_Cylinder.dat
+  sha256: 21ed3f1c546f865821876e76385a8fb6de59329585c40e8105266d737bf5221f
+  bytes: 6947
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/AeroData_AD15/AD_2_63-235_mod.dat
+  sha256: 778c9f603f4cb931cfa713a467c22f91c2c9b7413d95af012fead8c5bd465b75
+  bytes: 13422
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/AeroData_AD15/AD_3_63-224_mod.dat
+  sha256: a808633c961382dc01181528f67230c7b1cc4b846e38080d79d6ade052449a06
+  bytes: 13424
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/AeroData_AD15/AD_4_63-218_mod.dat
+  sha256: bf410f0978cc98b81b19953850d01e35064692300417f7abbd263a515bd65bb8
+  bytes: 13424
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/AeroData_AD15/AD_5_63-214_mod.dat
+  sha256: de510cfe00c8e04b6c14f68c3872c7c91d0d5a1753a345f598a0f7d8cfce1076
+  bytes: 13422
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/AeroData_AD15/Cylinder_coords.txt
+  sha256: 3a3a40c1eee741786357bab6fb49ae37b925dcf47a16aec083e8712c5b3bb595
+  bytes: 8396
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/SNLV27_AeroDyn15OF2.dat
+  sha256: 5a0a86679f823d9b02063cc5386eb2bb611ed085ae424cdda1b31d94f654b961
+  bytes: 7789
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/SNLV27_AeroDyn_Blade.dat
+  sha256: f9b23e17feef695d78997e1f764f9f794776bc0cdabc9f26c65c580ee60ab6bc
+  bytes: 2174
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/SNLV27_ElastoDyn.dat
+  sha256: f6ad64cbfb17f89be1dc617f7589aceea47b7b6c67da44b1a88ec0f82bc74265
+  bytes: 11111
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/SNLV27_ElastoDyn_Blade.dat
+  sha256: 06c12bf002aa298b183e2a828ef5ba3ba133780803b39d7a7422c9fe59277656
+  bytes: 5277
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/SNLV27_ElastoDyn_Tower.dat
+  sha256: 81f04f04b4ce34a21947e1c2658e752759292f9379648094ed231ca8c3fd77b6
+  bytes: 3860
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/SNLV27_F8.fst
+  sha256: d752b24ec1acbe44dfee7da908f0fd297f733946f695440b516576929664c57c
+  bytes: 5626
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/SNLV27_InflowWind.dat
+  sha256: fc3599c5aed35086690bf140f3748767f931fdd11076f3bcb1775faa0393d7ac
+  bytes: 5468
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/SNLV27_InflowWind_Turb.dat
+  sha256: ebf593e88c33eaa11e48d5d78e86d45afb1b9a49808a94d64035a0bd34b27ba5
+  bytes: 5593
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/SNLV27_OF2.fst
+  sha256: e1118020a988e9cc86379674b433f9d689d32faa399d8ae796794d9c6bcad35d
+  bytes: 5628
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: nrel_reference/vestas/V27/SNLV27_ServoDyn.dat
+  sha256: 5de82c858daa1bec343455e9a6e7529330cf0d33c3cf2ec30d3a4749448c3de5
+  bytes: 10787
+  licence: Apache-2.0 (NREL OpenFAST + r-test)
+  source: NREL reference wind turbine library
+- path: ref_site_a/5MW_Baseline/AeroData/Cylinder1.dat
+  sha256: 4ade21f61d2f28e0e94562e7208e40e562a4aafdeccb2d961b66a0b3a3b7a48b
+  bytes: 711
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/AeroData/Cylinder2.dat
+  sha256: 591d1336452ad993392675f0a7a761c5f16346125b4e0e0a93093e6f341ce37e
+  bytes: 711
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/AeroData/DU21_A17.dat
+  sha256: 9e4932a047b009c0618f86a4f28538e704395aba635be33179cc185b453eef8a
+  bytes: 6035
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/AeroData/DU25_A17.dat
+  sha256: 32a4bde2acfb312e5b61a4ae165d8c250380d38b64142fff5761aff27de55d6e
+  bytes: 5999
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/AeroData/DU30_A17.dat
+  sha256: 8930a1771ecaa2bfd961c460c73e161c56e399dd2dad2b706b1305dd0a8527f4
+  bytes: 6071
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/AeroData/DU35_A17.dat
+  sha256: 5bcfde38d38ac1c8a9ca5ffb46e764aa58f2410ef2839344c2496ea5c4d65478
+  bytes: 5783
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/AeroData/DU40_A17.dat
+  sha256: c831d56ead68b1786b536df979b0ed61c768ab664f829588f55738d3d54824d1
+  bytes: 5819
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/AeroData/NACA64_A17.dat
+  sha256: 4252d2d30db1d4574d292f8afcd08e3524c0beaa74c79ce8c45681c5c3a88652
+  bytes: 5497
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/Airfoils/Cylinder1.dat
+  sha256: 8cd740babf3de2449b28504335625382be076d40e3feedb3c04753820751873a
+  bytes: 7026
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/Airfoils/Cylinder2.dat
+  sha256: feeb9fb175dc918fccf580d9acf7a2238d86485e90af2d25f9bda3fdf4c450fc
+  bytes: 7095
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/Airfoils/DU21_A17.dat
+  sha256: 2ad661a5f04e87285b8c7f79e9e0b67765ce0f876a9597f604935eb6c47fa2f6
+  bytes: 12679
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/Airfoils/DU25_A17.dat
+  sha256: 52fcce2a8fd1159f38cdd1a8bfd365f79e3060e66ea91d5ab8fbce1f16ec20a7
+  bytes: 12601
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/Airfoils/DU30_A17.dat
+  sha256: 113387e58db28716aa9d2e1b023200fc32354095651c53042e3615ec6093ff82
+  bytes: 12720
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/Airfoils/DU35_A17.dat
+  sha256: 701cff83e01a187209ff788a3fc4bfb9b8592546462a5aec2f0df54701d05763
+  bytes: 12406
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/Airfoils/DU40_A17.dat
+  sha256: 002e2176cf03eda520b160d5a46ce0f5f42125f892c9d0e1fd3c40424d249324
+  bytes: 12445
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/Airfoils/NACA64_A17.dat
+  sha256: acfbf90a0aa479f560911d89b31ec20d02284496a74ecfc9b8ad0534c5d472b9
+  bytes: 12098
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/IceDyn_Input.dat
+  sha256: 181bf880b4b41eb73166752e6202542e8eb054fa2f7534bb7cb75b8244bb647d
+  bytes: 5133
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/IceFloe_IEC_Crushing.dat
+  sha256: ae2b7df51cb9353e8211e81fc9aa95aa54aaa3a9ba128c6bbbc6b3c416794efa
+  bytes: 1022
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/NRELOffshrBsline5MW_AeroDyn_blade.dat
+  sha256: 10b9ee4fa6cca5082b9a7be43945386524fabbd01616edef000b1efb65271161
+  bytes: 4546
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/NRELOffshrBsline5MW_BeamDyn.dat
+  sha256: cf6e28111dd2f73eb62e35893fc34c173d1e0a099f671e7e66ba62f20c57d13d
+  bytes: 7039
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/NRELOffshrBsline5MW_BeamDyn_Blade.dat
+  sha256: c7610d1c23877457c1ed75734a91a4ae3c0fb0264ee4e5e49ccca17882e04975
+  bytes: 58819
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/NRELOffshrBsline5MW_Blade.dat
+  sha256: 615b5352843f118e85c02616f8a0ae401e34c1df07d6dd3ed6f77bdd3d4198b5
+  bytes: 8049
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_12mps.dat
+  sha256: 97b504764260e293c65b292759a7bdd4d8b55943ca7c15a39fc65aa402f28548
+  bytes: 7655
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady13mps.dat
+  sha256: c35376552342f4d2d5be0c8d61d23cbfa2e6684e787f6ea8ebf9cac1eb8deb17
+  bytes: 7642
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/NRELOffshrBsline5MW_InflowWind_Steady8mps.dat
+  sha256: 8a3b1ca32027924c6eb6713d884972b864a38a56c2b971a7e31af689ccfc3ce6
+  bytes: 7603
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/NRELOffshrBsline5MW_Onshore_ElastoDyn_Tower.dat
+  sha256: 9ab73f849b66bbb933d3e54243a8bdbc6f1604dab4f72f335af3e22d8a3d766d
+  bytes: 3523
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/5MW_Baseline/NRELOffshrBsline5MW_ServoDyn_StC.dat
+  sha256: c09f838c268e1938f36c10d7eee4d26d48f947e0b165fb52d5c7fbaee903dbb8
+  bytes: 9859
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_00.dat
+  sha256: d77479c5ba962e4661e169779f13ae1ae7802da87ccf0ec41fb8b529078bf831
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_01.dat
+  sha256: 4fc9212bf930beb8848b31cdd757415106b274ae82e9d3daab48f1a1e1b27cbb
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_02.dat
+  sha256: 96f9dd82890c89c82d2a90061c1f7a8d70e7e93634112c8291fd1f7350d0ce5c
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_03.dat
+  sha256: acac0fda8945723414fb3f00fe3a0bf21c89bd07a286292f41d1bcbb0157017e
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_04.dat
+  sha256: bd2d23f1885df9008af5e267337663a41a0942d5a175f60b6ead6ee0017ddf9f
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_05.dat
+  sha256: 7ce24332f99227208a3ff15ed5a560c3b171cf44dfe0ad144177713a8e750aa2
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_06.dat
+  sha256: a1df5b82d9ee5bba5dc440adfb9bf0a2c846c64ad9246ec2d0a3475d47b7d33d
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_07.dat
+  sha256: cbf313f88153b54652b7c8f43304af83e9d207bd922ed4ba5e7f098f4a8562f2
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_08.dat
+  sha256: 8302deb88305dcfee6d99be5eed8a0a6bc0d2d6715bbcd7987cbe539103c71d6
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_09.dat
+  sha256: bdf9317cfce9ab58f2ba59bd523397b81b1c32e5fb822eb33d9fd5d736e8525b
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_10.dat
+  sha256: e6bffcce2196310b5240daa8f3afa29e2312dabcd83e1eb75ca1ab6de1f5be85
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_11.dat
+  sha256: 30dcd668641048183de263206649a29859d4544067448f38f44a86ad70d65e5c
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_12.dat
+  sha256: 1fe3ca10f2e9723d352046493882a11685970c8109bf91109d1c6732ecdc100a
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_13.dat
+  sha256: b8553b725cfe341ab0cac9af54b41afea581e9df84857a4e1abe4c6af0497df2
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_14.dat
+  sha256: fb58f75ebb195c47a8ec71b946d8b547a488ca7a61a86ff8aaf1f18310494f1c
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_15.dat
+  sha256: c5bc20f086fe7fc2409b49fb2f98e73f0f6ea17abdf281a32d9dd194a232b44b
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_16.dat
+  sha256: c4ec7b2f32203087e3ca23b344d56d827c51469effa950f09a94612eb7d2816c
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_17.dat
+  sha256: 88ea8eaaf3a92a28a0025a4b45bce7b40c0244428be00495bc68560404834e5e
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_18.dat
+  sha256: d49ad57a0e8432024145cd2d4a8811cc0faf97633a9c10fa501e179668ff39e2
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_19.dat
+  sha256: 754f783d806a295745ae56dc7b5fa2cc2757ac564d46b73b47bc37588b682d96
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_20.dat
+  sha256: f45e6e6115c1e94803521a2a9a03d2f746e694dd799944e23e97d4c7b1a85fc4
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_21.dat
+  sha256: e5a2da38b7799fba916d9f3419f2ca7d89d35f950f0de80004977897e9b7317a
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_22.dat
+  sha256: f0889854137865c44bb741d8c53685ad8b98b6d2c5f82c36767e1827fb70aa06
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_23.dat
+  sha256: 121d70f3d809e23c998304b9200c60d8a383881b016f9e12759233cd55e1de6c
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_24.dat
+  sha256: 8463f10aeaeae362ce2428c97501e931595943c996eaca3948f35b42ec5a52dc
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_25.dat
+  sha256: ea28c406d0c4d3cbcd015f0824b92b1f8f639b66e550fba833c08e9cef39671b
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_26.dat
+  sha256: 2ef1f6c51d1be7f2baad0329d1489cd4bf9c7efc32e9c4243b8654c9af76b80c
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_27.dat
+  sha256: 925cf58ebd333f3f240a2e74a6320023fe9af92776f869fa14fd170c8c1e0c20
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_28.dat
+  sha256: 0d917a983e8cc4fe962faa7c34dedca423cb101fe803286dab82ad4cebde1759
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/Airfoils/NREL-1p72-103_AeroDyn15_Polar_29.dat
+  sha256: c24d2d66a02490b3554ea8d9da93c16c108900a0c8ce54d70c0916b3e0a78eaa
+  bytes: 24779
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW.fst
+  sha256: 482ec176c5a500bba97f43f799cc9f14c51b28a950d89551c72b56788ff2c9a1
+  bytes: 4875
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_AeroDyn15.dat
+  sha256: 989d2910af70f31f0df3acd80756ed765cea537ea89e5ad74b2a925809bc6131
+  bytes: 12221
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_AeroDyn15_blade.dat
+  sha256: 2e55a65e031aa961cc56d911860fc26db6390b192df5d1afe9938b83bb17e6a7
+  bytes: 4943
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_DISCON.IN
+  sha256: 21baa4634fffcaea06e00ea753fe74ba4203dd2447d0b41b59d5f5bf758db578
+  bytes: 23190
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_ElastoDyn.dat
+  sha256: 2493913de32892b9badec11f76feb3482b7f012afc3ffd6a64ac81ed41d4efe9
+  bytes: 16567
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_ElastoDyn_blade.dat
+  sha256: 243dc119134bba2b69a92b04327a4a2062e118dd80320dcc0a19467aeac3ddb4
+  bytes: 6553
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_ElastoDyn_tower.dat
+  sha256: 80ecd0a5139ca660750c2f6a9f9f308f48cad933ac5b7d1502a25eb2d4e3000e
+  bytes: 4042
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_ElastoDyn_tower_calibrated.dat
+  sha256: ef919541de056d5bafeb362e151691bd2d27a510e4bf3c7727ca21975276b0ac
+  bytes: 5098
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_ElastoDyn_v4.dat
+  sha256: 0667a85518cbe4a6fb4e9cedc81b00a2d439d97872fbc38b790fd92113fedc22
+  bytes: 14726
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_HydroDyn.dat
+  sha256: cd5e961a1313c50feb78f8273394de182edc1142ee3cb1d101be266f57af7294
+  bytes: 1604
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_InflowFile.dat
+  sha256: a23cb8ae4bf25dd7e8f9004a1432d581245b559edec00c30e447a863697f09f1
+  bytes: 7754
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_SSI.dat
+  sha256: 9df9778e4074a6966e513fd43e7cdcbf37a5cdbda5ad3f733b9e305bae88ba1b
+  bytes: 863
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_ServoDyn.dat
+  sha256: e0fd0505ab0a13d719f7ccb95297f397bf77da51c79f186da4c0e1558fc29f42
+  bytes: 12868
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA-Ref4MW_SubDyn.dat
+  sha256: c03c73ef79a668b8d4cf9dec14b223656b1ede4a3a54005f2861dcd3b5820a58
+  bytes: 2946
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck/RefSiteA_ROSCO.yaml
+  sha256: 57a054a81c3e413c6bb920b38120c74ee90cde2dd1e7c709ce79de3b6eead4f3
+  bytes: 2383
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/Gunsan-4p2MW.SD.sum.yaml
+  sha256: 0b23f436a76482282bbb9aec45fc890ad98eac5bd349e74c5048f412daa7c49f
+  bytes: 14583911
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/Gunsan-4p2MW_SoilDyn.SD.sum.yaml
+  sha256: 88a1046d69963864492a5aa545346eb02ad95d155101f059aa94ed8c6d991cee
+  bytes: 14584785
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/RefSiteA-Ref4MW.fst
+  sha256: 1d1a41679ae2cf959f754bf2542044ae8cc820b94e17e09f46481c6bee55aeed
+  bytes: 8857
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/RefSiteA-Ref4MW_AeroDyn.dat
+  sha256: 69e41581868c5e30db63669cfef7e00ee8515283a0b5a9f3da23cc7579a7c858
+  bytes: 13530
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/RefSiteA-Ref4MW_ElastoDyn.dat
+  sha256: 8231cab60e29fe2338cefe7052543ec52410c619bfa9cfc9ce4502588e510a03
+  bytes: 15975
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/RefSiteA-Ref4MW_ElastoDyn_Tower.dat
+  sha256: 7befbbf252ed28160f4f092505f167fc785592adbd50d5215849b6a3a767e766
+  bytes: 3918
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/RefSiteA-Ref4MW_HydroDyn.dat
+  sha256: 5b3cc81a8b5a968ed1e062336288a019e59f2228cc1bc8e9f9a161f890b787ce
+  bytes: 30053
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/RefSiteA-Ref4MW_ServoDyn.dat
+  sha256: a96d8bf0a7836ae4163efd73fea3b68f1cb13c7e179e7dde51643cf828272c34
+  bytes: 12904
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/RefSiteA-Ref4MW_SoilDyn.dat
+  sha256: 07412b12ffd54ea492898adb88e7dfdc4f09f2bf9db2afb487e8437c78c5b077
+  bytes: 3305
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/RefSiteA-Ref4MW_SoilDyn.fst
+  sha256: 03e63206f1519d462bec0efc2b279aeec36d2953d5d7f653aa4b223f05538009
+  bytes: 8875
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/RefSiteA-Ref4MW_SubDyn.dat
+  sha256: 5e1138dff9e8733ecf4a34325429c5b11cd7a4f4f31e0335552e3c84aca3e727
+  bytes: 46476
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: ref_site_a/openfast_deck_v5/SeaState.dat
+  sha256: a6a3655c9752003d022e81412c61f9ce1f362501d7ba7f102875753b1f3c9046
+  bytes: 10352
+  licence: Academic-use (KEPCO research agreement; runtime-loaded)
+  source: Op^3 framework OpenFAST deck (ref site A)
+- path: sample_projects/gunsan_ref4mw.op3proj
+  sha256: f2832f3f9b8ec29a4aa21f5cf449fb63f2994b1794adc35b6bee9d594ac4506a
+  bytes: 649
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework sample library
+- path: sample_projects/iea_15mw_monopile.op3proj
+  sha256: e2c8620c4ade54ac65ba354934b84795e877cf56b36e871e9cb14cefbfa9a753
+  bytes: 647
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework sample library
+- path: sample_projects/nrel_5mw_oc3_monopile.op3proj
+  sha256: 3c783e7630a5d5662135a1cd282cf33150d1d84d32787d2347f3ef71f3e8e73b
+  bytes: 647
+  licence: MIT (Op^3 framework)
+  source: Op^3 framework sample library
+- path: validation/benchmarks/COMPREHENSIVE_MODEL_REPORT.md
+  sha256: b129b9883194da20205861b3a2b164f6661ab2016884cda30ca128b8dd351faa
+  bytes: 22284
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/CROSS_COMPARABILITY.md
+  sha256: 70f3a3d9d1f57c791165e6217fdaff1a09e1007967ef5d397c1462ed12bf37eb
+  bytes: 13385
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/FOUNDATION_MODE_STUDY.md
+  sha256: 6c061600e092976f009d4944f4145f7c05dc6c93c32a4173d5e69c1a7d98e43f
+  bytes: 7013
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/NREL_BENCHMARK.md
+  sha256: 1df8ac0599e8c127d51b33cd090ad358e580e3a8627c17485c56d05b19dd229b
+  bytes: 11878
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/PAPER_EXTRACTION_BACKLOG.md
+  sha256: f5625d362c147b246becb1aa022dd6608b84f29d87bbbd65d38032bac30490d2
+  bytes: 3499
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/REF_SITE_A_VS_NREL.md
+  sha256: f86734482fe6726e474d7edee418f851ea39d78dd18b2246e2fcb0b35a76b47c
+  bytes: 14548
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/calibration_mac.json
+  sha256: 6687a0eedca14277f41e306be00df1a37aba558a623cfa0b7edb583d401c0ea5
+  bytes: 4341
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/calibration_regression.json
+  sha256: 7ebd3867d4383b0436ea279e67f82c8690013edf7c0362c2857ae0b6045c23bb
+  bytes: 2510
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/calibration_tornado_01_nrel_5mw_baseline.json
+  sha256: 620fada8a59ee56df4838f517aa0b0f412debb9f7938ca801f7cccb083db6582
+  bytes: 2254
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/calibration_tornado_02_nrel_5mw_oc3_monopile.json
+  sha256: 8fcf904c3c20c5449bca4931234528f5b1932d57115e231f7ee997b20827fd07
+  bytes: 2253
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/calibration_tornado_04_ref_site_a_tripod.json
+  sha256: 9273cc2b4c9d142512d1ec504cabfa9c492567bd948d63a7c8e994eb61ba5ee8
+  bytes: 2221
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/calibration_tornado_07_iea_15mw_monopile.json
+  sha256: 52cc8f3f3b77ebd0c5d0e47dd32514ac4591a47be51e05e42234c6aec62b21a0
+  bytes: 2255
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/calibration_tornado_summary.json
+  sha256: 1534513983e679b6bfd4dac5c8c1fa22ce732e6b19883d642da37dfbc16eac1b
+  bytes: 9558
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/dnv_st_0126_conformance.json
+  sha256: f5cf23b0781db7c68cdd598261a485db0c450a13810419a62c22dcadb86d078f
+  bytes: 10898
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/iec_61400_3_conformance.json
+  sha256: e7a4e25023e02dc51798b812d34354002452c037ecb0e1d80f1bcc27067428d5
+  bytes: 14190
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/nrel_model_verification.json
+  sha256: a62cf94c9b4a740f4ba00ef22d4b353deaa5410842157f50b49846529282a65d
+  bytes: 25743
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/oc6_phase2_benchmark.json
+  sha256: ed086feb0332c2cff9dcb3bd63e89c3227da43e803fcccba10dab6747b853981
+  bytes: 1851
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/pisa_cross_validation.json
+  sha256: d121b67d2c74c6ba42f43b02ed00c6df5ce12cbb8bb72a65a1fbde6e9dd6af1f
+  bytes: 2586
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/solution_verification.json
+  sha256: 54fadfac11666b01b9d71d8655a682bbd1f474fd87bff78396f26f33083b3f12
+  bytes: 1638
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
+- path: validation/benchmarks/three_analyses_results.json
+  sha256: 7dfba27d7088b5a52eb2e271c89785d861a699f1023369b6d4d9ec4e13f95bb4
+  bytes: 3177
+  licence: MIT (Op^3 framework)
+  source: Op^3 release validation suite
