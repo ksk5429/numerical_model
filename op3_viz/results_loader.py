@@ -12,10 +12,15 @@ import plotly.graph_objects as go
 
 REPO = Path(__file__).resolve().parents[1]
 
-PATHS = {
-    "bayes": REPO / "PHD/ch7/site_a_bayesian_scour_real_mc.json",
-    "pce": REPO / "PHD/ch7/site_a_pce_surrogate.json",
-    "mode_d": REPO / "PHD/ch6/site_a_mode_d_calibration.json",
+# These dissertation result JSONs live in the private PHD tree
+# (F:/TREE_OF_THOUGHT/PHD/ch6,ch7). Resolved at call-time through
+# ``op3.data_sources.find_phd_data`` so the viewer works on any
+# machine where OP3_PHD_ROOT is configured, and fails loudly with
+# a clear error otherwise.
+PHD_REL = {
+    "bayes": "ch7/gunsan_bayesian_scour_real_mc.json",
+    "pce": "ch7/gunsan_pce_surrogate.json",
+    "mode_d": "ch6/gunsan_mode_d_calibration.json",
 }
 
 DARK = dict(
@@ -28,10 +33,21 @@ DARK = dict(
 
 
 def _load(key: str) -> dict | None:
-    p = PATHS[key]
+    """Resolve ``key`` via ``op3.data_sources.find_phd_data`` and
+    return the parsed JSON dict. Returns ``None`` if the PHD tree is
+    not configured or the file is missing -- callers render an
+    empty-state figure in that case."""
+    try:
+        from op3.data_sources import find_phd_data
+        p = find_phd_data(PHD_REL[key])
+    except Exception:
+        return None
     if not p.exists():
         return None
-    return json.loads(p.read_text(encoding="utf-8"))
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return None
 
 
 def figure_bayes_scour() -> go.Figure:

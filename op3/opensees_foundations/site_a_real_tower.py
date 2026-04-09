@@ -36,8 +36,34 @@ import numpy as np
 E_STEEL_PA = 210e9
 G_STEEL_PA = 80.8e9
 RHO_EFFECTIVE_KG_M3 = 8500.0   # inflated per NREL / DTU convention
-BASE_ELEV_M = float(os.environ.get("OP3_TOWER_BASE_ELEV_M", "0.0"))
-HUB_HEIGHT_M = float(os.environ.get("OP3_TOWER_HUB_HEIGHT_M", "0.0"))
+
+
+def _load_metadata() -> dict:
+    """Load site metadata (base elev, hub height) from a private
+    YAML alongside the segment CSV. Returns a dict with safe
+    defaults if the file cannot be resolved."""
+    try:
+        import yaml
+        from op3.data_sources import find_phd_data
+        rel = os.environ.get(
+            "OP3_TOWER_METADATA_YAML",
+            "data/private/tower_metadata.yaml",
+        )
+        p = find_phd_data(rel)
+        return yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return {}
+
+
+_meta = _load_metadata()
+BASE_ELEV_M = float(
+    os.environ.get("OP3_TOWER_BASE_ELEV_M",
+                   _meta.get("base_elev_m", 0.0))
+)
+HUB_HEIGHT_M = float(
+    os.environ.get("OP3_TOWER_HUB_HEIGHT_M",
+                   _meta.get("hub_height_m", 0.0))
+)
 
 
 # --- Lazy loader ------------------------------------------------------

@@ -228,9 +228,39 @@ def _tab_dlc() -> html.Div:
 
 
 def create_app() -> Dash:
-    scene = build_full_scene()
+    try:
+        scene = build_full_scene()
+        scene_error = None
+    except Exception as exc:
+        scene = None
+        scene_error = f"{type(exc).__name__}: {exc}"
+
     app = Dash(__name__)
     app.title = "Op^3 Viewer"
+
+    if scene is None:
+        app.layout = html.Div(
+            style={"backgroundColor": "#0f1117", "color": "#d0d4dc",
+                   "fontFamily": "system-ui, sans-serif",
+                   "minHeight": "100vh", "padding": "24px"},
+            children=[
+                html.H2("Op^3 Interactive Viewer"),
+                html.Div(
+                    "Could not build the default scene. The viewer "
+                    "requires a configured private data tree "
+                    "(set OP3_PHD_ROOT) with tower_segments.csv and "
+                    "tower_metadata.yaml.",
+                    style={"opacity": 0.8, "marginBottom": "12px"},
+                ),
+                html.Pre(scene_error or "",
+                         style={"backgroundColor": "#1a1e27",
+                                "padding": "10px", "borderRadius": "6px",
+                                "whiteSpace": "pre-wrap",
+                                "color": "#ff6b6b",
+                                "fontSize": "12px"}),
+            ],
+        )
+        return app
 
     app.layout = html.Div(
         style={"backgroundColor": "#0f1117", "color": "#d0d4dc",
