@@ -56,7 +56,7 @@ datas = (
 )
 
 a = Analysis(
-    ["op3_viz/dash_app/app.py"],
+    ["op3_studio_launcher.py"],
     pathex=["."],
     binaries=[],
     datas=datas,

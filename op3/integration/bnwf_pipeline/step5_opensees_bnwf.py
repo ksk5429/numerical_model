@@ -36,7 +36,7 @@ RHO_STEEL = 7850.0      # kg/m3
 # Bucket geometry
 D_BUCKET = 8.0          # m
 R_BUCKET = D_BUCKET / 2
-L_SKIRT = float('nan')  # <REDACTED>           # m
+L_SKIRT = float('nan')           # m
 T_SKIRT = 0.025         # m
 T_LID = 0.040           # m
 DZ = 0.5                # m

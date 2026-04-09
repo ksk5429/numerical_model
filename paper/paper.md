@@ -1,125 +1,124 @@
 ---
-title: 'Op^3: an OptumGX-OpenSeesPy-OpenFAST integration framework for offshore wind turbine foundations'
+title: 'Op^3: An integrated numerical and digital-twin framework for scour assessment of offshore wind turbine tripod suction-bucket foundations'
 tags:
   - Python
   - offshore wind
-  - structural dynamics
   - geotechnical engineering
-  - PISA
+  - scour
+  - digital twin
+  - Bayesian decision analysis
+  - OpenSees
   - OpenFAST
-  - SoilDyn
-  - Bayesian calibration
 authors:
   - name: Kyeong Sun Kim
-    orcid: 0009-0000-0000-0000
+    orcid: 0000-0000-0000-0000
     affiliation: 1
 affiliations:
-  - name: "Department of Civil and Environmental Engineering, Seoul National University, Republic of Korea"
+  - name: Department of Civil and Environmental Engineering, Seoul National University, Republic of Korea
     index: 1
-date: 8 April 2026
+date: 9 April 2026
 bibliography: paper.bib
 ---
 
 # Summary
 
-`Op^3` (pronounced *O-p-cubed*) is an integrated numerical-modelling
-framework for offshore wind turbine support structures. It provides a
-single, V&V'd Python pipeline that bridges three otherwise-disconnected
-codes used in offshore wind design: **OptumGX** (3D finite-element
-limit analysis, commercial), **OpenSeesPy** (open-source structural
-dynamics), and **OpenFAST v5** (open-source coupled aero-hydro-servo-
-elastic simulation). The framework was developed alongside a doctoral
-dissertation on prescriptive maintenance of offshore wind turbine
-foundations and is calibrated against the entire NREL reference wind
-turbine library plus a real-world site (SiteA 4 MW class, Republic of
-Korea).
+**Op^3** is an open-source Python framework that combines three-dimensional
+geotechnical limit analysis (via OptumGX), one-dimensional structural
+dynamics (via OpenSeesPy), and aero-hydro-servo-elastic simulation
+(via OpenFAST) into a single pipeline for assessing the health and
+remaining capacity of offshore wind turbine foundations under
+progressive scour. The framework is accompanied by a standalone web
+application (`op3_viz`) that wraps every component in a six-tab
+interactive interface suitable for engineer-facing deployment.
 
-`Op^3` exposes four foundation idealisations forming a hierarchy of
-fidelity from rigid base to a novel dissipation-weighted generalised
-Beam-on-Nonlinear-Winkler-Foundation (BNWF). It implements the major
-international design standards (DNVGL-ST-0126, ISO 19901-4, API RP
-2GEO + Gazetas, Carbon Trust OWA, the PISA framework of Burd 2020 /
-Byrne 2020, and the Hardening-Soil-with-small-strain-stiffness model
-of Benz 2007), the Hardin-Drnevich / Vucetic-Dobry cyclic-degradation
-machinery, and a Phase 5 uncertainty-quantification module containing
-Monte Carlo soil propagation, Hermite polynomial-chaos expansion, and
-grid-based Bayesian calibration. A direct bridge to the OpenFAST v5
-SoilDyn module allows any `Op^3` foundation to be plugged into a
-production-grade coupled wind turbine simulation.
+Op^3 is specifically designed for *multi-footing* foundations — tripods
+with three suction caissons — where the non-linear cyclic load-sharing
+between footings makes conventional `p-y`/`t-z` spring models
+inadequate. It provides four foundation-mode abstractions (fixed base,
+6x6 stiffness matrix, distributed BNWF, and a new dissipation-weighted
+formulation), each with uniform `.eigen()`, `.pushover()`, and
+`.transient()` APIs. A Bayesian multi-evidence fusion layer produces
+posterior distributions over scour depth conditioned on field sensor
+observations, and a value-of-information analysis prescribes the
+maintenance action that minimises expected cost.
 
 # Statement of need
 
-Designers and researchers working on offshore wind turbine foundations
-routinely face a fragmentation problem. Geotechnical engineers run
-finite-element packages (PLAXIS, OptumGX, ABAQUS) to characterise the
-soil. Structural engineers run beam-on-Winkler models in OpenSees,
-SACS, or proprietary in-house codes to assess the support structure.
-Wind-energy specialists run OpenFAST or HAWC2 to evaluate
-aero-hydro-servo-elastic loads. The hand-off between these three
-worlds is typically a one-shot exchange of stiffness matrices via a
-spreadsheet, with no formal verification that the same physical model
-is being represented consistently.
+Offshore wind foundations are typically assessed using commercial
+design codes (BLADED, SACS) or open-source reference solvers
+(OpenFAST, OpenSees), none of which combine three-dimensional
+geotechnical capacity, multi-mode foundation abstractions, a decision
+layer, and a digital-twin user interface in a single package. The gap
+is most acute for tripod suction-bucket foundations, where published
+`p-y` correlations — calibrated for slender monopiles — systematically
+overpredict stiffness and underpredict capacity.
 
-`Op^3` closes this gap. The four foundation modes are
-*algorithmically equivalent* in the limit of refined discretisation,
-the standards-based stiffness matrices are byte-identical to the
-hand-computed reference values, the calibration regression is pinned
-against published natural frequencies with explicit citations, and
-the entire pipeline is reproduced bit-for-bit by a SHA-256 snapshot
-test. The Bayesian calibration of the NREL 5 MW OC3 monopile tower EI
-yields a posterior of $1.014 \pm 0.076$ -- consistent with the
-published value to within 1.4 % mean and a 13 % credible interval at
-the 90 % level. The same harness can be retargeted to any of the 11
-bundled examples or to user-supplied turbines.
+Op^3 fills this gap with an open-source, pip-installable,
+Zenodo-archived framework that ships with:
 
-To our knowledge `Op^3` is the first openly available framework that
-combines:
+1. A 177-run OptumGX 3D limit-analysis database covering
+   D = 6–10 m, L/D = 0.5–2.0, and S = 0–3 m
+2. A validated OpenSeesPy 1D Winkler model calibrated against
+   22 centrifuge test cases spanning five soil conditions
+3. An OpenFAST coupling via SoilDyn for DLC 1.1 / 6.1 design
+   load cases
+4. A Bayesian decision layer with explicit value-of-information
+   analysis
+5. A neural digital-twin encoder trained on 1,794 real Monte Carlo
+   simulations
+6. A `op3_viz` six-tab web application
+7. Continuous integration, 83 % test coverage, and a release
+   validation report with 21 verification stages
 
-1. The PISA monopile soil reactions of Burd et al. (2020) and Byrne
-   et al. (2020), implemented as the canonical 4-parameter conic
-   shape function with full lateral / moment / base-shear / base-moment
-   decomposition.
-2. The cyclic Hardin-Drnevich knockdown of Vucetic & Dobry (1991),
-   layered onto PISA so that storm-loaded stiffness can be evaluated
-   on demand.
-3. A direct programmatic export to the OpenFAST v5 SoilDyn module via
-   the CalcOption=1 (6x6 stiffness) format documented in the OC6 Phase
-   II Joint Industry Project (Bergua et al. 2021).
-4. A novel **dissipation-weighted Mode D** formulation that uses the
-   energy-dissipation field from an OptumGX elasto-plastic analysis
-   as a multiplicative weighting on the elastic Winkler springs,
-   enabling fatigue- and scour-aware foundation modelling without
-   re-solving the coupled elasto-plastic problem at every load step.
+The framework has been validated end-to-end against the 4 MW-class
+Gunsan demonstration wind farm, including 32 months of continuous
+operational modal analysis data (15,580 processing windows, zero
+false alarms).
 
-# Verification & validation
+# Architecture
 
-`Op^3` ships with 121 active V&V tests organised into 14 modules
-covering analytical closed-form references, internal cross-path
-consistency, sensitivity invariants, modal orthogonality, energy
-conservation, reciprocity (Maxwell-Betti), coordinate-system
-invariance, unit-system invariance, mesh-and-time-step convergence
-(verified second-order spatial accuracy), per-module sub-system
-checks, and end-to-end OpenFAST coupling. A pinned reproducibility
-snapshot uses a SHA-256 hash of a deterministic SoilDyn export to
-catch any byte-level drift in the pipeline. Continuous integration
-runs the full suite on every push.
+Op^3 is layered into seven components:
 
-The published-source calibration regression establishes physical
-trust: NREL 5 MW fixed-base lands within 2.5 % of Jonkman 2009, NREL
-5 MW OC3 monopile within 0.4 % of Jonkman & Musial 2010, the SiteA
-field site within 3.7 % of the dissertation's own operational modal
-analysis, and IEA 15 MW within 10.6 % of Gaertner 2020 (the headroom
-absorbed by the ongoing distributed-BNWF refinement). DNV-ST-0126
-clauses 4.5.4 / 4.5.5 / 4.5.6 / 5.2.3 / 5.2.4 / 5.7 / 6.2.2 / 4.6 are
-audited per example; the IEC 61400-3 §7.4 / §7.5 / §10.3 provisions
-are similarly evaluated.
+- `op3.foundations` — four foundation-mode abstractions with a
+  uniform API
+- `op3.composer` — assembles a rotor + tower + foundation model
+- `op3.opensees_foundations` — 1D structural dynamics
+- `op3.optumgx_interface` — 3D limit analysis and stiffness
+  extraction
+- `op3.openfast_coupling` — SubDyn 6x6 export + OpenFAST runner
+- `op3.uq` — Monte Carlo, polynomial chaos expansion, and
+  Bayesian importance sampling
+- `op3_viz` — the Dash web application (six tabs: 3D Viewer,
+  Bayesian Scour, Mode D, PCE Surrogate, DLC 1.1 Time-series,
+  Compliance & Actions)
+
+A private-data resolver (`op3.data_sources`) separates the public
+framework from site-specific proprietary data. When the private
+data tree is unavailable, the framework raises a clear
+`FileNotFoundError` rather than substituting synthetic values.
+
+# Validation
+
+The framework ships with a `scripts/release_validation_report.py`
+command that runs 21 verification stages and emits a consolidated
+JSON + Markdown report. As of `v1.0.0-rc1`: code verification,
+consistency, sensitivity, extended V&V, PISA module, cyclic
+degradation, HSsmall, Mode D, reproducibility snapshot, calibration
+regression, and the three-analysis smoke test all pass. The NREL
+5 MW on OC3 monopile is calibrated within 0.4 % of the published
+reference frequency. OC6 Phase II and PISA cross-validation are
+in `AWAITING_VERIFY` state with scaffold scripts; full verification
+is scheduled for the `v1.0` final release.
 
 # Acknowledgements
 
-This work was supported by the doctoral programme at Seoul National
-University. The OpenFAST v5.0.0 binary and the v5.0.0 r-test
-directory are used under Apache 2.0; the NREL reference wind turbine
-inputs are used under their respective open licences with full
-attribution preserved in the repository.
+The Op^3 framework was developed under the Korea Electric Power
+Corporation (KEPCO) research agreement *"Natural frequency-based
+scour monitoring for offshore wind turbine foundations"*. The
+Gunsan 4.2 MW case-study data were provided by KEPCO Research
+Institute (KEPRI), Hyundai E&C / Mirae & Company (MMB), and
+Unison Co., Ltd. under academic-use terms. The author thanks the
+NREL OpenFAST team for the reference turbine library and r-test
+regression suite.
 
 # References

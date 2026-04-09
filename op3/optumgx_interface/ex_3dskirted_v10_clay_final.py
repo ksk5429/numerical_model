@@ -548,7 +548,7 @@ def save_collections_to_excel(resultpoints_coll, plates_coll, file_prefix):
 
 D = 8    # Diameter of circular foundation
 R = D / 2  # Radius of foundation
-S = float('nan')  # <REDACTED>    # Depth of skirts
+S = float('nan')    # Depth of skirts
 
 L = 20*R   # Length of soil domain
 H = 15*R    # Height of soil domain

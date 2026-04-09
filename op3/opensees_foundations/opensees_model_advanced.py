@@ -462,7 +462,7 @@ class HSDStiffnessLoader:
 
     def __init__(
         self,
-        bucket_length: float = float('nan')  # <REDACTED>,
+        bucket_length: float = float('nan'),
         bucket_diameter: float = 8.0,
         hsd_file_path: Optional[str] = None
     ):
@@ -907,7 +907,7 @@ def get_config() -> Dict[str, Any]:
     return {
         'structural': {
             'bucket_diameter': 8.0,
-            'bucket_length': float('nan')  # <REDACTED>,
+            'bucket_length': float('nan'),
             'skirt_thickness': 0.040,
             'lid_thickness': 0.050,
             'water_depth': 11.81,
@@ -1813,7 +1813,7 @@ if __name__ == "__main__":
         print()
 
         # Demonstrate HSD loader functionality
-        loader = HSDStiffnessLoader(bucket_length=float('nan')  # <REDACTED>, bucket_diameter=float('nan')  # <REDACTED>)
+        loader = HSDStiffnessLoader(bucket_length=float('nan'), bucket_diameter=float('nan'))
 
         print("HSD Loader Test (Synthetic Data):")
         print("-" * 40)

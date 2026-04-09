@@ -63,7 +63,7 @@ def _priors():
 
 
 def test_5_1_1_shape_and_positivity():
-    s = propagate_pisa_mc(diameter_m=float('nan')  # <REDACTED>, embed_length_m=30.0,
+    s = propagate_pisa_mc(diameter_m=float('nan'), embed_length_m=30.0,
                           soil_priors=_priors(), n_samples=100)
     print(f"  [5.1.1] shape={s.shape}, min K_xx={s[:,0,0].min():.3e}")
     assert s.shape == (100, 6, 6)
@@ -72,11 +72,11 @@ def test_5_1_1_shape_and_positivity():
 
 def test_5_1_2_mean_close_to_deterministic():
     priors = _priors()
-    s = propagate_pisa_mc(diameter_m=float('nan')  # <REDACTED>, embed_length_m=30.0,
+    s = propagate_pisa_mc(diameter_m=float('nan'), embed_length_m=30.0,
                           soil_priors=priors, n_samples=400)
     summary = summarise_samples(s)
     K_det = pisa_pile_stiffness_6x6(
-        diameter_m=float('nan')  # <REDACTED>, embed_length_m=30.0,
+        diameter_m=float('nan'), embed_length_m=30.0,
         soil_profile=[SoilState(p.depth_m, p.G_mean_Pa,
                                  p.su_or_phi_mean, p.soil_type)
                        for p in priors],
@@ -88,7 +88,7 @@ def test_5_1_2_mean_close_to_deterministic():
 
 
 def test_5_1_3_cov_in_band():
-    s = propagate_pisa_mc(diameter_m=float('nan')  # <REDACTED>, embed_length_m=30.0,
+    s = propagate_pisa_mc(diameter_m=float('nan'), embed_length_m=30.0,
                           soil_priors=_priors(), n_samples=400)
     summary = summarise_samples(s)
     cov = summary["Kxx"]["cov"]
@@ -97,7 +97,7 @@ def test_5_1_3_cov_in_band():
 
 
 def test_5_1_4_percentile_ordering():
-    s = propagate_pisa_mc(diameter_m=float('nan')  # <REDACTED>, embed_length_m=30.0,
+    s = propagate_pisa_mc(diameter_m=float('nan'), embed_length_m=30.0,
                           soil_priors=_priors(), n_samples=200)
     summary = summarise_samples(s)
     e = summary["Kxx"]
