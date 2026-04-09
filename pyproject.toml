@@ -35,6 +35,8 @@ dependencies = [
 docs = ["sphinx >= 7", "alabaster"]
 test = ["pytest >= 7", "pytest-cov >= 4"]
 dev  = ["mypy >= 1.5", "ruff >= 0.1"]
+encoder = ["torch >= 2.0"]
+viz = ["dash >= 2.14", "plotly >= 5.18", "pyyaml >= 6.0"]
 
 [project.urls]
 Homepage    = "https://github.com/ksk5429/numerical_model"
