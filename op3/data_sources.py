@@ -149,26 +149,34 @@ def find_phd_data(*candidates: str, op3_fallback: Optional[str] = None) -> Path:
 # ---------------------------------------------------------------------------
 
 def site_a_spring_params() -> Path:
-    """Real OptumGX SiteA spring parameters (v4 dissipation pipeline)."""
+    """Real OptumGX SiteA spring parameters (v4 dissipation pipeline).
+
+    Proprietary -- no public fallback. Configure ``OP3_PHD_ROOT`` to
+    point at the private data tree. Raises ``FileNotFoundError``
+    otherwise.
+    """
     return find_phd_data(
         "data/optumgx/dissipation/spring_params_v4_dissipation.csv",
-        op3_fallback="data/fem_results/site_a_real_spring_params.csv",
     )
 
 
 def site_a_dissipation_skirt() -> Path:
-    """Real OptumGX SiteA dissipation field (Vmax case, skirt-only)."""
+    """Real OptumGX SiteA dissipation field (Vmax case, skirt-only).
+
+    Proprietary -- no public fallback.
+    """
     return find_phd_data(
         "data/optumgx/dissipation/dissipation_skirt_Vmax.csv",
-        op3_fallback="data/fem_results/site_a_real_dissipation_skirt.csv",
     )
 
 
 def site_a_fn_vs_scour() -> Path:
-    """Real OptumGX SiteA f1 vs scour sweep (9 scour depths)."""
+    """Real OptumGX SiteA f1 vs scour sweep (9 scour depths).
+
+    Proprietary -- no public fallback.
+    """
     return find_phd_data(
         "data/optumgx/dissipation/fn_vs_scour_v4_dissipation.csv",
-        op3_fallback="data/fem_results/site_a_real_fn_vs_scour.csv",
     )
 
 
