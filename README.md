@@ -636,8 +636,46 @@ for at least three years after the dissertation defense.
 This work was funded by the Korea Electric Power Corporation (KEPCO)
 under the project *"Natural frequency-based scour monitoring for
 offshore wind turbine foundations"*. The framework was developed at
-Seoul National University. The NREL reference wind turbine library
-is maintained by the National Renewable Energy Laboratory; this
-repository bundles redistributed copies under their original licenses
-and gratefully acknowledges NREL's open-science commitment that made
-this comparison possible.
+Seoul National University.
+
+The NREL reference wind turbine library is maintained by the
+National Renewable Energy Laboratory; this repository bundles
+redistributed copies under their original licenses and gratefully
+acknowledges NREL's open-science commitment that made this
+comparison possible.
+
+### Field case study data
+
+The 4 MW-class offshore wind turbine used for the site-specific
+validation in Chapters 4–8 of the associated dissertation is the
+Gunsan Offshore Demonstration Wind Farm unit operated by KEPCO Research
+Institute (KEPRI) with foundation and support-structure design by
+Hyundai E&C, Mirae & Company (MMB), and nacelle/rotor hardware from
+Unison Co., Ltd. (UNISON U136, 4.2 MW, 136 m rotor diameter, 95 m hub
+height, three-bucket suction caisson tripod). Structural drawings,
+BOM, and geotechnical CPT/OMA data were provided by KEPRI/MMB/Unison
+for academic use under the KEPCO research agreement.
+
+Specific proprietary numerical values (tower segment schedule, bucket
+OD/skirt length/centre-to-centre spacing, nacelle mass, site
+coordinates, SubDyn 6x6 K matrix) are **not redistributed** in this
+public repository; the framework code loads them at runtime from a
+private data tree via ``op3.data_sources`` (``OP3_PHD_ROOT`` /
+``OP3_TOWER_SEGMENTS_CSV``). The framework itself (foundation modes
+A/B/C/D, the PISA/Hardin-Drnevich/HSsmall implementations, the Mode D
+dissipation-weighting formulation, the OpenFAST coupling, and the
+OC6/PISA benchmarks) is fully reproducible with the shipped NREL
+5 MW reference turbine for users without access to the KEPCO data.
+
+Please cite the dissertation and the Zenodo DOI when using this
+framework; if a publication makes use of the Gunsan case study
+outputs, please additionally acknowledge KEPCO Research Institute,
+MMB, and Unison Co., Ltd.
+
+### Citations for bundled references
+
+ * NREL reference wind turbines -- NREL/TP-500-38060 (5 MW),
+   NREL/TP-5000-75698 (IEA 15 MW)
+ * OC6 Phase II benchmark -- Bergua et al., NREL/TP-5000-79989 (2021)
+ * PISA design framework -- Burd et al., 2020; Byrne et al., 2020
+ * HSsmall constitutive model -- Benz, 2007
