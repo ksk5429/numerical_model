@@ -66,14 +66,14 @@ ROTOR_1P_HZ = {
     "01_nrel_5mw_baseline":     12.1 / 60,
     "02_nrel_5mw_oc3_monopile": 12.1 / 60,
     "03_nrel_5mw_oc4_jacket":   12.1 / 60,
-    "04_site_a_ref4mw_tripod":   13.2 / 60,    # Reference 4 MW OWT rated rpm
-    "05_nrel_5mw_on_site_a_tripod": 12.1 / 60,
-    "06_site_a_tower_on_monopile":  13.2 / 60,
+    "04_ref_site_a_tripod":   13.2 / 60,    # Reference 4 MW OWT rated rpm
+    "05_nrel_5mw_on_ref_site_a_tripod": 12.1 / 60,
+    "06_ref_site_a_tower_on_monopile":  13.2 / 60,
     "07_iea_15mw_monopile":     7.55 / 60,    # IEA 15MW rated rpm
     "08_iea_15mw_volturnus":    7.55 / 60,
     "09_sacs_nrel_oc4":         12.1 / 60,
     "10_sacs_innwind":          12.1 / 60,
-    "11_site_a_tower_on_jacket":13.2 / 60,
+    "11_ref_site_a_tower_on_jacket":13.2 / 60,
 }
 
 

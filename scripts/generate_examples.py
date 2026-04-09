@@ -85,7 +85,7 @@ expressed in two different analysis codes.""",
 
     # Tier 2: Op^3 scientific contributions (SiteA + foundation variants)
     dict(
-        id="04_site_a_ref4mw_tripod",
+        id="04_ref_site_a_tripod",
         title="SiteA 4 MW class on tripod suction bucket (as built)",
         tier=2,
         rotor="ref_4mw_owt",
@@ -107,7 +107,7 @@ natural frequency of 0.244 Hz from 32 months of nacelle
 accelerometer OMA.""",
     ),
     dict(
-        id="05_nrel_5mw_on_site_a_tripod",
+        id="05_nrel_5mw_on_ref_site_a_tripod",
         title="NREL 5MW rotor+tower on SiteA tripod (Op^3 isolation test)",
         tier=2,
         rotor="nrel_5mw_baseline",
@@ -128,7 +128,7 @@ Any difference between Example 2 and Example 5 is attributable to
 the foundation choice, because the rotor+tower are identical.""",
     ),
     dict(
-        id="06_site_a_tower_on_monopile",
+        id="06_ref_site_a_tower_on_monopile",
         title="SiteA RT1 tower on equivalent monopile (Op^3 isolation test)",
         tier=2,
         rotor="ref_4mw_owt",
@@ -234,7 +234,7 @@ parser on a second, larger deck (192 joints vs 56 for OC4).""",
 
     # User-requested addition
     dict(
-        id="11_site_a_tower_on_jacket",
+        id="11_ref_site_a_tower_on_jacket",
         title="SiteA RT1 tower on equivalent jacket (Op^3 isolation test)",
         tier=2,
         rotor="ref_4mw_owt",

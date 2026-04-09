@@ -48,7 +48,7 @@ def main():
     # Save results
     results_path = HERE / "results_eigen.json"
     results_path.write_text(json.dumps({
-        "example_id": "04_site_a_ref4mw_tripod",
+        "example_id": "04_ref_site_a_tripod",
         "title": "SiteA 4 MW class on tripod suction bucket (as built)",
         "first_6_frequencies_Hz": list(freqs),
     }, indent=2))

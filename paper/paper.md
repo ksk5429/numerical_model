@@ -50,8 +50,8 @@ design codes (BLADED, SACS) or open-source reference solvers
 geotechnical capacity, multi-mode foundation abstractions, a decision
 layer, and a digital-twin user interface in a single package. The gap
 is most acute for tripod suction-bucket foundations, where published
-`p-y` correlations — calibrated for slender monopiles — systematically
-overpredict stiffness and underpredict capacity.
+`p-y` correlations -- calibrated for slender monopiles -- systematically
+overpredict stiffness and underpredict capacity [@burd2020; @byrne2020; @mcadam2023].
 
 Op^3 fills this gap with an open-source, pip-installable,
 Zenodo-archived framework that ships with:
@@ -73,7 +73,9 @@ Zenodo-archived framework that ships with:
 The framework has been validated end-to-end against the 4 MW-class
 Gunsan demonstration wind farm, including 32 months of continuous
 operational modal analysis data (15,580 processing windows, zero
-false alarms).
+false alarms) [@kim2025scour; @kim2025mssp]. Full validation and
+theoretical background are documented in the associated doctoral
+dissertation [@kim2026phd].
 
 # Architecture
 
@@ -101,7 +103,11 @@ data tree is unavailable, the framework raises a clear
 
 The framework ships with a `scripts/release_validation_report.py`
 command that runs 21 verification stages and emits a consolidated
-JSON + Markdown report. As of `v1.0.0-rc1`: code verification,
+JSON + Markdown report. The framework is benchmarked against the
+NREL OC3 monopile reference [@jonkman2009; @jonkman2010], the IEA
+15 MW reference [@gaertner2020], the PISA Cowden and Dunkirk lab
+datasets [@burd2020; @byrne2020; @mcadam2023], and the OC6 Phase II
+floating benchmark [@bergua2021]. As of `v1.0.0-rc1`: code verification,
 consistency, sensitivity, extended V&V, PISA module, cyclic
 degradation, HSsmall, Mode D, reproducibility snapshot, calibration
 regression, and the three-analysis smoke test all pass. The NREL

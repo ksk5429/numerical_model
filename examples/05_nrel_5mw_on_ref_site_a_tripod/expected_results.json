@@ -1,5 +1,5 @@
 {
-  "example_id": "05_nrel_5mw_on_site_a_tripod",
+  "example_id": "05_nrel_5mw_on_ref_site_a_tripod",
   "title": "NREL 5MW rotor+tower on SiteA tripod (Op^3 isolation test)",
   "tier": "2",
   "rotor": "nrel_5mw_baseline",

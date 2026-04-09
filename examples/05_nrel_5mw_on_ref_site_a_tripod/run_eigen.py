@@ -48,7 +48,7 @@ def main():
     # Save results
     results_path = HERE / "results_eigen.json"
     results_path.write_text(json.dumps({
-        "example_id": "05_nrel_5mw_on_site_a_tripod",
+        "example_id": "05_nrel_5mw_on_ref_site_a_tripod",
         "title": "NREL 5MW rotor+tower on SiteA tripod (Op^3 isolation test)",
         "first_6_frequencies_Hz": list(freqs),
     }, indent=2))

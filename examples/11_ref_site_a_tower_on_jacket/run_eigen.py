@@ -48,7 +48,7 @@ def main():
     # Save results
     results_path = HERE / "results_eigen.json"
     results_path.write_text(json.dumps({
-        "example_id": "11_site_a_tower_on_jacket",
+        "example_id": "11_ref_site_a_tower_on_jacket",
         "title": "SiteA RT1 tower on equivalent jacket (Op^3 isolation test)",
         "first_6_frequencies_Hz": list(freqs),
     }, indent=2))

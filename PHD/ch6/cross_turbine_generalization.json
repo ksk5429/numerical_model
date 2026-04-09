@@ -21,13 +21,13 @@
       "notes": "Coupled tower+monopile 1st mode fixed at mudline."
     },
     {
-      "example": "04_gunsan_4p2mw_tripod",
+      "example": "04_ref_site_a_tripod",
       "f1_op3_hz": 0.28243259318571945,
       "f1_ref_hz": 0.244,
       "error_abs_hz": 0.038432593185719455,
       "error_rel_pct": 15.751062781032562,
       "source": "This dissertation Ch. 5 field OMA (20039 RANSAC windows)",
-      "notes": "Operational modal analysis of real Gunsan 4.2 MW OWT."
+      "notes": "Operational modal analysis of real SiteA 4 MW class OWT."
     },
     {
       "example": "07_iea_15mw_monopile",

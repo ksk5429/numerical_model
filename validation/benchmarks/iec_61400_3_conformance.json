@@ -252,7 +252,7 @@
     ]
   },
   {
-    "example": "04_site_a_ref4mw_tripod",
+    "example": "04_ref_site_a_tripod",
     "n_fail": 4,
     "checks": [
       {

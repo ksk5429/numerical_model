@@ -22,7 +22,7 @@
     "note": "Coupled tower+monopile 1st bending mode, fixed at mudline; Op3 example 02 uses fixed-base monopile (no p-y springs)."
   },
   {
-    "example": "04_site_a_ref4mw_tripod",
+    "example": "04_ref_site_a_tripod",
     "f1_hz": 0.28243259318571945,
     "reference_hz": 0.244,
     "error_fraction": 0.15751062781032563,

@@ -21,7 +21,7 @@ Foundations"* (Seoul National University, June 2026).
 
    environment
    getting_started
-   user_manual
+   user_manual/index
 
 .. toctree::
    :maxdepth: 2

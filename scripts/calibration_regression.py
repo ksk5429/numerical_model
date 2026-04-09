@@ -66,8 +66,8 @@ REFERENCES: dict[str, Reference] = {
         note="Coupled tower+monopile 1st bending mode, fixed at mudline; "
              "Op3 example 02 uses fixed-base monopile (no p-y springs).",
     ),
-    "04_site_a_ref4mw_tripod": Reference(
-        example_id="04_site_a_ref4mw_tripod",
+    "04_ref_site_a_tripod": Reference(
+        example_id="04_ref_site_a_tripod",
         f1_hz=0.244,
         tolerance=0.18,
         boundary_condition="tripod-suction-bucket-as-built",

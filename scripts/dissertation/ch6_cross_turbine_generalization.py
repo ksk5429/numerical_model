@@ -47,7 +47,7 @@ REFERENCES: list[TurbineRef] = [
     TurbineRef("02_nrel_5mw_oc3_monopile", 0.2766,
                "Jonkman & Musial 2010 NREL/TP-500-47535 Tab 7-3",
                "Coupled tower+monopile 1st mode fixed at mudline."),
-    TurbineRef("04_site_a_ref4mw_tripod", 0.244,
+    TurbineRef("04_ref_site_a_tripod", 0.244,
                "This dissertation Ch. 5 field OMA (20039 RANSAC windows)",
                "Operational modal analysis of real SiteA 4 MW class OWT."),
     TurbineRef("07_iea_15mw_monopile", 0.170,

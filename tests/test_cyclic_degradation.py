@@ -114,7 +114,7 @@ def test_degrade_profile_exact_at_gamma_ref():
 def test_cyclic_stiffness_lower_than_static():
     K_static = pisa_pile_stiffness_6x6(8.0, 30.0, PROFILE)
     K_cyclic = cyclic_stiffness_6x6(
-        diameter_m=float('nan'), embed_length_m=30.0,
+        diameter_m=8.0, embed_length_m=30.0,
         soil_profile=PROFILE, cyclic_strain=1e-3,
     )
     print(f"  [3.2.9] Kxx static={K_static[0,0]:.3e}, cyclic={K_cyclic[0,0]:.3e}")

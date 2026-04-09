@@ -140,7 +140,7 @@ def main():
         },
         "forward_model": {
             "framework": "Op^3 v0.3.2",
-            "example": "04_site_a_ref4mw_tripod",
+            "example": "04_ref_site_a_tripod",
             "foundation_mode": "distributed_bnwf (Mode C)",
             "scour_relief": "sqrt((z - s) / z) applied to k(z)",
         },
