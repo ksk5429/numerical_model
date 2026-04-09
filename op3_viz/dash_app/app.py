@@ -285,6 +285,130 @@ def _tab_dlc() -> html.Div:
     ])
 
 
+def _tab_sequential_bayes() -> html.Div:
+    """Sequential Bayesian tracker tab: accumulate monitoring epochs
+    and watch the posterior tighten over time."""
+    return html.Div([
+        html.Div([
+            html.H3("Sequential Bayesian Tracker",
+                    style={"marginTop": "0", "color": "#d0d4dc"}),
+            html.Div(
+                "Enter sensor readings for each monitoring epoch. "
+                "The posterior from each epoch becomes the prior for "
+                "the next, progressively tightening the diagnosis.",
+                style={"opacity": 0.7, "fontSize": "12px",
+                       "marginBottom": "12px"},
+            ),
+            html.Div([
+                html.Div([
+                    html.Label("Frequency ratio"),
+                    dcc.Input(id="seq_freq", type="number", value=0.994,
+                              step=0.001, style={"width": "120px",
+                                                  "color": "#111"}),
+                ], style={"marginRight": "16px"}),
+                html.Div([
+                    html.Label("Capacity ratio"),
+                    dcc.Input(id="seq_cap", type="number", value=0.99,
+                              step=0.01, style={"width": "120px",
+                                                 "color": "#111"}),
+                ], style={"marginRight": "16px"}),
+                html.Div([
+                    html.Label("Anomaly"),
+                    dcc.RadioItems(
+                        id="seq_anomaly",
+                        options=[{"label": "no", "value": "no"},
+                                 {"label": "yes", "value": "yes"}],
+                        value="no", inline=True,
+                        inputStyle={"marginRight": "4px",
+                                    "marginLeft": "8px"}),
+                ], style={"marginRight": "16px"}),
+                html.Button("Add epoch", id="btn_seq_epoch", n_clicks=0,
+                            style={"padding": "8px 16px",
+                                   "backgroundColor": "#2b7a78",
+                                   "color": "#fff", "border": "none",
+                                   "borderRadius": "6px",
+                                   "cursor": "pointer",
+                                   "alignSelf": "flex-end"}),
+                html.Button("Reset", id="btn_seq_reset", n_clicks=0,
+                            style={"padding": "8px 16px",
+                                   "backgroundColor": "#8b3a3a",
+                                   "color": "#fff", "border": "none",
+                                   "borderRadius": "6px",
+                                   "cursor": "pointer",
+                                   "marginLeft": "8px",
+                                   "alignSelf": "flex-end"}),
+            ], style={"display": "flex", "alignItems": "flex-end",
+                      "gap": "4px"}),
+        ], style={"padding": "14px"}),
+        dcc.Graph(id="g_seq_trajectory"),
+        html.Pre(id="seq_summary",
+                 style={"padding": "10px 14px",
+                        "backgroundColor": "#1a1e27",
+                        "color": "#d0d4dc", "fontSize": "11px",
+                        "whiteSpace": "pre-wrap", "maxHeight": "200px",
+                        "overflowY": "auto"}),
+    ])
+
+
+def _tab_agent() -> html.Div:
+    """Decision agent tab: run the full diagnostic pipeline and
+    produce a natural-language report."""
+    return html.Div([
+        html.Div([
+            html.H3("Diagnostic Agent",
+                    style={"marginTop": "0", "color": "#d0d4dc"}),
+            html.Div(
+                "Enter sensor readings and click 'Run diagnosis' to "
+                "produce a full natural-language maintenance report. "
+                "Each click adds an epoch to the agent's sequential "
+                "tracker.",
+                style={"opacity": 0.7, "fontSize": "12px",
+                       "marginBottom": "12px"},
+            ),
+            html.Div([
+                html.Div([
+                    html.Label("Frequency ratio"),
+                    dcc.Input(id="agent_freq", type="number", value=0.985,
+                              step=0.001, style={"width": "120px",
+                                                  "color": "#111"}),
+                ], style={"marginRight": "16px"}),
+                html.Div([
+                    html.Label("Capacity ratio"),
+                    dcc.Input(id="agent_cap", type="number", value=0.92,
+                              step=0.01, style={"width": "120px",
+                                                 "color": "#111"}),
+                ], style={"marginRight": "16px"}),
+                html.Div([
+                    html.Label("Anomaly"),
+                    dcc.RadioItems(
+                        id="agent_anomaly",
+                        options=[{"label": "no", "value": "no"},
+                                 {"label": "yes", "value": "yes"}],
+                        value="yes", inline=True,
+                        inputStyle={"marginRight": "4px",
+                                    "marginLeft": "8px"}),
+                ], style={"marginRight": "16px"}),
+                html.Button("Run diagnosis", id="btn_agent_run",
+                            n_clicks=0,
+                            style={"padding": "8px 16px",
+                                   "backgroundColor": "#c68b17",
+                                   "color": "#fff", "border": "none",
+                                   "borderRadius": "6px",
+                                   "cursor": "pointer",
+                                   "alignSelf": "flex-end"}),
+            ], style={"display": "flex", "alignItems": "flex-end",
+                      "gap": "4px"}),
+        ], style={"padding": "14px"}),
+        html.Div(id="agent_report",
+                 style={"padding": "14px",
+                        "backgroundColor": "#1a1e27",
+                        "color": "#d0d4dc", "fontSize": "12px",
+                        "whiteSpace": "pre-wrap",
+                        "maxHeight": "500px", "overflowY": "auto",
+                        "borderRadius": "6px", "margin": "10px 14px"}),
+    ])
+
+
 def create_app() -> Dash:
     try:
         scene = build_full_scene()
@@ -373,6 +497,20 @@ def create_app() -> Dash:
                         selected_style={"backgroundColor": "#0f1117",
                                         "color": "#4aa3ff",
                                         "borderTop": "2px solid #4aa3ff"}),
+                dcc.Tab(label="Sequential Tracker", value="seq_bayes",
+                        children=[_tab_sequential_bayes()],
+                        style={"backgroundColor": "#1a1e27",
+                               "color": "#d0d4dc"},
+                        selected_style={"backgroundColor": "#0f1117",
+                                        "color": "#4aa3ff",
+                                        "borderTop": "2px solid #4aa3ff"}),
+                dcc.Tab(label="Diagnostic Agent", value="agent",
+                        children=[_tab_agent()],
+                        style={"backgroundColor": "#1a1e27",
+                               "color": "#d0d4dc"},
+                        selected_style={"backgroundColor": "#0f1117",
+                                        "color": "#4aa3ff",
+                                        "borderTop": "2px solid #4aa3ff"}),
             ]),
         ],
     )
@@ -426,6 +564,89 @@ def create_app() -> Dash:
         )
         import json as _json
         return _json.dumps(result, indent=2)
+
+    # --- Sequential Bayesian tracker state (per-app instance) ---
+    from op3.uq.sequential_bayesian import SequentialBayesianTracker
+    _seq_tracker = SequentialBayesianTracker()
+
+    @app.callback(
+        Output("g_seq_trajectory", "figure"),
+        Output("seq_summary", "children"),
+        Input("btn_seq_epoch", "n_clicks"),
+        Input("btn_seq_reset", "n_clicks"),
+        Input("seq_freq", "value"),
+        Input("seq_cap", "value"),
+        Input("seq_anomaly", "value"),
+        prevent_initial_call=True,
+    )
+    def _seq_update(n_epoch, n_reset, freq, cap, anom):
+        import dash, json as _json
+        trig = dash.callback_context.triggered_id
+        if trig == "btn_seq_reset":
+            _seq_tracker.reset()
+            empty = go.Figure()
+            empty.update_layout(
+                paper_bgcolor="#0f1117", plot_bgcolor="#0f1117",
+                font=dict(color="#d0d4dc"),
+                title="tracker reset — add epochs to begin")
+            return empty, "reset"
+        if trig != "btn_seq_epoch":
+            raise dash.exceptions.PreventUpdate
+        _seq_tracker.update(
+            freq_ratio=float(freq or 0.99),
+            capacity_ratio=float(cap or 0.99),
+            anomaly=(anom == "yes"),
+        )
+        traj = _seq_tracker.trajectory()
+        epochs = [t["epoch"] for t in traj]
+        means = [t["mean"] for t in traj]
+        p05s = [t["p05"] for t in traj]
+        p95s = [t["p95"] for t in traj]
+        fig = go.Figure()
+        fig.add_scatter(x=epochs, y=p95s, mode="lines",
+                        line=dict(width=0), showlegend=False)
+        fig.add_scatter(x=epochs, y=p05s, mode="lines",
+                        fill="tonexty", fillcolor="rgba(74,163,255,0.2)",
+                        line=dict(width=0), name="90% CI")
+        fig.add_scatter(x=epochs, y=means, mode="lines+markers",
+                        line=dict(color="#4aa3ff", width=2),
+                        marker=dict(size=7), name="posterior mean")
+        fig.add_hline(y=0.45, line_dash="dash", line_color="#ff6b6b",
+                      annotation_text="critical")
+        fig.update_layout(
+            paper_bgcolor="#0f1117", plot_bgcolor="#0f1117",
+            font=dict(color="#d0d4dc"),
+            xaxis=dict(title="epoch", gridcolor="#2a2f3a"),
+            yaxis=dict(title="scour depth (S/D)", gridcolor="#2a2f3a"),
+            title=f"sequential posterior | {len(traj)} epochs | "
+                  f"latest mean={means[-1]:.3f}",
+            height=400, margin=dict(l=50, r=20, t=40, b=40),
+        )
+        summary = _json.dumps(_seq_tracker.summary(), indent=2)
+        return fig, summary
+
+    # --- Decision agent state ---
+    from op3.agents.decision_agent import DecisionAgent
+    _agent = DecisionAgent()
+
+    @app.callback(
+        Output("agent_report", "children"),
+        Input("btn_agent_run", "n_clicks"),
+        Input("agent_freq", "value"),
+        Input("agent_cap", "value"),
+        Input("agent_anomaly", "value"),
+        prevent_initial_call=True,
+    )
+    def _agent_run(n, freq, cap, anom):
+        import dash
+        if dash.callback_context.triggered_id != "btn_agent_run":
+            raise dash.exceptions.PreventUpdate
+        report = _agent.run(
+            freq_ratio=float(freq or 0.99),
+            capacity_ratio=float(cap or 0.99),
+            anomaly=(anom == "yes"),
+        )
+        return report.text
 
     return app
 
