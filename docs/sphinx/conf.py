@@ -31,7 +31,7 @@ autodoc_mock_imports = [
 project = "Op^3"
 author = "Kim Kyeong Sun (Seoul National University)"
 copyright = "2026, Kim Kyeong Sun"
-release = "0.3.0"
+release = "1.0.0-rc1"
 version = "0.3"
 
 
@@ -100,5 +100,5 @@ try:
 except ImportError:
     html_theme = "alabaster"
 html_static_path = ["_static"]
-html_title = "Op^3 -- OptumGX-OpenSeesPy-OpenFAST integration framework"
+html_title = "Op^3 -- Integrated Numerical and Digital Twin Framework for Offshore Wind Turbine Foundations"
 html_short_title = "Op^3"

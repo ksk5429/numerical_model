@@ -204,6 +204,6 @@ Next steps
 ----------
 
 * :doc:`getting_started` -- first Op\ :sup:`3` script
-* :doc:`user_manual` -- worked examples for each foundation mode
+* :doc:`user_manual/index` -- worked examples for each foundation mode
 * :doc:`technical_reference` -- mathematical formulation
 * :doc:`verification` -- V&V evidence base
