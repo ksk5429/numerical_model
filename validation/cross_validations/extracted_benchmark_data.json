@@ -110,5 +110,42 @@
     "L_D": 0.5,
     "soil": "kaolin clay su=8kPa",
     "benchmark": "H_norm=0.12 (pure lateral); V_norm=1.0 (pure vertical)"
+  },
+  {
+    "id": 23,
+    "paper": "INNWIND D4.31 (2013)",
+    "type": "design analysis",
+    "foundation": "reference jacket (DTU 10MW)",
+    "D_m": null,
+    "soil": "North Sea sand/clay",
+    "benchmark": "f1 = 0.287 Hz; allowable range 0.176-0.273 Hz; 3P lower limit 0.30 Hz"
+  },
+  {
+    "id": 24,
+    "paper": "Jonkman 2010 (OC3 Phase II)",
+    "type": "code-to-code comparison",
+    "foundation": "monopile (NREL 5MW)",
+    "benchmark": "f1 = 0.324 Hz (reference); ~20 codes compared; spread ~0.31-0.34 Hz"
+  },
+  {
+    "id": 25,
+    "paper": "Popko 2012 (OC4 Phase I)",
+    "type": "code-to-code comparison",
+    "foundation": "jacket (NREL 5MW on UpWind jacket)",
+    "benchmark": "f1 ~ 0.31 Hz (reference); ~15 codes compared"
+  },
+  {
+    "id": 26,
+    "paper": "Arany et al. 2015",
+    "type": "analytical model",
+    "foundation": "monopile (3-spring model)",
+    "benchmark": "Closed-form f1 formula validated against field data from Belwind, Walney, Thanet; error <5%"
+  },
+  {
+    "id": 27,
+    "paper": "Damgaard et al. 2013/2014",
+    "type": "field measurement",
+    "foundation": "monopile (North Sea)",
+    "benchmark": "Environmental normalisation: wind/wave/tidal/thermal contributions separated; sub-1% structural changes detectable"
   }
 ]
