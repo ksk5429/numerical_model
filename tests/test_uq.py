@@ -193,7 +193,7 @@ def test_5_3_3_normalised():
         forward_model=lambda p: 0.5 * p,
         likelihood_fn=normal_likelihood(0.5, 0.01),
         grid=grid)
-    Z = float(np.trapz(post.posterior, grid))
+    Z = float(np.trapezoid(post.posterior, grid))
     print(f"  [5.3.3] integral of posterior = {Z:.6f}")
     assert abs(Z - 1.0) < 1e-6
     assert (post.posterior >= 0).all()

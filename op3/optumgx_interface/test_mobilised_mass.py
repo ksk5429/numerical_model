@@ -17,6 +17,13 @@ N_sectors = 12
 L_dom = 20*R; H_dom = 15*R
 su0 = 15.0; k_su = 20.0; gamma = 10.0; a_int = 0.67
 
+import math
+if math.isnan(S):
+    raise RuntimeError(
+        "Proprietary dimension S (skirt length) not configured. "
+        "Set OP3_SKIRT_LENGTH env var or replace float('nan') with actual value."
+    )
+
 print("=" * 70)
 print("TEST: Mobilised Mass / Collapse Mechanism Data Extraction")
 print("=" * 70)

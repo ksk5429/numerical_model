@@ -210,7 +210,7 @@ class OpenSeesModel:
 
     # Soil plug parameters (saturated marine soil)
     # CORRECTED (2026-01-10): Changed from 1900.0 to 1700.0 kg/m³
-    # Based on weighted average of SiteA marine clay layers (see site_a_site.yaml)
+    # Based on weighted average of SiteA marine clay layers (see site_a.yaml)
     # Layer 1 (0-4m): γ=16.5 kN/m³ → ρ=1682 kg/m³
     # Layer 2 (4-9.3m): γ=17.2 kN/m³ → ρ=1753 kg/m³
     # Weighted average: 1723 kg/m³ ≈ 1700 kg/m³
@@ -1091,7 +1091,7 @@ class OpenSeesModel:
         models because the foundation stiffness is much higher than tower
         stiffness, making the system insensitive to foundation changes.
         """
-        # Reference frequency at S=0 (from SSOT site_a_site.yaml)
+        # Reference frequency at S=0 (from SSOT site_a.yaml)
         f0 = 0.24358  # Hz
 
         # Bucket diameter (from geometry)
@@ -1784,7 +1784,7 @@ if __name__ == "__main__":
     print("  " + "-" * 48)
 
     # SSOT baseline frequency
-    f0_ssot = 0.24358  # Hz (from SSOT site_a_site.yaml)
+    f0_ssot = 0.24358  # Hz (from SSOT site_a.yaml)
     f0_tolerance = 0.005  # ±0.5% tolerance
 
     test_scour_depths = [0.0, 0.5, 1.0, 2.0, 3.0, 4.0]

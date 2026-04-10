@@ -11,7 +11,7 @@ All numbers in this document are either:
 - **Extracted automatically** from the `.fst` / ElastoDyn files in
   this repository (marked ⚡), or
 - **Sourced from published NREL documentation** (marked 📄), or
-- **Read from the SiteA SSOT** (`op3/config/site_a_site.yaml`,
+- **Read from the SiteA SSOT** (`op3/config/site_a.yaml`,
   marked 🔧).
 
 Anything not so marked is an engineering estimate and will be

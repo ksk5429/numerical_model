@@ -78,7 +78,7 @@ def grid_bayesian_calibration(
     pred = np.array([forward_model(float(p)) for p in grid])
     lk = np.array([likelihood_fn(float(p)) for p in pred])
     post_unnorm = prior * lk
-    Z = float(np.trapz(post_unnorm, grid))
+    Z = float(np.trapezoid(post_unnorm, grid))
     if Z <= 0:
         raise ValueError("posterior unnormalisable: Z = 0")
     post = post_unnorm / Z
@@ -91,11 +91,11 @@ def grid_bayesian_calibration(
     def quantile(q: float) -> float:
         return float(np.interp(q, cdf, grid))
 
-    mean = float(np.trapz(grid * post, grid))
-    var = float(np.trapz((grid - mean) ** 2 * post, grid))
+    mean = float(np.trapezoid(grid * post, grid))
+    var = float(np.trapezoid((grid - mean) ** 2 * post, grid))
 
     return BayesianPosterior(
-        grid=grid, prior=prior / np.trapz(prior, grid),
+        grid=grid, prior=prior / np.trapezoid(prior, grid),
         likelihood=lk, posterior=post,
         mean=mean, std=float(np.sqrt(max(var, 0.0))),
         p05=quantile(0.05), p50=quantile(0.50), p95=quantile(0.95),

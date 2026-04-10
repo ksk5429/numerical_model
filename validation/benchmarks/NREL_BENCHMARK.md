@@ -118,7 +118,7 @@ matches the published 150 m within the 1.3 m shaft tilt offset.
   run to completion, but the rotor aerodynamic and blade structural
   properties are placeholders.
 - **What the real SiteA specification is** (from
-  [`op3/config/site_a_site.yaml`](../../op3/config/site_a_site.yaml)):
+  [`op3/config/site_a.yaml`](../../op3/config/site_a.yaml)):
   - Rotor: Reference 4 MW OWT, diameter 136.0 m, 3 blades
   - Hub height: 96.3 m above MSL
   - Rated power: 4 MW class at 11 m/s

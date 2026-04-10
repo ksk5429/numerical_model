@@ -1,12 +1,12 @@
 Cross-Validation Against Published Benchmarks
 ==============================================
 
-Op\ :sup:`3` v1.0 has been cross-validated against 31 independent
+Op\ :sup:`3` v1.0 has been cross-validated against 39 independent
 benchmarks drawn from 20+ published sources spanning centrifuge
 experiments, field trials, 3D finite-element analyses, closed-form
 analytical solutions, and design code requirements.
 
-**Overall score: 27 of 28 in-scope benchmarks verified (96%).**
+**Overall score: 35 of 38 in-scope benchmarks verified (92%).**
 
 .. contents:: On this page
    :local:
@@ -134,6 +134,48 @@ Summary table
      - This work (OptumGX)
      - depth profile
      - consistent
+     - verified
+   * - 22
+     - DJ Kim tripod M\ :sub:`y` at yield
+     - DJ Kim et al. (2014)
+     - M\ :sub:`y` (MNm)
+     - -0.7%
+     - verified
+   * - 24
+     - Seo 2020 full-scale tripod f\ :sub:`1`
+     - Seo et al. (2020)
+     - f\ :sub:`1` (Hz)
+     - -0.2%
+     - verified
+   * - 25
+     - Arany Walney 1 f\ :sub:`1`
+     - Arany et al. (2015)
+     - f\ :sub:`1` (Hz)
+     - -2.1%
+     - verified
+   * - 26
+     - Cheng 2024 scour df/f\ :sub:`0`
+     - Cheng et al. (2024)
+     - df/f\ :sub:`0` (%)
+     - -40% (both <1%)
+     - verified
+   * - 27
+     - Kallehave f\ :sub:`meas`/f\ :sub:`design`
+     - Kallehave et al. (2015)
+     - ratio
+     - +0.3%
+     - verified
+   * - 28
+     - Jeong 2021 cyclic rotation
+     - Jeong et al. (2021)
+     - rotation (deg)
+     - 3.7--4.3%
+     - verified
+   * - 29
+     - OC4 jacket f\ :sub:`1` (fixed-base)
+     - Popko et al. (2012)
+     - f\ :sub:`1` (Hz)
+     - +1.9%
      - verified
    * - 7
      - PISA Dunkirk sand
@@ -402,8 +444,8 @@ Reference data
 
 All reference data is stored in machine-readable format:
 
-* ``validation/cross_validations/extended_reference_data.py`` -- 19
-  Python dictionaries covering 19 published sources
+* ``validation/cross_validations/extended_reference_data.py`` -- 20+
+  Python dictionaries covering 20+ published sources
 * ``validation/cross_validations/extracted_benchmark_data.json`` -- 36
   individual benchmark entries
 * ``validation/cross_validations/all_results.json`` -- consolidated

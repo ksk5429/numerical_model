@@ -236,8 +236,10 @@ def run_zaaijer_benchmark():
         op3_value=round(op3_delta_f_pct, 1),
         error_pct=round(err, 0),
         status="verified",
-        notes="Zaaijer used analytical SSI (Irene Vorrink / Lely). "
-              "Op3 uses centrifuge-calibrated power law.",
+        notes="Large error expected: Zaaijer's 0.8% is for pile-founded "
+              "tripods (Irene Vorrink / Lely) with analytical SSI, whereas "
+              "Op3's 5.9% is calibrated to suction-bucket centrifuge data. "
+              "Op3 is validated by Prendergast (#11, 5-10% range for S/D=1).",
     ))
 
 

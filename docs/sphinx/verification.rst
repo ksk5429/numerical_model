@@ -1,8 +1,8 @@
 Verification & Validation
 =========================
 
-The Op\ :sup:`3` V&V suite contains 115+ active falsification gates
-across 14 test modules. All tests must pass before any commit reaches
+The Op\ :sup:`3` V&V suite contains 140 active falsification gates
+across 15 test modules. All tests must pass before any commit reaches
 ``main``.
 
 Test summary
@@ -24,7 +24,7 @@ Test summary
      - 5
      - Physical sensitivity invariants
    * - ``tests/test_extended_vv.py``
-     - 8
+     - 12
      - Damping, energy, reciprocity, units, coordinates, orthogonality
    * - ``tests/test_pisa.py``
      - 9
@@ -47,6 +47,9 @@ Test summary
    * - ``tests/test_uq.py``
      - 13
      - MC propagation, PCE, Bayesian
+   * - ``tests/test_op3_framework.py``
+     - 15
+     - Framework integration, project I/O, visualization wiring
    * - ``tests/test_reproducibility.py``
      - 6
      - Snapshot byte-identical reproduction
@@ -104,8 +107,8 @@ Cross-validation against published benchmarks
 ----------------------------------------------
 
 In addition to the internal V&V tests above, Op\ :sup:`3` has been
-cross-validated against **31 independent benchmarks** from 20+ published
-sources, achieving a **96% verification rate** (27/28 in-scope).
+cross-validated against **39 independent benchmarks** from 20+ published
+sources, achieving a **92% verification rate** (35/38 in-scope).
 
 See :doc:`cross_validation` for the complete cross-validation report
 including OptumGX bearing capacity factors (0.8--7.8% error vs Vulpe

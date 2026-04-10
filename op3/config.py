@@ -8,7 +8,7 @@ raises a clear error if a required key is missing.
 Usage:
 
     from op3 import load_site_config
-    cfg = load_site_config('op3/config/site_a_site.yaml')
+    cfg = load_site_config('op3/config/site_a.yaml')
     D = cfg['foundation']['bucket_diameter_m']
 """
 from __future__ import annotations

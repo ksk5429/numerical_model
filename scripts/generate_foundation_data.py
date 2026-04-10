@@ -137,7 +137,7 @@ def write_spring_profile():
         "depth_m": -df["z_m"],   # legacy uses negative z (downward), Op^3 uses positive
         "k_ini_kN_per_m": df["k_py_S0.0_kN_per_m2"] * D * dz,
         # Capacity from a fitted power law: p_ult ≈ 9 * s_u(z) * D
-        # with s_u(z) = 15 + 20*depth (kPa, from site_a_site.yaml)
+        # with s_u(z) = 15 + 20*depth (kPa, from site_a.yaml)
         "p_ult_kN_per_m": (15 + 20 * (-df["z_m"])) * 9 * D,
         "spring_type": "p_y",
     })

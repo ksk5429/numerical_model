@@ -200,7 +200,7 @@ if __name__ == "__main__":
             return raw
         smoothed = uniform_filter1d(raw.astype(float), size=window, mode='nearest')
         smoothed = np.maximum(smoothed, 0)  # no negative capacity
-        integral = np.trapz(smoothed, z)
+        integral = np.trapezoid(smoothed, z)
         if integral > 0:
             scale = global_target / integral
             smoothed *= scale
@@ -219,8 +219,8 @@ if __name__ == "__main__":
                                      window=3)
 
     # Compute base capacities
-    H_skirt = np.trapz(p_ult_smooth, z_nodes) if p_ult_smooth.max() > 0 else 0
-    V_skirt = np.trapz(t_ult_smooth * np.pi * D, z_nodes)
+    H_skirt = np.trapezoid(p_ult_smooth, z_nodes) if p_ult_smooth.max() > 0 else 0
+    V_skirt = np.trapezoid(t_ult_smooth * np.pi * D, z_nodes)
     H_base = max(Hmax - H_skirt, 0)
     V_base = max(Vmax - V_skirt, 0)
 

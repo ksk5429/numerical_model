@@ -157,6 +157,12 @@ def build_model_with_scour(prj, scour_depth, probe_type, run_name):
 
 
 if __name__ == "__main__":
+    import math
+    if math.isnan(S):
+        raise RuntimeError(
+            "Proprietary dimension S (skirt length) not configured. "
+            "Set OP3_SKIRT_LENGTH env var or replace float('nan') with actual value."
+        )
     print("=" * 60)
     print(f"PC3: Scour sweep at depths {SCOUR_DEPTHS}")
     print("=" * 60)

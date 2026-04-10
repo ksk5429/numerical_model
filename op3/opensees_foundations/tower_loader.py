@@ -341,7 +341,7 @@ def _integrate_blade_mass(blade_path: Path, span_m: float) -> float:
     bl_fract = arr[:, bf_idx]
     bmass = arr[:, bm_idx]
     s = bl_fract * span_m
-    return float(np.trapz(bmass, s))
+    return float(np.trapezoid(bmass, s))
 
 
 def load_elastodyn_rna(ed_main: str | Path) -> RNAProperties:

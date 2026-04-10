@@ -67,6 +67,33 @@ OpenFAST coupling
 .. automodule:: op3.openfast_coupling.soildyn_export
    :members:
 
+Fatigue
+-------
+
+.. automodule:: op3.fatigue
+   :members:
+
+Visualization
+-------------
+
+.. automodule:: op3.visualization
+   :members:
+
+.. automodule:: op3.viz_optumgx
+   :members:
+
+.. automodule:: op3.viz_openfast
+   :members:
+
+.. automodule:: op3.viz_tier1
+   :members:
+
+.. automodule:: op3.viz_tier2
+   :members:
+
+.. automodule:: op3.viz_tier3
+   :members:
+
 Uncertainty quantification (Phase 5)
 ------------------------------------
 
@@ -77,4 +104,16 @@ Uncertainty quantification (Phase 5)
    :members:
 
 .. automodule:: op3.uq.bayesian
+   :members:
+
+Advanced UQ
+-----------
+
+.. automodule:: op3.uq.sequential_bayesian
+   :members:
+
+.. automodule:: op3.uq.encoder_bridge
+   :members:
+
+.. automodule:: op3.uq.encoder_training
    :members:

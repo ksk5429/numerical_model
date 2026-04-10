@@ -2,7 +2,7 @@
 """
 OptumGX Full VHM Extraction: Vmax + Hmax + Mmax + Plate Pressures
 ==================================================================
-Builds D=8m, L=<REDACTED_SKIRT_L>  # (proprietary, loaded at runtime)ed circular foundation, runs all three
+Builds D=8m circular foundation with proprietary skirt length, runs all three
 uniaxial probes, extracts global capacities AND plate-element
 pressure distributions for BNWF calibration.
 
@@ -411,6 +411,12 @@ def run_mmax(prj):
 # 5. MAIN
 # =============================================================================
 if __name__ == "__main__":
+    import math
+    if math.isnan(S):
+        raise RuntimeError(
+            "Proprietary dimension S (skirt length) not configured. "
+            "Set OP3_SKIRT_LENGTH env var or replace float('nan') with actual value."
+        )
     print("=" * 70)
     print("OptumGX Full VHM: Vmax + Hmax + Mmax + Plate Pressures")
     print(f"D={D}m, L={S}m, su={su0}+{k_su}z, kappa={k_su*D/su0:.1f}")

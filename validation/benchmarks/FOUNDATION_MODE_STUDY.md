@@ -114,7 +114,7 @@ is in the tower model or the foundation model.
 
 ```bash
 python examples/01_compare_foundation_modes.py \
-  --site op3/config/site_a_site.yaml \
+  --site op3/config/site_a.yaml \
   --scour 0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0 \
   --modes fixed,stiffness_6x6,distributed_bnwf,dissipation_weighted \
   --output foundation_mode_comparison.csv

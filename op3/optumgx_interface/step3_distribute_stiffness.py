@@ -53,7 +53,7 @@ if __name__ == "__main__":
     # Model: k_h(z) = delta_h * G(z)  [kN/m per m depth per m width]
     # Total: integral_0^L k_h(z) * D * dz = Kh_global
     # Therefore: delta_h = Kh_global / (D * integral_0^L G(z) dz)
-    integral_G = np.trapz(G_z, z)
+    integral_G = np.trapezoid(G_z, z)
     delta_h = Kh_global / (D * integral_G) if integral_G > 0 else 1.0
     k_h = delta_h * G_z  # kN/m per m depth per m width
 
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     K_py_node = k_h * D * DZ  # kN/m per node
 
     # Verify
-    Kh_check = np.trapz(k_h * D, z)
+    Kh_check = np.trapezoid(k_h * D, z)
     print(f"\n  Horizontal springs:")
     print(f"    delta_h = {delta_h:.4f}")
     print(f"    Kh_check = {Kh_check/1000:.1f} MN/m "
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     # Base spring stiffness (remaining vertical stiffness)
     Kv_base = Kv_global * (1 - SHAFT_FRACTION)
 
-    Kv_shaft_check = np.trapz(k_v * np.pi * D, z)
+    Kv_shaft_check = np.trapezoid(k_v * np.pi * D, z)
     print(f"\n  Vertical springs:")
     print(f"    Shaft fraction = {SHAFT_FRACTION:.0%}")
     print(f"    delta_v = {delta_v:.4f}")
@@ -92,7 +92,7 @@ if __name__ == "__main__":
     # ---- Rotational stiffness check ----
     # The distributed lateral springs contribute to rotation:
     # Kr_distributed = integral_0^L k_h(z) * D * z^2 * dz
-    Kr_dist = np.trapz(k_h * D * z**2, z)
+    Kr_dist = np.trapezoid(k_h * D * z**2, z)
     Kr_deficit = Kr_global - Kr_dist
     print(f"\n  Rotational stiffness:")
     print(f"    Kr from distributed p-y = {Kr_dist/1000:.1f} MNm/rad")

@@ -199,7 +199,7 @@ If you have an OptumGX academic license and the `optumgx` Python API:
    profile. A license holder can swap in a different constitutive
    model (Mohr-Coulomb, Hoek-Brown, user-defined) and regenerate
    the capacity envelope.
-3. **Apply to a different site.** Replace `config/site_a_site.yaml`
+3. **Apply to a different site.** Replace `config/site_a.yaml`
    with a different site's geometry and soil, rerun OptumGX, and
    the downstream OpenSeesPy and OpenFAST pipelines pick up the new
    CSVs automatically.

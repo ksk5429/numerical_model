@@ -42,16 +42,12 @@ Foundations"* (Seoul National University, June 2026).
    verification
    cross_validation
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Tutorials
+.. note::
 
-   tutorials/01_quickstart
-   tutorials/02_foundation_modes
-   tutorials/03_uncertainty_quantification
-   tutorials/04_calibration
-   tutorials/05_soildyn_export
-   tutorials/06_dlc_sweep
+   **Tutorials** are planned for the v1.1 release. In the meantime,
+   see the demo scripts in ``scripts/`` (e.g., ``visualize_op3.py``,
+   ``visualize_optumgx_openfast.py``, ``test_three_analyses.py``)
+   and the sample projects in ``sample_projects/``.
 
 .. toctree::
    :maxdepth: 2
@@ -90,11 +86,11 @@ Run the bundled examples
 Verification & validation
 -------------------------
 
-The full V&V suite consists of 115 active tests across 14 modules
-plus 31 cross-validation benchmarks against 20+ published sources.
+The full V&V suite consists of 140 active tests across 15 modules
+plus 39 cross-validation benchmarks against 20+ published sources.
 See :doc:`verification` for the unit-test falsification gates and
 :doc:`cross_validation` for the published-benchmark comparison
-(27/28 in-scope benchmarks verified, 96%).
+(35/38 in-scope benchmarks verified, 92%).
 
 Indices and tables
 ==================

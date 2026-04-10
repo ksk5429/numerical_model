@@ -28,7 +28,7 @@ CPT_FILE = PROJECT_ROOT / 'site_data' / 'CPT-3.xlsx'
 # Foundation geometry
 D = 8.0         # diameter [m]
 R = D / 2
-L_SKIRT = <REDACTED_SKIRT_L>  # (proprietary, loaded at runtime) depth [m]
+L_SKIRT = float('nan')  # <REDACTED> proprietary skirt depth [m]
 DZ = 0.5        # discretization [m]
 
 # Water and soil constants

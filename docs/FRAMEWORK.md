@@ -311,7 +311,7 @@ profile, material properties, environmental conditions — lives in
 exactly one file:
 
 ```
-op3/config/site_a_site.yaml
+op3/config/site_a.yaml
 ```
 
 This is a strict convention. No constants are hardcoded in any
@@ -320,7 +320,7 @@ SSOT YAML via:
 
 ```python
 from op3.config import load_site_config
-cfg = load_site_config('op3/config/site_a_site.yaml')
+cfg = load_site_config('op3/config/site_a.yaml')
 D = cfg['foundation']['bucket_diameter_m']
 L = cfg['foundation']['skirt_length_m']
 ```
@@ -369,7 +369,7 @@ The framework is designed so that porting to a new turbine touches
 only the SSOT configuration and the OptumGX upstream step. Specific
 steps:
 
-1. Create a new YAML file modeled on `op3/config/site_a_site.yaml`
+1. Create a new YAML file modeled on `op3/config/site_a.yaml`
    with the new turbine's geometry, soil profile, rotor mass, tower
    properties, and water depth.
 2. Run OptumGX over the new parameter envelope (requires a license)

@@ -28,7 +28,7 @@ import json
 # Foundation geometry
 D = 8.0             # diameter [m]
 R = D / 2           # radius [m]
-S = <REDACTED_SKIRT_L>  # (proprietary, loaded at runtime) depth [m]
+S = float('nan')  # <REDACTED> proprietary skirt depth [m]
 N_SIDES = 24        # polygon sides (full circle)
 N_sectors = N_SIDES // 2  # half-model sectors
 

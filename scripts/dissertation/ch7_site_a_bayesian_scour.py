@@ -113,7 +113,7 @@ def main():
     likelihood = normal_likelihood(args.measured, args.sigma)
     lk = np.array([likelihood(float(p)) for p in preds])
     post_unnorm = lk   # uniform prior
-    Z = float(np.trapz(post_unnorm, grid))
+    Z = float(np.trapezoid(post_unnorm, grid))
     if Z <= 0:
         raise ValueError(f"posterior unnormalisable: Z={Z}")
     post = post_unnorm / Z
@@ -127,8 +127,8 @@ def main():
     def quantile(q: float) -> float:
         return float(np.interp(q, cdf, grid))
 
-    mean = float(np.trapz(grid * post, grid))
-    var = float(np.trapz((grid - mean) ** 2 * post, grid))
+    mean = float(np.trapezoid(grid * post, grid))
+    var = float(np.trapezoid((grid - mean) ** 2 * post, grid))
     std = float(np.sqrt(max(var, 0.0)))
 
     result = {

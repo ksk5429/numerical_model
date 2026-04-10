@@ -1729,6 +1729,12 @@ def create_sample_hsd_csv(output_path: str) -> None:
     """
     bucket_length = float('nan')  # <REDACTED>
     bucket_diameter = float('nan')  # <REDACTED>
+    import math
+    if math.isnan(bucket_length) or math.isnan(bucket_diameter):
+        raise RuntimeError(
+            "Proprietary dimensions (bucket_length, bucket_diameter) not configured. "
+            "Set actual values or use OP3 site config before generating sample CSV."
+        )
     n_slices = 19
 
     scour_depths = [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0]

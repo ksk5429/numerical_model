@@ -268,7 +268,7 @@ def fig_sensor_overlay(output_dir: Path) -> str:
     if "scour_grid" in posterior and "pdf" in posterior:
         s_grid = np.array(posterior["scour_grid"])
         pdf = np.array(posterior["pdf"])
-        pdf = pdf / np.trapz(pdf, s_grid)  # normalize
+        pdf = pdf / np.trapezoid(pdf, s_grid)  # normalize
 
         ax2.fill_between(s_grid, 0, pdf, alpha=0.3, color='steelblue',
                          label='Posterior p(S|f$_1$)')
@@ -290,7 +290,7 @@ def fig_sensor_overlay(output_dir: Path) -> str:
         # Synthetic if no real data
         s_grid = np.linspace(0, 5, 200)
         pdf = np.exp(-((s_grid - 1.0)**2) / (2 * 0.3**2))
-        pdf = pdf / np.trapz(pdf, s_grid)
+        pdf = pdf / np.trapezoid(pdf, s_grid)
         ax2.fill_between(s_grid, 0, pdf, alpha=0.3, color='steelblue')
         ax2.plot(s_grid, pdf, 'b-', linewidth=2, label='Posterior')
 

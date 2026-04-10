@@ -92,7 +92,7 @@ development plan.
 
 ### Test totals
 
-- 121 active V&V tests (all PASS)
+- 140 active V&V tests (all PASS)
 - 33 example smoke tests across 11 turbines
 - 4 calibration regression tests against published references
 - 35/36 DNV-ST-0126 conformance checks

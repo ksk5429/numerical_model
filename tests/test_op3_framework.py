@@ -142,7 +142,7 @@ class TestSSOTConfig:
 
     def test_yaml_exists_and_parses(self):
         import yaml
-        cfg = yaml.safe_load((REPO_ROOT / "op3" / "config" / "site_a_site.yaml").read_text())
+        cfg = yaml.safe_load((REPO_ROOT / "op3" / "config" / "site_a.yaml").read_text())
         assert cfg is not None
         assert isinstance(cfg, dict)
 

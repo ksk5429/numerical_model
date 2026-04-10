@@ -3,7 +3,7 @@ Environment setup guide
 
 This page is the complete setup guide for running Op\ :sup:`3` on a
 fresh machine. Follow it top-to-bottom and you will have a working
-installation with all 121 V&V tests passing in under 30 minutes.
+installation with all 140 V&V tests passing in under 30 minutes.
 
 Supported platforms
 -------------------
