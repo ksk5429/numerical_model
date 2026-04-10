@@ -1,0 +1,114 @@
+[
+  {
+    "id": 9,
+    "paper": "DJ Kim 2014",
+    "type": "centrifuge 70g",
+    "foundation": "tripod suction bucket",
+    "D_m": 6.5,
+    "L_m": 8.0,
+    "L_D": 1.23,
+    "soil": "SM/ML layered",
+    "benchmark": "My = 93 MN.m at 0.6 deg (tripod), 198 MN.m at 3.1 deg (monopod)",
+    "phi_deg": 39.18,
+    "G0_MPa": 42.0
+  },
+  {
+    "id": 14,
+    "paper": "Chen 2018",
+    "type": "1g model",
+    "foundation": "suction bucket",
+    "D_m": 0.2,
+    "L_D_range": [
+      0.5,
+      0.75,
+      1.0,
+      6.0
+    ],
+    "soil": "fine sand",
+    "benchmark": "Fu_norm: 0.60 (L/D=0.5), 0.79 (L/D=0.75), 1.64 (L/D=1.0); scour: 74% H loss for depth vs 18% for width"
+  },
+  {
+    "id": 15,
+    "paper": "Jin 2025",
+    "type": "3D FE (ABAQUS+SIMSAND)",
+    "foundation": "suction caisson",
+    "D_m": 2.0,
+    "L_m": 2.0,
+    "L_D": 1.0,
+    "soil": "Baskarp sand phi_c=35.1",
+    "benchmark": "H capacity to 30% at Sd/L=1.0; turning point at Sd/L=0.5; V only 87% reduction"
+  },
+  {
+    "id": 16,
+    "paper": "Chortis 2020",
+    "type": "centrifuge 100g",
+    "foundation": "monopile",
+    "D_m": 1.8,
+    "L_m": 9.0,
+    "L_D": 5.0,
+    "soil": "sand Dr=80% phi=34",
+    "benchmark": "H drops from 400 to 200 kN at 2D scour; global > local scour effect"
+  },
+  {
+    "id": 17,
+    "paper": "Jeong 2021",
+    "type": "centrifuge 70g",
+    "foundation": "tripod suction bucket",
+    "D_m": 6.0,
+    "soil": "Saemangeum SM/ML",
+    "benchmark": "ULS=47000 kN.m; perm rotation 0.047 deg at 100 cycles, 0.103 at 1M cycles"
+  },
+  {
+    "id": 18,
+    "paper": "Kallehave 2015",
+    "type": "field (400 turbines)",
+    "foundation": "monopile",
+    "D_m": 7.5,
+    "soil": "various North Sea",
+    "benchmark": "f_meas/f_design = 1.0-1.15; Walney 0.330 vs 0.302 Hz design; 20% steel savings possible"
+  },
+  {
+    "id": 19,
+    "paper": "Houlsby 2005",
+    "type": "field trial",
+    "foundation": "suction caisson",
+    "D_m": 3.0,
+    "L_m": 1.5,
+    "L_D": 0.5,
+    "soil": "Bothkennar clay su=11.4+1.9z",
+    "benchmark": "Rotational stiffness 225 MN.m/rad; V_max=746 kN (3.0m caisson)"
+  },
+  {
+    "id": 20,
+    "paper": "Houlsby 2006",
+    "type": "field trial",
+    "foundation": "suction caisson",
+    "D_m": 3.0,
+    "L_m": 1.5,
+    "L_D": 0.5,
+    "soil": "Luce Bay sand Dr=80-85% phi=45",
+    "benchmark": "G/pa = 2500*sqrt(p/pa); gamma_eff=10.3 kN/m3"
+  },
+  {
+    "id": 21,
+    "paper": "Barari 2021",
+    "type": "FE (PLAXIS 3D)",
+    "foundation": "tripod suction caisson",
+    "D_m": 6.5,
+    "L_m": 8.0,
+    "L_D": 1.23,
+    "soil": "SM phi=39.18 G0=42MPa",
+    "benchmark": "Calibrated to Kim 2014 centrifuge; Rinter=0.48; self-healing under cyclic"
+  },
+  {
+    "id": 22,
+    "paper": "Villalobos 2009",
+    "type": "1g model",
+    "foundation": "suction caisson",
+    "D_m": 0.293,
+    "L_m": 0.146,
+    "L_D": 0.5,
+    "soil": "kaolin clay su=8kPa",
+    "benchmark": "H_norm=0.12 (pure lateral); V_norm=1.0 (pure vertical)"
+  }
+]
