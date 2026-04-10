@@ -1,35 +1,16 @@
 """
-Op^3: OptumGX - OpenSeesPy - OpenFAST integrated numerical modeling framework
-for offshore wind turbines.
+Op3: OptumGX-OpenSeesPy-OpenFAST integration framework for offshore wind.
 
-Public API:
+Public API::
 
-    from op3 import build_foundation, compose_tower_model, cross_compare
-    from op3 import load_site_config
-
-    # Build a foundation module
-    foundation = build_foundation(
-        mode='distributed_bnwf',
-        ogx_data='data/fem_results/opensees_spring_stiffness.csv',
-        scour_depth=1.5,
-    )
-
-    # Compose a full tower + foundation model
+    from op3 import build_foundation, compose_tower_model
+    foundation = build_foundation(mode='fixed')
     model = compose_tower_model(
-        rotor='nrel_5mw',
-        tower='site_a_rt1',
+        rotor='nrel_5mw_baseline',
+        tower='nrel_5mw_tower',
         foundation=foundation,
     )
-
-    # Run eigenvalue analysis
-    freqs = model.eigen(n_modes=6)
-
-    # Cross-compare across the 4 foundation modes
-    results = cross_compare(
-        rotor='nrel_5mw',
-        tower='site_a_rt1',
-        scour_levels=[0.0, 0.5, 1.0, 1.5, 2.0],
-    )
+    freqs = model.eigen(n_modes=3)
 """
 
 from op3.config import load_site_config

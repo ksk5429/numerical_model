@@ -33,16 +33,22 @@ Mode B factories
 ----------------
 
 .. autofunction:: op3.foundations.foundation_from_pisa
+   :no-index:
 
 .. autofunction:: op3.standards.pisa.pisa_pile_stiffness_6x6
+   :no-index:
 
 .. autofunction:: op3.standards.dnv_st_0126.dnv_monopile_stiffness
+   :no-index:
 
 .. autofunction:: op3.standards.iso_19901_4.iso_pile_stiffness
+   :no-index:
 
 .. autofunction:: op3.standards.api_rp_2geo.api_pile_stiffness
+   :no-index:
 
 .. autofunction:: op3.standards.owa_bearing.owa_suction_bucket_stiffness
+   :no-index:
 
 Mode D formulation
 ------------------

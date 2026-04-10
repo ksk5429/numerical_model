@@ -23,6 +23,14 @@ sys.path.insert(0, str(REPO_ROOT))
 autodoc_mock_imports = [
     "openseespy",
     "openseespy.opensees",
+    "opsvis",
+    "openfast_io",
+    "openfast_io.FAST_output_reader",
+    "rainflow",
+    "fatpack",
+    "pcrunch",
+    "welib",
+    "torch",
 ]
 
 
@@ -31,8 +39,8 @@ autodoc_mock_imports = [
 project = "Op^3 -- Integrated Numerical and Digital Twin Framework"
 author = "Kim Kyeong Sun (Seoul National University)"
 copyright = "2026, Kim Kyeong Sun"
-release = "1.0.0-rc1"
-version = "1.0.0-rc1"
+release = "1.0.0-rc2"
+version = "1.0.0-rc2"
 
 
 # -- General configuration ---------------------------------------------------
@@ -83,6 +91,11 @@ intersphinx_mapping = {
 }
 
 todo_include_todos = True
+
+# Suppress noisy warnings that are not real documentation issues
+suppress_warnings = [
+    "epub.unknown_project_files",  # ePub builder complains about non-HTML
+]
 
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]

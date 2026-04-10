@@ -9,3 +9,7 @@ ipykernel >= 6.0               # notebook execution support
 numpy >= 1.24                  # needed for autodoc of op3 modules
 scipy >= 1.11
 pandas >= 2.0
+pyyaml >= 6.0                  # needed for op3.config
+matplotlib >= 3.7              # needed for viz modules autodoc
+pyvista >= 0.40                # needed for viz_optumgx autodoc
+plotly >= 5.0                  # needed for viz_tier3 autodoc
