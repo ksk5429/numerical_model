@@ -1,0 +1,116 @@
+{
+  "CM2": {
+    "pile": {
+      "site": "Cowden",
+      "D_m": 0.762,
+      "L_m": 3.86,
+      "t_m": 0.01,
+      "L_D": 5.07,
+      "soil": "stiff_clay",
+      "su0_kPa": 25.0,
+      "k_su_kPa_per_m": 5.5,
+      "G0_kPa": 4000.0,
+      "k_G0_kPa_per_m": 4000.0,
+      "ref_Hult_kN": 302.0,
+      "ref_source": "Burd et al. (2020) Table 4"
+    },
+    "op3": {
+      "status": "ok",
+      "k_op3_MN_m": 262.4,
+      "k_ref_MN_m": 198.2,
+      "K_6x6_shape": [
+        6,
+        6
+      ]
+    },
+    "k_ref_MN_m": 198.2,
+    "k_op3_MN_m": 262.4,
+    "ratio": 1.324,
+    "error_pct": 32.4
+  },
+  "CM9": {
+    "pile": {
+      "site": "Cowden",
+      "D_m": 2.0,
+      "L_m": 10.6,
+      "t_m": 0.025,
+      "L_D": 5.3,
+      "soil": "stiff_clay",
+      "su0_kPa": 25.0,
+      "k_su_kPa_per_m": 5.5,
+      "G0_kPa": 4000.0,
+      "k_G0_kPa_per_m": 4000.0,
+      "ref_Hult_kN": 4850.0,
+      "ref_source": "Burd et al. (2020) Table 4"
+    },
+    "op3": {
+      "status": "ok",
+      "k_op3_MN_m": 1412.4,
+      "k_ref_MN_m": 1212.5,
+      "K_6x6_shape": [
+        6,
+        6
+      ]
+    },
+    "k_ref_MN_m": 1212.5,
+    "k_op3_MN_m": 1412.4,
+    "ratio": 1.165,
+    "error_pct": 16.5
+  },
+  "DS2": {
+    "pile": {
+      "site": "Dunkirk",
+      "D_m": 0.273,
+      "L_m": 2.74,
+      "t_m": 0.007,
+      "L_D": 10.04,
+      "soil": "dense_sand",
+      "phi_deg": 37.0,
+      "Dr_pct": 75.0,
+      "gamma_prime_kN_m3": 10.1,
+      "ref_Hult_kN": 18.5,
+      "ref_source": "Byrne et al. (2020) Table 3"
+    },
+    "op3": {
+      "status": "ok",
+      "k_op3_MN_m": 515.5,
+      "k_ref_MN_m": 13.6,
+      "K_6x6_shape": [
+        6,
+        6
+      ]
+    },
+    "k_ref_MN_m": 13.6,
+    "k_op3_MN_m": 515.5,
+    "ratio": 37.904,
+    "error_pct": 3690.4
+  },
+  "DM7": {
+    "pile": {
+      "site": "Dunkirk",
+      "D_m": 2.0,
+      "L_m": 10.6,
+      "t_m": 0.025,
+      "L_D": 5.3,
+      "soil": "dense_sand",
+      "phi_deg": 37.0,
+      "Dr_pct": 75.0,
+      "gamma_prime_kN_m3": 10.1,
+      "ref_Hult_kN": 7200.0,
+      "ref_source": "Byrne et al. (2020) Table 3"
+    },
+    "op3": {
+      "status": "ok",
+      "k_op3_MN_m": 3425.2,
+      "k_ref_MN_m": 720.0,
+      "K_6x6_shape": [
+        6,
+        6
+      ]
+    },
+    "k_ref_MN_m": 720.0,
+    "k_op3_MN_m": 3425.2,
+    "ratio": 4.757,
+    "error_pct": 375.7
+  }
+}
