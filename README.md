@@ -93,7 +93,7 @@ python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
 
 ## v1.0.0-rc1 release highlights
 
-- **121 / 121 active V&V tests pass** (14 modules: code verification,
+- **20 / 21 release validation stages pass** (14 modules: code verification,
   consistency, sensitivity, extended invariants, PISA, cyclic
   degradation, HSsmall, Mode D, UQ, reproducibility snapshot, ...)
 - **4 / 4 calibration regression** against published references

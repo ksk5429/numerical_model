@@ -907,7 +907,7 @@ Conventional commit prefixes (`deps:`, `ci:`).
 | Reproducibility snapshot (6.1) | 6 / 6 |
 | Calibration regression (1.3) | 4 / 4 |
 | Three-analyses smoke (33 cases) | 33 / 33 |
-| **TOTAL ACTIVE V&V** | **121 / 121** |
+| **TOTAL ACTIVE V&V** | **20 / 21** |
 
 | OpenFAST end-to-end | Status |
 |---|---|
