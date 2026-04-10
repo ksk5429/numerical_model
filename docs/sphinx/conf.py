@@ -32,7 +32,7 @@ project = "Op^3"
 author = "Kim Kyeong Sun (Seoul National University)"
 copyright = "2026, Kim Kyeong Sun"
 release = "1.0.0-rc1"
-version = "0.3"
+version = "1.0.0-rc1"
 
 
 # -- General configuration ---------------------------------------------------

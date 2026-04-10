@@ -92,17 +92,17 @@ automatically, or wrap the rebuild in
 Q: Mode C ``extract_6x6_stiffness()`` used to return garbage values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This was a bug in v0.3.0: the finite-difference SP-constraint probe
+This was a bug in v0.4.0: the finite-difference SP-constraint probe
 interacted badly with BNWF anchor topology and returned ~zero. Fixed
-in v0.3.1: the new implementation uses the analytic Winkler integral
+in v0.4.1: the new implementation uses the analytic Winkler integral
 directly.
 
-If you hit this on an older version, upgrade to v0.3.1+:
+If you hit this on an older version, upgrade to v0.4.1+:
 
 .. code-block:: bash
 
    git fetch --tags
-   git checkout v0.3.2
+   git checkout v1.0.0-rc1
 
 Q: Two consecutive ``model.eigen()`` calls give different answers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -213,9 +213,9 @@ Two separate issues may be at play:
       from op3.standards.pisa import effective_head_stiffness
       k_eff = effective_head_stiffness(K, h_load_m=10.0)
 
-2. **You are using Op\ :sup:`3` v0.3.0 or earlier**, which lacks the
+2. **You are using Op\ :sup:`3` v0.4.0 or earlier**, which lacks the
    L/D-dependent depth functions from Burd 2020 Table 5. Upgrade to
-   v0.3.2+ to reduce the error by 10-30x.
+   v1.0.0-rc1+ to reduce the error by 10-30x.
 
 Even after both fixes, expect a residual 3-13x on short rigid piles
 (L/D < 5) because Op\ :sup:`3` uses the published generic PISA
@@ -278,13 +278,13 @@ UQ module
 Q: PCE mean comes out as 2*pi instead of 0 for f(xi) = xi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This was a v0.3.0 bug: ``numpy.polynomial.hermite_e.hermegauss``
+This was a v0.4.0 bug: ``numpy.polynomial.hermite_e.hermegauss``
 returns weights for ``integral f(x) exp(-x^2/2) dx`` rather than the
 standard-normal expectation ``integral f(x) (1/sqrt(2pi)) exp(-x^2/2) dx``.
 The missing factor ``1/sqrt(2pi)`` explains the 2*pi discrepancy in
 the variance.
 
-Fixed in v0.3.0+ -- if you hit this, upgrade.
+Fixed in v0.4.0+ -- if you hit this, upgrade.
 
 Q: MC propagation gives COV(K_xx) = 0 for my profile
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

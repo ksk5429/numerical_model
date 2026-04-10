@@ -101,7 +101,7 @@ combines all four of the following in one coherent API:
 The PISA framework replaces legacy API p-y curves with a 4-parameter
 conic shape function and L/D-dependent depth functions, calibrated
 against 3D finite-element back-analyses of the Dunkirk and Cowden
-medium-scale field tests. Op\ :sup:`3` v0.3.2 implements the full
+medium-scale field tests. Op\ :sup:`3` v1.0.0-rc1 implements the full
 depth-function form from Burd 2020 Table 5 (sand) and Byrne 2020
 Table 4 (clay), including:
 
@@ -113,7 +113,7 @@ Table 4 (clay), including:
 
 Earlier Op\ :sup:`3` versions used flat calibration constants from
 Table 7 (the single reference configuration), which over-predicted
-initial stiffness by 50-250x on short rigid piles. The v0.3.2 depth
+initial stiffness by 50-250x on short rigid piles. The v1.0.0-rc1 depth
 functions plus the eccentric-load compliance correction reduced the
 error on the PISA medium-scale field test piles to the 3-13x band,
 matching the "generic calibration applied without per-site
@@ -261,7 +261,7 @@ itself.
 The K_xx / K_rxrx over-prediction stems from applying PISA clay
 coefficients (calibrated for Cowden glacial till) naively to the WAS-XL
 clay profile used in OC6 Phase II. Per-site PISA recalibration closes
-this gap; the v0.3.2 harness now runs, documents the gap, and exposes
+this gap; the v1.0.0-rc1 harness now runs, documents the gap, and exposes
 the tolerance band honestly rather than masking the issue.
 
 4.3 PISA medium-scale field test cross-validation
@@ -280,7 +280,7 @@ field tests:
      - L/D
      - Site
      - Measured k_Hinit
-     - Op\ :sup:`3` k_Hinit,eff (v0.3.2)
+     - Op\ :sup:`3` k_Hinit,eff (v1.0.0-rc1)
      - Ratio
    * - DM7
      - 0.762
@@ -315,7 +315,7 @@ field tests:
      - 508.9 MN/m
      - **4.7x**
 
-The v0.3.0 version of Op\ :sup:`3` reported ratios of 50-250x. Three
+The v0.4.0 version of Op\ :sup:`3` reported ratios of 50-250x. Three
 physics corrections brought this down to 3.5-13x:
 
 1. **L/D-dependent depth functions** from Burd 2020 Table 5 and
@@ -383,7 +383,7 @@ The SHA-256 hash is the strongest possible reproduction guarantee:
 any byte change anywhere upstream (PISA math, file format, units
 conversion) flips the hash. The snapshot is regenerated automatically
 when intentional physics changes are committed (as happened on
-v0.3.2 when the depth functions were added).
+v1.0.0-rc1 when the depth functions were added).
 
 5. Known limitations
 --------------------
@@ -405,7 +405,7 @@ and in ``docs/DEVELOPER_NOTES.md``:
   coupling is lost at the attachment point even when the source
   matrix includes it.
 * **Torsional stiffness formula** is a slender-pile empirical fit,
-  not a rigorous derivation. Op\ :sup:`3` v0.3.2 corrected this from
+  not a rigorous derivation. Op\ :sup:`3` v1.0.0-rc1 corrected this from
   the rigid-disk ``(16/3) G R^3`` to the slender-pile
   ``pi G D^3 L / (L + 2D)``, which improved the OC6 Phase II K_rzz
   match but is still within 6x of the NGI calibration. A full fix
@@ -501,8 +501,8 @@ and in ``docs/DEVELOPER_NOTES.md``:
 7. Release and reproducibility policy
 -------------------------------------
 
-Every Op\ :sup:`3` release carries a git tag (``v0.3.0``, ``v0.3.1``,
-``v0.3.2``) and is accompanied by:
+Every Op\ :sup:`3` release carries a git tag (``v0.4.0``, ``v0.4.1``,
+``v1.0.0-rc1``) and is accompanied by:
 
 * A validated release report (``scripts/release_validation_report.py``)
   that exercises all 19 evidence stages end-to-end
@@ -515,7 +515,7 @@ Anyone can reproduce any release by:
 
 .. code-block:: bash
 
-   git clone --branch v0.3.2 https://github.com/ksk5429/numerical_model.git
+   git clone --branch v1.0.0-rc1 https://github.com/ksk5429/numerical_model.git
    cd numerical_model
    bash scripts/reproduce_all.sh
 
@@ -544,7 +544,7 @@ validation report.
 9. Conclusions
 --------------
 
-Op\ :sup:`3` v0.3.2 is a production-ready integration framework that
+Op\ :sup:`3` v1.0.0-rc1 is a integrated integration framework that
 closes the gap between OptumGX, OpenSeesPy, and OpenFAST v5 for
 offshore wind turbine foundation engineering. It is calibrated
 against four published references to within 4% of the most stringent

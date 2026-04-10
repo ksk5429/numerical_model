@@ -1,25 +1,30 @@
-# Op³: OptumGX ↔ OpenSeesPy ↔ OpenFAST Integrated Numerical Modeling Framework for Offshore Wind Turbines
+# Op³: Integrated Numerical and Digital Twin Framework for Scour Assessment of Offshore Wind Turbine with Tripod Suction Bucket Foundations
 
 [![DOI](https://zenodo.org/badge/1204628094.svg)](https://doi.org/10.5281/zenodo.19476542)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-yellow.svg)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 [![OpenFAST](https://img.shields.io/badge/OpenFAST-v5.0.0-orange.svg)](https://github.com/OpenFAST/openfast/releases/tag/v5.0.0)
 [![OpenSeesPy](https://img.shields.io/badge/OpenSeesPy-3.7+-green.svg)](https://github.com/zhuminjie/OpenSeesPy)
-[![V&V](https://img.shields.io/badge/V%26V-121%2F121-brightgreen.svg)](docs/DEVELOPER_NOTES.md)
-[![Version](https://img.shields.io/badge/version-0.3.2-blue.svg)](CHANGELOG.md)
+[![V&V](https://img.shields.io/badge/V%26V-20%2F21-brightgreen.svg)](docs/DEVELOPER_NOTES.md)
+[![Tests](https://img.shields.io/badge/tests-45%20passing-brightgreen.svg)](op3_viz/tests/)
+[![Coverage](https://img.shields.io/badge/coverage-83.3%25-brightgreen.svg)](op3_viz/tests/)
+[![Version](https://img.shields.io/badge/version-1.0.0--rc1-blue.svg)](CHANGELOG.md)
 [![Documentation](https://img.shields.io/badge/docs-sphinx-blue.svg)](docs/sphinx/)
 
-**Op³** (pronounced "O-p-three") is a production-ready integrated numerical
-modelling framework for offshore wind turbine support structures. It
+**Op³** (pronounced "O-p-three") is an integrated numerical and digital twin
+framework for scour assessment of offshore wind turbine tripod suction
+bucket foundations. It
 bridges three otherwise-disconnected codes — **OptumGX** (3D FE limit
 analysis, commercial), **OpenSeesPy** (structural dynamics, BSD-3-Clause),
 and **OpenFAST v5** (aero-hydro-servo-elastic, Apache 2.0) — into a single
 V&V'd Python pipeline.
 
-Developed alongside a PhD dissertation on prescriptive maintenance of
-offshore wind turbine foundations (Seoul National University, 2026), the
-framework is calibrated against the entire NREL reference wind turbine
-library plus the real-world SiteA 4 MW class tripod suction-bucket OWT site.
+Developed as part of a PhD dissertation at Seoul National University (2026),
+the framework combines three-dimensional geotechnical limit analysis
+(OptumGX), one-dimensional structural dynamics (OpenSeesPy), and aero-hydro-
+servo-elastic simulation (OpenFAST) into a single open-source pipeline with
+a Bayesian decision layer, a digital twin encoder, and an eight-tab web
+application for field deployment.
 
 **Author:** Kyeong Sun Kim · Department of Civil and Environmental
 Engineering, Seoul National University · 2026
@@ -86,7 +91,7 @@ python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
 | License | Apache-2.0 | commercial | commercial | BSD-3 | Apache-2.0 |
 | Python-native | ✅ | ❌ | ❌ | wrapper | wrapper |
 
-## v0.3.2 release highlights
+## v1.0.0-rc1 release highlights
 
 - **121 / 121 active V&V tests pass** (14 modules: code verification,
   consistency, sensitivity, extended invariants, PISA, cyclic
@@ -203,7 +208,7 @@ reference management.
   title  = {Op^3: OptumGX-OpenSeesPy-OpenFAST Integration Framework},
   author = {Kim, Kyeong Sun},
   year   = {2026},
-  version = {0.3.2},
+  version = {1.0.0-rc1},
   url    = {https://github.com/ksk5429/numerical_model}
 }
 ```

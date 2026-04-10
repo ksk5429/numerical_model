@@ -90,7 +90,7 @@ matches the OpenFAST v5 / SubDyn convention:
 - The **mudline** is at ``z = 0`` for monopiles and at
   ``z = -WaterDepth`` for offshore structures measured from MSL.
 - The **hub** is at ``z = TowerHt + Twr2Shft + NacCMzn`` above the
-  tower base (v0.3.0+ with the rigid CM offset).
+  tower base (v0.4.0+ with the rigid CM offset).
 - Tower foreaft bending is in the ``x-z`` plane; side-side is in
   ``y-z``.
 
@@ -219,7 +219,7 @@ with four component-specific parameters:
 * :math:`y_u` -- ultimate normalised reaction
 
 In Op\ :sup:`3` the four parameters are **depth-dependent**
-(v0.3.2+):
+(v1.0.0-rc1+):
 
 .. math::
 

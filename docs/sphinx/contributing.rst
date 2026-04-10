@@ -89,7 +89,7 @@ Scopes (project-specific):
 * ``pisa``, ``cyclic``, ``hssmall``, ``mode-d`` -- soil modules
 * ``uq``, ``openfast``, ``builder`` -- specific subsystems
 * ``ci``, ``release``, ``deps`` -- infrastructure
-* ``v0.3.1``, ``v0.3.2``, ... -- release tags
+* ``v0.4.1``, ``v1.0.0-rc1``, ... -- release tags
 
 Example:
 
@@ -97,7 +97,7 @@ Example:
 
    fix(pisa): depth functions + eccentric-load compliance
 
-   Closes the v0.3.1 PISA finding by implementing the three physics
+   Closes the v0.4.1 PISA finding by implementing the three physics
    corrections documented in DEVELOPER_NOTES section 13.2: ...
 
 Branching model
