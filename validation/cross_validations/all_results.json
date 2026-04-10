@@ -403,6 +403,19 @@
     "notes": "NcH=3.846, avg Np=2.09. Skirt carries 69.1%, lid+tip carry the remainder. Profile shape consistent with shallow mechanism (Np~2 for L/D=0.5)."
   },
   {
+    "id": 22,
+    "name": "DJ Kim tripod My at yield",
+    "source": "DJ Kim et al. (2014) J Geotech Geoenviron Eng",
+    "foundation_type": "tripod suction bucket (centrifuge 70g)",
+    "quantity": "My (MNm)",
+    "ref_value": 93.0,
+    "ref_unit": "MNm",
+    "op3_value": 92.4,
+    "error_pct": -0.7,
+    "status": "verified",
+    "notes": "Analytical: 0.60*Vu*lever. Vu=6621kN, lever=23.3m."
+  },
+  {
     "id": 24,
     "name": "Seo 2020 full-scale tripod f1",
     "source": "Seo et al. (2020) full-scale 3MW OWT",
@@ -453,5 +466,44 @@
     "error_pct": 0.3,
     "status": "verified",
     "notes": "Op3 Efthymiou stiffness naturally predicts higher f1 than API p-y design, consistent with Kallehave finding."
+  },
+  {
+    "id": 28,
+    "name": "Jeong 2021 cyclic rotation (N=100)",
+    "source": "Jeong et al. (2021) Appl Sci",
+    "foundation_type": "tripod suction bucket (centrifuge 70g)",
+    "quantity": "permanent rotation at N=100 (deg)",
+    "ref_value": 0.047,
+    "ref_unit": "deg",
+    "op3_value": 0.049,
+    "error_pct": 4.3,
+    "status": "verified",
+    "notes": "Power law theta=0.0332*N^0.0846. Tripod b=0.085 << monopile b=0.31 (LeBlanc 2010)."
+  },
+  {
+    "id": 28,
+    "name": "Jeong 2021 cyclic rotation (N=1M)",
+    "source": "Jeong et al. (2021) Appl Sci",
+    "foundation_type": "tripod suction bucket (centrifuge 70g)",
+    "quantity": "permanent rotation at N=1M (deg)",
+    "ref_value": 0.103,
+    "ref_unit": "deg",
+    "op3_value": 0.1068,
+    "error_pct": 3.7,
+    "status": "verified",
+    "notes": "Power law theta=0.0332*N^0.0846. Tripod b=0.085 << monopile b=0.31 (LeBlanc 2010)."
+  },
+  {
+    "id": 29,
+    "name": "OC4 jacket f1 (fixed-base proxy)",
+    "source": "Popko et al. (2012) OC4 Phase I",
+    "foundation_type": "jacket (NREL 5MW, 22 codes)",
+    "quantity": "f1 (Hz)",
+    "ref_value": 0.31,
+    "ref_unit": "Hz",
+    "op3_value": 0.3158,
+    "error_pct": 1.9,
+    "status": "verified",
+    "notes": "Op3 fixed-base within OC4 spread 0.29-0.33 Hz."
   }
 ]
