@@ -9,12 +9,12 @@ build:
   tools:
     python: "3.12"
   apt_packages:
-    - pandoc      # required by nbsphinx to render tutorial notebooks
+    - pandoc      # required by nbsphinx (reserved for future tutorials)
 
 # Sphinx configuration
 sphinx:
   configuration: docs/sphinx/conf.py
-  fail_on_warning: false          # start loose; tighten once docs are clean
+  fail_on_warning: true           # zero warnings as of 2026-04-10
 
 # Build HTML, PDF, and ePub
 formats:
