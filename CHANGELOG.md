@@ -4,6 +4,49 @@ All notable changes to Op^3 are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this
 project uses [Semantic Versioning](https://semver.org/).
 
+## [1.0.0-rc2] - 2026-04-10
+
+Comprehensive V&V upgrade, visualization, and repository hardening.
+
+### Added
+
+- **39 cross-validation benchmarks** against 25+ published sources
+  (35/38 in-scope verified, 92%)
+- **Fatigue DEL module** (`op3/fatigue.py`): rainflow counting +
+  damage-equivalent loads per DNV-RP-C203
+- **Visualization stack** (6 modules, 23 figures):
+  - `op3/visualization.py`: opsvis (OpenSeesPy model, modes, pushover)
+  - `op3/viz_optumgx.py`: PyVista 3D bucket pressure, collapse mechanism
+  - `op3/viz_openfast.py`: welib PSD, pCrunch DLC stats, DEL
+  - `op3/viz_tier1.py`: VHM envelope, cross-pipeline, scour sweep, Mode C/D
+  - `op3/viz_tier2.py`: foundation profile, rainflow, Campbell, M-theta
+  - `op3/viz_tier3.py`: interactive 3D (Plotly HTML), Bayesian sensor overlay
+- **Nonlinear BNWF** in production builder: `_attach_distributed_bnwf_nonlinear()`,
+  `run_pushover_moment_rotation()`, `run_cyclic_analysis()`
+- **OpenFAST load validation**: OC3 GenPwr -0.2%, RotSpeed -0.6%
+- **64 new unit tests** (fatigue, foundations, composer, visualization)
+- **Sphinx gallery page** with 17 embedded figures
+- **Developer tools**: Makefile, .editorconfig, .pre-commit-config.yaml
+- **Governance**: CODE_OF_CONDUCT.md, SECURITY.md
+
+### Fixed
+
+- LICENSE: MIT -> Apache-2.0 (matches pyproject.toml)
+- 3 SyntaxError files from bare `<REDACTED>` patterns
+- 55 bare `except:` -> typed exceptions
+- 25 `np.trapz` -> `np.trapezoid` (deprecated)
+- 16 stale config filename references (`site_a_site.yaml`)
+- 5 duplicate pipeline files -> re-export shims (-1,353 lines)
+- Sphinx build now zero-warning locally
+
+### Changed
+
+- CI: pytest with coverage replaces individual unittest runs
+- V&V test count: 140 across 15 modules (was 121/14)
+- Intersphinx: added OpenFAST + pandas cross-references
+
+---
+
 ## [1.0.0-rc1] - 2026-04-09
 
 First release candidate of the integrated tool. Ships all Tier-1

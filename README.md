@@ -8,7 +8,8 @@
 [![V&V](https://img.shields.io/badge/V%26V-35%2F38_benchmarks_(92%25)-brightgreen.svg)](validation/cross_validations/VV_REPORT.md)
 [![CI](https://github.com/ksk5429/numerical_model/actions/workflows/ci.yml/badge.svg)](https://github.com/ksk5429/numerical_model/actions/workflows/ci.yml)
 [![Tests](https://img.shields.io/badge/tests-140_passing-brightgreen.svg)](tests/)
-[![Version](https://img.shields.io/badge/version-1.0.0--rc1-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.0.0--rc2-blue.svg)](CHANGELOG.md)
+[![PyPI](https://img.shields.io/pypi/v/op3-framework.svg)](https://pypi.org/project/op3-framework/)
 [![Documentation](https://img.shields.io/badge/docs-sphinx-blue.svg)](docs/sphinx/)
 
 **Op³** (pronounced "O-p-three") is an integrated numerical and digital twin

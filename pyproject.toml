@@ -3,8 +3,8 @@ requires = ["setuptools>=61", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "op3"
-version = "1.0.0-rc1"
+name = "op3-framework"
+version = "1.0.0-rc2"
 description = "OptumGX-OpenSeesPy-OpenFAST integration framework for offshore wind turbine foundations"
 readme = "README.md"
 requires-python = ">=3.11"

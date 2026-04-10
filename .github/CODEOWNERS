@@ -1,0 +1,22 @@
+# Op3 Code Owners
+# These owners are automatically requested for PR review.
+
+# Default owner for everything
+* @ksk5429
+
+# Core framework
+/op3/ @ksk5429
+
+# Visualization
+/op3/viz_*.py @ksk5429
+/op3/visualization.py @ksk5429
+
+# Validation
+/validation/ @ksk5429
+/tests/ @ksk5429
+
+# Documentation
+/docs/ @ksk5429
+
+# CI/CD
+/.github/ @ksk5429

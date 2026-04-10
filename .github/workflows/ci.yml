@@ -59,7 +59,17 @@ jobs:
       - name: Cross-validation suite
         run: PYTHONUTF8=1 python validation/cross_validations/run_all_cross_validations.py
 
-      - name: Upload coverage
+      - name: Upload coverage to Codecov
+        if: always()
+        uses: codecov/codecov-action@v4
+        with:
+          file: coverage.xml
+          flags: unittests
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload coverage artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
