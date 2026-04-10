@@ -223,3 +223,53 @@ def build_asymmetric_foundation(
     f._per_bucket_scour = asymmetric_config.per_bucket
 
     return f
+
+
+def compute_per_bucket_eigenvalues(
+    config: AsymmetricScourConfig,
+    rotor: str = "ref_4mw_owt",
+    tower: str = "gunsan_u136_tower",
+    damping_ratio: float = 0.01,
+    n_modes: int = 6,
+) -> dict:
+    """Run three separate eigenvalue analyses, one per bucket's scour depth,
+    and return the per-bucket frequency estimates.
+
+    This is a first-order approximation: each analysis uses a symmetric
+    model at one bucket's scour depth. The true asymmetric response
+    (which would require a full 3D model with per-bucket springs) lies
+    between the minimum and maximum of these three estimates.
+
+    Returns
+    -------
+    dict
+        Keys 'A', 'B', 'C' each containing:
+          - 'scour_m': the scour depth at that bucket
+          - 'frequencies_Hz': array of first n_modes frequencies
+          - 'f1_Hz': the first bending frequency
+    """
+    try:
+        from op3 import build_foundation, compose_tower_model
+    except ImportError:
+        return {"status": "error", "message": "op3 not importable"}
+
+    results = {}
+    for label, scour_m in config.per_bucket.items():
+        try:
+            f = build_foundation(mode="distributed_bnwf", scour_depth=scour_m)
+            model = compose_tower_model(
+                rotor=rotor, tower=tower, foundation=f,
+                damping_ratio=damping_ratio,
+            )
+            freqs = model.eigen(n_modes=n_modes)
+            results[label] = {
+                "scour_m": scour_m,
+                "frequencies_Hz": freqs.tolist() if hasattr(freqs, "tolist") else list(freqs),
+                "f1_Hz": float(freqs[0]),
+            }
+        except Exception as e:
+            results[label] = {
+                "scour_m": scour_m,
+                "error": str(e),
+            }
+    return results

@@ -21,6 +21,7 @@ Polynomial Chaos Expansion
 --------------------------
 
 .. autoclass:: op3.uq.pce.HermitePCE
+   :no-index:
    :members:
 
 .. autofunction:: op3.uq.pce.build_pce_1d
@@ -31,6 +32,7 @@ Bayesian calibration
 --------------------
 
 .. autoclass:: op3.uq.bayesian.BayesianPosterior
+   :no-index:
    :members:
 
 .. autofunction:: op3.uq.bayesian.normal_likelihood
