@@ -808,3 +808,381 @@ def run_static_condensation(tower_model: "TowerModel") -> np.ndarray:
     K[0, 4] = K[4, 0] = -Kxrx
     K[1, 3] = K[3, 1] = Kxrx
     return K
+
+
+# ============================================================
+# Nonlinear BNWF attachment (PySimple1 / TzSimple1)
+# ============================================================
+
+def _attach_distributed_bnwf_nonlinear(ops, spring_table, base_node: int) -> dict:
+    """Attach a nonlinear BNWF foundation using PySimple1 and TzSimple1.
+
+    Unlike the linear ``_attach_distributed_bnwf``, which uses Elastic
+    uniaxial materials, this function creates nonlinear backbone springs
+    suitable for pushover capacity analysis. The spring_table must
+    contain columns ``depth_m``, ``k_ini_kN_per_m``, and ``p_ult_kN_per_m``.
+
+    The distributed springs are integrated into a single equivalent
+    nonlinear macro-element at the tower base:
+
+    * **Lateral (DOF 1, 2):** ``PySimple1`` with integrated p_ult and y50.
+    * **Vertical (DOF 3):** ``TzSimple1`` with t_ult ~ 0.5 * p_ult_total.
+    * **Rotational (DOF 4, 5):** ``Elastic`` with k = sum(k * z^2 * dz).
+    * **Torsional (DOF 6):** ``Elastic`` with k = 0.5 * k_rot.
+
+    Parameters
+    ----------
+    ops : openseespy.opensees module
+        The OpenSeesPy module (already imported by the caller).
+    spring_table : pd.DataFrame
+        Must contain ``depth_m``, ``k_ini_kN_per_m``, ``p_ult_kN_per_m``.
+    base_node : int
+        Tower base node tag (typically 1000).
+
+    Returns
+    -------
+    dict
+        Diagnostic information about the nonlinear foundation.
+    """
+    import pandas as pd
+
+    if not isinstance(spring_table, pd.DataFrame):
+        raise TypeError("spring_table must be a pandas DataFrame")
+    required = {"depth_m", "k_ini_kN_per_m", "p_ult_kN_per_m"}
+    missing = required - set(spring_table.columns)
+    if missing:
+        raise ValueError(
+            f"spring_table missing required columns {missing}. "
+            f"Got: {list(spring_table.columns)}"
+        )
+
+    depth = spring_table["depth_m"].values.astype(float)
+    k_arr = spring_table["k_ini_kN_per_m"].values.astype(float)   # kN/m per m
+    p_arr = spring_table["p_ult_kN_per_m"].values.astype(float)   # kN/m per m
+
+    if len(depth) < 2:
+        raise ValueError("need >= 2 spring rows for nonlinear BNWF")
+    dz = float(depth[1] - depth[0])
+
+    # -- Integrated lateral quantities (N, N/m) --
+    total_k_lateral = float(np.sum(k_arr) * dz) * 1e3       # kN/m -> N/m
+    total_p_ult     = float(np.sum(p_arr) * dz) * 1e3       # kN/m -> N
+    y50_lateral     = 0.5 * total_p_ult / max(total_k_lateral, 1e-6)
+
+    # -- Integrated vertical: t_ult ~ 0.5 * p_ult (shaft friction proxy) --
+    total_t_ult = 0.5 * total_p_ult                          # N
+    total_k_vert = total_k_lateral * 3.0                     # same ratio as linear
+    z50_vert = 0.5 * total_t_ult / max(total_k_vert, 1e-6)
+
+    # -- Integrated rotational: k_rot = sum(k * z^2 * dz) --
+    k_rot = float(np.sum(k_arr * depth * depth) * dz) * 1e3  # N*m/rad
+    # Moment capacity: M_ult = sum(p_ult * z * dz)
+    m_ult = float(np.sum(p_arr * depth) * dz) * 1e3           # N*m
+
+    # -- Anchor node --
+    anchor = 1100
+    ops.node(anchor, 0.0, 0.0, 0.0)
+    ops.fix(anchor, 1, 1, 1, 1, 1, 1)
+
+    # -- Material tags (200-series to avoid collision with linear 110-series) --
+    # DOF 1: lateral-x  (PySimple1)
+    mat_lat_x = 200
+    ops.uniaxialMaterial(
+        "PySimple1", mat_lat_x,
+        2,                                  # soilType=2 (sand)
+        max(total_p_ult, 1.0),              # pult [N]
+        max(y50_lateral, 1e-6),             # y50 [m]
+        0.0,                                # Cd (drag, 0 for static)
+    )
+
+    # DOF 2: lateral-y  (PySimple1, same capacity)
+    mat_lat_y = 201
+    ops.uniaxialMaterial(
+        "PySimple1", mat_lat_y,
+        2,
+        max(total_p_ult, 1.0),
+        max(y50_lateral, 1e-6),
+        0.0,
+    )
+
+    # DOF 3: vertical  (TzSimple1)
+    mat_vert = 202
+    ops.uniaxialMaterial(
+        "TzSimple1", mat_vert,
+        2,                                  # soilType=2 (sand)
+        max(total_t_ult, 1.0),              # tult [N]
+        max(z50_vert, 1e-6),                # z50 [m]
+        0.0,                                # Cd
+    )
+
+    # DOF 4, 5: rotational  (Elastic — PySimple1 does not support rotation)
+    mat_rot_x = 203
+    mat_rot_y = 204
+    ops.uniaxialMaterial("Elastic", mat_rot_x, max(k_rot, 1e3))
+    ops.uniaxialMaterial("Elastic", mat_rot_y, max(k_rot, 1e3))
+
+    # DOF 6: torsional  (Elastic, half rotational stiffness)
+    mat_tor = 205
+    ops.uniaxialMaterial("Elastic", mat_tor, max(k_rot * 0.5, 1e3))
+
+    # -- Zero-length element --
+    ele_tag = 2002
+    ops.element(
+        "zeroLength", ele_tag, anchor, base_node,
+        "-mat", mat_lat_x, mat_lat_y, mat_vert, mat_rot_x, mat_rot_y, mat_tor,
+        "-dir", 1, 2, 3, 4, 5, 6,
+    )
+
+    return {
+        "description": "nonlinear BNWF (PySimple1/TzSimple1 macro-element)",
+        "n_springs": int(len(spring_table)),
+        "integrated_lateral_kN_per_m": total_k_lateral / 1e3,
+        "integrated_p_ult_kN": total_p_ult / 1e3,
+        "y50_m": y50_lateral,
+        "integrated_rotational_kN_m_per_rad": k_rot / 1e3,
+        "moment_capacity_kN_m": m_ult / 1e3,
+    }
+
+
+# ============================================================
+# Moment-rotation pushover
+# ============================================================
+
+def run_pushover_moment_rotation(
+    tower_model: "TowerModel",
+    target_rotation_rad: float = 0.05,
+    n_steps: int = 100,
+) -> dict:
+    """Run a moment-controlled pushover at the tower base.
+
+    Applies an incrementally increasing rotation at the tower base node
+    (1000) and records the resisting moment. This is the standard test
+    for foundation moment capacity and stiffness degradation under
+    monotonic loading.
+
+    Parameters
+    ----------
+    tower_model : TowerModel
+        A built TowerModel (``tower_model.build()`` must have been called).
+    target_rotation_rad : float
+        Maximum imposed rotation at the base [rad]. Default 0.05 (~2.9 deg).
+    n_steps : int
+        Number of load increments.
+
+    Returns
+    -------
+    dict
+        ``rotation_deg`` : list[float] — base rotation in degrees.
+        ``moment_MNm``   : list[float] — resisting moment in MN*m.
+        ``base_node``    : int — node tag where rotation was imposed.
+    """
+    import openseespy.opensees as ops
+
+    base_node = 1000
+    rot_dof = 5   # rotation about y-axis (fore-aft rocking)
+
+    try:
+        # Displacement-control on rotation DOF
+        ts_tag = 9300
+        pat_tag = 9300
+        ops.timeSeries("Linear", ts_tag)
+        ops.pattern("Plain", pat_tag, ts_tag)
+        # Unit moment at base about y-axis
+        ops.load(base_node, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
+
+        ops.constraints("Transformation")
+        ops.numberer("RCM")
+        ops.system("UmfPack")
+        ops.test("NormDispIncr", 1e-8, 100, 0)
+        ops.algorithm("Newton")
+
+        d_rot = target_rotation_rad / n_steps
+        ops.integrator("DisplacementControl", base_node, rot_dof, d_rot)
+        ops.analysis("Static")
+
+        rotations_deg = []
+        moments_mnm = []
+
+        for _ in range(n_steps):
+            ok = ops.analyze(1)
+            if ok != 0:
+                # Try modified Newton before giving up
+                ops.algorithm("ModifiedNewton")
+                ok = ops.analyze(1)
+                ops.algorithm("Newton")
+                if ok != 0:
+                    break
+
+            rot_rad = float(ops.nodeDisp(base_node, rot_dof))
+            rotations_deg.append(float(np.degrees(rot_rad)))
+
+            # Resisting moment = load factor * unit moment
+            lf = float(ops.getLoadFactor(pat_tag))
+            moments_mnm.append(lf / 1e6)  # N*m -> MN*m
+
+        ops.remove("loadPattern", pat_tag)
+
+    except Exception as e:
+        return {
+            "rotation_deg": [],
+            "moment_MNm": [],
+            "error": str(e),
+        }
+
+    return {
+        "rotation_deg": rotations_deg,
+        "moment_MNm": moments_mnm,
+        "base_node": base_node,
+    }
+
+
+# ============================================================
+# Cyclic lateral analysis
+# ============================================================
+
+def run_cyclic_analysis(
+    tower_model: "TowerModel",
+    n_cycles: int = 10,
+    amplitude_m: float = 0.5,
+    n_steps_per_half: int = 25,
+    load_node: int | None = None,
+) -> dict:
+    """Run cyclic lateral push-pull at the hub and track degradation.
+
+    Applies symmetric cyclic displacement at the hub node (lateral DOF 1)
+    and records permanent (residual) rotation at the tower base and the
+    secant stiffness after each full cycle.
+
+    Parameters
+    ----------
+    tower_model : TowerModel
+        A built TowerModel.
+    n_cycles : int
+        Number of full push-pull cycles.
+    amplitude_m : float
+        Peak lateral displacement at the hub per half-cycle [m].
+    n_steps_per_half : int
+        Analysis steps per half-cycle (push or pull).
+    load_node : int or None
+        Hub node tag. Auto-detected if None.
+
+    Returns
+    -------
+    dict
+        ``cycle_number``            : list[int]
+        ``permanent_rotation_deg``  : list[float] — residual base rotation
+                                       after returning to zero hub displacement.
+        ``stiffness_kN_m_per_deg``  : list[float] — secant stiffness per cycle.
+        ``peak_force_kN``           : list[float] — peak lateral reaction per cycle.
+    """
+    import openseespy.opensees as ops
+
+    base_node = 1000
+
+    # Auto-detect hub node
+    if load_node is None:
+        max_node = 1000
+        for tag in range(1000, 1100):
+            try:
+                ops.nodeCoord(tag)
+                max_node = tag
+            except Exception:
+                break
+        load_node = max_node
+
+    try:
+        ts_tag = 9400
+        pat_tag = 9400
+        ops.timeSeries("Linear", ts_tag)
+        ops.pattern("Plain", pat_tag, ts_tag)
+        ops.load(load_node, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+
+        ops.constraints("Transformation")
+        ops.numberer("RCM")
+        ops.system("UmfPack")
+        ops.test("NormDispIncr", 1e-6, 80, 0)
+        ops.algorithm("Newton")
+
+        cycle_numbers = []
+        perm_rotations = []
+        stiffnesses = []
+        peak_forces = []
+
+        for cyc in range(1, n_cycles + 1):
+            peak_f = 0.0
+
+            # --- Push phase (0 -> +amplitude) ---
+            d_step = amplitude_m / n_steps_per_half
+            ops.integrator("DisplacementControl", load_node, 1, d_step)
+            ops.analysis("Static")
+            for _ in range(n_steps_per_half):
+                ok = ops.analyze(1)
+                if ok != 0:
+                    ops.algorithm("ModifiedNewton")
+                    ok = ops.analyze(1)
+                    ops.algorithm("Newton")
+                    if ok != 0:
+                        break
+            disp_peak = float(ops.nodeDisp(load_node, 1))
+            lf_peak = float(ops.getLoadFactor(pat_tag))
+            peak_f = max(peak_f, abs(lf_peak))
+
+            # --- Pull phase (+amplitude -> -amplitude) ---
+            d_step_back = -2.0 * amplitude_m / (2 * n_steps_per_half)
+            ops.integrator("DisplacementControl", load_node, 1, d_step_back)
+            ops.analysis("Static")
+            for _ in range(2 * n_steps_per_half):
+                ok = ops.analyze(1)
+                if ok != 0:
+                    ops.algorithm("ModifiedNewton")
+                    ok = ops.analyze(1)
+                    ops.algorithm("Newton")
+                    if ok != 0:
+                        break
+            lf_neg = float(ops.getLoadFactor(pat_tag))
+            peak_f = max(peak_f, abs(lf_neg))
+
+            # --- Return to zero (-amplitude -> 0) ---
+            d_step_ret = amplitude_m / n_steps_per_half
+            ops.integrator("DisplacementControl", load_node, 1, d_step_ret)
+            ops.analysis("Static")
+            for _ in range(n_steps_per_half):
+                ok = ops.analyze(1)
+                if ok != 0:
+                    ops.algorithm("ModifiedNewton")
+                    ok = ops.analyze(1)
+                    ops.algorithm("Newton")
+                    if ok != 0:
+                        break
+
+            # Record residual base rotation
+            residual_rot_rad = float(ops.nodeDisp(base_node, 5))
+            perm_rotations.append(float(np.degrees(residual_rot_rad)))
+
+            # Secant stiffness: peak force / peak displacement
+            secant = abs(peak_f) / max(abs(disp_peak), 1e-9)
+            # Convert to kN/m per degree: (N/m) / (1 rad * 180/pi) -> kN*deg/m
+            stiffnesses.append(secant / 1e3)
+
+            peak_forces.append(peak_f / 1e3)  # N -> kN
+            cycle_numbers.append(cyc)
+
+        ops.remove("loadPattern", pat_tag)
+
+    except Exception as e:
+        return {
+            "cycle_number": [],
+            "permanent_rotation_deg": [],
+            "stiffness_kN_m_per_deg": [],
+            "peak_force_kN": [],
+            "error": str(e),
+        }
+
+    return {
+        "cycle_number": cycle_numbers,
+        "permanent_rotation_deg": perm_rotations,
+        "stiffness_kN_m_per_deg": stiffnesses,
+        "peak_force_kN": peak_forces,
+        "load_node": load_node,
+        "base_node": base_node,
+    }
