@@ -1782,15 +1782,15 @@ if __name__ == "__main__":
     EXECUTION INSTRUCTIONS (Task 1):
 
     Method 1: Direct execution (sys.path injection handles imports)
-        cd F:\\GITHUB3
+        cd <REPO_ROOT>
         python src/structural/opensees_model_advanced.py
 
         OR from subfolder:
-        cd F:\\GITHUB3\\src\\structural
+        cd <REPO_ROOT>/src/structural
         python opensees_model_advanced.py
 
     Method 2: Module flag (-m) for proper package hierarchy
-        cd F:\\GITHUB3
+        cd <REPO_ROOT>
         python -m src.structural.opensees_model_advanced
 
         This method:

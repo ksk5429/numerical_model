@@ -24,7 +24,7 @@ import numpy as np
 from pathlib import Path
 
 # Add OpenSeesPy model directory to path
-SPINE_DIR = r"F:\GITHUB3\docs\manuscripts\current\ch4_1_optumgx_opensees_revised\2_opensees_models"
+SPINE_DIR = str(Path(__file__).resolve().parents[2] / "docs" / "manuscripts" / "current" / "ch4_1_optumgx_opensees_revised" / "2_opensees_models")
 sys.path.insert(0, SPINE_DIR)
 os.chdir(SPINE_DIR)
 
@@ -191,8 +191,8 @@ class StiffnessExtractor:
                             'Dt': float(p[3]), 'Db': float(p[4]), 't': float(p[5]),
                             'tap': abs(float(p[3]) - float(p[4])) > 1e-4
                         })
-                    except:
-                        pass
+                    except (ValueError, IndexError):
+                        pass  # skip unparseable element lines
 
         # Create structural nodes
         for nid, (x, y, z) in nodes.items():

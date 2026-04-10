@@ -39,8 +39,8 @@ def read_text_output(filepath):
                     vals = [float(x) for x in dl.split()]
                     if len(vals) == len(names):
                         data.append(vals)
-                except:
-                    continue
+                except ValueError:
+                    continue  # skip non-numeric lines
             return names, np.array(data)
     return None, None
 
@@ -150,7 +150,7 @@ def setup_excitation_test(name, scour, excitation_type='impulse', wind_speed=8.0
     if test_dir.exists():
         try:
             shutil.rmtree(test_dir)
-        except:
+        except OSError:
             import time as tm
             test_dir = RESULTS / f"{name}_S{scour:.0f}_{int(tm.time())%10000}"
 

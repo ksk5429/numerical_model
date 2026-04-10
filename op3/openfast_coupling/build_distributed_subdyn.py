@@ -318,7 +318,7 @@ if __name__ == '__main__':
 
     if DIST_DIR.exists():
         try: shutil.rmtree(DIST_DIR)
-        except: pass
+        except OSError: pass  # cleanup failure, will be overwritten
 
     if not DIST_DIR.exists():
         shutil.copytree(TEMPLATE, DIST_DIR)

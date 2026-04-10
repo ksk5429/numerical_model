@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-SPINE_DIR = r"F:\GITHUB3\docs\manuscripts\current\ch4_1_optumgx_opensees_revised\2_opensees_models"
+SPINE_DIR = str(Path(__file__).resolve().parents[2] / "docs" / "manuscripts" / "current" / "ch4_1_optumgx_opensees_revised" / "2_opensees_models")
 sys.path.insert(0, SPINE_DIR)
 os.chdir(SPINE_DIR)
 import openseespy.opensees as ops
@@ -293,8 +293,8 @@ def read_openfast_text_output(filepath):
             vals = [float(x) for x in line.split()]
             if len(vals) == len(names):
                 data.append(vals)
-        except:
-            continue
+        except ValueError:
+            continue  # skip non-numeric lines
     return names, np.array(data)
 
 

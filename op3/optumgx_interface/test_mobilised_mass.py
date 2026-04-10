@@ -60,7 +60,7 @@ m2.delete()
 try:
     sel = mod.select([0,0,-H_dom/2], types="edge")
     if sel: mod.delete_shapes(sel)
-except: pass
+except Exception: pass  # edge cleanup after revolution
 
 mod.add_vertex([0,0,0])
 sel_c = mod.select([0,0,0], types="vertex")
@@ -116,7 +116,7 @@ for attr in gr_attrs:
         val = getattr(gr, attr)
         if not callable(val):
             print(f"    {attr} = {val}")
-    except: pass
+    except Exception: pass  # attribute may not be readable
 
 # Critical results
 print("\n[4] Critical results:")
@@ -130,7 +130,7 @@ try:
             if not callable(val):
                 s = str(val)[:200]
                 print(f"    {attr} = {s}")
-        except: pass
+        except Exception: pass  # attribute may not be readable
 except Exception as e:
     print(f"    Error: {e}")
 
@@ -149,7 +149,7 @@ if hasattr(solid0, 'general'):
             val = getattr(gen, attr)
             if not callable(val):
                 print(f"      general.{attr} = {str(val)[:150]}")
-        except: pass
+        except Exception: pass  # attribute may not be readable
 
 if hasattr(solid0, 'topology'):
     top = solid0.topology
@@ -168,10 +168,10 @@ if hasattr(solid0, 'results'):
                         val = getattr(cat, prop)
                         s = str(val)[:200]
                         print(f"        {prop} = {s}")
-                    except: pass
+                    except Exception: pass  # attribute may not be readable
             elif not callable(cat):
                 print(f"      results.{cat_name} = {str(cat)[:150]}")
-        except: pass
+        except Exception: pass  # attribute may not be readable
 
 # First plate element - deep dive
 print("\n[6] First plate element (deep inspection):")
@@ -186,7 +186,7 @@ if hasattr(plate0, 'results'):
             cat = getattr(res, cat_name)
             if hasattr(cat, 'props'):
                 print(f"      results.{cat_name}.props = {cat.props}")
-        except: pass
+        except Exception: pass  # attribute may not be readable
 
 # Count elements with non-zero collapse mechanism
 print("\n[7] Collapse mechanism statistics (ALL solid elements):")
@@ -238,7 +238,7 @@ if hasattr(solid_first, 'results'):
                 cat = getattr(res, cat_name)
                 if hasattr(cat, 'props'):
                     print(f"      props = {cat.props}")
-            except: pass
+            except Exception: pass  # attribute may not be readable
 
 # Check vertices/coordinates for volume computation
 print("\n[9] Solid element topology for volume computation:")

@@ -113,7 +113,7 @@ def build_model_with_scour(prj, scour_depth, probe_type, run_name):
     try:
         sel = mod.select([0, 0, -H_dom/2], types="edge")
         if sel: mod.delete_shapes(sel)
-    except: pass
+    except Exception: pass  # edge may not exist after revolution
 
     mod.add_vertex([0, 0, 0])
     sel_c = mod.select([0, 0, 0], types="vertex")
@@ -144,7 +144,7 @@ def build_model_with_scour(prj, scour_depth, probe_type, run_name):
             sf = mod.select([R*np.cos(np.radians(ang)),
                              R*np.sin(np.radians(ang)), -S], types="vertex")
             if sf: mod.set_mesh_fan(shapes=sf, fan_angle=fan_angle)
-        except: pass
+        except Exception: pass  # vertex may not exist at this angle
 
     mod.set_analysis_properties(
         analysis_type='load_multiplier', element_type="mixed",
@@ -173,10 +173,10 @@ def build_model_with_scour(prj, scour_depth, probe_type, run_name):
 
     try:
         lm = float(mod.output.global_results.load_multiplier)
-    except:
+    except (AttributeError, TypeError, ValueError):
         try:
             lm = float(mod.output.critical_results.load_multiplier)
-        except:
+        except (AttributeError, TypeError, ValueError):
             lm = None
 
     mod.delete()

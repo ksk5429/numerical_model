@@ -23,6 +23,7 @@ import openseespy.opensees as ops
 import numpy as np
 import math
 import sys
+from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -34,7 +35,7 @@ print("=" * 65)
 # PARSE SUBDYN FILE
 # ═══════════════════════════════════════════════════════════════════
 
-subdyn_file = r"C:\Users\geolab\.claude\projects\f--TREE-OF-THOUGHT\8cda8629-6ce6-4bb7-a003-4536885cb5af\tool-results\b3qlt63o3.txt"
+subdyn_file = str(Path(__file__).parent / "NRELOffs662_OC3Tripod_SubDyn.dat")  # place SubDyn file alongside this script
 
 joints = {}  # {id: (x, y, z)}
 members = []  # [{id, j1, j2, prop1, prop2, mtype}]

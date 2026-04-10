@@ -22,14 +22,14 @@ Foundation: spine-ribs BNWF (4 ribs x 3 buckets x 19 depth nodes)
             + base rotational spring KM_base at skirt tip
 Scour:      spring removal + stress correction sqrt(sigma_new/sigma_old)
 
-Run: "C:\\Users\\geolab\\AppData\\Local\\Programs\\Python\\Python312\\python.exe" OpenSeesPy_v4_dissipation.py
+Run: python OpenSeesPy_v4_dissipation.py
 """
 import sys, os, math, re
 import numpy as np
 import pandas as pd
 from pathlib import Path
 
-SPINE_DIR = r"F:\GITHUB3\docs\manuscripts\current\ch4_1_optumgx_opensees_revised\2_opensees_models"
+SPINE_DIR = str(Path(__file__).resolve().parents[2] / "docs" / "manuscripts" / "current" / "ch4_1_optumgx_opensees_revised" / "2_opensees_models")
 sys.path.insert(0, SPINE_DIR); os.chdir(SPINE_DIR)
 import openseespy.opensees as ops
 
@@ -178,7 +178,7 @@ class TripodModel:
                 p=line.split('#')[0].split()
                 if len(p)>=6:
                     try: self.elements.append({'n1':int(p[1]),'n2':int(p[2]),'Dt':float(p[3]),'Db':float(p[4]),'t':float(p[5]),'tap':abs(float(p[3])-float(p[4]))>1e-4})
-                    except: pass
+                    except (ValueError, IndexError): pass  # skip unparseable element lines
 
     def build_model(self, scour):
         ops.wipe(); ops.model('basic','-ndm',3,'-ndf',6); self._reset()
@@ -306,7 +306,7 @@ class TripodModel:
             try:
                 z=ops.nodeCoord(nid)[2]
                 if z<sz: mp_=ap*0.5*SOIL_PLUG_RHO; ops.mass(nid,mp_,mp_,0,0,0,0)
-            except: pass
+            except Exception: pass  # node may have been removed by scour
 
     def _ghost(self):
         gm=self._mid; self._mid+=1; ops.uniaxialMaterial('Elastic',gm,1.0)
@@ -318,7 +318,7 @@ class TripodModel:
         try:
             v=ops.eigen('-fullGenLapack',1)
             return math.sqrt(v[0])/(2*math.pi) if v else 0.0
-        except: return 0.0
+        except Exception: return 0.0  # eigenvalue solver failure
 
 
 # =============================================================================

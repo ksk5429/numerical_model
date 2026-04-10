@@ -97,7 +97,7 @@ def run_scour_level(scour, extractor):
     if run_dir.exists():
         try:
             shutil.rmtree(run_dir)
-        except:
+        except OSError:
             import time as tm
             run_dir = SWEEP_DIR / f"S{scour:.1f}m_{int(tm.time()) % 10000}"
 

@@ -233,7 +233,7 @@ def extract_summary(output):
         summary['load_multiplier'] = _get(gr, 'load_multiplier')
         summary['max_displacement'] = _get(gr, 'max_displacement')
         summary['factor_of_safety'] = _get(gr, 'factor_of_safety')
-    except: pass
+    except (AttributeError, TypeError): pass  # global results may not exist
 
     # Critical
     try:
@@ -245,7 +245,7 @@ def extract_summary(output):
             val = _get(cr, attr)
             if val is not None:
                 summary[f'cr_{attr}'] = val
-    except: pass
+    except (AttributeError, TypeError): pass  # critical results may not exist
 
     return summary
 

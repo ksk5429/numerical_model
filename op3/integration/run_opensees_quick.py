@@ -5,10 +5,11 @@ Directly uses the ScourAnalysisModel class (copied inline to avoid import issues
 import pandas as pd
 import numpy as np
 import os, sys, shutil, math
+from pathlib import Path
 
 sys.stdout.reconfigure(line_buffering=True)
 
-BASE = r'F:\GITHUB3\docs\manuscripts\current\ch4_1_optumgx_opensees_revised'
+BASE = str(Path(__file__).resolve().parents[2] / "docs" / "manuscripts" / "current" / "ch4_1_optumgx_opensees_revised")
 MODEL_DIR = os.path.join(BASE, '2_opensees_models')
 POST_DIR = os.path.join(BASE, '3_postprocessing')
 REF_DIR = os.path.join(BASE, '7_reference_data')
@@ -88,7 +89,7 @@ def run_sweep(params_file, label, per_scour_file=None):
                         'n1': int(p[1]), 'n2': int(p[2]),
                         'D_top': float(p[3]), 'D_bot': float(p[4]), 'thk': float(p[5]),
                     })
-                except: pass
+                except (ValueError, IndexError): pass  # skip unparseable element lines
 
     # Load soil parameters
     raw_soil = pd.read_excel('OpenSees_Master_Parameters_Global.xlsx', sheet_name='OpenSees_Parameters')
@@ -338,7 +339,7 @@ def run_sweep(params_file, label, per_scour_file=None):
         try:
             vals = ops.eigen('-fullGenLapack', 1)
             f1 = math.sqrt(vals[0])/(2*math.pi) if vals and vals[0] > 0 else 0.0
-        except:
+        except Exception:
             f1 = 0.0
 
         if i_scour == 0: base_freq = f1

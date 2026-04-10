@@ -77,7 +77,7 @@ def gen_samples(n, seed):
         Lt = cholesky(C, lower=True)
         Lc = cholesky(np.corrcoef(z.T), lower=True)
         z = z @ np.linalg.inv(Lc).T @ Lt.T
-    except: pass
+    except (np.linalg.LinAlgError, ValueError): pass  # correlation matrix not PD
     u = stats.norm.cdf(z)
     S = {}
     ml, sl = ln_p(RV_su0['m'], RV_su0['cov'])
@@ -184,7 +184,7 @@ def run_probe(prj, su0, k_su, gamma, alpha_int, scour_base,
     try:
         sel = mod.select([0, 0, -H_dom / 2], types="edge")
         if sel: mod.delete_shapes(sel)
-    except: pass
+    except Exception: pass  # edge may not exist after revolution
 
     # Physical scour
     if scour_base > 0:
@@ -218,7 +218,7 @@ def run_probe(prj, su0, k_su, gamma, alpha_int, scour_base,
             sf = mod.select([R * np.cos(np.radians(ang)),
                              R * np.sin(np.radians(ang)), -S], types="vertex")
             if sf: mod.set_mesh_fan(shapes=sf, fan_angle=fan_angle)
-        except: pass
+        except Exception: pass  # vertex may not exist at this angle
 
     mod.set_analysis_properties(
         analysis_type='load_multiplier', element_type="mixed",
@@ -254,9 +254,9 @@ def run_probe(prj, su0, k_su, gamma, alpha_int, scour_base,
     dt = time.time() - t0
 
     try: lm = float(mod.output.global_results.load_multiplier)
-    except:
+    except (AttributeError, TypeError, ValueError):
         try: lm = float(mod.output.critical_results.load_multiplier)
-        except: lm = None
+        except (AttributeError, TypeError, ValueError): lm = None
 
     if probe == 'Mmax' and lm is not None:
         lm = lm * R
@@ -266,7 +266,7 @@ def run_probe(prj, su0, k_su, gamma, alpha_int, scour_base,
         try:
             ftag = f'run{rid}_S{int(scour_base)}_{probe}'
             _, _, extras = extract_full_output(mod.output, save_dir=DATA_DIR, tag=ftag)
-        except: pass
+        except Exception: pass  # non-critical extraction failure
 
     mod.delete()
     return lm, dt, extras

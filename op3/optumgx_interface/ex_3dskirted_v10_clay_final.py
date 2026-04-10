@@ -160,8 +160,8 @@ def extract_property(obj, prop_name):
                     else:
                         values.append(None)
                 return {'values': values, 'labels': labels}
-    except:
-        pass
+    except Exception:
+        pass  # OptumGX attribute access can fail in many ways
     # Enhanced fallback: Parse if in "unit: 'xx', value: yy" format
     str_rep = str(attr)
     match = re.search(r"unit: '(.*?)', value: (.*)", str_rep)
@@ -176,8 +176,8 @@ def extract_property(obj, prop_name):
                 if len(value) == 1:
                     value = value[0]
                 return value
-            except:
-                pass
+            except (ValueError, TypeError):
+                pass  # value string not numeric
         return str_rep
     else:
         return str_rep
@@ -223,7 +223,7 @@ def collect_resultpoints(output):
                                     row.pop(prop, None)
                                     for j, f in enumerate(floats, 1):
                                         row[f'{prop}_{j}'] = f
-                            except:
+                            except (ValueError, TypeError):
                                 row[prop] = val
                         else:
                             row[prop] = val
@@ -244,7 +244,7 @@ def collect_resultpoints(output):
                                 val = list_val[0]
                             elif all(isinstance(i, (int, float)) for i in list_val):
                                 val = list_val
-                    except:
+                    except (ValueError, SyntaxError):
                         pass
                 if isinstance(val, str):
                     match = re.search(r"unit: '(.*?)', value: (.*)", val)
@@ -258,7 +258,7 @@ def collect_resultpoints(output):
                                     val = floats[0]
                                 else:
                                     val = floats
-                            except:
+                            except (ValueError, TypeError):
                                 pass
                 if isinstance(val, list):
                     for j, v in enumerate(val, 1):
@@ -285,7 +285,7 @@ def collect_resultpoints(output):
                                             val = floats[0]
                                         else:
                                             val = floats
-                                    except:
+                                    except (ValueError, TypeError):
                                         pass
                         if isinstance(val, dict) and 'values' in val and 'labels' in val:
                             for label, v in zip(val['labels'], val['values']):
@@ -322,7 +322,7 @@ def collect_plates(output):
                                     row.pop(prop, None)
                                     for j, f in enumerate(floats, 1):
                                         row[f'{prop}_{j}'] = f
-                            except:
+                            except (ValueError, TypeError):
                                 row[prop] = val
                         else:
                             row[prop] = val
@@ -343,7 +343,7 @@ def collect_plates(output):
                                 val = list_val[0]
                             elif all(isinstance(i, (int, float)) for i in list_val):
                                 val = list_val
-                    except:
+                    except (ValueError, SyntaxError):
                         pass
                 if isinstance(val, str):
                     match = re.search(r"unit: '(.*?)', value: (.*)", val)
@@ -357,7 +357,7 @@ def collect_plates(output):
                                     val = floats[0]
                                 else:
                                     val = floats
-                            except:
+                            except (ValueError, TypeError):
                                 pass
                 if isinstance(val, list):
                     for j, v in enumerate(val, 1):
@@ -384,7 +384,7 @@ def collect_plates(output):
                                             val = floats[0]
                                         else:
                                             val = floats
-                                    except:
+                                    except (ValueError, TypeError):
                                         pass
                         if isinstance(val, dict) and 'values' in val and 'labels' in val:
                             for label, v in zip(val['labels'], val['values']):
@@ -425,7 +425,7 @@ def collect_solids(output):
                                     row.pop(prop, None)
                                     for j, f in enumerate(floats, 1):
                                         row[f'{prop}_{j}'] = f
-                            except:
+                            except (ValueError, TypeError):
                                 row[prop] = val
                         else:
                             row[prop] = val
@@ -446,7 +446,7 @@ def collect_solids(output):
                                 val = list_val[0]
                             elif all(isinstance(i, (int, float)) for i in list_val):
                                 val = list_val
-                    except:
+                    except (ValueError, SyntaxError):
                         pass
                 if isinstance(val, str):
                     match = re.search(r"unit: '(.*?)', value: (.*)", val)
@@ -460,7 +460,7 @@ def collect_solids(output):
                                     val = floats[0]
                                 else:
                                     val = floats
-                            except:
+                            except (ValueError, TypeError):
                                 pass
                 if isinstance(val, list):
                     for j, v in enumerate(val, 1):
@@ -486,7 +486,7 @@ def collect_solids(output):
                                             val = floats[0]
                                         else:
                                             val = floats
-                                    except:
+                                    except (ValueError, TypeError):
                                         pass
                         if isinstance(val, dict) and 'values' in val and 'labels' in val:
                             for label, v in zip(val['labels'], val['values']):
@@ -644,7 +644,7 @@ try:
     sel = mod.select([0, 0, -H/2], types="edge")
     if sel:
         mod.delete_shapes(sel)
-except:
+except Exception:  # edge cleanup after revolution
     pass
 # Add center vertex for load application
 mod.add_vertex([0, 0, 0])
