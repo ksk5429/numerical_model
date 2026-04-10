@@ -28,7 +28,7 @@ autodoc_mock_imports = [
 
 # -- Project information -----------------------------------------------------
 
-project = "Op^3"
+project = "Op^3 -- Integrated Numerical and Digital Twin Framework"
 author = "Kim Kyeong Sun (Seoul National University)"
 copyright = "2026, Kim Kyeong Sun"
 release = "1.0.0-rc1"
