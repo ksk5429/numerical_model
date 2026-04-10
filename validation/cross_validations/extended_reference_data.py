@@ -215,6 +215,274 @@ KALLEHAVE_2015 = {
 }
 
 
+# ============================================================
+# Fu & Bienen (2017) ASCE J Geotech Geoenviron Eng
+# "Uniaxial Capacities of Skirted Circular Foundations in Clay"
+# ============================================================
+FU_BIENEN_2017 = {
+    "source": "Fu & Bienen (2017) J Geotech Geoenviron Eng 143(7)",
+    "test_type": "3D FE (Modified Cam Clay) + centrifuge 200g validation",
+    "D_m": 14.0,  # prototype
+    "L_D_range": [0.0, 0.1, 0.25, 0.5],
+    "soil": "NC kaolin clay, MCC (lambda=0.205, kappa=0.044, M=0.890)",
+    "benchmark_values": {
+        # NcV = V_ult / (A * su) for different d/D and kD/su0
+        "NcV_surface": {
+            "kD_su0_0": 5.94, "kD_su0_1": 6.82, "kD_su0_2": 7.56,
+            "kD_su0_3": 8.13, "kD_su0_5": 9.14,
+        },
+        "NcV_dD_0.5": {
+            "kD_su0_0": 10.51, "kD_su0_1": 11.13, "kD_su0_2": 11.04,
+        },
+        "NcH_surface": {
+            "kD_su0_0": 1.02, "kD_su0_1": 1.02, "kD_su0_2": 1.02,
+        },
+        "NcH_dD_0.5": {
+            "kD_su0_0": 4.47, "kD_su0_1": 3.92, "kD_su0_2": 3.24,
+        },
+        "NcM_surface": {
+            "kD_su0_0": 0.71, "kD_su0_1": 0.83, "kD_su0_2": 0.94,
+        },
+        "NcM_dD_0.5": {
+            "kD_su0_0": 1.60, "kD_su0_1": 1.48, "kD_su0_2": 1.28,
+        },
+    },
+    "normalised_formulas": {
+        "NcV_surf": "6.05 * (1 + 0.14*(kD/su0) - 0.0074*(kD/su0)^2)",
+        "NcV_ratio_homo": "1 + 1.9*ln(1 + d/D)",
+        "NcH_ratio_homo": "1 + 8.15*ln(1 + d/D)",
+        "NcM_ratio_homo": "1 + 1.7*(d/D)",
+    },
+    "notes": "Most directly comparable to Op³ suction bucket geometry. "
+             "Average absolute error <= 0.5% in fitted formulas.",
+}
+
+# ============================================================
+# Achmus et al. (2013) Applied Ocean Research
+# "Load-bearing behavior of suction bucket foundations in sand"
+# ============================================================
+ACHMUS_2013 = {
+    "source": "Achmus et al. (2013) Applied Ocean Research",
+    "test_type": "3D FE (Mohr-Coulomb, stress-dependent stiffness)",
+    "D_m": 12.0,  # reference system
+    "L_m": 9.0,
+    "L_D": 0.75,
+    "soil": "very dense sand (phi=40, kappa=600) and medium dense (phi=35, kappa=400)",
+    "validation": "Frederikshavn (D=2m) and Sandy Haven (D=4m) field tests",
+    "benchmark_values": {
+        "Hu_pure_horizontal_MN": 45.0,  # approx, at load eccentricity h=0
+        "Hu_h20m_MN": 8.0,  # at 20m eccentricity
+        "hyperbolic_factor": 0.92,  # Hu(FEM)/Hu(hyperbolic)
+    },
+    "key_findings": [
+        "capacity more sensitive to L/D than to t/D",
+        "initial stiffness more sensitive to D than to L",
+        "vertical preload has <10% effect on horizontal capacity",
+    ],
+    "notes": "Normalised capacity equations for L/D=0.5-1.0 in sand. "
+             "Directly comparable to Op³ Mode C pushover.",
+}
+
+# ============================================================
+# Lai et al. (2023) Soil Dynamics and Earthquake Engineering
+# "Effects of soil small strain nonlinearity on dynamic
+#  impedance of horizontally loaded suction caisson"
+# ============================================================
+LAI_2023 = {
+    "source": "Lai et al. (2023) Soil Dyn Earthquake Eng 165:107731",
+    "test_type": "3D FE (Plaxis 3D, Hardening Soil Small-Strain)",
+    "D_m": 30.0,
+    "L_m": 10.0,
+    "L_D": 0.333,
+    "soil": "marine clay (c'=4.7kPa, phi'=28.7, G0_ref=42MPa, gamma_0.7=3e-4)",
+    "benchmark_values": {
+        "stiffness_reduction_high_NL_pct": 20.0,  # at gamma_0.7 = 1e-4
+        "stiffness_reduction_low_NL_pct": 10.0,   # at gamma_0.7 = 5e-4
+        "max_shear_strain_H10MN": 1.57e-3,
+        "max_shear_strain_M100MNm": 1.04e-3,
+    },
+    "degradation_formula": "Gs/G0 = 1 / (1 + 0.385 * |gamma/gamma_0.7|)",
+    "notes": "Dynamic impedance with nonlinearity for large-diameter "
+             "suction caisson. Directly comparable to Op³ Mode B "
+             "stiffness extraction under varying load levels.",
+}
+
+# ============================================================
+# Skau et al. (2018) Géotechnique
+# "A numerical study of capacity and stiffness of circular
+#  skirted foundations in clay under combined static and
+#  cyclic general loading"
+# ============================================================
+SKAU_2018 = {
+    "source": "Skau et al. (2018) Géotechnique 68(3):205-220",
+    "test_type": "3D FE (HVMcap + Plaxis 3D)",
+    "D_m": 10.0,
+    "L_D_range": [0.5, 1.0],
+    "soil": "Drammen clay, OCR=1/4/40, DSS undrained shear strength",
+    "benchmark_values": {
+        "drammen_clay_su": {
+            "OCR_1": {"su0_kPa": 24.0, "gradient_kPa_m": 1.44},
+            "OCR_4": {"su0_kPa": 41.0, "gradient_kPa_m": 2.46},
+            "OCR_40": {"su_kPa": 68.0},
+        },
+        "displacement_scaling": {
+            "OCR_40_Neq_10_hD_1.0": {
+                "zeta_v": 1.40, "zeta_h": 1.60, "zeta_theta": 1.50,
+            },
+        },
+    },
+    "key_findings": [
+        "normalised failure envelopes insensitive to cyclic degradation",
+        "framework for combined VHM under cyclic loading",
+    ],
+    "notes": "Provides cyclic degradation factors applicable to Op³ "
+             "Mode D dissipation-weighted foundation.",
+}
+
+# ============================================================
+# Vulpe (2015) Géotechnique
+# "Design method for the undrained capacity of skirted
+#  circular foundations under combined loading"
+# ============================================================
+VULPE_2015 = {
+    "source": "Vulpe (2015) Géotechnique 65(8):669-683",
+    "test_type": "3D FE (Abaqus, small-strain)",
+    "L_D_range": [0.0, 0.10, 0.25, 0.50],
+    "soil": "NC clay, Eu/su=500, nu=0.499, gamma'=6 kN/m3",
+    "benchmark_values": {
+        # Bearing capacity factors NcV, NcH, NcM for rough interface
+        "rough_dD_0.5": {
+            "kappa_0":   {"NcV": 10.69, "NcH": 4.17, "NcM": 1.48},
+            "kappa_6":   {"NcV": 11.22, "NcH": 3.31, "NcM": 1.21},
+            "kappa_20":  {"NcV": 11.34, "NcH": 3.00, "NcM": 1.07},
+            "kappa_60":  {"NcV": 11.39, "NcH": 2.82, "NcM": 1.05},
+            "kappa_100": {"NcV": 11.16, "NcH": 2.80, "NcM": 1.03},
+        },
+        "rough_dD_0.25": {
+            "kappa_0":   {"NcV": 8.71, "NcH": 2.90, "NcM": 1.01},
+            "kappa_6":   {"NcV": 10.73, "NcH": 2.50, "NcM": 0.99},
+            "kappa_20":  {"NcV": 11.08, "NcH": 2.21, "NcM": 0.88},
+        },
+        "smooth_dD_0.5": {
+            "kappa_0":   {"NcV": 7.91, "NcH": 3.65, "NcM": 1.06},
+            "kappa_6":   {"NcV": 9.10, "NcH": 2.89, "NcM": 0.86},
+            "kappa_20":  {"NcV": 9.33, "NcH": 2.61, "NcM": 0.75},
+        },
+    },
+    "notes": "Comprehensive VHM capacity factors for skirted circular "
+             "foundations. kappa = kD/sum (heterogeneity index). "
+             "Directly comparable to Op³ Mode D VH envelope.",
+}
+
+# ============================================================
+# Jalbi et al. (2018) Ocean Engineering
+# "Impedance functions for rigid skirted caissons supporting
+#  offshore wind turbines"
+# ============================================================
+JALBI_2018 = {
+    "source": "Jalbi et al. (2018) Ocean Eng 148",
+    "test_type": "3D FE (Plaxis 3D) + regression",
+    "L_D_range": [0.5, 2.0],
+    "soil_profiles": ["homogeneous", "linear (Gibson)", "parabolic (sand)"],
+    "benchmark_values": {
+        # Impedance coefficients: K = f(L/D) * D^n * E_f
+        "homogeneous": {
+            "KL_coeffs":  {"a0": 0.56, "a1": 2.91, "exp": 0.96},
+            "KLR_coeffs": {"a0": 1.47, "a1": 1.87, "exp": 1.06},
+            "KR_coeffs":  {"a0": 1.92, "a1": 2.70, "exp": 0.96},
+        },
+        "linear": {
+            "KL_coeffs":  {"a0": 1.33, "a1": 2.53, "exp": 0.96},
+            "KLR_coeffs": {"a0": 2.29, "a1": 2.02, "exp": 0.96},
+            "KR_coeffs":  {"a0": 2.90, "a1": 2.46, "exp": 0.96},
+        },
+        # Example: 5MW OWT, L=6m, D=12m, L/D=0.5, Es=40MPa
+        "example_5MW": {
+            "KL_GN_m": 0.294,
+            "KLR_GN": 5.3,
+            "KR_GNm_rad": 44.0,
+            "f_fixed_Hz": 0.26,
+            "f_flexible_Hz": 0.17,
+        },
+    },
+    "validation_vs_doherty": {
+        "KL_LD_0.5_homo_v0.2":  {"doherty": 9.09, "proposed": 9.08},
+        "KR_LD_0.5_homo_v0.2":  {"doherty": 16.77, "proposed": 13.1},
+        "KL_LD_2.0_homo_v0.2":  {"doherty": 18.04, "proposed": 19.87},
+        "KR_LD_2.0_homo_v0.2":  {"doherty": 201.6, "proposed": 187.41},
+    },
+    "notes": "Most directly comparable to Op³ Mode B 6x6 stiffness "
+             "matrix. Regression formulas give KL, KLR, KR for L/D "
+             "0.5-2.0 across three ground profiles.",
+}
+
+# ============================================================
+# Gazetas group (2015, 2018)
+# Elastic and non-linear stiffness for suction caissons
+# ============================================================
+GAZETAS_2018 = {
+    "source": "Efthymiou & Gazetas (2018) J Geotech Geoenviron Eng 145(2)",
+    "test_type": "closed-form elastic solutions",
+    "benchmark_values": {
+        # Design example: L = R = 10m, G = 5MPa, nu=0.5, H=30m bedrock
+        "example": {
+            "L_m": 10.0, "R_m": 10.0, "G_MPa": 5.0,
+            "KH_MN_m": 955.0,
+            "KR_MNm_rad": 121110.0,
+            "KHR_MN": 5730.0,
+            "theta_rad": 1.66e-3,
+            "u1_cm": 1.4,
+        },
+    },
+    "key_findings": [
+        "closed-form expressions for KV, KH, KR, KHR",
+        "covers homogeneous and Gibson (G=lambda*z) soil",
+        "sidewall shell contributes 68-100% of caisson stiffness at L/R>=0.5",
+    ],
+    "notes": "Closed-form stiffness validation target for Op³ Mode B.",
+}
+
+# ============================================================
+# Doherty et al. (2005) ASCE J Geotech Geoenviron Eng
+# "Stiffness of flexible caisson foundations embedded in
+#  nonhomogeneous elastic soil"
+# ============================================================
+DOHERTY_2005 = {
+    "source": "Doherty et al. (2005) J Geotech Geoenviron Eng 131(12):1498-1508",
+    "test_type": "semi-analytical (scaled boundary FE)",
+    "benchmark_values": {
+        # Five dimensionless stiffness coefficients: KV, KH, KM, KT, KC
+        # for variable D/B = 0.2, 0.5, 1.0 and nu = 0.49
+        "notes": "Reference elastic stiffness coefficients for flexible "
+                 "and rigid caissons. Used as validation target by Jalbi "
+                 "2018 and Suryasentana 2017/2020.",
+    },
+    "notes": "Canonical reference for suction caisson elastic stiffness. "
+             "Op³ Mode B extraction should match within 5-15%.",
+}
+
+# ============================================================
+# Suryasentana et al. (2020) Géotechnique
+# "A Winkler model for suction caisson foundations (OxCaisson)"
+# ============================================================
+SURYASENTANA_2020 = {
+    "source": "Suryasentana et al. (2020) Géotechnique 70(9):815-834",
+    "test_type": "calibrated 1D Winkler model (OxCaisson)",
+    "benchmark_values": {
+        "notes": "Six independent stiffness coefficients: KH, KV, KM, "
+                 "KQ (twist), KC (coupling). Calibrated against Doherty "
+                 "2005. Poisson ratio dependency up to 40% for KV.",
+    },
+    "key_findings": [
+        "local stiffness matrix: symmetric and positive definite",
+        "coupling KHR ≈ 0.6*KHL typical ratio",
+        "millisecond execution vs hours for 3D FE",
+    ],
+    "notes": "OxCaisson is the closest published equivalent to Op³ "
+             "Mode B. Direct comparison of 6x6 global stiffness.",
+}
+
+
 def all_references() -> dict:
     """Return all reference datasets as a dict keyed by short name."""
     return {
@@ -228,4 +496,13 @@ def all_references() -> dict:
         "Chortis_2020": CHORTIS_2020,
         "Villalobos_2009": VILLALOBOS_2009,
         "Kallehave_2015": KALLEHAVE_2015,
+        "Fu_Bienen_2017": FU_BIENEN_2017,
+        "Achmus_2013": ACHMUS_2013,
+        "Lai_2023": LAI_2023,
+        "Skau_2018": SKAU_2018,
+        "Vulpe_2015": VULPE_2015,
+        "Jalbi_2018": JALBI_2018,
+        "Gazetas_2018": GAZETAS_2018,
+        "Doherty_2005": DOHERTY_2005,
+        "Suryasentana_2020": SURYASENTANA_2020,
     }

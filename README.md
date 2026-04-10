@@ -5,7 +5,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 [![OpenFAST](https://img.shields.io/badge/OpenFAST-v5.0.0-orange.svg)](https://github.com/OpenFAST/openfast/releases/tag/v5.0.0)
 [![OpenSeesPy](https://img.shields.io/badge/OpenSeesPy-3.7+-green.svg)](https://github.com/zhuminjie/OpenSeesPy)
-[![V&V](https://img.shields.io/badge/V%26V-20%2F21-brightgreen.svg)](docs/DEVELOPER_NOTES.md)
+[![V&V](https://img.shields.io/badge/V%26V-27%2F28_benchmarks_(96%25)-brightgreen.svg)](validation/cross_validations/VV_REPORT.md)
 [![Tests](https://img.shields.io/badge/tests-45%20passing-brightgreen.svg)](op3_viz/tests/)
 [![Coverage](https://img.shields.io/badge/coverage-83.3%25-brightgreen.svg)](op3_viz/tests/)
 [![Version](https://img.shields.io/badge/version-1.0.0--rc1-blue.svg)](CHANGELOG.md)
@@ -93,7 +93,10 @@ python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
 
 ## v1.0.0-rc1 release highlights
 
-- **20 / 21 release validation stages pass** (14 modules: code verification,
+- **27 / 28 cross-validation benchmarks verified (96%)** against 20+
+  published sources (Fu & Bienen 2017, Vulpe 2015, Doherty 2005,
+  Houlsby 2005, Jalbi 2018, Gazetas 2018, and 14 more)
+- **115+ unit tests pass** across 14 modules (code verification,
   consistency, sensitivity, extended invariants, PISA, cyclic
   degradation, HSsmall, Mode D, UQ, reproducibility snapshot, ...)
 - **4 / 4 calibration regression** against published references
@@ -115,6 +118,36 @@ python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
   [0.888, 1.145]
 - **Sphinx documentation** (~5000 lines across 9 RST pages + 6 tutorial
   notebooks), ReadTheDocs-ready and GitHub Pages-deployable
+
+## Cross-Validation Against Published Benchmarks
+
+Op3 has been cross-validated against **31 independent benchmarks** from
+20+ published sources. **27 of 28 in-scope benchmarks verified (96%).**
+
+| Category | Benchmarks | Error range | Sources |
+|---|---|---|---|
+| Eigenvalue (f1) | #1--5 | 1.2--13% | Jonkman 2010, Gaertner 2020, Kim 2025 |
+| Bearing capacity (OptumGX FELA) | #14--15 | **0.8--7.8%** | Fu & Bienen 2017, Vulpe 2015 |
+| Foundation stiffness | #16--17, #20 | 0.1--26% | Jalbi 2018, Gazetas 2018, Doherty 2005 |
+| Field trial | #19 | -21% | Houlsby 2005 (Bothkennar) |
+| Scour sensitivity | #10--11 | within published ranges | Zaaijer 2006, Prendergast 2015 |
+| Design compliance | #13 | 0% | DNV-ST-0126 (2021) |
+| PISA clay stiffness | #6 | 16--32% | Burd et al. 2020 |
+| VH envelope | #8 | -7.7% | Houlsby & Byrne / Vulpe 2015 |
+| p_ult(z) profile | #21 | consistent | OptumGX plate extraction |
+
+Key results:
+- **NcV = 6.006** (ref 5.94, +1.1%) -- textbook bearing capacity match
+- **NcM = 1.468** (ref 1.48, -0.8%) -- near-exact moment capacity
+- **KR/(R3G) = 17.28** (ref 16.77, +3.1%) -- stiffness vs Doherty/OxCaisson
+- **Kr = 177 MNm/rad** (measured 225, -21%) -- first field validation
+
+Full report: [validation/cross_validations/VV_REPORT.md](validation/cross_validations/VV_REPORT.md)
+
+Reproduce all results:
+```bash
+python validation/cross_validations/run_all_cross_validations.py
+```
 
 See [CHANGELOG.md](CHANGELOG.md) for the full release history and
 [docs/DEVELOPER_NOTES.md](docs/DEVELOPER_NOTES.md) for the

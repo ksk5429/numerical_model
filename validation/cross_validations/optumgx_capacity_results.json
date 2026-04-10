@@ -1,0 +1,45 @@
+{
+  "fu_bienen_surface": {
+    "NcV_op3": 6.006,
+    "NcV_ref": 5.94,
+    "error_pct": 1.1,
+    "V_ult_kN": 23583.6,
+    "time_s": 400.0,
+    "config": "D=10m, su=50kPa, gamma=0.01, Tresca, 6000el, 3 adapt"
+  },
+  "fu_bienen_embedded": {
+    "NcV_op3": 10.247,
+    "NcV_ref": 10.51,
+    "error_pct": -2.5,
+    "V_ult_kN": 40238.2,
+    "time_s": 790.0,
+    "d_D": 0.5,
+    "config": "D=10m, S=5m, su=50kPa, Tresca, 8000el, 3 adapt"
+  },
+  "vulpe_NcV": {
+    "op3": 10.249,
+    "ref": 10.69,
+    "error_pct": -4.1,
+    "config": "D=10m, S=5m, su=50kPa, Tresca, rough, 10000el"
+  },
+  "vulpe_NcH": {
+    "op3": 3.847,
+    "ref": 4.17,
+    "error_pct": -7.8,
+    "config": "D=10m, S=5m, su=50kPa, Tresca, rough, 10000el"
+  },
+  "vulpe_NcM": {
+    "op3": 1.468,
+    "ref": 1.48,
+    "error_pct": -0.8,
+    "config": "D=10m, S=5m, su=50kPa, Tresca, rough, 10000el"
+  },
+  "achmus_Hu": {
+    "Hu_op3_MN": 1227.7,
+    "Hu_ref_MN": 45.0,
+    "error_pct": 2628.2,
+    "time_s": 1053.5,
+    "status": "out_of_calibration",
+    "notes": "Limit analysis with Mohr-Coulomb sand computes theoretical plastic collapse, not displacement-based capacity. Achmus defines Hu at rotation criterion. Limit analysis is appropriate for Tresca/undrained clay (benchmarks 14-15), not for drained frictional sand."
+  }
+}

@@ -147,5 +147,86 @@
     "type": "field measurement",
     "foundation": "monopile (North Sea)",
     "benchmark": "Environmental normalisation: wind/wave/tidal/thermal contributions separated; sub-1% structural changes detectable"
+  },
+  {
+    "id": 28,
+    "paper": "Fu & Bienen 2017",
+    "type": "3D FE (MCC Abaqus) + centrifuge 200g",
+    "foundation": "suction caisson",
+    "D_m": 14.0,
+    "L_D_range": [0.0, 0.1, 0.25, 0.5],
+    "soil": "NC kaolin clay",
+    "benchmark": "NcV=5.94-9.14 (surface, kD/su0=0-5); NcV=10.51 (d/D=0.5); NcH=4.47 (d/D=0.5); NcM=1.60 (d/D=0.5); fitting error <=0.5%"
+  },
+  {
+    "id": 29,
+    "paper": "Achmus 2013",
+    "type": "3D FE (Mohr-Coulomb)",
+    "foundation": "suction bucket",
+    "D_m": 12.0,
+    "L_m": 9.0,
+    "L_D": 0.75,
+    "soil": "very dense sand phi=40",
+    "benchmark": "Hu~45MN (pure H); Hu~8MN (h=20m); hyperbolic factor 0.92; validated Frederikshavn+Sandy Haven"
+  },
+  {
+    "id": 30,
+    "paper": "Lai 2023",
+    "type": "3D FE (Plaxis 3D HSS)",
+    "foundation": "suction caisson",
+    "D_m": 30.0,
+    "L_m": 10.0,
+    "L_D": 0.333,
+    "soil": "marine clay G0=42MPa gamma_0.7=3e-4",
+    "benchmark": "20% stiffness reduction at gamma_0.7=1e-4; Gs/G0 = 1/(1+0.385*|gamma/gamma_0.7|)"
+  },
+  {
+    "id": 31,
+    "paper": "Skau 2018",
+    "type": "3D FE (HVMcap+Plaxis 3D)",
+    "foundation": "skirted circular",
+    "D_m": 10.0,
+    "L_D_range": [0.5, 1.0],
+    "soil": "Drammen clay OCR=1/4/40",
+    "benchmark": "Cyclic degradation factors; displacement scaling zeta_v=1.4-1.6; failure envelopes insensitive to Neq"
+  },
+  {
+    "id": 32,
+    "paper": "Vulpe 2015",
+    "type": "3D FE (Abaqus small-strain)",
+    "foundation": "skirted circular",
+    "L_D_range": [0.0, 0.1, 0.25, 0.5],
+    "soil": "NC clay Eu/su=500",
+    "benchmark": "NcV=10.69, NcH=4.17, NcM=1.48 (d/D=0.5 kappa=0 rough); full kappa=0-100 tables; VHM envelope alpha/beta"
+  },
+  {
+    "id": 33,
+    "paper": "Jalbi 2018",
+    "type": "3D FE (Plaxis 3D) regression",
+    "foundation": "rigid skirted caisson",
+    "L_D_range": [0.5, 2.0],
+    "soil": "homogeneous / Gibson / parabolic",
+    "benchmark": "KL=0.294GN/m, KR=44GNm/rad (5MW example L/D=0.5); validated vs Doherty 2005"
+  },
+  {
+    "id": 34,
+    "paper": "Gazetas 2018",
+    "type": "closed-form elastic",
+    "foundation": "rigid suction caisson",
+    "benchmark": "KH=955MN/m, KR=121110MNm/rad (L=R=10m, G=5MPa); covers homogeneous+Gibson soil"
+  },
+  {
+    "id": 35,
+    "paper": "Doherty 2005",
+    "type": "semi-analytical (scaled boundary FE)",
+    "foundation": "flexible/rigid caisson",
+    "benchmark": "Canonical elastic stiffness coefficients KV,KH,KM,KT,KC for D/B=0.2-1.0; reference for all subsequent studies"
+  },
+  {
+    "id": 36,
+    "paper": "Suryasentana 2020 (OxCaisson)",
+    "type": "calibrated 1D Winkler",
+    "foundation": "suction caisson",
+    "benchmark": "6DOF stiffness: KH,KV,KM,KQ,KC; coupling KHR~0.6*KHL; Poisson ratio dep up to 40%; validated vs Doherty 2005"
   }
 ]

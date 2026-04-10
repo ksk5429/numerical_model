@@ -40,6 +40,7 @@ Foundations"* (Seoul National University, June 2026).
 
    scientific_report
    verification
+   cross_validation
 
 .. toctree::
    :maxdepth: 2
@@ -89,9 +90,11 @@ Run the bundled examples
 Verification & validation
 -------------------------
 
-The full V&V suite consists of 115 active tests across 12 modules.
-See :doc:`verification` for the complete list of falsification gates
-and the published-source calibration regression.
+The full V&V suite consists of 115 active tests across 14 modules
+plus 31 cross-validation benchmarks against 20+ published sources.
+See :doc:`verification` for the unit-test falsification gates and
+:doc:`cross_validation` for the published-benchmark comparison
+(27/28 in-scope benchmarks verified, 96%).
 
 Indices and tables
 ==================

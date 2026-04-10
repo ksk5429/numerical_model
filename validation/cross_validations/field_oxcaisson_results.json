@@ -1,0 +1,124 @@
+{
+  "benchmark_a_field_trials": {
+    "A1_bothkennar": {
+      "site": "Bothkennar clay",
+      "D_m": 3.0,
+      "L_m": 1.5,
+      "L_over_D": 0.5,
+      "G_mean_kPa": 4106.2,
+      "nu": 0.5,
+      "measured_Kr_MNm_rad": 225.0,
+      "efthymiou_homogeneous": {
+        "Kr_MNm_rad": 384.64,
+        "pct_diff": 71.0
+      },
+      "efthymiou_gibson": {
+        "Kr_MNm_rad": 176.85,
+        "pct_diff": -21.4
+      },
+      "owa_houlsby_byrne": {
+        "Kr_MNm_rad": 170.0,
+        "pct_diff": -24.4
+      }
+    },
+    "A2_luce_bay": {
+      "site": "Luce Bay sand",
+      "D_m": 3.0,
+      "L_m": 1.5,
+      "L_over_D": 0.5,
+      "G_mean_kPa": 48065.3,
+      "nu": 0.3,
+      "efthymiou_homogeneous": {
+        "Kv_MN_m": 680.04,
+        "Kh_MN_m": 791.33,
+        "Kr_MNm_rad": 3215.97
+      },
+      "owa_houlsby_byrne": {
+        "Kv_MN_m": 659.18,
+        "Kh_MN_m": 1029.97,
+        "Kr_MNm_rad": 1421.36
+      }
+    }
+  },
+  "benchmark_b_oxcaisson": {
+    "L/D=0.5": {
+      "nu_0.2": {
+        "nu": 0.2,
+        "doherty": {
+          "KL_RG": 9.09,
+          "KR_R3G": 16.77
+        },
+        "gazetas_1991": {
+          "KL_norm": 6.89,
+          "KR_norm": 7.41,
+          "KL_pct_diff": -24.2,
+          "KR_pct_diff": -55.8
+        },
+        "owa_houlsby_byrne": {
+          "KL_norm": 12.5,
+          "KR_norm": 7.67,
+          "KL_pct_diff": 37.5,
+          "KR_pct_diff": -54.3
+        },
+        "efthymiou_2018": {
+          "KL_norm": 10.02,
+          "KR_norm": 17.28,
+          "KL_pct_diff": 10.2,
+          "KR_pct_diff": 3.1
+        }
+      },
+      "nu_0.5": {
+        "nu": 0.4999,
+        "doherty": {
+          "KL_RG": 10.95,
+          "KR_R3G": 20.06
+        },
+        "gazetas_1991": {
+          "KL_norm": 8.27,
+          "KR_norm": 11.85,
+          "KL_pct_diff": -24.5,
+          "KR_pct_diff": -40.9
+        },
+        "owa_houlsby_byrne": {
+          "KL_norm": 20.0,
+          "KR_norm": 12.26,
+          "KL_pct_diff": 82.6,
+          "KR_pct_diff": -38.9
+        },
+        "efthymiou_2018": {
+          "KL_norm": 12.02,
+          "KR_norm": 27.65,
+          "KL_pct_diff": 9.8,
+          "KR_pct_diff": 37.8
+        }
+      }
+    },
+    "L/D=1.0": {
+      "nu_0.2": {
+        "nu": 0.2,
+        "doherty": {
+          "KL_RG": 12.5,
+          "KR_R3G": 50.0
+        },
+        "gazetas_1991": {
+          "KL_norm": 8.85,
+          "KR_norm": 12.93,
+          "KL_pct_diff": -29.2,
+          "KR_pct_diff": -74.1
+        },
+        "owa_houlsby_byrne": {
+          "KL_norm": 20.0,
+          "KR_norm": 14.0,
+          "KL_pct_diff": 60.0,
+          "KR_pct_diff": -72.0
+        },
+        "efthymiou_2018": {
+          "KL_norm": 15.8,
+          "KR_norm": 45.34,
+          "KL_pct_diff": 26.4,
+          "KR_pct_diff": -9.3
+        }
+      }
+    }
+  }
+}

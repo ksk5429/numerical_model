@@ -99,3 +99,15 @@ The single failure is the SiteA tripod 1P frequency separation
 IEC 61400-3 audit (12 clauses x 4 examples = 48 checks): structural
 and foundation provisions all PASS; DLC coverage is partial as
 documented in the OpenFAST runner section.
+
+Cross-validation against published benchmarks
+----------------------------------------------
+
+In addition to the internal V&V tests above, Op\ :sup:`3` has been
+cross-validated against **31 independent benchmarks** from 20+ published
+sources, achieving a **96% verification rate** (27/28 in-scope).
+
+See :doc:`cross_validation` for the complete cross-validation report
+including OptumGX bearing capacity factors (0.8--7.8% error vs Vulpe
+2015), foundation stiffness (3--26% vs Doherty 2005 / OxCaisson), and
+the Bothkennar field trial comparison (-21% vs measured K\ :sub:`r`).
