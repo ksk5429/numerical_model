@@ -6,8 +6,8 @@
 [![OpenFAST](https://img.shields.io/badge/OpenFAST-v5.0.0-orange.svg)](https://github.com/OpenFAST/openfast/releases/tag/v5.0.0)
 [![OpenSeesPy](https://img.shields.io/badge/OpenSeesPy-3.7+-green.svg)](https://github.com/zhuminjie/OpenSeesPy)
 [![V&V](https://img.shields.io/badge/V%26V-35%2F38_benchmarks_(92%25)-brightgreen.svg)](validation/cross_validations/VV_REPORT.md)
-[![Tests](https://img.shields.io/badge/tests-45%20passing-brightgreen.svg)](op3_viz/tests/)
-[![Coverage](https://img.shields.io/badge/coverage-83.3%25-brightgreen.svg)](op3_viz/tests/)
+[![CI](https://github.com/ksk5429/numerical_model/actions/workflows/ci.yml/badge.svg)](https://github.com/ksk5429/numerical_model/actions/workflows/ci.yml)
+[![Tests](https://img.shields.io/badge/tests-140_passing-brightgreen.svg)](tests/)
 [![Version](https://img.shields.io/badge/version-1.0.0--rc1-blue.svg)](CHANGELOG.md)
 [![Documentation](https://img.shields.io/badge/docs-sphinx-blue.svg)](docs/sphinx/)
 

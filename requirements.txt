@@ -3,7 +3,7 @@
 # Install with:
 #   pip install -r requirements.txt
 #
-# OpenFAST itself is NOT a Python package — download the v4.0.2 binary
+# OpenFAST itself is NOT a Python package — download the v5.0.0 binary
 # from https://github.com/OpenFAST/openfast/releases and set the
 # OPENFAST_EXE environment variable to its path.
 #
