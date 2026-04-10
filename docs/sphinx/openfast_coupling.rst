@@ -8,10 +8,13 @@ SoilDyn export
 --------------
 
 .. autofunction:: op3.openfast_coupling.soildyn_export.write_soildyn_input
+   :no-index:
 
 .. autofunction:: op3.openfast_coupling.soildyn_export.write_soildyn_from_pisa
+   :no-index:
 
 .. autofunction:: op3.openfast_coupling.soildyn_export.write_soildyn_multipoint
+   :no-index:
 
 End-to-end example
 ------------------

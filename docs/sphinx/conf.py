@@ -98,11 +98,7 @@ suppress_warnings = [
 ]
 
 templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
-try:
-    exclude_patterns.extend(exclude_patterns_notebooks)
-except NameError:
-    pass
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store", "tutorials/*"]
 
 
 # -- HTML output -------------------------------------------------------------

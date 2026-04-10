@@ -35,7 +35,10 @@ Cyclic degradation
 ------------------
 
 .. autofunction:: op3.standards.cyclic_degradation.hardin_drnevich
+   :no-index:
 
 .. autofunction:: op3.standards.cyclic_degradation.vucetic_dobry_gamma_ref
+   :no-index:
 
 .. autofunction:: op3.standards.cyclic_degradation.cyclic_stiffness_6x6
+   :no-index:
