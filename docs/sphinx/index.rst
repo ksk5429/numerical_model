@@ -41,6 +41,7 @@ Foundations"* (Seoul National University, June 2026).
    scientific_report
    verification
    cross_validation
+   gallery
 
 .. note::
 

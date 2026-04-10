@@ -75,9 +75,11 @@ napoleon_numpy_docstring = True
 napoleon_include_init_with_doc = False
 
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/3", None),
-    "numpy":  ("https://numpy.org/doc/stable/", None),
-    "scipy":  ("https://docs.scipy.org/doc/scipy/", None),
+    "python":   ("https://docs.python.org/3", None),
+    "numpy":    ("https://numpy.org/doc/stable/", None),
+    "scipy":    ("https://docs.scipy.org/doc/scipy/", None),
+    "pandas":   ("https://pandas.pydata.org/docs/", None),
+    "openfast": ("https://openfast.readthedocs.io/en/dev/", None),
 }
 
 todo_include_todos = True

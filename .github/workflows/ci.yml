@@ -1,4 +1,4 @@
-name: Op3 V&V
+name: Op3 CI
 
 on:
   push:
@@ -8,15 +8,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  vv-suite:
-    name: V&V suite (Python ${{ matrix.python-version }})
+  test:
+    name: Tests (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        # openseespylinux 3.8.0.0 requires Python >= 3.12. Python 3.11
-        # is dropped from CI until an older openseespylinux wheel is
-        # re-published or openseespy ships a 3.11-compatible wheel.
         python-version: ["3.12"]
 
     steps:
@@ -39,92 +36,65 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install numpy scipy pandas
-          # openseespy on Linux needs the openseespylinux native binary
-          # wheel in addition to the universal front-end.
+          pip install -r requirements.txt
           pip install openseespy openseespylinux
+          pip install pytest pytest-cov
 
-      - name: Code verification (analytical references)
-        run: PYTHONUTF8=1 python tests/test_code_verification.py
-
-      - name: Consistency tests
-        run: PYTHONUTF8=1 python tests/test_consistency.py
-
-      - name: Sensitivity invariants
-        run: PYTHONUTF8=1 python tests/test_sensitivity.py
-
-      - name: Extended V&V (2.7-2.20)
-        run: PYTHONUTF8=1 python tests/test_extended_vv.py
-
-      - name: PISA module
-        run: PYTHONUTF8=1 python tests/test_pisa.py
-
-      - name: Cyclic degradation
-        run: PYTHONUTF8=1 python tests/test_cyclic_degradation.py
-
-      - name: HSsmall wrapper
-        run: PYTHONUTF8=1 python tests/test_hssmall.py
-
-      - name: Mode D dissipation-weighted
-        run: PYTHONUTF8=1 python tests/test_mode_d.py
-
-      - name: OpenFAST runner infrastructure
-        run: PYTHONUTF8=1 python tests/test_openfast_runner.py
-
-      - name: Backlog closure (2.10/2.15/2.16)
-        run: PYTHONUTF8=1 python tests/test_backlog_closure.py
-
-      - name: UQ (5.1/5.2/5.3)
-        run: PYTHONUTF8=1 python tests/test_uq.py
-
-      - name: Reproducibility snapshot
-        run: PYTHONUTF8=1 python tests/test_reproducibility.py
+      - name: Run pytest (all tests)
+        run: |
+          PYTHONUTF8=1 python -m pytest tests/ -v --tb=short \
+            --cov=op3 --cov-report=xml --cov-report=term-missing \
+            -x --timeout=120
+        continue-on-error: false
 
       - name: Calibration regression
         run: PYTHONUTF8=1 python scripts/calibration_regression.py
 
       - name: Three-analyses smoke (11 examples)
-        run: python scripts/test_three_analyses.py
+        run: PYTHONUTF8=1 python scripts/test_three_analyses.py
 
       - name: DNV-ST-0126 conformance
         run: PYTHONUTF8=1 python scripts/dnv_st_0126_conformance.py --all
 
-      - name: IEC 61400-3 conformance scoping
-        run: PYTHONUTF8=1 python scripts/iec_61400_3_conformance.py --all
-        continue-on-error: true   # DLC coverage gaps are tracked, not blockers
+      - name: Cross-validation suite
+        run: PYTHONUTF8=1 python validation/cross_validations/run_all_cross_validations.py
 
-      - name: Upload V&V JSON artifacts
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-py${{ matrix.python-version }}
+          path: coverage.xml
+          retention-days: 30
+
+      - name: Upload V&V artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: vv-artifacts-py${{ matrix.python-version }}
-          path: validation/benchmarks/*.json
+          path: |
+            validation/benchmarks/*.json
+            validation/cross_validations/all_results.json
           retention-days: 30
 
   docs:
-    name: Sphinx build
+    name: Sphinx build (strict)
     runs-on: ubuntu-latest
-    # Intentionally NOT dependent on vv-suite -- docs should build
-    # even if a V&V test module fails transiently, so that users
-    # can still browse the documentation during a test outage.
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install pandoc (for nbsphinx)
+      - name: Install pandoc
         run: sudo apt-get update && sudo apt-get install -y pandoc
-      - name: Install Sphinx
+      - name: Install Sphinx + deps
         run: |
           pip install --upgrade pip
           pip install -r docs/sphinx/requirements.txt
-      - name: Build HTML docs
-        # Do NOT use -W (warning-as-error); the docs build has 66
-        # cosmetic cross-reference warnings that do not indicate
-        # rendering failures. The actual-error build gate is in
-        # docs-deploy.yml which deploys the output to Pages.
-        run: sphinx-build -b html docs/sphinx docs/sphinx/_build/html --keep-going
-      - name: Upload docs artifact
+          pip install numpy scipy pandas pyyaml
+      - name: Build HTML (warnings = errors)
+        run: python -W ignore::DeprecationWarning -m sphinx -W --keep-going -b html docs/sphinx docs/sphinx/_build/html
+      - name: Upload docs
         uses: actions/upload-artifact@v4
         with:
           name: op3-docs
