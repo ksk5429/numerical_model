@@ -125,10 +125,11 @@ def write_soildyn_multipoint(
     Write a multi-point SoilDyn input file using CalcOption=3 layout
     (one independent 6x6 K per coupling point). Each ``points`` entry
     must be a dict with keys:
-        location: (x, y, z) tuple
-        K       : 6x6 ndarray
-        damping : optional 6x6 ndarray (defaults to zero)
-        label   : optional string label
+
+    - ``location``: (x, y, z) tuple
+    - ``K``       : 6x6 ndarray
+    - ``damping`` : optional 6x6 ndarray (defaults to zero)
+    - ``label``   : optional string label
 
     This is the format used by the OC6 Phase II REDWIN DLL test case
     and is the natural target for the Op^3 Mode D dissipation-weighted

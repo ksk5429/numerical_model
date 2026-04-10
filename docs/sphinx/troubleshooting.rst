@@ -13,7 +13,7 @@ Installation
 ------------
 
 Q: ``pip install -e ".[test,docs]"`` fails with a C compiler error
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You are likely on Python 3.13, which does not yet have pre-built
 NumPy / SciPy wheels for Windows. Downgrade to Python 3.12:
@@ -41,7 +41,7 @@ If still missing, check https://pypi.org/project/openseespy/#files
 for the latest available wheel matching your Python version.
 
 Q: ``from op3 import ...`` fails with a ``ModuleNotFoundError``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You are running outside the repository root or you forgot the
 editable install. From the repo root:
@@ -58,7 +58,7 @@ OpenSees runtime
 ----------------
 
 Q: ``WARNING: symbolic analysis returns -8`` followed by a solver crash
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Your OpenSees domain has stale state from a previous build. The
 ``conftest.py`` autouse fixture wipes the domain before every
@@ -198,7 +198,7 @@ PISA and geotechnical
 ---------------------
 
 Q: Op\ :sup:`3` PISA gives K_xx 100x higher than my published reference
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Two separate issues may be at play:
 

@@ -38,8 +38,10 @@ McAdam, R. A. et al. (2020). "Monotonic laterally loaded pile testing
 Calibration regime
 ------------------
 The published PISA coefficients are calibrated for:
-    L/D = 2..10  (rigid to semi-rigid monopiles)
-    D   = 2..10 m
+
+- L/D = 2..10  (rigid to semi-rigid monopiles)
+- D   = 2..10 m
+
 The parameters in this module are reproduced from Burd 2020 Table 6
 (clay) and Byrne 2020 Table 7 (sand). Other soils require independent
 calibration.
@@ -176,9 +178,11 @@ def conic(x: float, k: float, n: float, x_u: float, y_u: float) -> float:
 
     y / y_u = c1 - sqrt(c1^2 - 4 n (x / x_u) c2)
 
-    where
-        c1 = 1 + n (1 - x / x_u)
-        c2 = 1 - n
+    where:
+
+    - c1 = 1 + n (1 - x / x_u)
+    - c2 = 1 - n
+
     For n -> 0 the curve is bilinear (k for x < x_y, then plateau at y_u).
     For n -> 1 it is asymptotically elastic-perfectly plastic.
     """

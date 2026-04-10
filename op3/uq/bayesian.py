@@ -7,12 +7,13 @@ stiffness multiplier) given a measured first natural frequency.
 
 The grid approach is preferred over MCMC for the 1D problems Op^3
 needs because:
-  1. The posterior is uni-modal and concentrated, so 200-500 grid
-     points are enough for sub-percent posterior summaries.
-  2. No tuning parameters (chain length, burn-in, proposal width).
-  3. The forward model is fast (~10 ms per Op^3 eigen call) so the
-     200-point grid runs in 2 seconds end-to-end.
-  4. The result is fully reproducible -- no random seed dependence.
+
+1. The posterior is uni-modal and concentrated, so 200-500 grid
+   points are enough for sub-percent posterior summaries.
+2. No tuning parameters (chain length, burn-in, proposal width).
+3. The forward model is fast (~10 ms per Op^3 eigen call) so the
+   200-point grid runs in 2 seconds end-to-end.
+4. The result is fully reproducible -- no random seed dependence.
 
 The output is a posterior PDF on the calibration parameter, plus
 the posterior mean, std, and 5/50/95 percentiles.

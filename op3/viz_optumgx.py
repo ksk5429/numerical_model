@@ -9,7 +9,8 @@ Op3 OptumGX Visualization via PyVista.
   - Velocity vector glyphs at collapse
   - Spring profile visualization (k and p_ult vs depth)
 
-Usage:
+Usage::
+
     from op3.viz_optumgx import plot_bucket_pressure, plot_spring_profile
     plot_spring_profile("data/fem_results/spring_profile_op3.csv",
                         output_dir="validation/figures/")

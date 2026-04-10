@@ -1069,11 +1069,11 @@ def run_cyclic_analysis(
     Returns
     -------
     dict
-        ``cycle_number``            : list[int]
-        ``permanent_rotation_deg``  : list[float] — residual base rotation
-                                       after returning to zero hub displacement.
-        ``stiffness_kN_m_per_deg``  : list[float] — secant stiffness per cycle.
-        ``peak_force_kN``           : list[float] — peak lateral reaction per cycle.
+        - ``cycle_number``            : list[int]
+        - ``permanent_rotation_deg``  : list[float] -- residual base rotation
+          after returning to zero hub displacement.
+        - ``stiffness_kN_m_per_deg``  : list[float] -- secant stiffness per cycle.
+        - ``peak_force_kN``           : list[float] -- peak lateral reaction per cycle.
     """
     import openseespy.opensees as ops
 

@@ -7,7 +7,8 @@ Provides publication-quality figures of the OpenSeesPy model:
   - Pushover deformed shape
   - Section force diagrams (moment, shear, axial)
 
-Usage:
+Usage::
+
     from op3 import build_foundation, compose_tower_model
     from op3.visualization import plot_all
 

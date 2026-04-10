@@ -9,7 +9,8 @@ Advanced visualization and analysis of OpenFAST outputs:
   - DLC batch statistics (mean, std, min, max, DEL per wind speed)
   - Campbell diagram (from linearization files)
 
-Usage:
+Usage::
+
     from op3.viz_openfast import (
         plot_time_series, plot_psd, plot_power_curve,
         plot_del_bar, compute_dlc_statistics,

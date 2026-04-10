@@ -278,8 +278,9 @@ class RNAProperties:
 def published_mode_shape(twr_text: str, mode: str = "TwFAM1Sh") -> np.ndarray | None:
     """
     Return the 5 polynomial coefficients [c2, c3, c4, c5, c6] for one of
-    the NREL ElastoDyn tower mode shapes:
-        TwFAM1Sh, TwFAM2Sh, TwSSM1Sh, TwSSM2Sh.
+    the NREL ElastoDyn tower mode shapes
+    (TwFAM1Sh, TwFAM2Sh, TwSSM1Sh, TwSSM2Sh).
+
     Mode shape is psi(eta) = sum_{i=2..6} c_i * eta^i where eta in [0,1].
     """
     coeffs = []

@@ -27,11 +27,11 @@ the PISA framework directly. For sand (c = 0):
 
 This module exposes:
 
-    HSsmallParams           : dataclass for HSsmall material parameters
-    hssmall_G_at_depth()    : evaluate G_0(z) for one HSsmall material
-    load_hssmall_profile()  : read an OptumGX-exported CSV -> list[SoilState]
-    hssmall_to_pisa()       : convert an HSsmall material list to a PISA-ready
-                              soil profile
+- ``HSsmallParams``         : dataclass for HSsmall material parameters
+- ``hssmall_G_at_depth()``  : evaluate G_0(z) for one HSsmall material
+- ``load_hssmall_profile()`` : read an OptumGX-exported CSV -> list[SoilState]
+- ``hssmall_to_pisa()``     : convert an HSsmall material list to a PISA-ready
+  soil profile
 
 Reference
 ---------
