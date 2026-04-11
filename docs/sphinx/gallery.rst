@@ -200,3 +200,93 @@ Pipeline-Stage Figures
 .. image:: ../../validation/figures/openfast_del.png
    :width: 70%
    :alt: DEL bar chart
+
+
+Complete Capability Coverage
+----------------------------
+
+**4-Mode Cross-Comparison (A/B/C/D vs Scour)**
+
+.. image:: ../../validation/figures/complete/cross_compare_4modes.png
+   :width: 80%
+   :alt: 4-mode frequency comparison across scour depths
+
+|
+
+**PISA Depth-Dependent Reaction Parameters**
+
+.. image:: ../../validation/figures/complete/pisa_depth_functions.png
+   :width: 100%
+   :alt: PISA 4-component depth functions for sand and clay
+
+|
+
+**Cyclic Degradation: G/Gmax and Damping**
+
+.. image:: ../../validation/figures/complete/cyclic_degradation_gmax.png
+   :width: 100%
+   :alt: Hardin-Drnevich modulus reduction and damping curves
+
+|
+
+**Foundation 6x6 Stiffness Matrix**
+
+.. image:: ../../validation/figures/complete/k6x6_heatmap.png
+   :width: 100%
+   :alt: Annotated K_6x6 heatmap with diagonal bar chart
+
+|
+
+**DNV-ST-0126 Frequency Band Compliance**
+
+.. image:: ../../validation/figures/complete/dnv_frequency_band.png
+   :width: 90%
+   :alt: 1P/3P exclusion zones with soft-stiff band
+
+|
+
+**Scour Parametric Sweep (Continuous)**
+
+.. image:: ../../validation/figures/complete/scour_continuous_sweep.png
+   :width: 100%
+   :alt: Continuous f1 vs S/D curve with centrifuge data
+
+|
+
+**PCE Surrogate Response Surface**
+
+.. image:: ../../validation/figures/complete/pce_surrogate.png
+   :width: 100%
+   :alt: PCE surrogate vs 1794 MC samples with residual histogram
+
+|
+
+**Sequential Bayesian Epoch Tracking**
+
+.. image:: ../../validation/figures/complete/sequential_bayesian.png
+   :width: 100%
+   :alt: 8-epoch posterior trajectory with sharpening
+
+|
+
+**Monte Carlo Propagation: K Diagonal Distributions**
+
+.. image:: ../../validation/figures/complete/mc_propagation_histogram.png
+   :width: 100%
+   :alt: K_6x6 diagonal histograms from 1794 MC samples
+
+|
+
+**DLC 1.1 Load Envelope**
+
+.. image:: ../../validation/figures/complete/dlc_load_envelope.png
+   :width: 100%
+   :alt: Min/mean/max load band across wind speeds
+
+|
+
+**Cross-Turbine Generalization**
+
+.. image:: ../../validation/figures/complete/cross_turbine_comparison.png
+   :width: 100%
+   :alt: Frequency and stiffness comparison across 4 turbine platforms
