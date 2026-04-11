@@ -42,6 +42,8 @@ def api_pile_stiffness(
     L = embedment_m
     R = 0.5 * D
 
+    # PHYSICS: Gazetas (1991) Eqs. 2-5 — embedded foundation impedances (surface + embedment correction)
+    # REVIEW-STATUS: PENDING (awaiting human verification against paper)
     # API formulas (similar to ISO 19901-4 with API correction factors)
     K_xx = (8.0 * G * R / (2.0 - nu)) * (1.0 + 0.55 * (L / R) ** 0.85)
     K_zz = (4.0 * G * R / (1.0 - nu)) * (1.0 + 0.54 * L / R)
@@ -77,6 +79,8 @@ def gazetas_full_6x6(
 
     K = np.zeros((6, 6))
 
+    # PHYSICS: Gazetas (1991) Table 1 — surface foundation static stiffness (half-space solution)
+    # REVIEW-STATUS: PENDING (awaiting human verification against paper)
     # Diagonal terms — Gazetas surface foundation
     K_x_0 = (8.0 * G * R) / (2.0 - nu)
     K_z_0 = (4.0 * G * R) / (1.0 - nu)

@@ -80,6 +80,8 @@ import numpy as np
 # but for initial elastic stiffness evaluation we only need the linear
 # coefficients.
 
+# PHYSICS: Burd et al. (2020) Table 3 — PISA sand calibration coefficients (Dunkirk dense sand)
+# REVIEW-STATUS: PENDING (awaiting human verification against paper)
 PISA_SAND = {
     "lateral_p": {
         "k_1": 8.64, "k_2": -0.81,       # k_p = 8.64 - 0.81 z/D
@@ -107,6 +109,8 @@ PISA_SAND = {
     },
 }
 
+# PHYSICS: Byrne et al. (2020) Table 4 — PISA clay calibration coefficients (Cowden till)
+# REVIEW-STATUS: PENDING (awaiting human verification against paper)
 # Byrne 2020 clay (Cowden till), second-stage calibration. Table 4.
 # Distributed lateral p: k_p = 10.60 - 1.650 * (z/D)
 # Curvature: n_p = 0.9390 - 0.03345 * (z/D)

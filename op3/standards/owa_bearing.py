@@ -68,6 +68,8 @@ def owa_suction_bucket_stiffness(
     L = skirt_length_m
     R = 0.5 * D
 
+    # PHYSICS: Houlsby & Byrne (2005) Eqs. 5.2-5.5 — suction caisson elastic impedances
+    # REVIEW-STATUS: PENDING (awaiting human verification against paper)
     # Houlsby & Byrne (2005) Eq. 5.2-5.5 for embedded caisson
     # Lateral
     K_xx_single = (4.0 * G * R / (1.0 - nu)) * (1.0 + 1.5 * L / R)

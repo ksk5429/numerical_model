@@ -798,6 +798,8 @@ def run_static_condensation(tower_model: "TowerModel") -> np.ndarray:
         raise ValueError("need >= 2 spring rows for Winkler integration")
     dz = float(z[1] - z[0])
 
+    # PHYSICS: Winkler integration — static condensation of distributed springs to 6x6 mudline stiffness
+    # REVIEW-STATUS: PENDING (awaiting human verification against Randolph & Gourvenec (2011) §5.3)
     Kxx = float(np.sum(k) * dz)
     Kxrx = float(np.sum(k * z) * dz)
     Krxrx = float(np.sum(k * z * z) * dz)

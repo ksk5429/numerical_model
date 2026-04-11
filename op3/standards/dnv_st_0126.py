@@ -111,6 +111,8 @@ def dnv_monopile_stiffness(
     D = diameter_m
     L = embedment_m
 
+    # PHYSICS: DNVGL-ST-0126 (2021) §5.5.2 Eq. 5.7 — monopile embedment correction factors
+    # REVIEW-STATUS: PENDING (awaiting human verification against standard)
     # Equivalent stiffness coefficients (DNVGL-ST-0126 §5.5.2 Eq. 5.7)
     # Lateral: K_xx = K_yy ~= 8 G D / (2 - nu)  with depth correction
     depth_factor = 1.0 + 0.5 * np.tanh(L / D - 1.0)
@@ -232,6 +234,8 @@ def dnv_suction_bucket_stiffness(
     L = skirt_length_m
     R = 0.5 * D
 
+    # PHYSICS: Gazetas (1991) — embedded cylindrical foundation impedances for suction bucket
+    # REVIEW-STATUS: PENDING (awaiting human verification against paper)
     # Single bucket — Gazetas embedded cylindrical foundation
     # Lateral
     K_xx_single = (8.0 * G * R / (2.0 - nu)) * (1.0 + 0.55 * (L / R) ** 0.85)
