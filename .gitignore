@@ -95,3 +95,4 @@ docs/sphinx/_build/
 # PyInstaller artefacts
 build/
 dist/
+examples/anchor_01_results/

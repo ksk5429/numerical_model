@@ -53,9 +53,27 @@ from op3.anchors.anchor import (
     UndrainedClayProfile,
     MooringLoad,
 )
+from op3.anchors.capacity import (
+    AnchorCapacityResult,
+    anchor_capacity,
+    capacity_dnv_rp_e303,
+    capacity_murff_hamilton,
+    capacity_api_rp_2sk,
+    capacity_aubeny_2003,
+    capacity_fe_calibrated,
+)
 
 __all__ = [
+    # Data model
     "SuctionAnchor",
     "UndrainedClayProfile",
     "MooringLoad",
+    # Capacity
+    "AnchorCapacityResult",
+    "anchor_capacity",
+    "capacity_dnv_rp_e303",
+    "capacity_murff_hamilton",
+    "capacity_api_rp_2sk",
+    "capacity_aubeny_2003",
+    "capacity_fe_calibrated",
 ]
