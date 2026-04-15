@@ -4,6 +4,45 @@ All notable changes to Op^3 are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this
 project uses [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added -- `op3.anchors` suction-anchor module (floating OWT)
+
+Extends Op^3 from fixed-bottom foundations to floating-platform anchors.
+New package `op3/anchors/`:
+
+- **Data model**: `SuctionAnchor`, `UndrainedClayProfile`, `MooringLoad`
+- **Capacity**: five methods behind a unified dispatcher
+  (`dnv_rp_e303`, `murff_hamilton`, `api_rp_2sk`, `aubeny_2003`,
+  `fe_calibrated`). The FE-calibrated method reads real OptumGX
+  CSVs; no synthetic data is generated.
+- **Installation**: self-weight penetration (bisection),
+  required / allowable suction, plug-heave check, end-to-end
+  `installation_analysis` per DNV-RP-E303 Sections 5.2-5.4.
+- **Padeye optimization**: Supachawarote 2005 table,
+  Murff-Hamilton constant, brute-force sensitivity sweep, **novel
+  dissipation-centroid method** from Op^3 Mode D.
+- **Cyclic degradation**: Andersen 2015 Drammen-clay surrogate
+  calibrated to the four corner cases of Fig. 4.
+- **MoorPy coupling**: real non-linear catenary physics, per-step
+  DNV-ST-0119 safety factor, Markdown design report.
+
+New standards: `op3/standards/dnv_rp_e303.py`, `op3/standards/api_rp_2sk.py`.
+
+OptumGX driver: `op3/anchors/optumgx_anchor_run.py` (loaded inside
+the OptumGX desktop scripting console) + pure-Python post-processor
+`op3/anchors/fe_postprocess.py`. Guide: `docs/ANCHOR_OPTUMGX_GUIDE.md`.
+
+134 new tests, all passing. 5 runnable examples in `examples/anchor_0X_*.py`.
+
+Published benchmarks encoded from literature:
+Aubeny et al. 2003 Table 2 (N_p smooth/rough),
+Randolph & House 2002 effective N_p trend,
+Supachawarote et al. 2005 Table 2 (optimal padeye),
+API RP 2SK N_p cut-off, DNV-RP-E303 N_p profile.
+
+Optional dependency: `moorpy >= 1.0` under extras `anchors`.
+
 ## [1.0.0-rc2] - 2026-04-10
 
 Comprehensive V&V upgrade, visualization, and repository hardening.

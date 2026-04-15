@@ -609,6 +609,77 @@ for the full reproducer of dissertation Table 6.X.
 
 </details>
 
+## Suction anchor module (floating OWT)
+
+Op³ now covers floating-platform anchors as well as fixed-bottom
+foundations. The `op3.anchors` package implements suction anchor
+capacity, installation, padeye optimisation, cyclic degradation, and
+MoorPy coupling for floating offshore wind mooring design.
+
+| Feature | Fixed-bottom (existing) | Floating-platform (new) |
+|---|---|---|
+| Geometry | Tripod suction bucket (L/D ~ 0.5-1) | Single suction anchor (L/D ~ 1-6) |
+| Loading | V/H/M from tower | Inclined tension at padeye from mooring |
+| Standard | DNV-ST-0126, OWA bearing | DNV-RP-E303, API RP 2SK |
+| Capacity methods | OWA, PISA, FE | DNV-RP-E303, Murff-Hamilton, API RP 2SK, Aubeny 2003, FE-calibrated |
+| Data flow | Foundation → tower → OpenFAST | OpenFAST/MoorPy → anchor (downstream) |
+
+```python
+from op3.anchors import (
+    SuctionAnchor, UndrainedClayProfile, MooringLoad,
+    anchor_capacity, installation_analysis,
+    optimal_padeye_analytical, optimal_padeye_from_dissipation,
+    cyclic_capacity_reduction, anchor_safety_factor_timeseries,
+)
+
+anchor = SuctionAnchor(diameter_m=5.0, skirt_length_m=15.0,
+                       padeye_depth_m=10.0, submerged_weight_kN=500.0)
+soil = UndrainedClayProfile(su_mudline_kPa=5.0,
+                            su_gradient_kPa_per_m=1.5)
+
+# 1. capacity (5 methods)
+r = anchor_capacity(anchor, soil, method='dnv_rp_e303',
+                    load_angle_deg=30.0)
+# 2. installation feasibility
+inst = installation_analysis(anchor, soil, water_depth_m=200.0)
+# 3. optimal padeye
+z_p = optimal_padeye_analytical(anchor, soil,
+                                method='supachawarote_2005')
+```
+
+The module follows the same "no synthetic data" rule as the rest of
+Op³: finite-element features require a real OptumGX output CSV
+produced by [`op3/anchors/optumgx_anchor_run.py`](op3/anchors/optumgx_anchor_run.py)
+(run from inside the OptumGX GUI), and mooring coupling uses the
+real [MoorPy](https://github.com/NREL/MoorPy) package. See
+[`docs/ANCHOR_OPTUMGX_GUIDE.md`](docs/ANCHOR_OPTUMGX_GUIDE.md) for
+the LLM-assisted workflow where the user operates OptumGX and an
+LLM drives everything downstream.
+
+### Novel contribution: dissipation-centroid padeye
+
+`optimal_padeye_from_dissipation()` is a new method that derives the
+optimal padeye depth from the Op³ Mode D plastic-dissipation field:
+
+```
+z*  =  ∫₀ᴸ z ψ(z) dz  /  ∫₀ᴸ ψ(z) dz
+```
+
+where `ψ(z)` is the depth-distributed plastic dissipation weight
+produced by the OptumGX driver. This extends the existing Mode D
+formulation to anchor design and is the single novel theoretical
+contribution of the anchor module.
+
+### Runnable anchor examples
+
+| Script | What it demonstrates |
+|---|---|
+| [`examples/anchor_01_basic_capacity.py`](examples/anchor_01_basic_capacity.py) | Four analytical capacity methods + V-H envelope comparison |
+| [`examples/anchor_02_installation_check.py`](examples/anchor_02_installation_check.py) | Self-weight + suction feasibility + plug-heave |
+| [`examples/anchor_03_padeye_optimization.py`](examples/anchor_03_padeye_optimization.py) | Analytical vs sensitivity sweep vs dissipation-centroid |
+| [`examples/anchor_04_cyclic_storm.py`](examples/anchor_04_cyclic_storm.py) | Andersen 2015 cyclic reduction applied to DNV envelope |
+| [`examples/anchor_05_moorpy_coupling.py`](examples/anchor_05_moorpy_coupling.py) | End-to-end: MoorPy catenary → Op³ DNV FoS check |
+
 ## The OpenSeesPy → OpenFAST coupling
 
 The coupling is two-way in principle but one-way in practice: the
