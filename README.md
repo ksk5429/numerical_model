@@ -12,23 +12,16 @@
 [![PyPI](https://img.shields.io/pypi/v/op3-framework.svg)](https://pypi.org/project/op3-framework/)
 [![Documentation](https://img.shields.io/badge/docs-sphinx-blue.svg)](docs/sphinx/)
 
-**Op³** (pronounced "O-p-three") is an integrated numerical and digital twin
-framework for scour assessment of offshore wind turbine tripod suction
-bucket foundations. It
-bridges three otherwise-disconnected codes — **OptumGX** (3D FE limit
-analysis, commercial), **OpenSeesPy** (structural dynamics, BSD-3-Clause),
-and **OpenFAST v5** (aero-hydro-servo-elastic, Apache 2.0) — into a single
-V&V'd Python pipeline.
+**Op³** (pronounced "O-p-three") bridges three otherwise-disconnected
+solvers — **OptumGX** (3D FE limit analysis, commercial), **OpenSeesPy**
+(structural dynamics, BSD-3-Clause), and **OpenFAST v5**
+(aero-hydro-servo-elastic, Apache 2.0) — into a single V&V'd Python
+pipeline for scour assessment of offshore wind turbine tripod suction
+bucket foundations. Adds a Bayesian decision layer, a digital twin
+encoder, and an eight-tab web application for field deployment.
 
-Developed as part of a PhD dissertation at Seoul National University (2026),
-the framework combines three-dimensional geotechnical limit analysis
-(OptumGX), one-dimensional structural dynamics (OpenSeesPy), and aero-hydro-
-servo-elastic simulation (OpenFAST) into a single open-source pipeline with
-a Bayesian decision layer, a digital twin encoder, and an eight-tab web
-application for field deployment.
-
-**Author:** Kyeong Sun Kim · Department of Civil and Environmental
-Engineering, Seoul National University · 2026
+PhD dissertation at **Seoul National University** (2026) ·
+**Kyeong Sun Kim** · Department of Civil and Environmental Engineering
 
 ---
 
@@ -90,8 +83,23 @@ flowchart TD
 
 ## 30-second introduction
 
+```bash
+pip install op3-framework
+
+# End-to-end OpenFAST v5 coupled simulation
+python scripts/run_openfast.py site_a --tmax 5
+python scripts/run_dlc11_partial.py --tmax 600 --speeds 8 12 18
+
+# Standards conformance + full V&V suite
+python scripts/dnv_st_0126_conformance.py --all
+python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
+```
+
+<details>
+<summary><b>🐍 Python API — build a PISA foundation and compose a tower model</b></summary>
+
 ```python
-from op3 import build_foundation, compose_tower_model
+from op3 import compose_tower_model
 from op3.foundations import foundation_from_pisa
 from op3.standards.pisa import SoilState
 
@@ -118,20 +126,17 @@ pushover = model.pushover(target_disp_m=0.5)   # static pushover
 transient = model.transient(duration_s=10.0)   # free vibration
 ```
 
-```bash
-# End-to-end OpenFAST v5 coupled simulation
-python scripts/run_openfast.py site_a --tmax 5
-python scripts/run_dlc11_partial.py --tmax 600 --speeds 8 12 18
-
-# Standards conformance audit
-python scripts/dnv_st_0126_conformance.py --all
-python scripts/iec_61400_3_conformance.py --all
-
-# Full V&V suite
-python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
-```
+</details>
 
 ## What you get
+
+**Four foundation modes** (Fixed / 6×6 / BNWF / Dissipation-weighted)
+· **6 standards** (DNV · ISO · API · OWA · PISA · HSsmall) ·
+**Bayesian + PCE + Monte Carlo UQ** · **direct OpenFAST SoilDyn
+export** · **Apache-2.0**.
+
+<details>
+<summary><b>Feature comparison vs SACS / PLAXIS / OpenSeesPy / OpenFAST</b></summary>
 
 | Capability | Op³ | SACS | PLAXIS | OpenSeesPy | OpenFAST |
 |---|:-:|:-:|:-:|:-:|:-:|
@@ -148,7 +153,16 @@ python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
 | License | Apache-2.0 | commercial | commercial | BSD-3 | Apache-2.0 |
 | Python-native | ✅ | ❌ | ❌ | wrapper | wrapper |
 
+</details>
+
 ## v1.0.0-rc1 release highlights
+
+**92% V&V · 140 tests · OpenFAST v5 end-to-end · OC6 Phase II match
+to 0.5% · PISA field validation at 10–30× error reduction · Sphinx
+docs + tutorials.**
+
+<details>
+<summary><b>Detailed release notes</b></summary>
 
 - **35 / 38 cross-validation benchmarks verified (92%)** against 20+
   published sources (Fu & Bienen 2017, Vulpe 2015, Doherty 2005,
@@ -177,10 +191,21 @@ python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
 - **Sphinx documentation** (~5000 lines across 9 RST pages + 6 tutorial
   notebooks), ReadTheDocs-ready and GitHub Pages-deployable
 
+</details>
+
 ## Cross-Validation Against Published Benchmarks
 
-Op3 has been cross-validated against **39 independent benchmarks** from
-20+ published sources. **35 of 38 in-scope benchmarks verified (92%).**
+Op³ is cross-validated against **39 independent benchmarks** from 20+
+published sources. **35 of 38 in-scope benchmarks verified (92%).**
+
+**Headline matches:** NcV = 6.006 (+1.1%) · NcM = 1.468 (−0.8%) ·
+KR/(R³G) = 17.28 (+3.1%) · field Kr = 177 MN·m/rad (−21%, first
+field validation).
+
+Full report: [validation/cross_validations/VV_REPORT.md](validation/cross_validations/VV_REPORT.md)
+
+<details>
+<summary><b>📊 Full benchmark table (16 categories)</b></summary>
 
 | Category | Benchmarks | Error range | Sources |
 |---|---|---|---|
@@ -201,31 +226,24 @@ Op3 has been cross-validated against **39 independent benchmarks** from
 | Cyclic rotation (N=100, N=1M) | #28 | 3.7--4.3% | Jeong et al. 2021 |
 | OC4 jacket f1 (fixed-base) | #29 | +1.9% | Popko et al. 2012 |
 
-Key results:
-- **NcV = 6.006** (ref 5.94, +1.1%) -- textbook bearing capacity match
-- **NcM = 1.468** (ref 1.48, -0.8%) -- near-exact moment capacity
-- **KR/(R3G) = 17.28** (ref 16.77, +3.1%) -- stiffness vs Doherty/OxCaisson
-- **Kr = 177 MNm/rad** (measured 225, -21%) -- first field validation
-
-Full report: [validation/cross_validations/VV_REPORT.md](validation/cross_validations/VV_REPORT.md)
+</details>
 
 ### V&V at a glance
 
 ```mermaid
-graph TD
-    T["`**39 Benchmarks**
-    20+ published sources
+flowchart TB
+    T["`**39 Benchmarks · 20+ sources**
     35 / 38 in-scope verified (92%)`"]
 
-    T --> C1["`✅ <b>Eigenvalue f₁</b><br/>1.2–13% · Jonkman 2010, Gaertner 2020`"]
-    T --> C2["`✅ <b>Bearing capacity</b><br/>NcV +1.1% · NcM −0.8%<br/>Fu & Bienen 2017, Vulpe 2015`"]
-    T --> C3["`✅ <b>PISA field trial</b><br/>McAdam 2020 · Byrne 2020<br/>10–30× error reduction`"]
-    T --> C4["`✅ <b>OC6 Phase II</b><br/>K_zz 1.3% · f₁ 0.5%<br/>Bergua 2021 NREL/TP-5000-79989`"]
-    T --> C5["`✅ <b>Centrifuge yield M</b><br/>−0.7% · DJ Kim 2014`"]
-    T --> C6["`✅ <b>Cyclic N=10⁶</b><br/>3.7–4.3% · Jeong 2021`"]
-    T --> C7["`✅ <b>Full-scale tripod f₁</b><br/>−0.2% · Seo 2020`"]
-    T --> C8["`✅ <b>DNV-ST-0126</b><br/>35/36 conformance`"]
-    T --> C9["`🟡 <b>Field Kr</b><br/>−21% · Houlsby 2005<br/>first field validation`"]
+    T --> C1["`✅ <b>Eigenvalue f₁</b> · 1.2–13%<br/>Jonkman 2010 · Gaertner 2020`"]
+    C1 --> C2["`✅ <b>Bearing capacity</b> · NcV +1.1% · NcM −0.8%<br/>Fu & Bienen 2017 · Vulpe 2015`"]
+    C2 --> C3["`✅ <b>PISA field trial</b> · 10–30× error reduction<br/>McAdam 2020 · Byrne 2020`"]
+    C3 --> C4["`✅ <b>OC6 Phase II</b> · K_zz 1.3% · f₁ 0.5%<br/>Bergua 2021 NREL/TP-5000-79989`"]
+    C4 --> C5["`✅ <b>Centrifuge yield M</b> · −0.7%<br/>DJ Kim 2014`"]
+    C5 --> C6["`✅ <b>Cyclic N=10⁶</b> · 3.7–4.3%<br/>Jeong 2021`"]
+    C6 --> C7["`✅ <b>Full-scale tripod f₁</b> · −0.2%<br/>Seo 2020`"]
+    C7 --> C8["`✅ <b>DNV-ST-0126</b> · 35/36 conformance`"]
+    C8 --> C9["`🟡 <b>Field Kr</b> · −21%<br/>Houlsby 2005 · first field validation`"]
 
     style T fill:#1a1a2e,stroke:#58a6ff,color:#58a6ff
     style C1 fill:#0a2910,stroke:#3fb950,color:#3fb950
@@ -248,9 +266,22 @@ See [CHANGELOG.md](CHANGELOG.md) for the full release history and
 [docs/DEVELOPER_NOTES.md](docs/DEVELOPER_NOTES.md) for the
 implementation journal of Track C phases 1 through 8.
 
-## Documentation
+## 📖 Documentation
 
-Comprehensive package, all free, all on GitHub:
+| | Link |
+|---|---|
+| 🌐 **Hosted docs** | [op3-framework.readthedocs.io](https://op3-framework.readthedocs.io) · [Pages mirror](https://ksk5429.github.io/numerical_model/) |
+| 📘 **User manual** | [`docs/sphinx/user_manual.rst`](docs/sphinx/user_manual.rst) |
+| 🔬 **Technical reference** | [`docs/sphinx/technical_reference.rst`](docs/sphinx/technical_reference.rst) |
+| 📓 **Tutorials** | [`docs/tutorials/`](docs/tutorials/) — 6 Jupyter notebooks |
+| 🧪 **Mode D paper-draft** | [`docs/MODE_D_DISSIPATION_WEIGHTED.md`](docs/MODE_D_DISSIPATION_WEIGHTED.md) |
+
+Auto-deployed on every push via
+[`.readthedocs.yaml`](.readthedocs.yaml) and
+[`.github/workflows/docs-deploy.yml`](.github/workflows/docs-deploy.yml).
+
+<details>
+<summary><b>All documentation pages</b></summary>
 
 | Page | Content |
 |---|---|
@@ -264,115 +295,116 @@ Comprehensive package, all free, all on GitHub:
 | [Mode D formulation](docs/MODE_D_DISSIPATION_WEIGHTED.md) | Novel dissipation-weighted BNWF paper-draft |
 | [Tutorials](docs/tutorials/) | 6 Jupyter notebooks: quickstart, foundation modes, UQ, calibration, SoilDyn, DLC sweeps |
 
-Documentation is configured for free hosting on
-[Read the Docs](https://readthedocs.org) via [`.readthedocs.yaml`](.readthedocs.yaml)
-and for GitHub Pages deployment via
-[`.github/workflows/docs-deploy.yml`](.github/workflows/docs-deploy.yml).
-
-Once the repo is linked to Read the Docs, the full documentation
-will be rendered at `https://op3-framework.readthedocs.io` with
-automatic rebuilds on every push. Alternatively the GitHub Actions
-workflow deploys to `https://ksk5429.github.io/numerical_model/`.
+</details>
 
 ## Quick start
 
 ```bash
-# Clone and install
-git clone https://github.com/ksk5429/numerical_model.git
-cd numerical_model
-pip install -e ".[test,docs]"
+pip install op3-framework
+python -c "import op3; print(op3.__version__)"    # 1.0.0-rc2
+```
 
-# Bootstrap OpenFAST v5.0.0 binary
+Or clone + develop-install + run the full V&V suite in ~42 s:
+
+```bash
+git clone https://github.com/ksk5429/numerical_model.git
+cd numerical_model && pip install -e ".[test,docs]"
+PYTHONUTF8=1 python scripts/release_validation_report.py
+# → 18/19 PASS, 0 mandatory FAIL
+```
+
+<details>
+<summary><b>🔧 Bootstrap OpenFAST v5 + r-test (for coupled simulations)</b></summary>
+
+```bash
+# OpenFAST v5.0.0 binary
 mkdir -p tools/openfast
 curl -L -o tools/openfast/OpenFAST.exe \
   https://github.com/OpenFAST/openfast/releases/download/v5.0.0/OpenFAST.exe
 
-# Bootstrap r-test
+# r-test suite
 mkdir -p tools/r-test_v5 && cd tools/r-test_v5
 git clone --depth=1 --branch v5.0.0 https://github.com/OpenFAST/r-test.git
 cd ../..
-
-# Run the full V&V suite
-PYTHONUTF8=1 python scripts/release_validation_report.py
 ```
 
-Expected: **18/19 PASS, 0 mandatory FAIL, ~42 s total wall time**.
+See [`docs/sphinx/environment.rst`](docs/sphinx/environment.rst) for
+platform notes.
 
-See the [environment setup guide](docs/sphinx/environment.rst) for
-troubleshooting and platform-specific notes.
+</details>
 
 ## Repository layout
 
+<details>
+<summary><b>📁 Full tree</b></summary>
+
 ```
-op3/                     the Python package
-  foundations.py         Foundation dataclass + factory
-  composer.py            TowerModel: eigen / pushover / transient
-  opensees_foundations/  OpenSeesPy builder + ElastoDyn tower loader
-  standards/             DNV / ISO / API / OWA / PISA / HSsmall / cyclic
-  openfast_coupling/     Op^3 -> OpenFAST SoilDyn bridge
-  uq/                    Propagation / PCE / Bayesian
-  sacs_interface/        SACS jacket deck parser
-
-tests/                   140 active V&V tests
-scripts/                 Runners, audits, regressions, release tooling
-examples/                11 turbine TowerModel build.py files
-docs/                    Sphinx + tutorials + Mode D notes + developer notes
-paper/                   JOSS-format paper + BibTeX
-.github/workflows/       CI, docs deploy, release validation
-site_a_ref4mw/            SiteA 4 MW class OWT decks (v4 and v5)
-nrel_reference/          NREL + IEA reference turbines bundled for V&V
-validation/benchmarks/   Test output JSON artifacts
-tools/                   OpenFAST binary + r-test clone (gitignored)
+numerical_model/
+├── README.md                          this file
+├── LICENSE                            Apache-2.0
+├── CITATION.cff                       citation metadata
+├── pyproject.toml                     PEP 517 package
+│
+├── op3/                               main Op³ framework
+│   ├── composer.py                    TowerModel: eigen / pushover / transient
+│   ├── foundations.py                 Foundation dataclass + factory
+│   ├── opensees_foundations/          OpenSeesPy builder + ElastoDyn loader
+│   ├── openfast_coupling/             Op³ → SubDyn / SoilDyn bridge
+│   ├── standards/                     DNV · ISO · API · OWA · PISA · HSsmall
+│   ├── uq/                            Propagation · PCE · Bayesian
+│   ├── sacs_interface/                SACS jacket deck parser
+│   ├── optumgx_interface/             OptumGX scripts (licence holders)
+│   └── config/site_a.yaml             single source of truth
+│
+├── data/                              OptumGX persisted outputs
+│   ├── integrated_database_1794.csv   master MC database
+│   └── fem_results/                   small result CSVs
+│
+├── site_a_ref4mw/                     SiteA 4 MW class decks (v4 / v5)
+├── nrel_reference/                    NREL + IEA reference turbines
+├── validation/                        V&V tests + benchmark artefacts
+├── examples/                          11 turbine build.py files
+├── tests/                             140 pytest assertions
+├── scripts/                           Runners · audits · release tooling
+├── docs/                              Sphinx + tutorials + Mode D notes
+├── paper/                             JOSS-format paper + BibTeX
+└── .github/workflows/                 CI · docs deploy · release validation
 ```
 
-## Citation
-
-If you use Op³ in academic work, please cite both the software and the
-dissertation. A [`CITATION.cff`](CITATION.cff) is provided for automatic
-reference management.
-
-```bibtex
-@software{op3_2026,
-  title  = {Op^3: OptumGX-OpenSeesPy-OpenFAST Integration Framework},
-  author = {Kim, Kyeong Sun},
-  year   = {2026},
-  version = {1.0.0-rc1},
-  url    = {https://github.com/ksk5429/numerical_model}
-}
-```
+</details>
 
 ---
 
-### Historical introduction (preserved from v0.1)
+<details>
+<summary><i>Historical introduction (preserved from v0.1)</i></summary>
 
-The original Op³ framework was developed around the
+The original Op³ framework was developed around the Gunsan offshore
+wind turbine site (KEPCO demonstration, UNISON U136) between 2023
+and 2026 as part of the author's PhD dissertation at Seoul National
+University.
 
-**Author:** Kyeong Sun Kim · Department of Civil and Environmental
-Engineering, Seoul National University · 2026
+</details>
 
 ---
 
-## Important: license boundary between the three solvers
+## License boundary between the three solvers
 
-This framework sits at the boundary of two open-source solvers and one
-commercial solver. Understanding this boundary is essential to
-reproduce any result in this repository.
+| Solver | License | Runnable by anyone? |
+|---|---|:-:|
+| **OpenSeesPy** | [BSD-3-Clause](https://opensource.org/license/bsd-3-clause) | ✅ `pip install openseespy` |
+| **OpenFAST** | [Apache-2.0](https://github.com/OpenFAST/openfast/blob/main/LICENSE) | ✅ download v5.0.0 binary |
+| **OptumGX** | Commercial — [academic licence](https://optumce.com/) | ❌ licence holders only |
 
-| Solver     | License                                    | Runnable by anyone? |
-|------------|--------------------------------------------|:-------------------:|
-| **OpenSeesPy** | [BSD 3-Clause](https://opensource.org/license/bsd-3-clause) (fully open) | ✅ yes — `pip install openseespy` |
-| **OpenFAST**   | [Apache 2.0](https://github.com/OpenFAST/openfast/blob/main/LICENSE) (fully open) | ✅ yes — download v4.0.2 binary from NREL |
-| **OptumGX**    | **Commercial** — [academic license required](https://optumce.com/) | ❌ only license holders |
+OptumGX runs **once, upstream**, to produce the capacity / dissipation
+CSVs committed under [`data/fem_results/`](data/fem_results/) and
+[`data/integrated_database_1794.csv`](data/integrated_database_1794.csv).
+**The open-source path (OpenSeesPy + OpenFAST) reproduces every
+headline result without OptumGX installed.**
 
-### How this repository handles the commercial-solver constraint
+<details>
+<summary><b>How the commercial-solver constraint is handled</b></summary>
 
-OptumGX is used **once, upstream**, by the author to generate the
-three-dimensional finite-element limit-analysis outputs (bearing
-capacity envelopes, depth-resolved contact pressure fields, plastic
-dissipation profiles). The outputs are then **persisted as CSV files
-and committed to this repository under [`data/fem_results/`](data/fem_results/)
-and [`data/integrated_database_1794.csv`](data/integrated_database_1794.csv)**.
-A third party who does not have OptumGX can still:
+A third party without OptumGX can still:
 
 1. ✅ Read the persisted OptumGX output CSVs directly
 2. ✅ Run the complete OpenSeesPy foundation analysis pipeline
@@ -383,16 +415,12 @@ A third party who does not have OptumGX can still:
    parameter envelope is available)
 
 The OptumGX interface scripts in [`op3/optumgx_interface/`](op3/optumgx_interface/)
-are provided as reference for license holders who wish to extend the
-parameter envelope. They are not runnable without an OptumGX license
-and the corresponding Python API. The scripts import from
-`optumgx` (the commercial API package); attempts to run them on a
-machine without the license will fail at import time with a clear
-error message.
+are provided as reference for licence holders who wish to extend the
+parameter envelope. They import from the commercial `optumgx` Python
+API; attempts to run them without the licence fail at import time
+with a clear error message.
 
-**The overwhelming majority of users only need the open-source path**
-(OpenSeesPy + OpenFAST), and for those users the OptumGX constraint is
-invisible because the OptumGX outputs have been pre-computed.
+</details>
 
 ---
 
@@ -465,41 +493,29 @@ rest of the OpenSeesPy tower model remains identical across all four
 modes — only the foundation boundary condition changes.
 
 ```mermaid
-flowchart LR
-    A["`**Mode A**
-    🧱 Fixed base
-    ⚡ fastest
-    _upper-bound reference_
-    _sanity check_`"]
+flowchart TD
+    A["`**Mode A** · 🧱 Fixed base
+    ⚡ fastest · upper-bound reference`"]
 
-    B["`**Mode B**
-    🔗 6×6 lumped K
-    ⚡ fast
-    _SubDyn-native_
-    _PISA paradigm_`"]
+    B["`**Mode B** · 🔗 6×6 lumped K
+    ⚡ fast · SubDyn-native · PISA paradigm`"]
 
-    C["`**Mode C**
-    🌾 Distributed BNWF
-    🟡 medium
-    _depth-resolved p-y/t-z_
-    _scour progression_`"]
+    C["`**Mode C** · 🌾 Distributed BNWF
+    🟡 medium · depth-resolved p-y / t-z
+    scour progression per depth`"]
 
-    D["`**Mode D** ★ novel
-    🎯 Dissipation-weighted
-    🐢 slow
-    _energy-consistent_
-    _research-grade_`"]
+    D["`**Mode D** ★ novel · 🎯 Dissipation-weighted
+    🐢 slow · energy-consistent · research-grade`"]
 
     A ==> B ==> C ==> D
-
-    FID["`⬅️ increasing fidelity + cost ➡️`"]
 
     style A fill:#1a1a2e,stroke:#8b949e,color:#8b949e
     style B fill:#0a2910,stroke:#58a6ff,color:#58a6ff
     style C fill:#0a2910,stroke:#3fb950,color:#3fb950
     style D fill:#1a0a29,stroke:#bc8cff,color:#bc8cff
-    style FID fill:#0d1117,stroke:#30363d,color:#8b949e
 ```
+
+<sub>⬇ increasing fidelity + computational cost</sub>
 
 | Mode | Name                      | Fidelity | Runtime | Use case |
 |:----:|---------------------------|:--------:|:-------:|----------|
@@ -514,6 +530,9 @@ Only the foundation representation changes, which makes it trivial to
 compare the effect of foundation modeling choice on the predicted
 natural frequency, mode shape, or transient response.
 
+<details>
+<summary><b>📘 Per-mode code examples</b></summary>
+
 ### Mode A — Fixed base
 
 ```python
@@ -522,10 +541,8 @@ model = build_tower_model(foundation_mode='fixed')
 model.eigen(1)
 ```
 
-Fixes the base of the tower at the mudline. No soil contribution,
-no scour sensitivity. The first natural frequency is the upper bound
-against which all other modes are compared. Useful for regression
-testing and as a reference point.
+Base fixed at mudline. No soil contribution, no scour sensitivity.
+Upper-bound f₁ against which all other modes are compared.
 
 ### Mode B — 6×6 lumped stiffness matrix
 
@@ -536,16 +553,13 @@ model = build_tower_model(
 )
 ```
 
-Represents the foundation as a single six-degree-of-freedom linear
-spring at the tower base node. The matrix encodes the translational,
-rotational, and translational-rotational coupling stiffnesses. This
-is the representation that the OpenFAST SubDyn interface accepts
-directly, and it is the representation the PISA research programme
-uses for rigid bucket-like foundations
-[@burd2020pisasand; @byrne2020pisaclay]. Scour progression is modeled
-by loading a different 6×6 matrix computed for that scour level.
+Six-DOF linear spring at the base node (translation + rotation +
+coupling). This is the representation OpenFAST SubDyn accepts
+directly and the one the PISA programme uses for rigid bucket-like
+foundations [@burd2020pisasand; @byrne2020pisaclay]. Scour progression
+is modelled by swapping in a different 6×6 matrix per scour level.
 
-### Mode C — Distributed beam-on-nonlinear-Winkler-foundation springs
+### Mode C — Distributed BNWF
 
 ```python
 model = build_tower_model(
@@ -555,16 +569,13 @@ model = build_tower_model(
 )
 ```
 
-Represents the foundation as a series of nonlinear lateral (p-y)
-and vertical (t-z) springs distributed along the bucket skirt depth.
-The spring stiffnesses and capacities are calibrated from the OptumGX
+Nonlinear p-y and t-z springs distributed along the skirt depth.
+Stiffnesses and capacities are calibrated from the OptumGX
 contact-pressure database, then scaled by a depth-dependent
-stress-correction factor that accounts for overburden loss as the
-scoured mudline moves downward. This is the Chapter 6 core of the
-dissertation and the representation against which the other modes
-are validated.
+stress-correction factor as the scoured mudline moves downward.
+Chapter 6 core representation.
 
-### Mode D — Dissipation-weighted generalized BNWF (highest fidelity)
+### Mode D — Dissipation-weighted generalized BNWF
 
 ```python
 model = build_tower_model(
@@ -576,14 +587,12 @@ model = build_tower_model(
 ```
 
 Extends Mode C with a depth-dependent participation factor derived
-from the OptumGX plastic dissipation field at collapse. This is the
-generalization of the Vesic cavity expansion theory described in
-Appendix A of the dissertation: the uniform plastic-zone assumption
-of classical cavity expansion is replaced by a spatially varying
-weight function. The stiffness, ultimate resistance, and
-half-displacement are all derived from a single energy-consistent
-framework with `su` canceling exactly in the `y50` parameter. This
-is the recommended mode for research use.
+from the OptumGX plastic dissipation field at collapse — the
+generalised cavity-expansion framework of Appendix A (uniform
+plastic-zone assumption replaced by a spatially varying weight
+function). Stiffness, ultimate resistance, and half-displacement
+all derive from a single energy-consistent expression with `sᵤ`
+cancelling in the `y₅₀` parameter. **Recommended for research use.**
 
 ### Comparing modes on the same tower
 
@@ -593,11 +602,12 @@ results = compare_foundation_modes(
     modes=['fixed', 'stiffness_6x6', 'distributed_bnwf', 'dissipation_weighted'],
     scour_levels=[0.0, 0.5, 1.0, 1.5, 2.0],
 )
-print(results)  # DataFrame indexed by (mode, scour) with first_freq_Hz column
 ```
 
 See [`examples/compare_foundation_modes.py`](examples/compare_foundation_modes.py)
-for a full script that reproduces Table 6.X of the dissertation.
+for the full reproducer of dissertation Table 6.X.
+
+</details>
 
 ## The OpenSeesPy → OpenFAST coupling
 
@@ -738,15 +748,17 @@ The grid Bayesian implementation and VoI calculator live in
 campaign are cached at
 [`PHD/ch7/site_a_bayesian_scour_real_mc.json`](PHD/ch7/).
 
-## NREL reference library bundled in this repository
+## Reference turbine library
 
-Op³ is benchmarked against the full NREL reference wind turbine
-library. For **every** NREL model listed below, the OpenFAST input
-deck is bundled in this repository and was verified to exist and be
-structurally complete at the time of commit. See
+Op³ bundles **9 reference decks** (NREL 5 MW Baseline · OC3 Monopile ·
+IEA-scaled 1.72/1.79/2.3/2.8 MW · Vestas V27 · SiteA 4 MW tripod)
+with every OpenFAST input deck verified structurally complete at
+commit time. See
 [`validation/benchmarks/NREL_BENCHMARK.md`](validation/benchmarks/NREL_BENCHMARK.md)
-for the per-model verification status including which modules are
-enabled and which r-test assertions pass.
+for per-model verification status.
+
+<details>
+<summary><b>NREL / IEA / Vestas deck inventory</b></summary>
 
 | Model | Power | Rotor | Foundation | Path | Status |
 |-------|------:|------:|------------|------|:------:|
@@ -760,12 +772,13 @@ enabled and which r-test assertions pass.
 | Vestas V27 (historical baseline)     | 225 kW   |  27 m | Land-based      | [`nrel_reference/vestas/V27/`](nrel_reference/vestas/V27/) | ✅ |
 | **SiteA 4 MW class (subject under test)** | **4 MW class** | **136 m** | **Tripod suction bucket** | [`site_a_ref4mw/openfast_deck/`](site_a_ref4mw/openfast_deck/) | **tested** |
 
-## SiteA vs NREL side-by-side
+</details>
 
-See [`validation/benchmarks/SITE_A_VS_NREL.md`](validation/benchmarks/SITE_A_VS_NREL.md)
-for the full side-by-side comparison of rotor properties, tower
-properties, structural natural frequencies, and steady-state
-performance. The short version is in the table below.
+<details>
+<summary><b>SiteA vs NREL side-by-side</b></summary>
+
+Full comparison in
+[`validation/benchmarks/SITE_A_VS_NREL.md`](validation/benchmarks/SITE_A_VS_NREL.md).
 
 | Property | NREL 5MW r-test | NREL OC3 Monopile | NREL 2.8-127 | **SiteA 4 MW class** |
 |---|:---:|:---:|:---:|:---:|
@@ -778,32 +791,7 @@ performance. The short version is in the table below.
 | SSI coupling                 | none    | none    | none    | **OpenSees BNWF → SubDyn** |
 | Scour parameterization       | none    | none    | none    | **9 levels, 0-4 m**        |
 
-## Quick start
-
-```bash
-# 1. Clone
-git clone https://github.com/ksk5429/numerical_model.git
-cd numerical_model
-
-# 2. Install Python dependencies (open-source only, no OptumGX needed)
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-
-# 3. Run eigenvalue analysis in all four foundation modes
-python examples/01_compare_foundation_modes.py
-
-# 4. Run a scour parametric sweep
-python examples/02_scour_parametric.py
-
-# 5. Generate a SubDyn file for OpenFAST
-python examples/03_build_subdyn_from_opensees.py
-
-# 6. Run the full OpenFAST simulation (requires OpenFAST v4.0.2 binary)
-# Download from https://github.com/OpenFAST/openfast/releases
-export OPENFAST_EXE=/path/to/openfast_x64
-python examples/04_openfast_single_run.py
-```
+</details>
 
 ## Module architecture
 
@@ -850,55 +838,28 @@ block-beta
     SOLV --> UQ_LAYER
 ```
 
-## Repository layout
-
-```
-numerical_model/
-├── README.md                          this file
-├── LICENSE                            MIT
-├── CITATION.cff                       citation metadata
-├── requirements.txt                   pip dependencies
-│
-├── op3/                               main Op³ framework
-│   ├── optumgx_interface/             OptumGX scripts (academic license)
-│   ├── opensees_foundations/          four foundation modules + BNWF
-│   ├── openfast_coupling/             OpenSees ↔ SubDyn bridge
-│   ├── integration/                   OptumGX outputs → OpenSees springs
-│   └── config/                        single source of truth
-│       └── site_a.yaml
-│
-├── data/                              OptumGX persisted outputs
-│   ├── integrated_database_1794.csv   master Monte Carlo database
-│   ├── fem_results/                   small result CSVs
-│   └── blade_data_RT1.csv
-│
-├── site_a_ref4mw/                      SiteA 4 MW class specific
-│   ├── openfast_deck/                 OpenFAST v4 input files
-│   └── opensees_deck/                 OpenSeesPy tower + foundation
-│
-├── nrel_reference/                    NREL benchmark library
-│   ├── openfast_rtest/                NREL 5MW baseline + OC3 monopile
-│   ├── iea_scaled/                    NREL 1.72 / 1.79 / 2.3 / 2.8 MW
-│   └── vestas/                        V27 historical baseline
-│
-├── validation/
-│   └── benchmarks/
-│       ├── NREL_BENCHMARK.md          per-model verification status
-│       ├── SITE_A_VS_NREL.md          side-by-side comparison
-│       └── FOUNDATION_MODE_STUDY.md   four-mode cross-validation
-│
-├── examples/                          turnkey runnable scripts
-├── tests/                             pytest assertions
-└── docs/                              extended documentation
-    ├── FRAMEWORK.md                   architecture + philosophy
-    ├── OPTUMGX_BOUNDARY.md            commercial/open boundary
-    ├── THEORY.md                      cavity expansion generalization
-    └── USAGE.md                       per-module usage guide
-```
-
 ## Citation
 
+[![DOI](https://zenodo.org/badge/1204628094.svg)](https://doi.org/10.5281/zenodo.19476542)
+
+Please cite both the software and the dissertation. A
+[`CITATION.cff`](CITATION.cff) is provided for automatic reference
+management.
+
+<details>
+<summary><b>BibTeX</b></summary>
+
 ```bibtex
+@software{kim2026op3,
+  author  = {Kim, Kyeong Sun},
+  title   = {Op³: OptumGX-OpenSeesPy-OpenFAST integrated numerical
+             modeling framework for offshore wind turbines},
+  year    = {2026},
+  version = {1.0.0-rc2},
+  url     = {https://github.com/ksk5429/numerical_model},
+  doi     = {10.5281/zenodo.19476542},
+}
+
 @phdthesis{kim2026dissertation,
   author = {Kim, Kyeong Sun},
   title  = {Digital Twin Encoder for Prescriptive Maintenance of
@@ -907,21 +868,9 @@ numerical_model/
   year   = {2026},
   type   = {Ph.D. Dissertation},
 }
-
-@software{kim2026op3,
-  author = {Kim, Kyeong Sun},
-  title  = {Op³: OptumGX-OpenSeesPy-OpenFAST integrated numerical
-            modeling framework for offshore wind turbines},
-  year   = {2026},
-  url    = {https://github.com/ksk5429/numerical_model},
-  version= {0.3.2},
-  doi    = {10.5281/zenodo.19476542},
-}
 ```
 
-### Zenodo DOI
-
-[![DOI](https://zenodo.org/badge/1204628094.svg)](https://doi.org/10.5281/zenodo.19476542)
+</details>
 
 Op³ is archived on Zenodo for every tagged GitHub release via the
 [GitHub-Zenodo integration](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content).
@@ -976,49 +925,46 @@ for at least three years after the dissertation defense.
 
 ## Acknowledgments
 
-This work was funded by the Korea Electric Power Corporation (KEPCO)
-under the project *"Natural frequency-based scour monitoring for
-offshore wind turbine foundations"*. The framework was developed at
-Seoul National University.
+Funded by the **Korea Electric Power Corporation (KEPCO)**
+under *"Natural frequency-based scour monitoring for offshore wind
+turbine foundations."* Developed at **Seoul National University**.
+NREL reference decks redistributed under their original licences.
 
-The NREL reference wind turbine library is maintained by the
-National Renewable Energy Laboratory; this repository bundles
-redistributed copies under their original licenses and gratefully
-acknowledges NREL's open-science commitment that made this
-comparison possible.
-
-### Field case study data
+<details>
+<summary><b>Field case study data (Gunsan / KEPCO / MMB / Unison)</b></summary>
 
 The 4 MW-class offshore wind turbine used for the site-specific
-validation in Chapters 4–8 of the associated dissertation is the
-Gunsan Offshore Demonstration Wind Farm unit operated by KEPCO Research
-Institute (KEPRI) with foundation and support-structure design by
-Hyundai E&C, Mirae & Company (MMB), and nacelle/rotor hardware from
-Unison Co., Ltd. (UNISON U136, 4.2 MW, 136 m rotor diameter, 95 m hub
-height, three-bucket suction caisson tripod). Structural drawings,
-BOM, and geotechnical CPT/OMA data were provided by KEPRI/MMB/Unison
-for academic use under the KEPCO research agreement.
+validation in Chapters 4–8 of the dissertation is the Gunsan Offshore
+Demonstration Wind Farm unit operated by **KEPCO Research Institute
+(KEPRI)** with foundation and support-structure design by **Hyundai
+E&C** and **Mirae & Company (MMB)**, and nacelle/rotor hardware from
+**Unison Co., Ltd.** (UNISON U136, 4.2 MW, 136 m rotor, 95 m HH,
+three-bucket suction caisson tripod). Structural drawings, BOM, and
+geotechnical CPT/OMA data were provided by KEPRI/MMB/Unison for
+academic use under the KEPCO research agreement.
 
-Specific proprietary numerical values (tower segment schedule, bucket
-OD/skirt length/centre-to-centre spacing, nacelle mass, site
-coordinates, SubDyn 6x6 K matrix) are **not redistributed** in this
-public repository; the framework code loads them at runtime from a
-private data tree via ``op3.data_sources`` (``OP3_PHD_ROOT`` /
-``OP3_TOWER_SEGMENTS_CSV``). The framework itself (foundation modes
-A/B/C/D, the PISA/Hardin-Drnevich/HSsmall implementations, the Mode D
-dissipation-weighting formulation, the OpenFAST coupling, and the
-OC6/PISA benchmarks) is fully reproducible with the shipped NREL
-5 MW reference turbine for users without access to the KEPCO data.
+Proprietary numerical values (tower segment schedule, bucket
+OD/skirt length/C-to-C spacing, nacelle mass, site coordinates,
+SubDyn 6×6 K matrix) are **not redistributed** in this public
+repository; the framework code loads them at runtime from a private
+data tree via `op3.data_sources` (`OP3_PHD_ROOT` /
+`OP3_TOWER_SEGMENTS_CSV`). The framework itself (foundation modes
+A/B/C/D, PISA/Hardin-Drnevich/HSsmall, Mode D formulation, OpenFAST
+coupling, OC6/PISA benchmarks) is fully reproducible with the
+shipped NREL 5 MW reference turbine.
 
-Please cite the dissertation and the Zenodo DOI when using this
-framework; if a publication makes use of the Gunsan case study
-outputs, please additionally acknowledge KEPCO Research Institute,
-MMB, and Unison Co., Ltd.
+If a publication uses Gunsan case study outputs, please
+additionally acknowledge KEPCO Research Institute, MMB, and
+Unison Co., Ltd.
 
-### Citations for bundled references
+</details>
 
- * NREL reference wind turbines -- NREL/TP-500-38060 (5 MW),
-   NREL/TP-5000-75698 (IEA 15 MW)
- * OC6 Phase II benchmark -- Bergua et al., NREL/TP-5000-79989 (2021)
- * PISA design framework -- Burd et al., 2020; Byrne et al., 2020
- * HSsmall constitutive model -- Benz, 2007
+<details>
+<summary><b>Citations for bundled references</b></summary>
+
+- NREL reference wind turbines — NREL/TP-500-38060 (5 MW), NREL/TP-5000-75698 (IEA 15 MW)
+- OC6 Phase II benchmark — Bergua et al., NREL/TP-5000-79989 (2021)
+- PISA design framework — Burd et al., 2020; Byrne et al., 2020
+- HSsmall constitutive model — Benz, 2007
+
+</details>
