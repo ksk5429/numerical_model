@@ -4,48 +4,60 @@ import Header from "./components/layout/Header";
 import SceneManager from "./components/three/SceneManager";
 import ChatPanel from "./components/chat/ChatPanel";
 import { getAnchorMesh, getFoundationMesh } from "./api/meshes";
+import { useProject } from "./stores/projectStore";
 import type { MeshResponse } from "./types/op3";
+
+import SiteTab from "./components/tabs/SiteTab";
+import FoundationTab from "./components/tabs/FoundationTab";
+import AnalysisTab from "./components/tabs/AnalysisTab";
+import ScourTab from "./components/tabs/ScourTab";
+import ValidationTab from "./components/tabs/ValidationTab";
+import AnchorTab from "./components/tabs/AnchorTab";
+import DigitalTwinTab from "./components/tabs/DigitalTwinTab";
+import ReportTab from "./components/tabs/ReportTab";
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabKey>("foundation");
   const [showChat, setShowChat] = useState(true);
   const [meshData, setMeshData] = useState<MeshResponse | null>(null);
-  const [scourDepth, setScourDepth] = useState(0);
 
-  // Demo: fetch a default mesh per tab so the 3D view is never empty.
+  const { foundation, scourDepth, anchor } = useProject();
+
+  // Refresh the 3D viewer when relevant inputs change.
   useEffect(() => {
     let cancelled = false;
-    async function fetchDemoMesh() {
+    async function fetchMesh() {
       try {
         if (activeTab === "anchor") {
-          const m = await getAnchorMesh({
-            diameter_m: 5.0, skirt_length_m: 15.0,
-            wall_thickness_mm: 30.0, padeye_depth_m: 10.0,
-          });
+          const m = await getAnchorMesh(anchor);
           if (!cancelled) setMeshData(m);
         } else {
-          const m = await getFoundationMesh(
-            {
-              type: activeTab === "foundation" ? "suction_bucket" :
-                    activeTab === "twin"        ? "tripod" :
-                                                  "suction_bucket",
-              diameter_m: 8.0, length_m: 8.0,
-              wall_thickness_mm: 25.0,
-              foundation_mode: "stiffness_6x6", standard: "dnv",
-            },
-            scourDepth,
-          );
+          const m = await getFoundationMesh(foundation, scourDepth);
           if (!cancelled) setMeshData(m);
         }
-      } catch (err) {
-        // Backend not running yet -- leave the viewer empty rather than
-        // showing fake geometry.
+      } catch (e) {
         if (!cancelled) setMeshData(null);
       }
     }
-    fetchDemoMesh();
+    fetchMesh();
     return () => { cancelled = true; };
-  }, [activeTab, scourDepth]);
+  }, [activeTab, foundation, scourDepth, anchor]);
+
+  const tabs: Record<TabKey, React.ReactNode> = {
+    site:       <SiteTab />,
+    foundation: <FoundationTab />,
+    analysis:   <AnalysisTab />,
+    scour:      <ScourTab />,
+    validation: <ValidationTab />,
+    anchor:     <AnchorTab />,
+    twin:       <DigitalTwinTab />,
+    report:     <ReportTab />,
+  };
+
+  const projectStateForChat = {
+    activeTab,
+    foundation, scour_depth_m: scourDepth, anchor,
+  };
 
   return (
     <div className="flex h-screen bg-op3-bg text-gray-100">
@@ -61,26 +73,13 @@ const App: React.FC = () => {
             <div className="h-1/2 border-b border-gray-800">
               <SceneManager meshData={meshData} />
             </div>
-            <div className="h-1/2 overflow-y-auto p-4">
-              <h2 className="text-base font-medium text-gray-200 mb-2">
-                {activeTab.toUpperCase()} tab
-              </h2>
-              {activeTab === "foundation" && (
-                <ScourSlider value={scourDepth} onChange={setScourDepth} />
-              )}
-              <p className="text-sm text-gray-500 mt-3">
-                Phase 4 (full tab UIs) is deferred. The 3D viewer above is
-                live: it talks to <code>/api/foundation/mesh</code> and
-                <code> /api/anchor/mesh</code>.
-              </p>
+            <div className="h-1/2 overflow-y-auto p-3">
+              {tabs[activeTab]}
             </div>
           </section>
           {showChat && (
             <aside className="w-96">
-              <ChatPanel projectState={{
-                activeTab,
-                scourDepth,
-              }} />
+              <ChatPanel projectState={projectStateForChat} />
             </aside>
           )}
         </main>
@@ -88,18 +87,5 @@ const App: React.FC = () => {
     </div>
   );
 };
-
-const ScourSlider: React.FC<{
-  value: number; onChange: (v: number) => void;
-}> = ({ value, onChange }) => (
-  <label className="block text-sm text-gray-300">
-    Scour depth: <span className="text-op3-accent">{value.toFixed(2)} m</span>
-    <input
-      type="range" min={0} max={4} step={0.1}
-      value={value} onChange={(e) => onChange(Number(e.target.value))}
-      className="w-full mt-2"
-    />
-  </label>
-);
 
 export default App;

@@ -1,0 +1,137 @@
+"""Op3 Studio report generator.
+
+Builds a Markdown design report from the current project state by
+calling the same op3_service helpers the REST endpoints use. No
+synthetic content -- every numeric value comes from a real op3
+calculation or directly from the user's inputs.
+
+PDF export is intentionally NOT bundled (would pull weasyprint /
+reportlab into the container). The Markdown is canonical and can be
+piped through pandoc by the user when a PDF is needed.
+"""
+from __future__ import annotations
+
+from datetime import datetime, timezone
+from textwrap import dedent
+
+from backend.models.schemas import (
+    AnchorParams, ClayProfile, FoundationParams, SiteProfile,
+)
+from backend.services.op3_service import (
+    AnchorCapacityRequest, FoundationCapacityRequest,
+    InstallationRequest, PadeyeRequest,
+    calculate_anchor_capacity, calculate_anchor_installation,
+    calculate_foundation_capacity, optimize_padeye,
+)
+
+
+def generate_markdown_report(
+    site: SiteProfile,
+    foundation: FoundationParams,
+    scour_depth_m: float,
+    anchor: AnchorParams,
+    anchor_soil: ClayProfile,
+) -> str:
+    """Run capacity / installation / padeye and assemble Markdown."""
+
+    cap_req = FoundationCapacityRequest(
+        site=site, foundation=foundation, scour_depth_m=scour_depth_m,
+    )
+    cap = calculate_foundation_capacity(cap_req)
+
+    a_cap = calculate_anchor_capacity(AnchorCapacityRequest(
+        anchor=anchor, soil=anchor_soil,
+        method="dnv_rp_e303", load_angle_deg=30.0,
+    ))
+    inst = calculate_anchor_installation(InstallationRequest(
+        anchor=anchor, soil=anchor_soil,
+        water_depth_m=site.water_depth_m,
+    ))
+    padeye = optimize_padeye(PadeyeRequest(
+        anchor=anchor, soil=anchor_soil,
+        method="supachawarote_2005",
+    ))
+
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+
+    soil_rows = "\n".join(
+        f"| {L.depth_m:.1f} | {L.thickness_m:.1f} | {L.soil_type} | "
+        f"{L.friction_angle_deg or '-'} | "
+        f"{L.undrained_shear_strength_kPa or '-'} | "
+        f"{L.unit_weight_kN_m3:.1f} |"
+        for L in site.layers
+    )
+
+    return dedent(f"""\
+        # Op³ design report
+
+        Generated: **{now}**
+        Project: **{site.name}**
+
+        ## 1. Site
+
+        - Water depth: **{site.water_depth_m:.1f} m**
+        - Number of soil layers: **{len(site.layers)}**
+
+        | Top [m] | h [m] | Type | φ [°] | su [kPa] | γ' [kN/m³] |
+        |---|---|---|---|---|---|
+        {soil_rows}
+
+        ## 2. Foundation ({foundation.type})
+
+        - Diameter D = **{foundation.diameter_m:.2f} m**
+        - Length L  = **{foundation.length_m:.2f} m**
+        - Wall t    = {foundation.wall_thickness_mm:.0f} mm
+        - Mode      = `{foundation.foundation_mode}`
+        - Standard  = `{foundation.standard}`
+        - Scour depth = **{scour_depth_m:.2f} m**
+
+        ### Capacity proxy (DNV-ST-0126)
+        | Quantity | Value |
+        |---|---|
+        | H proxy | **{cap.horizontal_kN:,.1f} kN** |
+        | V proxy | **{cap.vertical_kN:,.1f} kN** |
+        | M proxy | **{cap.moment_kNm:,.1f} kN·m** |
+        | K_xx | {float(cap.metadata['Kxx_N_per_m']):.3e} N/m |
+        | K_zz | {float(cap.metadata['Kzz_N_per_m']):.3e} N/m |
+        | K_φφ | {float(cap.metadata['Kpp_Nm_per_rad']):.3e} N·m/rad |
+
+        ## 3. Anchor (suction caisson, DNV-RP-E303)
+
+        - D × L = {anchor.diameter_m:.2f} × {anchor.skirt_length_m:.2f} m
+          (L/D = **{anchor.skirt_length_m / anchor.diameter_m:.2f}**)
+        - Padeye depth z_p = {anchor.padeye_depth_m or '?'} m
+        - Submerged weight W' = {anchor.submerged_weight_kN:.0f} kN
+        - Soil: su = {anchor_soil.su_mudline_kPa:.1f} +
+          {anchor_soil.su_gradient_kPa_per_m:.2f}·z kPa,
+          γ' = {anchor_soil.gamma_eff_kN_per_m3:.1f} kN/m³,
+          St = {anchor_soil.sensitivity:.1f}, PI = {anchor_soil.plasticity_index:.0f}%
+
+        ### Capacity at θ = {a_cap.load_angle_deg:.1f}°
+        | Quantity | Value |
+        |---|---|
+        | H_ult | **{a_cap.H_ult_kN:,.1f} kN** |
+        | V_ult | **{a_cap.V_ult_kN:,.1f} kN** |
+        | T_ult | **{a_cap.T_ult_kN:,.1f} kN** |
+
+        Method: `{a_cap.method}` ({a_cap.metadata.get('standard', '?')}).
+
+        ### Installation feasibility (water = {site.water_depth_m:.0f} m)
+        | Check | Value |
+        |---|---|
+        | Self-weight depth | {inst.self_weight_depth_m:.2f} m |
+        | Max suction required | {inst.max_suction_required_kPa:.1f} kPa |
+        | Cavitation limit | {inst.max_allowable_suction_kPa:.1f} kPa |
+        | Plug-heave OK | {inst.plug_heave_ok} |
+        | **Verdict** | **{'FEASIBLE' if inst.feasible else 'INFEASIBLE'}** |
+
+        ### Optimal padeye (Supachawarote 2005)
+        z_p* = **{padeye.optimal_padeye_depth_m:.2f} m**
+        ({padeye.optimal_padeye_over_L * 100:.0f}% of L)
+
+        ---
+
+        *Report generated by Op³ Studio (`op3.anchors` v1.0.0-rc2).
+        Reviewed against DNV-RP-E303 (2021), API RP 2SK (2005),
+        Aubeny et al. (2003), Supachawarote et al. (2005).*
+        """)
