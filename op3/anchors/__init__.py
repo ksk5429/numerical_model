@@ -83,6 +83,12 @@ from op3.anchors.cyclic import (
     apply_cyclic_to_soil,
     CyclicResult,
 )
+from op3.anchors.mooring_coupling import (
+    extract_anchor_loads_from_moorpy,
+    extract_anchor_loads_from_moorpy_system,
+    anchor_safety_factor_timeseries,
+    generate_anchor_report,
+)
 
 __all__ = [
     # Data model
@@ -115,4 +121,9 @@ __all__ = [
     "andersen_cyclic_reduction",
     "apply_cyclic_to_soil",
     "CyclicResult",
+    # Mooring coupling
+    "extract_anchor_loads_from_moorpy",
+    "extract_anchor_loads_from_moorpy_system",
+    "anchor_safety_factor_timeseries",
+    "generate_anchor_report",
 ]
