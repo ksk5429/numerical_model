@@ -6,6 +6,30 @@ project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added -- `op3_studio/` web GUI
+
+Production GUI replacing the legacy PyInstaller desktop launcher:
+
+- **Backend (FastAPI)**: `op3_studio/backend/` exposes `op3` and
+  `op3.anchors` over REST. 8 routers (site/foundation/anchor/analysis/
+  scour/openfast/report/chat), 4 services (op3 bridge, mesh generator,
+  LLM chat with sandboxed exec, Markdown report generator). Real op3
+  calls only -- no synthetic fallbacks anywhere.
+- **Frontend (React + TS + Vite + Three.js + Tailwind + Zustand +
+  recharts)**: 8-tab UI with editable site soil-layer table, foundation
+  capacity + scour controls, full anchor designer (capacity / VH
+  envelope / installation / padeye), interactive 3D viewer for bucket /
+  anchor / tripod, Markdown report download, AI chat with executed-code
+  cards.
+- **LLM chat (Anthropic Claude)**: sandboxed op3 code execution
+  (`op3.*` / numpy / pandas / math import allowlist; no file or
+  network access; daemon-thread timeout). Bilingual prompts (Korean +
+  English).
+- **Dev**: `docker compose up` brings backend + frontend together;
+  `make backend` / `make frontend` for native dev.
+- **Tests**: 57 backend tests passing (health, mesh primitives + 3
+  builders + 3 endpoints, op3 bridge, sandbox, report generator).
+
 ### Added -- `op3.anchors` suction-anchor module (floating OWT)
 
 Extends Op^3 from fixed-bottom foundations to floating-platform anchors.
