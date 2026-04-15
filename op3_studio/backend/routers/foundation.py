@@ -5,8 +5,12 @@ from fastapi import APIRouter, HTTPException
 
 from backend.models.schemas import (
     CapacityResponse, FoundationCapacityRequest,
+    FoundationMeshRequest, MeshResponse,
 )
 from backend.services.op3_service import calculate_foundation_capacity
+from backend.services.mesh_generator import (
+    generate_suction_bucket_mesh, generate_tripod_mesh,
+)
 
 router = APIRouter()
 
@@ -33,3 +37,30 @@ def capacity(req: FoundationCapacityRequest) -> CapacityResponse:
         raise HTTPException(status_code=503, detail=str(e))
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.post("/mesh", response_model=MeshResponse)
+def mesh(req: FoundationMeshRequest) -> MeshResponse:
+    """Generate Three.js-compatible mesh for the given foundation."""
+    f = req.foundation
+    if f.type == "tripod":
+        comp = generate_tripod_mesh(
+            bucket_diameter_m=f.diameter_m,
+            bucket_length_m=f.length_m,
+            tripod_spacing_m=max(2.5 * f.diameter_m, 12.0),
+            tower_height_m=80.0,
+            scour_depth_m=req.scour_depth_m,
+            n_segments=req.n_segments,
+        )
+        meta = {"shape": "tripod"}
+    else:
+        comp = generate_suction_bucket_mesh(
+            diameter_m=f.diameter_m,
+            skirt_length_m=f.length_m,
+            wall_thickness_mm=f.wall_thickness_mm,
+            scour_depth_m=req.scour_depth_m,
+            n_segments=req.n_segments,
+            stress_profile=req.stress_profile,
+        )
+        meta = {"shape": "monopod_or_bucket"}
+    return MeshResponse(components=comp, metadata=meta)

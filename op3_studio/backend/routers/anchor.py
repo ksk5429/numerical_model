@@ -5,9 +5,11 @@ from fastapi import APIRouter, HTTPException
 
 from backend.models.schemas import (
     AnchorCapacityRequest, AnchorCapacityResponse,
+    AnchorMeshRequest, MeshResponse,
     InstallationRequest, InstallationResponse,
     PadeyeRequest, PadeyeResponse,
 )
+from backend.services.mesh_generator import generate_anchor_mesh
 from backend.services.op3_service import (
     calculate_anchor_capacity,
     calculate_anchor_installation,
@@ -47,3 +49,21 @@ def optimize_padeye_endpoint(req: PadeyeRequest) -> PadeyeResponse:
         return optimize_padeye(req)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.post("/mesh", response_model=MeshResponse)
+def mesh(req: AnchorMeshRequest) -> MeshResponse:
+    """Three.js mesh for the anchor + mooring catenary."""
+    a = req.anchor
+    z_p = a.padeye_depth_m if a.padeye_depth_m is not None \
+        else 0.7 * a.skirt_length_m
+    comp = generate_anchor_mesh(
+        diameter_m=a.diameter_m,
+        skirt_length_m=a.skirt_length_m,
+        padeye_depth_m=z_p,
+        mooring_angle_deg=req.mooring_angle_deg,
+        mooring_length_m=req.mooring_length_m,
+        n_segments=req.n_segments,
+    )
+    return MeshResponse(components=comp,
+                        metadata={"shape": "suction_anchor"})
