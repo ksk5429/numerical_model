@@ -1,6 +1,6 @@
 <div align="center">
 
-# Op³ — OWT Foundation & Anchor Analysis, End-to-End
+# Op³ — OptumGX+OpenSeesPy+OpenFAST
 
 Integrated numerical + digital-twin framework for offshore wind
 turbine foundations. Now covers **fixed-bottom scour assessment**
