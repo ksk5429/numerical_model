@@ -62,6 +62,16 @@ from op3.anchors.capacity import (
     capacity_aubeny_2003,
     capacity_fe_calibrated,
 )
+from op3.anchors.installation import (
+    InstallationResult,
+    installation_analysis,
+    self_weight_penetration,
+    suction_penetration,
+    required_suction_kPa,
+    allowable_suction_kPa,
+    plug_heave_check,
+    penetration_resistance,
+)
 
 __all__ = [
     # Data model
@@ -76,4 +86,13 @@ __all__ = [
     "capacity_api_rp_2sk",
     "capacity_aubeny_2003",
     "capacity_fe_calibrated",
+    # Installation
+    "InstallationResult",
+    "installation_analysis",
+    "self_weight_penetration",
+    "suction_penetration",
+    "required_suction_kPa",
+    "allowable_suction_kPa",
+    "plug_heave_check",
+    "penetration_resistance",
 ]
