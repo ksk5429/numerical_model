@@ -748,6 +748,72 @@ The grid Bayesian implementation and VoI calculator live in
 campaign are cached at
 [`PHD/ch7/site_a_bayesian_scour_real_mc.json`](PHD/ch7/).
 
+## Digital twin encoder (Chapter 8)
+
+The encoder learns a low-dimensional latent representation of the
+forward-model database, then projects field OMA observations into the
+same space. Nearest-neighbour retrieval answers the core dissertation
+question — *"which FEM simulation best matches this sensor reading?"*
+
+```mermaid
+flowchart TD
+    subgraph TRAIN [" 🧠 TRAINING (offline) "]
+        direction TB
+        MC["`**1,794 Monte Carlo runs**
+        Op³ forward model
+        scour × soil × capacity`"]
+        SIG["`**Simulated signatures**
+        f₁, f₂, mode shapes
+        per configuration`"]
+        ENC["`**Supervised encoder**
+        N-dim → 2-D latent
+        dim₁ corr = 0.9976`"]
+        MC --> SIG --> ENC
+    end
+
+    subgraph FIELD [" 📡 FIELD DEPLOYMENT "]
+        direction TB
+        OMA["`**OMA on nacelle**
+        measured f₁, f₂
+        mode shapes`"]
+        Z["`**Field point z_obs**
+        projected into latent space`"]
+        OMA --> Z
+    end
+
+    subgraph MATCH [" 🎯 NEAREST-NEIGHBOUR RETRIEVAL "]
+        direction TB
+        KNN["`**Top-K configurations**
+        closest simulations
+        in latent space`"]
+        PARAMS["`**Inferred state**
+        scour S · Gₛ · φ · boundary`"]
+        KNN --> PARAMS
+    end
+
+    ENC --> KNN
+    Z --> KNN
+
+    RESULT["`**🔎 FIELD RESULT · SiteA**
+    S/D ≈ 0.06–0.13
+    → continue monitoring`"]
+
+    PARAMS --> RESULT
+
+    style MC fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style SIG fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style ENC fill:#1a0a29,stroke:#bc8cff,color:#bc8cff
+    style OMA fill:#1a1a2e,stroke:#58a6ff,color:#58a6ff
+    style Z fill:#1a1a2e,stroke:#58a6ff,color:#58a6ff
+    style KNN fill:#1a0a29,stroke:#bc8cff,color:#bc8cff
+    style PARAMS fill:#2e2410,stroke:#e3b341,color:#e3b341
+    style RESULT fill:#2e1a1a,stroke:#ff7b72,color:#ff7b72
+```
+
+Training scripts and cached encoder weights live under
+[`PHD/ch8/`](PHD/ch8/); the SiteA field retrieval with S/D ≈ 0.06–0.13
+is the Chapter 8 headline result.
+
 ## Reference turbine library
 
 Op³ bundles **9 reference decks** (NREL 5 MW Baseline · OC3 Monopile ·
