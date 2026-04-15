@@ -32,6 +32,62 @@ Engineering, Seoul National University · 2026
 
 ---
 
+## The Op³ story in one diagram
+
+```mermaid
+flowchart TD
+    FIELD["`**🌊 FIELD MEASUREMENT**
+    OMA accelerometers on nacelle
+    → measured natural frequency f₁`"]
+
+    CPT["`**🌱 SITE CHARACTERIZATION**
+    CPT profile · cyclic loading history
+    → layered soil state (Gₛ, φ, sᵤ)`"]
+
+    subgraph MODEL [" 🏗️ Op³ FORWARD MODEL "]
+        direction TB
+        FE["`**OptumGX**
+        3D FE limit analysis
+        capacity + dissipation`"]
+        BNWF["`**OpenSeesPy**
+        1D BNWF structural dynamics
+        Mode A / B / C / D`"]
+        AHSE["`**OpenFAST v5**
+        aero-hydro-servo-elastic
+        coupled simulation`"]
+        FE -- "CSV" --> BNWF -- "6×6 K_SSI" --> AHSE
+    end
+
+    DB["`**📦 MC DATABASE**
+    1,794 Monte Carlo samples
+    scour × soil × capacity × f₁`"]
+
+    BAYES["`**🎯 BAYESIAN UPDATE**
+    posterior on scour depth
+    credible intervals · VoI`"]
+
+    ACT["`**⚠️ PRESCRIPTIVE ACTION**
+    monitor · inspect · backfill
+    defensible decision under uncertainty`"]
+
+    CPT --> MODEL
+    MODEL --> DB
+    FIELD --> BAYES
+    DB --> BAYES
+    BAYES --> ACT
+
+    style FIELD fill:#1a1a2e,stroke:#58a6ff,color:#58a6ff
+    style CPT fill:#1a1a2e,stroke:#58a6ff,color:#58a6ff
+    style FE fill:#2e1a1a,stroke:#ff7b72,color:#ff7b72
+    style BNWF fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style AHSE fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style DB fill:#1a1a2e,stroke:#58a6ff,color:#58a6ff
+    style BAYES fill:#1a0a29,stroke:#bc8cff,color:#bc8cff
+    style ACT fill:#2e1a1a,stroke:#e3b341,color:#e3b341
+```
+
+---
+
 ## 30-second introduction
 
 ```python
@@ -152,6 +208,36 @@ Key results:
 - **Kr = 177 MNm/rad** (measured 225, -21%) -- first field validation
 
 Full report: [validation/cross_validations/VV_REPORT.md](validation/cross_validations/VV_REPORT.md)
+
+### V&V at a glance
+
+```mermaid
+graph TD
+    T["`**39 Benchmarks**
+    20+ published sources
+    35 / 38 in-scope verified (92%)`"]
+
+    T --> C1["`✅ <b>Eigenvalue f₁</b><br/>1.2–13% · Jonkman 2010, Gaertner 2020`"]
+    T --> C2["`✅ <b>Bearing capacity</b><br/>NcV +1.1% · NcM −0.8%<br/>Fu & Bienen 2017, Vulpe 2015`"]
+    T --> C3["`✅ <b>PISA field trial</b><br/>McAdam 2020 · Byrne 2020<br/>10–30× error reduction`"]
+    T --> C4["`✅ <b>OC6 Phase II</b><br/>K_zz 1.3% · f₁ 0.5%<br/>Bergua 2021 NREL/TP-5000-79989`"]
+    T --> C5["`✅ <b>Centrifuge yield M</b><br/>−0.7% · DJ Kim 2014`"]
+    T --> C6["`✅ <b>Cyclic N=10⁶</b><br/>3.7–4.3% · Jeong 2021`"]
+    T --> C7["`✅ <b>Full-scale tripod f₁</b><br/>−0.2% · Seo 2020`"]
+    T --> C8["`✅ <b>DNV-ST-0126</b><br/>35/36 conformance`"]
+    T --> C9["`🟡 <b>Field Kr</b><br/>−21% · Houlsby 2005<br/>first field validation`"]
+
+    style T fill:#1a1a2e,stroke:#58a6ff,color:#58a6ff
+    style C1 fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style C2 fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style C3 fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style C4 fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style C5 fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style C6 fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style C7 fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style C8 fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style C9 fill:#2e2410,stroke:#e3b341,color:#e3b341
+```
 
 Reproduce all results:
 ```bash
@@ -312,24 +398,46 @@ invisible because the OptumGX outputs have been pre-computed.
 
 ## What Op³ actually does
 
-```
- ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
- │   OptumGX    │     │  OpenSeesPy  │     │   OpenFAST   │
- │ 3D FE limit  │ ──▶ │  1D BNWF     │ ──▶ │  aero-hydro- │
- │   analysis   │     │ structural   │     │ servo-elastic│
- │ (commercial) │     │  dynamics    │     │   rotor-tower│
- └──────────────┘     └──────────────┘     └──────────────┘
-        │                    │                    │
-        ▼                    ▼                    ▼
-  capacity envelopes   eigenmodes, pushover   time-domain
-  contact pressures    transient response     response under
-  dissipation fields   six-DOF impedance      wind+wave loading
-        │                    │                    │
-        └────── CSV ─────────┴─────── CSV ────────┘
-                            │
-                            ▼
-                   integrated_database_1794.csv
-                   (1,794 Monte Carlo samples)
+```mermaid
+flowchart TD
+    subgraph UPSTREAM ["🔒 UPSTREAM — runs once, license-gated"]
+        OGX["`**OptumGX**
+        3D FE limit analysis · commercial
+        · bearing capacity envelopes (V, H, M)
+        · depth-resolved contact pressures
+        · plastic dissipation fields
+        · p_ult(z) profiles`"]
+    end
+
+    subgraph OPEN ["🐍 OPEN-SOURCE PATH — runs for anyone"]
+        direction TB
+        OSP["`**OpenSeesPy** · BSD-3
+        1D BNWF structural dynamics
+        · eigenmodes · pushover
+        · transient response
+        · 6×6 condensation at mudline`"]
+        OF["`**OpenFAST v5** · Apache-2.0
+        aero-hydro-servo-elastic
+        · rotor + tower + SubDyn
+        · wind + wave time-domain
+        · 8-module coupled simulation`"]
+        OSP -- "6×6 K_SSI" --> OF
+    end
+
+    DB["`**📦 integrated_database_1794.csv**
+    1,794 Monte Carlo samples
+    capacity × stiffness × scour × f₁
+    reproducible without OptumGX`"]
+
+    OGX == "CSV committed to repo" ==> OSP
+    OGX -.->|"persisted"| DB
+    OSP -.->|"persisted"| DB
+    OF -.->|"persisted"| DB
+
+    style OGX fill:#2e1a1a,stroke:#ff7b72,color:#ff7b72
+    style OSP fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style OF fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style DB fill:#1a1a2e,stroke:#58a6ff,color:#58a6ff
 ```
 
 Two boundary crossings need to be made explicit because they are
@@ -355,6 +463,43 @@ arranged in increasing order of fidelity and computational cost.
 The choice is made at runtime via a single configuration flag, so the
 rest of the OpenSeesPy tower model remains identical across all four
 modes — only the foundation boundary condition changes.
+
+```mermaid
+flowchart LR
+    A["`**Mode A**
+    🧱 Fixed base
+    ⚡ fastest
+    _upper-bound reference_
+    _sanity check_`"]
+
+    B["`**Mode B**
+    🔗 6×6 lumped K
+    ⚡ fast
+    _SubDyn-native_
+    _PISA paradigm_`"]
+
+    C["`**Mode C**
+    🌾 Distributed BNWF
+    🟡 medium
+    _depth-resolved p-y/t-z_
+    _scour progression_`"]
+
+    D["`**Mode D** ★ novel
+    🎯 Dissipation-weighted
+    🐢 slow
+    _energy-consistent_
+    _research-grade_`"]
+
+    A ==> B ==> C ==> D
+
+    FID["`⬅️ increasing fidelity + cost ➡️`"]
+
+    style A fill:#1a1a2e,stroke:#8b949e,color:#8b949e
+    style B fill:#0a2910,stroke:#58a6ff,color:#58a6ff
+    style C fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style D fill:#1a0a29,stroke:#bc8cff,color:#bc8cff
+    style FID fill:#0d1117,stroke:#30363d,color:#8b949e
+```
 
 | Mode | Name                      | Fidelity | Runtime | Use case |
 |:----:|---------------------------|:--------:|:-------:|----------|
@@ -465,19 +610,42 @@ characterized by that matrix. This is computationally efficient
 because OpenFAST does not need to re-compute the foundation response
 at each time step.
 
-```
-OpenSeesPy                         OpenFAST
-┌────────────┐                     ┌─────────────┐
-│ BNWF model │  eigenvalue +       │  SubDyn     │
-│  (Mode C   │  static condensation│  substruct  │
-│   or D)    │ ───────────────────▶│  interface  │
-│            │     6x6 K_SSI       │             │
-└────────────┘                     └─────────────┘
-                                          │
-                                          ▼
-                              full aero-hydro-servo-elastic
-                              tower + rotor simulation under
-                              wind and wave loading
+```mermaid
+flowchart LR
+    subgraph SEES ["🐍 OpenSeesPy (BSD-3)"]
+        direction TB
+        BNWF["`**BNWF model**
+        Mode C or D
+        distributed p-y / t-z
+        per scour level`"]
+        EIG["`**Eigenvalue +
+        static condensation**
+        at mudline node`"]
+        K["`**6×6 K_SSI**
+        head stiffness matrix
+        → SubDyn input`"]
+        BNWF --> EIG --> K
+    end
+
+    subgraph FAST ["⚙️ OpenFAST v5 (Apache-2.0)"]
+        direction TB
+        SUB["`**SubDyn**
+        substructure interface
+        accepts 6×6 K directly`"]
+        SIM["`**AHSE coupled sim**
+        rotor + tower + waves + wind
+        time-domain response
+        8-module integration`"]
+        SUB --> SIM
+    end
+
+    K ==>|"one-way coupling<br/>per scour level"| SUB
+
+    style BNWF fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style EIG fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style K fill:#1a1a2e,stroke:#58a6ff,color:#58a6ff
+    style SUB fill:#0a2910,stroke:#3fb950,color:#3fb950
+    style SIM fill:#0a2910,stroke:#3fb950,color:#3fb950
 ```
 
 The extraction is handled by
@@ -552,6 +720,51 @@ python examples/03_build_subdyn_from_opensees.py
 # Download from https://github.com/OpenFAST/openfast/releases
 export OPENFAST_EXE=/path/to/openfast_x64
 python examples/04_openfast_single_run.py
+```
+
+## Module architecture
+
+```mermaid
+block-beta
+    columns 1
+
+    block:APP["🎛️ APPLICATION LAYER"]
+        columns 3
+        COM["composer\nTowerModel\neigen · pushover · transient"] FND["foundations\nFactory + dataclass"] SAC["sacs_interface\nJacket deck parser"]
+    end
+
+    space
+
+    block:STD["📐 STANDARDS LAYER"]
+        columns 4
+        PISA["PISA\nBurd · Byrne 2020"] CYC["cyclic\nHardin-Drnevich\nHSsmall"] DNV["DNV · ISO\nAPI · OWA"] CAP["capacity\nVesic · Fu Bienen"]
+    end
+
+    space
+
+    block:PHYS["🏗️ FOUNDATION PHYSICS — four modes"]
+        columns 4
+        MA["Mode A\nFixed base"] MB["Mode B\n6×6 lumped K"] MC["Mode C\nDistributed BNWF"] MD["Mode D ★\nDissipation-weighted"]
+    end
+
+    space
+
+    block:SOLV["🔧 SOLVER BRIDGES"]
+        columns 3
+        OSI["opensees_foundations\nOpenSeesPy builder"] OFC["openfast_coupling\n→ SubDyn 6×6"] OGI["optumgx_interface\n(license holders only)"]
+    end
+
+    space
+
+    block:UQ_LAYER["📊 UQ + CALIBRATION"]
+        columns 3
+        PRO["Propagation\nMonte Carlo 1,794"] PCE["PCE\nHermite expansion"] BAY["Bayesian\nGrid calibration"]
+    end
+
+    APP --> STD
+    STD --> PHYS
+    PHYS --> SOLV
+    SOLV --> UQ_LAYER
 ```
 
 ## Repository layout
