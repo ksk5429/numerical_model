@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar, { TabKey } from "./components/layout/Sidebar";
 import Header from "./components/layout/Header";
 import SceneManager from "./components/three/SceneManager";
+import ChatPanel from "./components/chat/ChatPanel";
 import { getAnchorMesh, getFoundationMesh } from "./api/meshes";
 import type { MeshResponse } from "./types/op3";
 
@@ -75,8 +76,11 @@ const App: React.FC = () => {
             </div>
           </section>
           {showChat && (
-            <aside className="w-96 bg-op3-panel border-l border-gray-800">
-              <ChatPlaceholder />
+            <aside className="w-96">
+              <ChatPanel projectState={{
+                activeTab,
+                scourDepth,
+              }} />
             </aside>
           )}
         </main>
@@ -96,12 +100,6 @@ const ScourSlider: React.FC<{
       className="w-full mt-2"
     />
   </label>
-);
-
-const ChatPlaceholder: React.FC = () => (
-  <div className="h-full flex items-center justify-center text-gray-600">
-    <span className="text-sm">AI Chat (Phase 5)</span>
-  </div>
 );
 
 export default App;
