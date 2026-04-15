@@ -1,0 +1,48 @@
+# Op3 Studio dev environment.
+# Run from this directory:
+#   docker compose up
+# Backend: http://localhost:8000   (OpenAPI: /docs)
+# Frontend: http://localhost:5173
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: op3_studio/Dockerfile.backend
+    container_name: op3-studio-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/op3_studio/backend
+      - ../op3:/app/op3
+      - ../data:/app/data
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-claude-sonnet-4-5-20250929}
+      OP3_ROOT: /app
+      PYTHONUTF8: "1"
+    command: >
+      uvicorn backend.main:app
+      --host 0.0.0.0 --port 8000 --reload
+      --reload-dir /app/op3_studio/backend
+      --reload-dir /app/op3
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: op3_studio/Dockerfile.frontend
+    container_name: op3-studio-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - ./frontend/index.html:/app/index.html
+      - ./frontend/vite.config.ts:/app/vite.config.ts
+      - ./frontend/tsconfig.json:/app/tsconfig.json
+      - ./frontend/tailwind.config.js:/app/tailwind.config.js
+      - ./frontend/postcss.config.js:/app/postcss.config.js
+    environment:
+      VITE_API_BASE: http://localhost:8000
+    depends_on:
+      - backend
