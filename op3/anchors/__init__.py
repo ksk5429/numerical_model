@@ -72,6 +72,11 @@ from op3.anchors.installation import (
     plug_heave_check,
     penetration_resistance,
 )
+from op3.anchors.padeye import (
+    optimal_padeye_analytical,
+    optimal_padeye_from_dissipation,
+    padeye_sensitivity_study,
+)
 
 __all__ = [
     # Data model
@@ -95,4 +100,8 @@ __all__ = [
     "allowable_suction_kPa",
     "plug_heave_check",
     "penetration_resistance",
+    # Padeye
+    "optimal_padeye_analytical",
+    "optimal_padeye_from_dissipation",
+    "padeye_sensitivity_study",
 ]
