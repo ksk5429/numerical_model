@@ -1,41 +1,108 @@
-# Op³: Integrated Numerical and Digital Twin Framework for Scour Assessment of Offshore Wind Turbine with Tripod Suction Bucket Foundations
+<div align="center">
+
+# Op³ — OWT Foundation & Anchor Analysis, End-to-End
+
+Integrated numerical + digital-twin framework for offshore wind
+turbine foundations. Now covers **fixed-bottom scour assessment**
+(tripod suction buckets, monopiles, jackets) **and** **floating-platform
+mooring anchors** (suction caissons) in a single Python stack, with a
+production web GUI and an LLM chat front-end.
 
 [![DOI](https://zenodo.org/badge/1204628094.svg)](https://doi.org/10.5281/zenodo.19476542)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-yellow.svg)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/release/python-3120/)
 [![OpenFAST](https://img.shields.io/badge/OpenFAST-v5.0.0-orange.svg)](https://github.com/OpenFAST/openfast/releases/tag/v5.0.0)
 [![OpenSeesPy](https://img.shields.io/badge/OpenSeesPy-3.7+-green.svg)](https://github.com/zhuminjie/OpenSeesPy)
+
 [![V&V](https://img.shields.io/badge/V%26V-35%2F38_benchmarks_(92%25)-brightgreen.svg)](validation/cross_validations/VV_REPORT.md)
 [![CI](https://github.com/ksk5429/numerical_model/actions/workflows/ci.yml/badge.svg)](https://github.com/ksk5429/numerical_model/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/tests-140_passing-brightgreen.svg)](tests/)
+[![Studio CI](https://github.com/ksk5429/numerical_model/actions/workflows/op3-studio.yml/badge.svg)](https://github.com/ksk5429/numerical_model/actions/workflows/op3-studio.yml)
+[![Tests](https://img.shields.io/badge/tests-429_passing-brightgreen.svg)](tests/)
+[![Anchor tests](https://img.shields.io/badge/op3.anchors-134%2F134-brightgreen.svg)](tests/test_anchors/)
+[![Studio tests](https://img.shields.io/badge/op3__studio-67%2F67-brightgreen.svg)](op3_studio/backend/tests/)
+
 [![Version](https://img.shields.io/badge/version-1.0.0--rc2-blue.svg)](CHANGELOG.md)
 [![PyPI](https://img.shields.io/pypi/v/op3-framework.svg)](https://pypi.org/project/op3-framework/)
 [![Documentation](https://img.shields.io/badge/docs-sphinx-blue.svg)](docs/sphinx/)
 
-**Op³** (pronounced "O-p-three") bridges three otherwise-disconnected
-solvers — **OptumGX** (3D FE limit analysis, commercial), **OpenSeesPy**
-(structural dynamics, BSD-3-Clause), and **OpenFAST v5**
-(aero-hydro-servo-elastic, Apache 2.0) — into a single V&V'd Python
-pipeline for scour assessment of offshore wind turbine tripod suction
-bucket foundations. Adds a Bayesian decision layer, a digital twin
-encoder, and an eight-tab web application for field deployment.
+PhD dissertation · **Seoul National University** (2026) ·
+**Kyeong Sun Kim** · Civil & Environmental Engineering
 
-PhD dissertation at **Seoul National University** (2026) ·
-**Kyeong Sun Kim** · Department of Civil and Environmental Engineering
+</div>
 
-> **Two new modules in this release:**
->
-> * [`op3.anchors`](op3/anchors/) — suction-anchor design for floating
->   OWT mooring (DNV-RP-E303, Murff-Hamilton, API RP 2SK, Aubeny 2003,
->   FE-calibrated; installation feasibility; novel dissipation-centroid
->   padeye method; Andersen 2015 cyclic; MoorPy coupling). 134 tests.
->   See the [Suction anchor module section](#suction-anchor-module-floating-owt) below.
-> * [`op3_studio/`](op3_studio/) — production web GUI (FastAPI +
->   React + Three.js + Tailwind + LLM chat with sandboxed op3 exec).
->   8-tab UI, parametric sliders, V-H envelope plots, Markdown +
->   PDF report download, AI assistant in Korean and English.
->   57 backend tests + frontend vitest setup. Run with
->   `cd op3_studio && docker compose up`.
+Op³ bridges three otherwise-disconnected solvers — **OptumGX** (3D FE
+limit analysis, commercial), **OpenSeesPy** (structural dynamics,
+BSD-3-Clause), and **OpenFAST v5** (aero-hydro-servo-elastic,
+Apache 2.0) — into a single V&V'd Python pipeline. A Bayesian decision
+layer, a digital-twin encoder, and a new web GUI turn it into a
+production tool for offshore-wind geotechnical engineers.
+
+---
+
+## ✨ What's new (April 2026)
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 🪝 `op3.anchors` — floating-platform mooring
+*Suction-anchor design for floating OWT, branch
+[`feat/anchors-module`](https://github.com/ksk5429/numerical_model/tree/feat/anchors-module).*
+
+* **5 capacity methods**: DNV-RP-E303 (default), Murff-Hamilton 1993,
+  API RP 2SK, Aubeny et al. 2003, FE-calibrated from OptumGX.
+* **Installation feasibility**: self-weight penetration, required
+  suction vs cavitation limit, plug-heave stability per DNV-RP-E303
+  §5.2-5.4.
+* **Novel dissipation-centroid padeye** — extends Op³ Mode D to
+  floating anchor design. Unpublished theoretical contribution.
+* **Cyclic storm degradation** — Andersen (2015) Drammen-clay
+  surrogate calibrated to the FOG III Fig. 4 corner cases.
+* **MoorPy coupling** — real non-linear catenary physics, per-step
+  DNV-ST-0119 safety factor, Markdown + PDF report.
+* **134 tests**, full Sphinx page at [`docs/sphinx/anchors.rst`](docs/sphinx/anchors.rst).
+
+</td>
+<td width="50%" valign="top">
+
+### 🖥️ `op3_studio/` — production web GUI
+*FastAPI + React + Three.js + Tailwind, branch
+[`feat/op3-studio`](https://github.com/ksk5429/numerical_model/tree/feat/op3-studio).*
+
+* **8 tabs** with live endpoints: Site (editable soil table),
+  Foundation (DNV stiffness + scour slider), Anchor (VH envelope +
+  installation profile), Scour sweep, Analysis, V&V, Digital Twin,
+  Report (Markdown + PDF download).
+* **3D viewer** — Three.js `SceneManager` renders suction buckets,
+  anchors, and tripods from real geometric inputs; per-vertex stress
+  colormap; sea-surface bobbing animation.
+* **LLM chat** — Anthropic Claude (bilingual KR/EN) with
+  **subprocess-sandboxed op3 execution** (OS-killable on timeout;
+  `op3.*` / numpy / pandas / math import allowlist only).
+* **Streaming chat** over Server-Sent Events.
+* **67 backend tests + vitest frontend tests + full CI workflow**.
+* Run `cd op3_studio && docker compose up`.
+
+</td>
+</tr>
+</table>
+
+### 🔢 Repo test health (April 2026)
+
+```
+Op3 framework + V&V : 228 passed, 11 skipped, 0 failed
+op3.anchors         : 134 passed
+op3_studio backend  :  67 passed
+────────────────────────────────────────────────────
+Total               : 429 passed, 11 skipped, 0 failed
+```
+
+> Note: pre-existing CI failures (missing NREL reference decks, ...)
+> have been resolved with `pytest.skipif` guards in April 2026. CI
+> now stays green on minimal checkouts that don't include the
+> multi-GB reference data. See
+> [`docs/AI_CODE_AUDIT_DEFENSE.md`](docs/AI_CODE_AUDIT_DEFENSE.md)
+> for outstanding dissertation-defense review items.
 
 ---
 
@@ -95,11 +162,30 @@ flowchart TD
 
 ---
 
-## 30-second introduction
+## 30-second introductions
+
+### 🖥️ Web GUI (casual / demo) — *recommended for first-time users*
+
+```bash
+git clone https://github.com/ksk5429/numerical_model.git
+cd numerical_model/op3_studio
+cp .env.example .env            # add ANTHROPIC_API_KEY for AI chat
+docker compose up               # backend :8000 + frontend :5173
+```
+
+Open <http://localhost:5173>, drag the scour slider, click "Generate
+report", type a question at the AI chat. The OpenAPI explorer is at
+<http://localhost:8000/docs>.
+
+### 🐍 Python library (programmatic)
 
 ```bash
 pip install op3-framework
+```
 
+**Fixed-bottom foundation** (tripod suction bucket, monopile, jacket):
+
+```bash
 # End-to-end OpenFAST v5 coupled simulation
 python scripts/run_openfast.py site_a --tmax 5
 python scripts/run_dlc11_partial.py --tmax 600 --speeds 8 12 18
@@ -108,6 +194,29 @@ python scripts/run_dlc11_partial.py --tmax 600 --speeds 8 12 18
 python scripts/dnv_st_0126_conformance.py --all
 python scripts/release_validation_report.py   # 18/19 PASS in ~42 s
 ```
+
+**Floating-platform suction anchor** (new):
+
+```python
+from op3.anchors import (
+    SuctionAnchor, UndrainedClayProfile, MooringLoad,
+    anchor_capacity, installation_analysis,
+)
+anchor = SuctionAnchor(diameter_m=5.0, skirt_length_m=15.0,
+                       padeye_depth_m=10.0, submerged_weight_kN=250.0)
+soil   = UndrainedClayProfile(su_mudline_kPa=5.0,
+                              su_gradient_kPa_per_m=1.5)
+load   = MooringLoad(tension_kN=4000.0, angle_at_padeye_deg=25.0)
+
+r = anchor_capacity(anchor, soil, method="dnv_rp_e303", load=load)
+print(f"T_ult = {r.T_ult_kN:.0f} kN, FoS = {r.factor_of_safety(4000.0):.2f}")
+
+inst = installation_analysis(anchor, soil, water_depth_m=200.0)
+print(f"feasible: {inst.feasible}, "
+      f"max suction: {inst.max_suction_required_kPa:.1f} kPa")
+```
+
+Five runnable examples in [`examples/anchor_0X_*.py`](examples/).
 
 <details>
 <summary><b>🐍 Python API — build a PISA foundation and compose a tower model</b></summary>
