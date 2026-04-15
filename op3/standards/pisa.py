@@ -68,17 +68,18 @@ import numpy as np
 
 
 #
-# ---- SAND (Burd 2020 Table 5, D_R = 75%) -----------------------------------
+# ---- SAND (Byrne 2020 Table 7, D_R = 80%) -----------------------------------
+# (was incorrectly cited as "Burd 2020 Table 5" pre-audit -- swap fixed
+# 2026-04-15 per AI-Generated Code Audit item #2.)
 # "First-stage" depth-function form:
 #     k_p  = k_p1 + k_p2 * (z/D)
 #     k_m  = const
 #     k_H  = k_H1 + k_H2 * (L/D)        (pile-base shear)
 #     k_M  = const                       (pile-base moment)
 #
-# ---- CLAY (Byrne 2020 Table 4, "Second-stage calibration") -----------------
-# Same structure. Note the Byrne 2020 paper uses cot(phi)-shifted stresses
-# but for initial elastic stiffness evaluation we only need the linear
-# coefficients.
+# ---- CLAY (Burd 2020 Table 6, "Second-stage calibration") -----------------
+# (was incorrectly cited as "Byrne 2020 Table 4" pre-audit -- swap fixed.)
+# Same structure as the sand formulation above.
 
 # PHYSICS: Burd et al. (2020) Table 3 — PISA sand calibration coefficients (Dunkirk dense sand)
 # REVIEW-STATUS: PENDING (awaiting human verification against paper)

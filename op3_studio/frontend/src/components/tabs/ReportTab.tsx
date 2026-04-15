@@ -36,6 +36,27 @@ const ReportTab: React.FC = () => {
     URL.revokeObjectURL(a.href);
   };
 
+  const downloadPdf = async () => {
+    setBusy(true); setErr(null);
+    try {
+      const r = await api.post("/api/report/generate.pdf", {
+        site, foundation, scour_depth_m: scourDepth,
+        anchor, anchor_soil: anchorSoil,
+      }, { responseType: "blob" });
+      const blob = new Blob([r.data], { type: "application/pdf" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `op3_report_${Date.now()}.pdf`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    } catch (e: any) {
+      setErr(e?.response?.data?.detail || e?.message
+             || "PDF export failed (reportlab missing?)");
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
     <div className="relative space-y-3">
       {busy && <LoadingOverlay message="Generating report..." />}
@@ -46,14 +67,24 @@ const ReportTab: React.FC = () => {
                      text-op3-accent rounded px-3 py-1 text-sm"
         >Generate report</button>
         {markdown && (
-          <button
-            onClick={download}
-            className="bg-op3-ok/20 border border-op3-ok/40
-                       text-op3-ok rounded px-3 py-1 text-sm
-                       flex items-center gap-1"
-          >
-            <Download size={14} /> Download .md
-          </button>
+          <>
+            <button
+              onClick={download}
+              className="bg-op3-ok/20 border border-op3-ok/40
+                         text-op3-ok rounded px-3 py-1 text-sm
+                         flex items-center gap-1"
+            >
+              <Download size={14} /> .md
+            </button>
+            <button
+              onClick={downloadPdf}
+              className="bg-op3-warn/20 border border-op3-warn/40
+                         text-op3-warn rounded px-3 py-1 text-sm
+                         flex items-center gap-1"
+            >
+              <Download size={14} /> .pdf
+            </button>
+          </>
         )}
       </div>
 

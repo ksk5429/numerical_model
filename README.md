@@ -23,6 +23,20 @@ encoder, and an eight-tab web application for field deployment.
 PhD dissertation at **Seoul National University** (2026) ·
 **Kyeong Sun Kim** · Department of Civil and Environmental Engineering
 
+> **Two new modules in this release:**
+>
+> * [`op3.anchors`](op3/anchors/) — suction-anchor design for floating
+>   OWT mooring (DNV-RP-E303, Murff-Hamilton, API RP 2SK, Aubeny 2003,
+>   FE-calibrated; installation feasibility; novel dissipation-centroid
+>   padeye method; Andersen 2015 cyclic; MoorPy coupling). 134 tests.
+>   See the [Suction anchor module section](#suction-anchor-module-floating-owt) below.
+> * [`op3_studio/`](op3_studio/) — production web GUI (FastAPI +
+>   React + Three.js + Tailwind + LLM chat with sandboxed op3 exec).
+>   8-tab UI, parametric sliders, V-H envelope plots, Markdown +
+>   PDF report download, AI assistant in Korean and English.
+>   57 backend tests + frontend vitest setup. Run with
+>   `cd op3_studio && docker compose up`.
+
 ---
 
 ## The Op³ story in one diagram

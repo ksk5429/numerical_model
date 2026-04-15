@@ -28,6 +28,7 @@ Foundations"* (Seoul National University, June 2026).
    :caption: Reference
 
    foundation_modes
+   anchors
    standards
    uq
    openfast_coupling

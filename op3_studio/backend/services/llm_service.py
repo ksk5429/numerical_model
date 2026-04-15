@@ -216,22 +216,79 @@ def _exec_in_sandbox(code: str) -> ExecutionResult:
                            results=results)
 
 
-def safe_execute(code: str, timeout_s: int | None = None) -> ExecutionResult:
+def _exec_in_subprocess(
+    code: str, timeout_s: int,
+) -> ExecutionResult:
+    """Run code in an isolated Python interpreter; OS-killable on timeout."""
+    import multiprocessing as mp
+    from backend.services import sandbox_worker
+
+    ctx = mp.get_context("spawn")  # cross-platform, no fork inheritance
+    q = ctx.Queue(maxsize=1)
+    p = ctx.Process(
+        target=sandbox_worker.run,
+        args=(q, code, tuple(settings.sandbox_allowed_imports)),
+    )
+    p.start()
+    p.join(timeout=timeout_s)
+    if p.is_alive():
+        p.terminate()
+        p.join(timeout=2)
+        if p.is_alive():
+            p.kill()
+            p.join(timeout=2)
+        return ExecutionResult(
+            success=False,
+            error=f"Execution exceeded {timeout_s}s (subprocess killed)",
+            error_type="TimeoutError",
+        )
+    try:
+        payload = q.get_nowait()
+    except Exception:
+        return ExecutionResult(
+            success=False,
+            error="subprocess produced no output",
+            error_type="RuntimeError",
+        )
+    return ExecutionResult(
+        success=payload["success"],
+        stdout=payload["stdout"],
+        results=payload["results"],
+        error=payload["error"],
+        error_type=payload["error_type"],
+    )
+
+
+def safe_execute(
+    code: str,
+    timeout_s: int | None = None,
+    *,
+    use_subprocess: bool = True,
+) -> ExecutionResult:
     """Execute a single ``op3`` code block with a wall-clock timeout.
 
-    Uses a daemon thread so the interpreter is free to exit even if the
-    worker is stuck inside a tight CPU loop. Note: Python's GIL prevents
-    interrupting C-level loops; for untrusted code in production,
-    replace the daemon thread with a ``multiprocessing.Process`` sandbox
-    so the OS can hard-kill runaway code.
+    Two strategies:
+
+    * ``use_subprocess=True`` (default, production): runs ``code`` in
+      an isolated Python interpreter via ``multiprocessing.Process``.
+      OS-killable on timeout; full process isolation; safe against
+      C-level infinite loops.
+    * ``use_subprocess=False``: runs in a daemon thread inside the
+      current interpreter. ~5x faster startup, but cannot interrupt
+      tight CPU loops (Python GIL). Used by the test suite for
+      deterministic timing and easy mocking.
     """
     timeout = timeout_s or settings.sandbox_timeout_s
+    if use_subprocess:
+        return _exec_in_subprocess(code, timeout)
+
+    # Daemon-thread fallback (tests / dev convenience)
     q: "queue.Queue[ExecutionResult]" = queue.Queue(maxsize=1)
 
     def worker() -> None:
         try:
             q.put(_exec_in_sandbox(code))
-        except Exception as e:  # pragma: no cover -- safety net
+        except Exception as e:  # pragma: no cover
             q.put(ExecutionResult(success=False, error=str(e),
                                   error_type=type(e).__name__))
 
@@ -270,6 +327,94 @@ class LLMService:
             )
         import anthropic
         return anthropic.Anthropic(api_key=self.api_key)
+
+    def chat_stream(
+        self,
+        message: str,
+        history: list[dict],
+        project_state: dict,
+    ):
+        """Yield SSE-style JSON chunks as Claude streams.
+
+        Chunks emitted:
+          {"type": "first_token", "text": "<incremental>"}    -- many
+          {"type": "first_done"}                              -- once
+          {"type": "exec_start", "code": "...", "i": 0}       -- per block
+          {"type": "exec_done",  "result": {...}, "i": 0}
+          {"type": "second_token", "text": "<incremental>"}   -- many
+          {"type": "done", "code_executed": [...],
+                           "results": [...]}
+        """
+        client = self._client()
+        system = SYSTEM_PROMPT.format(
+            project_state=json.dumps(project_state, indent=2,
+                                     default=str, ensure_ascii=False),
+        )
+        messages = list(history) + [{"role": "user", "content": message}]
+
+        first_text_parts: list[str] = []
+        with client.messages.stream(
+            model=self.model,
+            max_tokens=settings.llm_max_tokens,
+            system=system,
+            messages=messages,
+        ) as stream:
+            for text in stream.text_stream:
+                first_text_parts.append(text)
+                yield {"type": "first_token", "text": text}
+        first_text = "".join(first_text_parts)
+        yield {"type": "first_done"}
+
+        code_blocks = extract_op3_code(first_text)
+        if not code_blocks:
+            yield {"type": "done", "code_executed": [], "results": []}
+            return
+
+        executed: list[ExecutionResult] = []
+        for i, code in enumerate(code_blocks):
+            yield {"type": "exec_start", "code": code, "i": i}
+            r = safe_execute(code)
+            executed.append(r)
+            yield {"type": "exec_done",
+                   "i": i,
+                   "result": {
+                       "success": r.success,
+                       "stdout": r.stdout,
+                       "results": r.results,
+                       "error": r.error,
+                       "error_type": r.error_type,
+                   }}
+
+        # Second turn: stream interpretation
+        results_for_llm = [
+            {"code": c, "success": r.success,
+             "stdout": r.stdout[-2000:], "results": r.results,
+             "error": r.error}
+            for c, r in zip(code_blocks, executed)
+        ]
+        with client.messages.stream(
+            model=self.model,
+            max_tokens=settings.llm_max_tokens,
+            system=system,
+            messages=messages + [
+                {"role": "assistant", "content": first_text},
+                {"role": "user",
+                 "content": (
+                     "The op3 code blocks above were executed. Here are "
+                     "the results -- give the user a clear engineering "
+                     "interpretation, cite the standard, and do NOT "
+                     "emit further ``op3`` blocks unless asked.\n\n"
+                     + json.dumps(results_for_llm, indent=2,
+                                  default=str, ensure_ascii=False)
+                 )},
+            ],
+        ) as stream:
+            for text in stream.text_stream:
+                yield {"type": "second_token", "text": text}
+
+        yield {"type": "done",
+               "code_executed": code_blocks,
+               "results": [r.__dict__ for r in executed]}
 
     def chat(
         self,

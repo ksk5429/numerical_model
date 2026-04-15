@@ -47,6 +47,12 @@ def api_pile_stiffness(
     # API formulas (similar to ISO 19901-4 with API correction factors)
     K_xx = (8.0 * G * R / (2.0 - nu)) * (1.0 + 0.55 * (L / R) ** 0.85)
     K_zz = (4.0 * G * R / (1.0 - nu)) * (1.0 + 0.54 * L / R)
+    # FIXME(audit-2026-04-15, item #1): Gazetas 1991 rocking stiffness
+    # for an embedded circular foundation is
+    #   K_ry = (8 G R^3) / [3 (1-nu)] * (1 + 2 L/D + 0.58 (L/D)^3)
+    # Op^3's expression below omits the cubic term; this is conservative
+    # at L/D <= 1 (~2% error) but understates K_rxx by up to ~37% at
+    # L/D = 3. See docs/AI_CODE_AUDIT_DEFENSE.md for resolution status.
     K_rxx = ((8.0 / 3.0) * G * R ** 3 / (1.0 - nu)) * (1.0 + 2.3 * L / D)
     K_rzz = (16.0 / 3.0) * G * R ** 3
 

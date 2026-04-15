@@ -12,6 +12,7 @@ piped through pandoc by the user when a PDF is needed.
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from io import BytesIO
 from textwrap import dedent
 
 from backend.models.schemas import (
@@ -135,3 +136,95 @@ def generate_markdown_report(
         Reviewed against DNV-RP-E303 (2021), API RP 2SK (2005),
         Aubeny et al. (2003), Supachawarote et al. (2005).*
         """)
+
+
+def render_markdown_to_pdf(markdown: str) -> bytes:
+    """Render Markdown to a self-contained PDF using reportlab.
+
+    reportlab is the lightest PDF dep (pure-Python, no system fonts,
+    no headless browser). Heading levels and code blocks are styled
+    minimally. Tables in source Markdown render as monospaced text;
+    for richer layout install a Markdown -> HTML -> PDF chain
+    (markdown2 + weasyprint) in the requirements file.
+
+    Raises
+    ------
+    RuntimeError
+        If reportlab is not installed (it is in
+        backend/requirements-pdf.txt to keep the default container
+        slim).
+    """
+    try:
+        from reportlab.lib.pagesizes import A4
+        from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+        from reportlab.lib.units import cm
+        from reportlab.platypus import (
+            Paragraph, SimpleDocTemplate, Spacer, Preformatted,
+        )
+    except ImportError as e:
+        raise RuntimeError(
+            "PDF export requires reportlab; install with "
+            "`pip install reportlab` (or run the studio container "
+            "with the [pdf] extras enabled)."
+        ) from e
+
+    buf = BytesIO()
+    doc = SimpleDocTemplate(buf, pagesize=A4,
+                            leftMargin=2 * cm, rightMargin=2 * cm,
+                            topMargin=2 * cm, bottomMargin=2 * cm,
+                            title="Op3 Studio design report")
+    styles = getSampleStyleSheet()
+    code_style = ParagraphStyle("code",
+                                parent=styles["Code"],
+                                fontSize=8, leading=10,
+                                backColor=(0.95, 0.95, 0.95))
+
+    story = []
+    in_code = False
+    code_buf: list[str] = []
+
+    for raw in markdown.splitlines():
+        if raw.startswith("```"):
+            if in_code:
+                story.append(Preformatted("\n".join(code_buf), code_style))
+                code_buf = []
+                story.append(Spacer(1, 6))
+            in_code = not in_code
+            continue
+        if in_code:
+            code_buf.append(raw)
+            continue
+
+        line = raw.rstrip()
+        if not line:
+            story.append(Spacer(1, 6))
+            continue
+        if line.startswith("# "):
+            story.append(Paragraph(_md_inline(line[2:]), styles["Title"]))
+        elif line.startswith("## "):
+            story.append(Paragraph(_md_inline(line[3:]), styles["Heading2"]))
+        elif line.startswith("### "):
+            story.append(Paragraph(_md_inline(line[4:]), styles["Heading3"]))
+        elif line.startswith("- "):
+            story.append(Paragraph("• " + _md_inline(line[2:]),
+                                   styles["BodyText"]))
+        elif line.startswith("|"):
+            # Table row -- render as preformatted text to preserve alignment
+            story.append(Preformatted(line, code_style))
+        else:
+            story.append(Paragraph(_md_inline(line), styles["BodyText"]))
+
+    if code_buf:
+        story.append(Preformatted("\n".join(code_buf), code_style))
+
+    doc.build(story)
+    return buf.getvalue()
+
+
+def _md_inline(text: str) -> str:
+    """Translate a tiny subset of Markdown inline syntax to ReportLab tags."""
+    import re
+    text = re.sub(r"\*\*([^*]+)\*\*", r"<b>\1</b>", text)
+    text = re.sub(r"\*([^*]+)\*", r"<i>\1</i>", text)
+    text = re.sub(r"`([^`]+)`", r"<font face='Courier'>\1</font>", text)
+    return text

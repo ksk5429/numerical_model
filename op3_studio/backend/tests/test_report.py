@@ -60,3 +60,16 @@ class TestReport:
         r = client.get("/api/report/templates")
         assert r.status_code == 200
         assert "anchor_design" in r.json()
+
+    def test_pdf_export(self, client):
+        r = client.post("/api/report/generate.pdf", json={
+            "site": SITE, "foundation": FOUNDATION,
+            "scour_depth_m": 0.0,
+            "anchor": ANCHOR, "anchor_soil": SOIL,
+        })
+        # Either 200 with PDF bytes, or 503 if reportlab is absent
+        assert r.status_code in (200, 503)
+        if r.status_code == 200:
+            assert r.headers["content-type"] == "application/pdf"
+            assert r.content[:4] == b"%PDF"
+            assert len(r.content) > 1000

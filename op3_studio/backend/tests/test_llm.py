@@ -56,12 +56,12 @@ class TestExtraction:
 class TestSandbox:
 
     def test_simple_arithmetic(self):
-        r = safe_execute("y = 2 + 3")
+        r = safe_execute("y = 2 + 3", use_subprocess=False)
         assert r.success
         assert r.results["y"] == 5
 
     def test_print_captured(self):
-        r = safe_execute("print('hello world')")
+        r = safe_execute("print('hello world')", use_subprocess=False)
         assert r.success
         assert "hello world" in r.stdout
 
@@ -69,41 +69,43 @@ class TestSandbox:
         r = safe_execute(
             "from op3.anchors import SuctionAnchor\n"
             "a = SuctionAnchor(diameter_m=5.0, skirt_length_m=15.0)\n"
-            "ar = a.aspect_ratio\n"
+            "ar = a.aspect_ratio\n",
+            use_subprocess=False,
         )
         assert r.success, r.error
         assert r.results["ar"] == 3.0
 
     def test_disallowed_import_blocked(self):
-        r = safe_execute("import os\nx = os.listdir('.')")
+        r = safe_execute("import os\nx = os.listdir('.')",
+                         use_subprocess=False)
         assert not r.success
         assert r.error_type == "ImportError"
 
     def test_disallowed_subprocess_blocked(self):
-        r = safe_execute("import subprocess")
+        r = safe_execute("import subprocess", use_subprocess=False)
         assert not r.success
         assert r.error_type == "ImportError"
 
     def test_open_file_blocked(self):
         # 'open' is not in the safe builtins
-        r = safe_execute("f = open('test.txt', 'w')")
+        r = safe_execute("f = open('test.txt', 'w')",
+                         use_subprocess=False)
         assert not r.success
 
-    def test_timeout(self, monkeypatch):
-        """Verify the TimeoutError path without spawning an unkillable
-        worker. We monkeypatch _exec_in_sandbox to block on an event so
-        the daemon worker exits cleanly when the test ends."""
+    def test_timeout_thread_mode(self, monkeypatch):
+        """Verify the TimeoutError path in thread mode."""
         import threading
         from backend.services import llm_service as ls
         block = threading.Event()
 
         def slow_exec(code):
-            block.wait()  # interpreter-level wait, releases GIL
+            block.wait()
             return ls.ExecutionResult(success=True)
 
         monkeypatch.setattr(ls, "_exec_in_sandbox", slow_exec)
         try:
-            r = safe_execute("# whatever", timeout_s=1)
+            r = safe_execute("# whatever", timeout_s=1,
+                             use_subprocess=False)
             assert not r.success
             assert r.error_type == "TimeoutError"
         finally:
@@ -120,12 +122,34 @@ class TestSandbox:
             "                         su_gradient_kPa_per_m=1.5)\n"
             "rr = anchor_capacity(a, s, method='dnv_rp_e303',\n"
             "                     load_angle_deg=30.0)\n"
-            "H = rr.H_ult_kN\nV = rr.V_ult_kN\nT = rr.T_ult_kN\n"
+            "H = rr.H_ult_kN\nV = rr.V_ult_kN\nT = rr.T_ult_kN\n",
+            use_subprocess=False,
         )
         assert r.success, r.error
         assert r.results["H"] > 0
         assert r.results["V"] > 0
         assert r.results["T"] > 0
+
+
+class TestSubprocessSandbox:
+    """Smoke test the production multiprocessing sandbox.
+
+    Marked separately because spawning a python interpreter takes ~1 s
+    on Windows; only one test exercises it, the rest of the suite uses
+    the in-process daemon-thread fallback.
+    """
+
+    def test_subprocess_arithmetic(self):
+        r = safe_execute("y = 7 * 6", use_subprocess=True, timeout_s=30)
+        assert r.success, r.error
+        assert r.results["y"] == 42
+
+    def test_subprocess_kills_infinite_loop(self):
+        # A real CPU-bound infinite loop -- killable only by the OS.
+        r = safe_execute("while True:\n    pass\n",
+                         use_subprocess=True, timeout_s=2)
+        assert not r.success
+        assert r.error_type == "TimeoutError"
 
 
 # ---------------------------------------------------------------------------
@@ -153,6 +177,15 @@ class TestChatEndpoint:
         # Endpoint must report availability as a boolean only.
         assert body["available"] is True
         assert "sk-ant-secret-fake" not in str(body)
+
+    def test_stream_503_when_no_api_key(self, client, monkeypatch):
+        from backend import config as cfg_mod
+        monkeypatch.setattr(cfg_mod.settings, "anthropic_api_key", None)
+        r = client.post("/api/chat/stream", json={
+            "message": "hi", "conversation_history": [],
+            "project_state": {},
+        })
+        assert r.status_code == 503
 
 
 class TestServiceConstruction:
