@@ -77,6 +77,12 @@ from op3.anchors.padeye import (
     optimal_padeye_from_dissipation,
     padeye_sensitivity_study,
 )
+from op3.anchors.cyclic import (
+    cyclic_capacity_reduction,
+    andersen_cyclic_reduction,
+    apply_cyclic_to_soil,
+    CyclicResult,
+)
 
 __all__ = [
     # Data model
@@ -104,4 +110,9 @@ __all__ = [
     "optimal_padeye_analytical",
     "optimal_padeye_from_dissipation",
     "padeye_sensitivity_study",
+    # Cyclic
+    "cyclic_capacity_reduction",
+    "andersen_cyclic_reduction",
+    "apply_cyclic_to_soil",
+    "CyclicResult",
 ]
