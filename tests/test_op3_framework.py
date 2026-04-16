@@ -153,7 +153,11 @@ class TestSSOTConfig:
 
     def test_yaml_exists_and_parses(self):
         import yaml
-        cfg = yaml.safe_load((REPO_ROOT / "op3" / "config" / "site_a.yaml").read_text())
+        # Explicit UTF-8 encoding is required because the YAML contains
+        # Korean site metadata; Windows cp949 default decoder fails on it.
+        cfg = yaml.safe_load(
+            (REPO_ROOT / "op3" / "config" / "site_a.yaml").read_text(encoding="utf-8")
+        )
         assert cfg is not None
         assert isinstance(cfg, dict)
 

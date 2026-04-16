@@ -4,6 +4,24 @@ All notable changes to Op^3 are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this
 project uses [Semantic Versioning](https://semver.org/).
 
+## [1.0.0] -- 2026-04-16
+
+Promotion from 1.0.0-rc2 to 1.0.0 for the Advances in Engineering Software
+submission (Paper J9). No functional changes relative to rc2; this release is
+a stable version cut.
+
+### Changed
+- Version strings bumped to 1.0.0 in `op3/__init__.py`, `pyproject.toml`,
+  `CITATION.cff`, `docs/sphinx/conf.py`.
+- `__release_date__` added to `op3/__init__.py`.
+
+### Verified
+- 361 / 361 tests passing (11 skipped for optional data not in this checkout;
+  1 pre-existing test deselected for a Windows cp949 encoding issue unrelated
+  to the release; reproducible at `tests/test_op3_framework.py::TestSSOTConfig::
+  test_yaml_exists_and_parses`, tracked separately).
+- Package imports with `__version__ == "1.0.0"` confirmed.
+
 ## [Unreleased]
 
 ### Added -- `op3_studio/` web GUI
