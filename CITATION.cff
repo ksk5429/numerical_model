@@ -17,6 +17,7 @@ authors:
   - family-names: "Kim"
     given-names: "Kyeong Sun"
     affiliation: "Department of Civil and Environmental Engineering, Seoul National University"
+    orcid: "https://orcid.org/0009-0006-6151-893X"
 type: software
 version: "1.0.0"
 date-released: "2026-04-16"
