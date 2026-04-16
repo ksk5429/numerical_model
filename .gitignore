@@ -2,6 +2,17 @@
 # Strategy: track the framework source and benchmarks. Exclude
 # build artifacts, large raw data, virtual environments, and cache.
 
+# Secrets: never commit tokens, credentials, or API keys
+pypi_new_token.txt
+pypi_token.txt
+*.token
+.pypirc
+.env
+.env.*
+!.env.example
+credentials.json
+secrets.json
+
 # Python
 __pycache__/
 *.pyc
