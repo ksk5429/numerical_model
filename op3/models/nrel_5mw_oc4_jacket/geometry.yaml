@@ -1,0 +1,53 @@
+# =============================================================================
+# NREL 5MW OC4 Phase I Jacket -- geometry
+# =============================================================================
+# Provenance: Popko 2012 NREL/TP-5000-56129 + Vorpahl 2013 IWES deck.
+# Representative (single) values for leg / brace OD and thickness; the
+# real OC4 jacket has stepped legs (4 levels) and stepped braces. A
+# finer wall-schedule loader lands when the jacket gains topology-aware
+# OpenSees instantiation in a later PR.
+# =============================================================================
+
+jacket:
+  n_legs: 4
+  n_x_braces: 4              # Brace levels between mudline and TP
+
+  # Representative leg tube (use for provenance only; real jacket has
+  # stepped legs per Popko 2012 Table 1).
+  leg_diameter_m: 1.2
+  leg_wall_thickness_m: 0.05
+
+  # Representative X-brace tube.
+  brace_diameter_m: 0.8
+  brace_wall_thickness_m: 0.02
+
+  # Geometry elevations (global coord system; MSL = 0).
+  mudline_z_m: -50.0
+  transition_piece_z_m: 20.15   # Popko 2012: TP top at +20.15 m
+
+  # Footprint spacing at mudline (square base, 12 m x 12 m per Popko 2012).
+  footprint_spacing_m: 12.0
+
+  # Optional: parsed SACS deck relative to this dossier directory.
+  # Set to null if not bundled in the checkout.
+  sacs_deck: "../../../nrel_reference/sacs_jackets/nrel_oc4/NREL_OC4.sacs"
+
+tower:
+  template_name: "nrel_5mw_tower"
+  hub_height_m: 90.0
+  base_elev_above_mudline_m: 70.15   # 50 m water + 20.15 m TP
+
+rna:
+  total_mass_kg: 350000.0
+  template_name: "nrel_5mw_baseline"
+
+ssi_interface:
+  # Head-stiffness CSV produced by SubDyn reduction of the full OC4
+  # jacket + soil. Loaded by build_jacket_oc4() via Stiffness6x6.
+  stiffness_csv: "../../../data/fem_results/K_6x6_oc4_jacket.csv"
+  notes: >
+    Diagonal K from OpenFAST SubDyn internal condensation of the OC4
+    jacket with mudline-pinned legs (no explicit soil). Values:
+    K_H = 2.4e9 N/m, K_V = 4.5e9 N/m, K_R = 8.5e11 N.m/rad,
+    K_T = 1.2e10 N.m/rad. Off-diagonals zero because SubDyn's
+    legacy condensation is diagonal for this benchmark.

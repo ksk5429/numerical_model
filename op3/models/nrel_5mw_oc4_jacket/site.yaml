@@ -1,0 +1,33 @@
+# =============================================================================
+# NREL 5MW OC4 Phase I Jacket -- site metadata
+# =============================================================================
+# Provenance: OC4 Phase I definition (Popko et al. 2012,
+# NREL/TP-5000-56129). IEA Wind Task 30 (Offshore Code Comparison
+# Collaboration Continuation) benchmark. Follow-on from OC3 that
+# focused on jacket substructures.
+# =============================================================================
+
+site:
+  id: "NREL-5MW-OC4-JACKET"
+  label: "NREL 5MW OC4 Phase I (Popko 2012)"
+  description: >
+    IEA Wind OC4 Phase I jacket benchmark. 50 m water depth, 5 MW
+    turbine on a 4-leg X-braced lattice jacket. Sixteen participant
+    codes produced cross-validation data for eigenfrequencies,
+    modal shapes, and DLC response. The coupled first fore-aft
+    natural frequency is ~0.319 Hz; participants agree within ~2%.
+
+  water_depth_m: 50.0
+  msl_z_m: 0.0          # Mean sea level reference
+  mudline_z_m: -50.0    # Seabed elevation
+  tower_base_z_m: 20.15 # Top of transition piece / bottom of tower
+
+  coordinates:
+    note: "Reference turbine; no physical coordinates."
+
+references:
+  - citation: "Popko, W., Vorpahl, F., Zuga, A., Kohlmeier, M., Jonkman, J., Robertson, A., Larsen, T. J. et al. (2012). Offshore Code Comparison Collaboration Continuation (OC4), Phase I -- Results of Coupled Simulations of an Offshore Wind Turbine with Jacket Support Structure. NREL/TP-5000-56129 / Proceedings ISOPE 2012."
+    doi: "10.1115/OMAE2013-10729"
+    used_for: "Jacket geometry, first fore-aft coupled frequency (0.319 Hz)"
+  - citation: "Vorpahl, F., Popko, W., Kaufer, D. (2013). Description of a basic model of the 'UpWind reference jacket' for code comparison in the OC4 project under IEA Wind Annex XXX. Fraunhofer IWES."
+    used_for: "Leg and brace wall schedule, section properties"

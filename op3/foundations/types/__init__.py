@@ -10,9 +10,9 @@ Status
 +----------------+------------+-----------------------------------------+
 | Type           | Status     | Validated models                        |
 +================+============+=========================================+
-| Monopile       | skeleton   | nrel_5mw_oc3_monopile (RED, in progress)|
+| Monopile       | skeleton   | nrel_5mw_oc3_monopile (YELLOW, PR #2)   |
+| Jacket         | skeleton   | nrel_5mw_oc4_jacket (YELLOW, PR #3)     |
 | Tripod         | planned    | gunsan_4mw_tripod                       |
-| Jacket         | planned    | nrel_5mw_oc4_jacket                     |
 | SuctionBucket  | planned    | —                                       |
 +----------------+------------+-----------------------------------------+
 
@@ -23,8 +23,10 @@ that bar is cleared.
 """
 from __future__ import annotations
 
+from op3.foundations.types.jacket import Jacket
 from op3.foundations.types.monopile import Monopile
 
 __all__ = [
+    "Jacket",
     "Monopile",
 ]

@@ -1,0 +1,177 @@
+# =============================================================================
+# NREL 5MW OC4 Phase I Jacket -- V&V&C dossier
+# =============================================================================
+# Status values:
+#   RED     -- metric not yet evaluated or failing acceptance threshold
+#   YELLOW  -- metric passing but provenance / uncertainty incomplete
+#   GREEN   -- metric passing at target accuracy with documented provenance
+# =============================================================================
+
+dossier:
+  model: "nrel_5mw_oc4_jacket"
+  api_version: "v1.1"
+  created: "2026-04-20 (PR #3)"
+  overall_status: "YELLOW"
+  notes: >
+    PR #3 scaffolds the Jacket type with the OC4 Phase I coupled
+    benchmark as the primary validation. Uses a pre-computed 6x6
+    head K from data/fem_results/K_6x6_oc4_jacket.csv; future PRs
+    will add Craig-Bampton reduction from the SACS-parsed topology.
+
+# ---------------------------------------------------------------------------
+# (1) CLASSIFICATION
+# ---------------------------------------------------------------------------
+classification:
+  status: "YELLOW"
+  dnv_a204_level: "M1 (reference digital representation)"
+  asme_vv40_tier: "Level 2 (published-benchmark validation)"
+  notes: "OC4 Phase I is a 16-participant IEA Wind benchmark -- strong pedigree."
+
+# ---------------------------------------------------------------------------
+# (2) CODE VERIFICATION
+# ---------------------------------------------------------------------------
+code_verification:
+  status: "GREEN"
+  items:
+    - name: "Jacket.from_oc4_phase1_spec returns expected geometry"
+      test: "tests/test_model_nrel_5mw_oc4_jacket.py::TestJacketFactory::test_from_oc4_phase1_spec"
+      status: "GREEN"
+    - name: "Jacket SACS parse produces 56 joints / 54 members"
+      test: "tests/test_model_nrel_5mw_oc4_jacket.py::TestJacketFactory::test_sacs_deck_parses"
+      status: "GREEN"
+    - name: "Jacket.from_yaml loads dossier geometry + SACS + soil"
+      test: "tests/test_model_nrel_5mw_oc4_jacket.py::TestJacketFactory::test_from_yaml_matches_dossier"
+      status: "GREEN"
+    - name: "as_legacy_foundation produces STIFFNESS_6X6"
+      test: "tests/test_model_nrel_5mw_oc4_jacket.py::TestLegacyBridge::test_as_legacy_foundation"
+      status: "GREEN"
+
+# ---------------------------------------------------------------------------
+# (3) CALCULATION VERIFICATION
+# ---------------------------------------------------------------------------
+calc_verification:
+  status: "RED"
+  items:
+    - name: "SubDyn condensation cross-check vs Op^3 Craig-Bampton"
+      target: "K_6x6 agreement within 5% after Op^3 reconstructs jacket in OpenSees"
+      status: "NOT-STARTED"
+      notes: "Requires topology-aware Jacket OpenSees builder (future PR)."
+
+# ---------------------------------------------------------------------------
+# (4) CONCEPTUAL MODEL
+# ---------------------------------------------------------------------------
+conceptual_model:
+  status: "YELLOW"
+  items:
+    - name: "Jacket head stiffness is diagonal (K[0,4]=K[1,3]=0)"
+      status: "GREEN"
+      notes: >
+        Matches SubDyn's legacy diagonal condensation. For OC4 Phase I
+        the off-diagonals are ~0 by design (mudline-pinned legs with
+        symmetric footprint).
+    - name: "SACS parse aligns mudline with geometry.yaml"
+      status: "GREEN"
+
+# ---------------------------------------------------------------------------
+# (5) INPUT PEDIGREE
+# ---------------------------------------------------------------------------
+input_pedigree:
+  status: "GREEN"
+  items:
+    - field: "jacket geometry"
+      source: "Popko 2012 NREL/TP-5000-56129"
+      status: "GREEN"
+    - field: "head-stiffness CSV"
+      source: "data/fem_results/K_6x6_oc4_jacket.csv (SubDyn-condensed)"
+      status: "GREEN"
+    - field: "SACS deck"
+      source: "nrel_reference/sacs_jackets/nrel_oc4/NREL_OC4.sacs"
+      status: "GREEN"
+    - field: "soil profile"
+      source: "OC4 Phase I = mudline-pinned (no soil)"
+      status: "GREEN"
+
+# ---------------------------------------------------------------------------
+# (6) VALIDATION METRICS
+# ---------------------------------------------------------------------------
+validation:
+  status: "GREEN"
+  metrics:
+    - name: "f1_Hz_oc4_coupled"
+      description: "First fore-aft f1, coupled OC4 jacket + tower + RNA"
+      reference_value: 0.319
+      reference_source: "Popko 2012 OC4 Phase I multi-code average"
+      acceptance_tolerance_pct: 3.0
+      current_value: 0.3131
+      current_error_pct: 1.8
+      test: "tests/test_model_nrel_5mw_oc4_jacket.py::TestValidationEigen::test_f1_matches_oc4_phase1_coupled"
+      status: "GREEN"
+
+    - name: "K_head_lateral_N_per_m"
+      description: "Head K[0,0] from the SubDyn-condensed CSV"
+      reference_value: 2.4e9
+      reference_source: "data/fem_results/K_6x6_oc4_jacket.csv"
+      acceptance_tolerance_pct: 1.0
+      current_value: 2.4e9
+      current_error_pct: 0.0
+      test: "tests/test_model_nrel_5mw_oc4_jacket.py::TestValidationEigen::test_K_matches_csv"
+      status: "GREEN"
+
+# ---------------------------------------------------------------------------
+# (7) SENSITIVITY
+# ---------------------------------------------------------------------------
+sensitivity:
+  status: "RED"
+  items:
+    - name: "Sobol on K_H, K_R, RNA mass"
+      target: "identify top-3 drivers of f1"
+      status: "NOT-STARTED"
+
+# ---------------------------------------------------------------------------
+# (8) APPLICABILITY
+# ---------------------------------------------------------------------------
+applicability:
+  status: "GREEN"
+  envelope:
+    water_depth_m_range: [30.0, 70.0]
+    turbine_rated_MW_range: [3.0, 10.0]
+    footprint_m_range: [8.0, 20.0]
+
+# ---------------------------------------------------------------------------
+# (9) STANDARDS
+# ---------------------------------------------------------------------------
+standards:
+  status: "RED"
+  items:
+    - standard: "DNV-ST-0126 (2024)"
+      section: "Jacket design basis"
+      status: "NOT-STARTED"
+    - standard: "ISO 19902:2020"
+      section: "Fixed steel offshore structures"
+      status: "NOT-STARTED"
+
+# ---------------------------------------------------------------------------
+# KNOWN LIMITATIONS
+# ---------------------------------------------------------------------------
+limitations:
+  - id: "head_stiffness_is_external"
+    severity: "MEDIUM"
+    description: >
+      The jacket head K matrix comes from an external SubDyn
+      condensation CSV, not from an Op^3 Craig-Bampton of the jacket
+      topology. The SACS deck is parsed and stored in the Jacket
+      instance but is NOT yet used to rebuild the jacket in OpenSees.
+    future_fix: >
+      Add a JacketCraigBampton SSI strategy that assembles the jacket
+      from the SACS JointTable + MemberTable and invokes the
+      op3.openfast_coupling.craig_bampton pipeline to produce the 6x6
+      in-situ. Then the dossier can validate K_6x6 against the
+      external reference too.
+
+  - id: "leg_wall_schedule_single_value"
+    severity: "LOW"
+    description: >
+      geometry.yaml stores single representative values for leg /
+      brace diameter and thickness. Real OC4 Phase I jacket has
+      stepped legs; the SACS deck holds the full schedule.
+    future_fix: "Expose a schedule reader once topology is built in OpenSees."

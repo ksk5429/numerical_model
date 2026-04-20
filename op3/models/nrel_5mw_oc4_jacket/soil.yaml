@@ -1,0 +1,28 @@
+# =============================================================================
+# NREL 5MW OC4 Phase I Jacket -- soil profile
+# =============================================================================
+# OC4 Phase I did NOT include explicit soil springs — jackets were
+# modelled with mudline-pinned legs. The head-stiffness CSV at
+# geometry.yaml:ssi_interface.stiffness_csv encodes the rigid-mudline
+# response without soil flexibility.
+#
+# This soil.yaml is a PLACEHOLDER kept for API symmetry with the
+# monopile dossier. When OC4 Phase II soil conditions are wired in
+# (OC4 Phase II used the NREL 5MW OC4 floating spar — not a jacket),
+# or when a SITE-specific jacket validation is added (e.g. Horns Rev,
+# Alpha Ventus), update both ``layers`` and ``provenance``.
+# =============================================================================
+
+layers: []
+
+provenance:
+  status: "INTENTIONALLY-EMPTY"
+  primary_source: >
+    OC4 Phase I (Popko 2012) does not specify a soil profile; the
+    jacket legs are clamped at mudline. The SubDyn-condensed head K
+    at data/fem_results/K_6x6_oc4_jacket.csv already encodes the
+    mudline-pinned boundary condition. A PISA or BNWF SSI strategy
+    CAN be attached to this dossier, but the resulting f1 would no
+    longer match the OC4 Phase I benchmark.
+  comments: >
+    For site-specific jacket work add real soil layers here.
