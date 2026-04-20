@@ -13,12 +13,18 @@ from pathlib import Path
 DOSSIER_DIR: Path = Path(__file__).resolve().parent
 
 from op3.models.nrel_5mw_oc3_monopile.build import (  # noqa: E402
+    LEGACY_K_CSV,
     build_monopile,
+    build_monopile_legacy_csv,
+    build_monopile_pisa,
     build_tower_model,
 )
 
 __all__ = [
     "DOSSIER_DIR",
+    "LEGACY_K_CSV",
     "build_monopile",
+    "build_monopile_legacy_csv",
+    "build_monopile_pisa",
     "build_tower_model",
 ]

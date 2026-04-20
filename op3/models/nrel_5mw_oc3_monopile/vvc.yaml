@@ -14,11 +14,14 @@ dossier:
   model: "nrel_5mw_oc3_monopile"
   api_version: "v1.1"
   created: "2026-04-20"
-  overall_status: "RED"
+  updated: "2026-04-20 (PR #2)"
+  overall_status: "YELLOW"
   notes: >
-    PR #1 scaffolds the new op3.foundations.types API. Acceptance
-    metrics below are placeholders for the validation work that lands
-    in PR #2 (PISA calibration) and PR #3 (physical-BNWF comparison).
+    PR #1 scaffolded the new op3.foundations.types API. PR #2 adds
+    the PISA SSI strategy validated against the OC3 Phase I coupled
+    benchmark and tightens tolerances. Overall status YELLOW because
+    input pedigree (soil profile) and SSI-coupling representation
+    (diagonal-only Mode B) are acknowledged limitations.
 
 # ---------------------------------------------------------------------------
 # (1) CLASSIFICATION -- DNV-RP-A204 / ASME V&V 40
@@ -33,16 +36,22 @@ classification:
 # (2) CODE VERIFICATION -- MMS / unit tests
 # ---------------------------------------------------------------------------
 code_verification:
-  status: "RED"
+  status: "GREEN"
   items:
     - name: "Monopile.from_oc3_spec returns expected geometry"
-      test: "tests/test_model_nrel_5mw_oc3_monopile.py::test_from_oc3_spec"
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::TestMonopileFactory::test_from_oc3_spec"
       status: "GREEN"
     - name: "Monopile as_legacy_foundation produces STIFFNESS_6X6"
-      test: "tests/test_model_nrel_5mw_oc3_monopile.py::test_as_legacy_foundation"
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::TestLegacyFoundationBridge::test_as_legacy_foundation_returns_STIFFNESS_6X6"
       status: "GREEN"
     - name: "Composer eigen pipeline accepts Monopile-derived Foundation"
-      test: "tests/test_model_nrel_5mw_oc3_monopile.py::test_compose_tower_model_accepts_monopile"
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::TestComposerIntegration::test_compose_tower_model_accepts_monopile"
+      status: "GREEN"
+    - name: "PISA strategy produces a valid 6x6 head stiffness"
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::TestPisaStrategy::test_pisa_produces_valid_6x6"
+      status: "GREEN"
+    - name: "PISA + legacy-CSV variants both build without error"
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::TestPisaStrategy::test_three_variants_build_successfully"
       status: "GREEN"
 
 # ---------------------------------------------------------------------------
@@ -79,8 +88,16 @@ input_pedigree:
       source: "Jonkman 2010 NREL/TP-500-47535"
       status: "GREEN"
     - field: "soil profile"
-      source: "PLACEHOLDER (see soil.yaml)"
-      status: "RED"
+      source: "Zaaijer 2006 + corroborating refs (see soil.yaml provenance)"
+      status: "YELLOW"
+      notes: >
+        Layered dense sand consistent with published OC3 follow-ons;
+        not reproduced from a single primary source. OC3 Phase I
+        originally used apparent-fixity (4.5*D) which the legacy
+        K_6x6_oc3_monopile.csv encodes.
+    - field: "tower template"
+      source: "nrel_5mw_oc3_tower (Jonkman 2010)"
+      status: "GREEN"
 
 # ---------------------------------------------------------------------------
 # (6) VALIDATION METRICS
@@ -93,40 +110,69 @@ input_pedigree:
 validation:
   status: "YELLOW"
   metrics:
-    - name: "f1_Hz_oc3_coupled"
-      description: "First fore-aft natural frequency, rigid SSI, OC3 monopile + tower + RNA"
+    - name: "f1_Hz_oc3_coupled_rigid"
+      description: "First fore-aft f1, rigid Stiffness6x6 SSI, OC3 monopile + tower + RNA"
       reference_value: 0.276
-      reference_source: "Passon 2008 / OC3 Phase I benchmark"
-      acceptance_tolerance_pct: 5.0
+      reference_source: "Passon 2008 / OC3 Phase I benchmark (J. Phys. Conf. Ser. 75:012071)"
+      acceptance_tolerance_pct: 3.0
       current_value: 0.2815
       current_error_pct: 2.0
-      test: "tests/test_model_nrel_5mw_oc3_monopile.py::test_f1_matches_oc3_phase1_coupled"
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::TestValidationEigen::test_f1_matches_oc3_phase1_coupled"
+      status: "GREEN"
+      notes: "Tightened from 5% in PR #1 to 3% in PR #2 (measured error = 2.0%)."
+
+    - name: "f1_Hz_oc3_coupled_pisa"
+      description: "First fore-aft f1, PISA SSI using soil.yaml layers, OC3 monopile + tower + RNA"
+      reference_value: 0.276
+      reference_source: "Passon 2008"
+      acceptance_tolerance_pct: 5.0
+      current_value: 0.2813
+      current_error_pct: 2.0
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::TestValidationEigen::test_f1_pisa_matches_oc3_phase1_coupled"
       status: "GREEN"
       notes: >
-        PR #1: rigid Stiffness6x6 SSI via legacy _attach_stiffness_6x6
-        (ground at origin, tower base at +10 m). PR #2 will tighten
-        the tolerance to 2% after adding a topology-aware interface
-        node at z = +10 m.
+        Passes despite the diagonal-only Mode B attachment losing
+        PISA off-diagonals (see limitations below). First mode is
+        tower-dominated which masks the off-diagonal loss.
+
+    - name: "f1_Hz_oc3_coupled_legacy_csv"
+      description: "First fore-aft f1, legacy K_6x6_oc3_monopile.csv via Stiffness6x6"
+      reference_value: 0.276
+      reference_source: "Passon 2008"
+      acceptance_tolerance_pct: 3.0
+      current_value: 0.2815
+      current_error_pct: 2.0
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::TestValidationEigen::test_f1_legacy_csv_matches"
+      status: "GREEN"
+      notes: "Reproduces the v1.0 op³ result via the new API bridge."
 
     - name: "f1_Hz_fixed_base"
-      description: "First fore-aft natural frequency, tower truly clamped at its base (z=+10m)"
+      description: "First fore-aft f1, tower truly clamped at its base (z=+10m)"
       reference_value: 0.324
       reference_source: "NREL 5MW onshore baseline (Jonkman 2009 NREL/TP-500-38060)"
       acceptance_tolerance_pct: 2.0
       current_value: null
-      status: "BLOCKED"
+      status: "DEFERRED"
       notes: >
-        Requires SSI that attaches rigidly at the tower-base node
-        (not at origin). Deferred to PR #2.
+        The legacy _attach_stiffness_6x6 places ground_node at (0,0,0)
+        not at the tower-base elevation (+10 m), so a rigid K does not
+        produce a true fixed base at the tower foot. A topology-aware
+        SSI (attaches rigidly at base_node's coord) is future work.
 
     - name: "K_head_lateral_N_per_m"
-      description: "Head stiffness K[0,0] from PISA-derived 6x6 on OC3 Phase II/III soil"
-      reference_value: null   # To be computed from published depth-function baseline
-      reference_source: "TBD (PISA Burd 2020 depth-function fit to OC3 soil)"
+      description: "Head stiffness K[0,0] from PISA-derived 6x6 on the soil.yaml profile"
+      reference_value: 1.9e10
+      reference_source: "Op^3 PISA internal calibration (not an independent validation)"
       acceptance_tolerance_pct: 10.0
-      current_value: null
-      status: "NOT-STARTED"
-      notes: "Requires real OC3 soil profile (see soil.yaml provenance)."
+      current_value: 1.862e10
+      current_error_pct: 2.0
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::TestPisaStrategy::test_pisa_K_in_expected_range"
+      status: "YELLOW"
+      notes: >
+        Internal consistency check; NOT an independent validation.
+        The legacy v1.0 K_6x6_oc3_monopile.csv gives K[0,0] = 8.5e8 N/m
+        (apparent-fixity equivalent); PISA gives ~1.9e10 N/m. The
+        two-order-of-magnitude gap is documented in soil.yaml provenance.
 
 # ---------------------------------------------------------------------------
 # (7) SENSITIVITY / UNCERTAINTY QUANTIFICATION
@@ -161,3 +207,38 @@ standards:
     - standard: "IEC 61400-3-1:2019"
       section: "DLC 1.2, 1.6, 6.1"
       status: "NOT-STARTED"
+
+# ---------------------------------------------------------------------------
+# KNOWN LIMITATIONS
+# ---------------------------------------------------------------------------
+limitations:
+  - id: "diagonal_only_Mode_B_attachment"
+    severity: "MEDIUM"
+    description: >
+      The legacy op3.opensees_foundations.builder._attach_stiffness_6x6
+      attaches a 6x6 head stiffness as SIX independent Elastic uniaxial
+      materials on a zeroLength element (one per DOF). The lateral-
+      rocking off-diagonals K[0,4], K[1,3] of a PISA-derived K are
+      therefore NOT represented in the eigenvalue analysis. The op³
+      audit-pass UserWarning fires whenever this happens
+      (coupling_ratio > 0.1).
+    impact_on_this_metric: >
+      For NREL 5MW OC3 the first fore-aft mode is tower-dominated, so
+      the off-diagonal loss has < 2% impact on f1. For stockier towers
+      or deeper modes the effect will be larger.
+    future_fix: >
+      Custom zeroLengthND element OR a physical distributed BNWF SSI
+      strategy that builds its own OpenSees topology. Blueprint
+      Q1(a) + Q2(b) direction.
+
+  - id: "ground_node_not_at_tower_base_elevation"
+    severity: "LOW"
+    description: >
+      _attach_stiffness_6x6 places the ground node at (0, 0, 0) even
+      when the tower base is at z = +10 m. OpenSees emits a WARNING
+      ("Element X has L=10 which is greater than tolerance"). Since
+      the zeroLength element is DOF-based with Elastic materials the
+      numerical result is position-independent, but the warning is
+      noisy and the semantics of "fixed base" are unclear in the
+      model domain.
+    future_fix: "Place ground_node at ops.nodeCoord(base_node)."

@@ -5,19 +5,32 @@ Instantiates the model via the new :mod:`op3.foundations.types` API
 and bridges to the legacy :func:`op3.composer.compose_tower_model`
 pipeline so the eigen / pushover / transient analyses work unchanged.
 
-Two public entry points:
-
-- :func:`build_monopile` — returns a configured ``Monopile`` ready
-  for head-stiffness queries.
+Public entry points
+-------------------
+- :func:`build_monopile` — returns a configured :class:`Monopile`
+  ready for head-stiffness queries. Defaults to rigid SSI; pass an
+  ``ssi`` kwarg to override.
+- :func:`build_monopile_pisa` — convenience: Monopile pre-wired with
+  the :class:`op3.ssi.PISA` strategy and the dossier soil profile.
+- :func:`build_monopile_legacy_csv` — convenience: Monopile pre-wired
+  with a :class:`op3.ssi.Stiffness6x6` loaded from the legacy
+  ``data/fem_results/K_6x6_oc3_monopile.csv`` (useful for diffing the
+  new API against the v1.0 pipeline).
 - :func:`build_tower_model` — returns a legacy ``TowerModel`` wired
-  with the Monopile-derived 6x6 head stiffness so the existing
-  composer can drive eigen analyses.
+  with the Monopile-derived 6x6 head stiffness.
 
-Both functions load from the dossier YAMLs (no hidden constants).
-SSI defaults to :class:`op3.ssi.Stiffness6x6.rigid` (fixed-base) —
-this reproduces the NREL 5MW onshore tower behaviour at the
-monopile's top elevation and is the most reproducible configuration
-for PR #1. Calibrated SSI (PISA with OC3 soil) is future work.
+All functions read from the dossier YAMLs; no hidden constants.
+
+Known limitations (PR #2, see vvc.yaml)
+---------------------------------------
+The legacy :func:`op3.opensees_foundations.builder._attach_stiffness_6x6`
+attaches the 6x6 head stiffness as a diagonal-only ``zeroLength``
+element (one :class:`Elastic` uniaxial per DOF). PISA-derived K
+matrices carry significant lateral-rocking off-diagonals (``K[0,4]``,
+``K[1,3]`` approximately -0.8 times ``sqrt(K[0,0]*K[4,4])``) which
+are lost at this attachment. The audit-pass UserWarning fires when
+this happens. Fixing it requires either a new custom ``zeroLengthND``
+path or the physical-BNWF SSI (blueprint Q1(a), future PR).
 """
 from __future__ import annotations
 
@@ -32,6 +45,12 @@ if TYPE_CHECKING:  # pragma: no cover
 
 
 DOSSIER_DIR: Path = Path(__file__).resolve().parent
+# op3/models/<name>/build.py -> <repo-root>
+#   parents[0] = op3/models
+#   parents[1] = op3
+#   parents[2] = <repo root>
+REPO_ROOT: Path = DOSSIER_DIR.parents[2]
+LEGACY_K_CSV: Path = REPO_ROOT / "data" / "fem_results" / "K_6x6_oc3_monopile.csv"
 
 
 def build_monopile(ssi: Optional["SSIProtocol"] = None) -> Monopile:
@@ -41,8 +60,9 @@ def build_monopile(ssi: Optional["SSIProtocol"] = None) -> Monopile:
     ----------
     ssi : SSIProtocol, optional
         SSI fidelity strategy. Defaults to
-        :meth:`op3.ssi.Stiffness6x6.rigid` (fixed-base; the most
-        reproducible configuration for PR #1).
+        :meth:`op3.ssi.Stiffness6x6.rigid` (rigid head-spring; the
+        most reproducible configuration for establishing the new-API
+        contract).
     """
     if ssi is None:
         from op3.ssi import Stiffness6x6
@@ -51,6 +71,66 @@ def build_monopile(ssi: Optional["SSIProtocol"] = None) -> Monopile:
 
     monopile = Monopile.from_yaml(DOSSIER_DIR)
     monopile.with_ssi(ssi)
+    return monopile
+
+
+def build_monopile_pisa(n_segments: int = 50) -> Monopile:
+    """Build the OC3 monopile pre-wired with the PISA SSI strategy.
+
+    Uses the layered soil profile from ``soil.yaml`` and the PISA
+    depth-function coefficients from :mod:`op3.standards.pisa` (Byrne
+    2020 Table 7 sand). Raises :class:`ImportError` if
+    :mod:`op3.ssi.pisa` is unavailable.
+    """
+    from op3.ssi import PISA
+
+    if PISA is None:
+        raise ImportError(
+            "op3.ssi.PISA is unavailable — install PyYAML and ensure "
+            "op3.standards.pisa is importable to use the PISA SSI "
+            "strategy for this dossier."
+        )
+
+    monopile = Monopile.from_yaml(DOSSIER_DIR)
+    if not monopile.soil_profile:
+        raise RuntimeError(
+            f"soil.yaml at {DOSSIER_DIR / 'soil.yaml'} loaded an empty "
+            "soil profile; cannot instantiate PISA strategy"
+        )
+    monopile.with_ssi(
+        PISA(
+            soil_profile=monopile.soil_profile,
+            n_segments=n_segments,
+            label="OC3 Phase I dense sand (soil.yaml)",
+        )
+    )
+    return monopile
+
+
+def build_monopile_legacy_csv() -> Monopile:
+    """Build the OC3 monopile with the legacy apparent-fixity K matrix
+    from ``data/fem_results/K_6x6_oc3_monopile.csv``.
+
+    Useful for reproducing v1.0 op³ results against the new API. The
+    legacy CSV is diagonal-only and K_HH = 8.5e8 N/m; the modern
+    PISA-derived K_HH is ~1.9e10 N/m but both give the same coupled
+    f1 within 2% because the NREL 5MW OC3 first mode is
+    tower-dominated.
+    """
+    from op3.ssi import Stiffness6x6
+
+    if not LEGACY_K_CSV.exists():
+        raise FileNotFoundError(
+            f"Legacy OC3 K matrix not found at {LEGACY_K_CSV}. Check "
+            "that the data/fem_results tree is present in this checkout."
+        )
+    monopile = Monopile.from_yaml(DOSSIER_DIR)
+    monopile.with_ssi(
+        Stiffness6x6.from_csv(
+            str(LEGACY_K_CSV),
+            label="v1.0 apparent-fixity equivalent (K_6x6_oc3_monopile.csv)",
+        )
+    )
     return monopile
 
 
