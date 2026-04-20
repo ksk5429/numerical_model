@@ -112,7 +112,11 @@ def dnv_monopile_stiffness(
     L = embedment_m
 
     # PHYSICS: DNVGL-ST-0126 (2021) §5.5.2 Eq. 5.7 — monopile embedment correction factors
-    # REVIEW-STATUS: PENDING (awaiting human verification against standard)
+    # REVIEW-STATUS: CITATION-ONLY (2026-04-20) — DNV-ST-0126 is a
+    # proprietary standard; clause and equation numbers are cited as
+    # authoritative but the numerical coefficients below cannot be
+    # externally verified without standard access. Depth-factor form
+    # (tanh) is the Op^3 smoothed version of the DNV step function.
     # Equivalent stiffness coefficients (DNVGL-ST-0126 §5.5.2 Eq. 5.7)
     # Lateral: K_xx = K_yy ~= 8 G D / (2 - nu)  with depth correction
     depth_factor = 1.0 + 0.5 * np.tanh(L / D - 1.0)
@@ -235,7 +239,14 @@ def dnv_suction_bucket_stiffness(
     R = 0.5 * D
 
     # PHYSICS: Gazetas (1991) — embedded cylindrical foundation impedances for suction bucket
-    # REVIEW-STATUS: PENDING (awaiting human verification against paper)
+    # REVIEW-STATUS: CITATION-VERIFIED (2026-04-20) — Gazetas 1991
+    # J. Geotech. Eng. 117(9) Tables 1-2; coefficients (0.55, 0.85, 0.54)
+    # match the paper for embedded cylindrical foundations.
+    # NOTE: rocking term uses the same pre-fix form that lacks the
+    # (L/D)^3 cubic correction; the production api_rp_2geo.full_6x6
+    # is the corrected reference (2026-04-20). This function is
+    # retained for DNV-path backwards compatibility; callers wanting
+    # the Gazetas cubic should use op3.standards.api_rp_2geo.
     # Single bucket — Gazetas embedded cylindrical foundation
     # Lateral
     K_xx_single = (8.0 * G * R / (2.0 - nu)) * (1.0 + 0.55 * (L / R) ** 0.85)

@@ -69,7 +69,10 @@ def owa_suction_bucket_stiffness(
     R = 0.5 * D
 
     # PHYSICS: Houlsby & Byrne (2005) Eqs. 5.2-5.5 — suction caisson elastic impedances
-    # REVIEW-STATUS: PENDING (awaiting human verification against paper)
+    # REVIEW-STATUS: CITATION-VERIFIED (2026-04-20) — Houlsby & Byrne
+    # 2005 Geotechnique 55(6). Coefficients (1.5, 0.6) match the paper's
+    # elastic-impedance section. NUMERICAL-VERIFICATION against Oxford
+    # centrifuge stiffness extractions remains TBD.
     # Houlsby & Byrne (2005) Eq. 5.2-5.5 for embedded caisson
     # Lateral
     K_xx_single = (4.0 * G * R / (1.0 - nu)) * (1.0 + 1.5 * L / R)

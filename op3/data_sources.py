@@ -45,22 +45,32 @@ dated snapshots needed for reviewer reproducibility.
 from __future__ import annotations
 
 import os
+import warnings
 from pathlib import Path
 from typing import Optional
 
 
+# The default PHD root is the author's laptop path (F: drive on
+# Windows). Every other environment MUST set ``OP3_PHD_ROOT`` or the
+# module will fall through to the committed CSV snapshot cache with
+# a UserWarning — silent fallback is not allowed.
 _DEFAULT_PHD_ROOT = Path("F:/TREE_OF_THOUGHT/PHD")
+_WARNED_MISSING_ROOT: bool = False
 
 
 def get_phd_root() -> Optional[Path]:
-    """
-    Return the PHD root directory if it exists, else None.
+    """Return the PHD root directory if it exists, else ``None``.
 
     Resolution order:
-      1. ``OP3_PHD_ROOT`` environment variable
-      2. Default location ``F:/TREE_OF_THOUGHT/PHD``
-      3. None if neither exists
+      1. ``OP3_PHD_ROOT`` environment variable (preferred; cross-platform)
+      2. Default location ``F:/TREE_OF_THOUGHT/PHD`` (author's laptop)
+      3. ``None`` — caller must fall back to committed CSV snapshots.
+
+    When neither 1 nor 2 resolves on this machine, a one-shot
+    ``UserWarning`` is emitted so non-author environments notice the
+    silent fallback to snapshots. Set ``OP3_PHD_ROOT`` to silence.
     """
+    global _WARNED_MISSING_ROOT
     env = os.environ.get("OP3_PHD_ROOT")
     if env:
         p = Path(env)
@@ -68,6 +78,17 @@ def get_phd_root() -> Optional[Path]:
             return p
     if _DEFAULT_PHD_ROOT.exists():
         return _DEFAULT_PHD_ROOT
+    if not _WARNED_MISSING_ROOT:
+        warnings.warn(
+            "PHD root not found (OP3_PHD_ROOT unset and default "
+            f"'{_DEFAULT_PHD_ROOT}' does not exist on this machine). "
+            "Op^3 will fall back to committed CSV snapshots under "
+            "data/fem_results/; those snapshots may lag behind the "
+            "author's laptop. Set OP3_PHD_ROOT to the real project root "
+            "to use live data. This warning fires once per process.",
+            stacklevel=2,
+        )
+        _WARNED_MISSING_ROOT = True
     return None
 
 

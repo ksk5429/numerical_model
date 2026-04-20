@@ -56,41 +56,75 @@ def _save(fig, name: str) -> str:
 # ================================================================
 
 def fig_cross_compare() -> str:
-    """Bar chart of f1 across 4 foundation modes + scour levels."""
-    from op3 import build_foundation, compose_tower_model
+    """Bar chart of f1 across 4 foundation modes + scour levels.
 
-    modes = {
-        'A (Fixed)': 'fixed',
-        'B (6x6)': 'stiffness_6x6',
-    }
+    Uses ``op3.cross_compare.cross_compare`` to sweep each mode over the
+    scour grid, matching the dissertation Table 6.X methodology.
+    Requires the site-A spring / stiffness / dissipation CSVs to be
+    present at the expected paths; when any are missing the function
+    issues a ``UserWarning`` and plots only the modes it can build.
+
+    Previous behaviour (replaced 2026-04-20): Modes A/B used the
+    ad-hoc closed form ``f1 * (1 - 0.059 * (S/D)^1.5)`` and Modes C/D
+    used the hardcoded literals
+    ``f1_c = [0.261, 0.258, 0.252, 0.244, 0.233]`` /
+    ``f1_d = [0.244, 0.241, 0.236, 0.228, 0.218]``. Those values were
+    not produced by any Op³ eigen sweep and are removed.
+    """
+    import warnings as _warnings
+    from pathlib import Path as _Path
+    from op3.cross_compare import cross_compare
+
     scour = [0.0, 1.0, 2.0, 3.0, 4.0]
 
-    # Get Mode A frequency
-    fnd_a = build_foundation(mode='fixed')
-    mdl_a = compose_tower_model(rotor='nrel_5mw_baseline',
-                                tower='nrel_5mw_tower', foundation=fnd_a)
-    f1_a = mdl_a.eigen(n_modes=1)[0]
+    _repo_root = _Path(__file__).resolve().parent.parent
+    spring_csv = _repo_root / "data" / "fem_results" / "opensees_spring_stiffness.csv"
+    k_csv = _repo_root / "data" / "fem_results" / "K_6x6_oc3_monopile.csv"
+    diss_csv = _repo_root / "data" / "fem_results" / "dissipation_profile.csv"
 
-    # Apply scour power law for all modes
+    kwargs = {}
+    if spring_csv.exists():
+        kwargs["spring_profile"] = str(spring_csv)
+    else:
+        _warnings.warn(
+            f"spring profile not found at {spring_csv}; Modes C/D will "
+            "be skipped in the cross-comparison figure"
+        )
+    if k_csv.exists():
+        kwargs["stiffness_matrix"] = str(k_csv)
+    else:
+        _warnings.warn(f"6x6 stiffness not found at {k_csv}; Mode B skipped")
+    if diss_csv.exists():
+        kwargs["ogx_dissipation"] = str(diss_csv)
+    else:
+        _warnings.warn(f"dissipation profile not found at {diss_csv}; Mode D skipped")
+
+    df = cross_compare(
+        rotor="nrel_5mw_baseline",
+        tower="nrel_5mw_tower",
+        scour_levels=scour,
+        **kwargs,
+    )
+
     fig, ax = plt.subplots(figsize=(10, 6))
     x = np.arange(len(scour))
     width = 0.18
-
-    for i, (label, mode) in enumerate(modes.items()):
-        f1_vals = []
-        for s in scour:
-            sd = s / 8.0  # D = 8m
-            f1_s = f1_a * (1 - 0.059 * sd**1.5) if sd > 0 else f1_a
-            if mode == 'stiffness_6x6':
-                f1_s *= 0.87  # SSI reduction
-            f1_vals.append(f1_s)
+    mode_order = [
+        ("fixed", "A (Fixed)"),
+        ("stiffness_6x6", "B (6x6)"),
+        ("distributed_bnwf", "C (BNWF)"),
+        ("dissipation_weighted", "D (Dissipation)"),
+    ]
+    for i, (mode, label) in enumerate(mode_order):
+        sub = df[df["mode"] == mode].sort_values("scour_m")
+        if sub.empty:
+            continue
+        f1_vals = [
+            float(sub[sub["scour_m"] == float(s)]["f1_Hz"].iloc[0])
+            if (sub["scour_m"] == float(s)).any() else np.nan
+            for s in scour
+        ]
         ax.bar(x + i * width, f1_vals, width, label=label)
-
-    # Mode C and D (from real data)
-    f1_c = [0.261, 0.258, 0.252, 0.244, 0.233]
-    f1_d = [0.244, 0.241, 0.236, 0.228, 0.218]
-    ax.bar(x + 2 * width, f1_c, width, label='C (BNWF)', color='green')
-    ax.bar(x + 3 * width, f1_d, width, label='D (Dissipation)', color='red')
 
     ax.set_xlabel('Scour Depth (m)', fontsize=12)
     ax.set_ylabel('f$_1$ (Hz)', fontsize=12)
@@ -297,26 +331,48 @@ def fig_dnv_frequency_band() -> str:
 # ================================================================
 
 def fig_scour_continuous() -> str:
-    """Continuous f1 vs S/D curve with field data overlay."""
+    """Continuous f1 vs S/D curve with field data overlay.
+
+    2026-04-20 correction: the previous version of this figure synthesised
+    "centrifuge 70 g 22-case" scatter by adding ``np.random.normal(0,
+    0.003)`` noise to the Op³ power-law prediction and labelled the
+    result as experimental data. That was fabrication and has been
+    removed; the figure now shows only the Op³ empirical scaling curve
+    and the design-target baseline. To reintroduce centrifuge overlays
+    the caller must supply a real (S/D, f1_Hz) CSV via the
+    ``OP3_CENTRIFUGE_CSV`` environment variable or pass one explicitly.
+
+    The ``f1 = f_base * (1 - 0.059 * (S/D)^1.5)`` power law itself is
+    an empirical scaling observed in Op³ sweeps; the exponent (1.5) and
+    coefficient (0.059) should be treated as fitted-to-own-data until a
+    peer-reviewed calibration is published.
+    """
+    import os as _os
+    from op3.field_reference import field_reference_freq
+
     S_D = np.linspace(0, 0.6, 100)
-    f1_base = 0.244  # Hz (field)
+    f1_base, f_label = field_reference_freq(prefer="stiff")
+    f1_op3 = f1_base * (1 - 0.059 * S_D ** 1.5)
 
-    # Op3 power law
-    f1_op3 = f1_base * (1 - 0.059 * S_D**1.5)
-
-    # Centrifuge data points (22-case)
-    S_D_centrifuge = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
-    f1_centrifuge = [f1_base * (1 - 0.059 * s**1.5) * (1 + np.random.normal(0, 0.003))
-                     for s in S_D_centrifuge]
+    centrifuge_csv = _os.environ.get("OP3_CENTRIFUGE_CSV")
+    centrifuge_points = None
+    if centrifuge_csv and Path(centrifuge_csv).exists():
+        import pandas as _pd
+        _df = _pd.read_csv(centrifuge_csv)
+        if {"S_over_D", "f1_Hz"}.issubset(_df.columns):
+            centrifuge_points = (
+                _df["S_over_D"].to_numpy(),
+                _df["f1_Hz"].to_numpy(),
+            )
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
-
-    # Panel (a): frequency
-    ax1.plot(S_D, f1_op3, 'b-', linewidth=2.5, label='Op3 power law')
-    ax1.plot(S_D_centrifuge, f1_centrifuge, 'ro', markersize=8,
-             label='Centrifuge 70g (22 cases)')
+    ax1.plot(S_D, f1_op3, 'b-', linewidth=2.5,
+             label="Op³ empirical scaling (unvalidated fit)")
+    if centrifuge_points is not None:
+        ax1.plot(centrifuge_points[0], centrifuge_points[1], 'ro',
+                 markersize=8, label=f'Centrifuge (from {Path(centrifuge_csv).name})')
     ax1.axhline(f1_base, color='green', linestyle='--', alpha=0.5,
-                label=f'Field measured ({f1_base} Hz)')
+                label=f_label)
     ax1.fill_between(S_D, f1_op3 * 0.97, f1_op3 * 1.03, alpha=0.1,
                      color='blue', label='$\\pm$3% uncertainty')
     ax1.set_xlabel('Scour Depth S/D', fontsize=12)

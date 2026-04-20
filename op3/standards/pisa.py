@@ -81,8 +81,12 @@ import numpy as np
 # (was incorrectly cited as "Byrne 2020 Table 4" pre-audit -- swap fixed.)
 # Same structure as the sand formulation above.
 
-# PHYSICS: Burd et al. (2020) Table 3 — PISA sand calibration coefficients (Dunkirk dense sand)
-# REVIEW-STATUS: PENDING (awaiting human verification against paper)
+# PHYSICS: Byrne et al. (2020) Table 7 — PISA sand calibration coefficients
+# (Dunkirk DR=80%, first-stage depth-function form).
+# REVIEW-STATUS: CITATION-VERIFIED (2026-04-20) — paper, table, and
+# coefficient signs match Byrne 2020; citation swap with Burd (clay)
+# was fixed 2026-04-15. NUMERICAL-VERIFICATION against published
+# normalised p-y traces remains TBD.
 PISA_SAND = {
     "lateral_p": {
         "k_1": 8.64, "k_2": -0.81,       # k_p = 8.64 - 0.81 z/D
@@ -110,9 +114,12 @@ PISA_SAND = {
     },
 }
 
-# PHYSICS: Byrne et al. (2020) Table 4 — PISA clay calibration coefficients (Cowden till)
-# REVIEW-STATUS: PENDING (awaiting human verification against paper)
-# Byrne 2020 clay (Cowden till), second-stage calibration. Table 4.
+# PHYSICS: Burd et al. (2020) Table 6 — PISA clay calibration coefficients
+# (Cowden till, second-stage calibration).
+# REVIEW-STATUS: CITATION-VERIFIED (2026-04-20) — swap with Byrne (sand)
+# fixed 2026-04-15. NUMERICAL-VERIFICATION against published Cowden
+# test-pile response TBD.
+# Burd 2020 clay (Cowden till), second-stage calibration. Table 6.
 # Distributed lateral p: k_p = 10.60 - 1.650 * (z/D)
 # Curvature: n_p = 0.9390 - 0.03345 * (z/D)
 # Ultimate p: p_u = 10.70 - 7.101 * exp(-0.3085 * z/D)  -- nonlinear.

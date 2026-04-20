@@ -556,7 +556,13 @@ def fig_mode_cd_comparison(output_dir: Path) -> str:
     K_C_total = np.sum(k_C * dz)
 
     alphas = np.linspace(0, 5, 50)
-    f1_mode_C = 0.244  # Hz (field measurement, from SSOT)
+    # f1_mode_C is the anchor frequency for Mode D normalisation. It is
+    # the SITE-A DESIGN-REPORT TARGET (stiff-soil case, 0.24358 Hz),
+    # NOT a field OMA measurement. The previous comment "field measurement
+    # from SSOT" was inaccurate — the field OMA baseline has not yet been
+    # populated in op3/config/site_a.yaml (baselines.field_measured_hz).
+    from op3.field_reference import field_reference_freq
+    f1_mode_C, _freq_label = field_reference_freq(prefer="stiff")
 
     f1_ratios = []
     for a in alphas:
@@ -569,7 +575,7 @@ def fig_mode_cd_comparison(output_dir: Path) -> str:
 
     ax2.plot(alphas, f1_D, 'b-', linewidth=2.5, label='Mode D prediction')
     ax2.axhline(f1_mode_C, color='green', linewidth=2, linestyle='--',
-                label=f'Field measured ({f1_mode_C} Hz)')
+                label=_freq_label)
 
     # Mark specific alpha values
     for a in alpha_values:

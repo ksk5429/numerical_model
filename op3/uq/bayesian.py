@@ -74,7 +74,17 @@ def grid_bayesian_calibration(
         Prior PDF over the same grid (un-normalised is fine). If None,
         a uniform prior is used.
     """
+    import warnings as _warnings
     if prior is None:
+        _warnings.warn(
+            "grid_bayesian_calibration called without a prior — using a "
+            "UNIFORM prior over the supplied grid. This is rarely the "
+            "right choice for physical parameters; pass an informative "
+            "prior (e.g. log-normal over EI, truncated-normal over scour "
+            "depth) unless you explicitly want a maximum-likelihood "
+            "estimate dressed as a posterior.",
+            stacklevel=2,
+        )
         prior = np.ones_like(grid)
     pred = np.array([forward_model(float(p)) for p in grid])
     lk = np.array([likelihood_fn(float(p)) for p in pred])
@@ -83,6 +93,25 @@ def grid_bayesian_calibration(
     if Z <= 0:
         raise ValueError("posterior unnormalisable: Z = 0")
     post = post_unnorm / Z
+
+    # Multi-modality detector: count local maxima of the posterior. A
+    # 1D grid Bayesian is not reliable for multi-modal posteriors —
+    # secondary modes may fall below the credible interval and go
+    # unreported. Emit a UserWarning if more than one interior local
+    # maximum is detected.
+    if post.size >= 3:
+        interior_peaks = int(
+            np.sum((post[1:-1] > post[:-2]) & (post[1:-1] > post[2:]))
+        )
+        if interior_peaks >= 2:
+            _warnings.warn(
+                f"Posterior is multi-modal ({interior_peaks} interior "
+                "local maxima). 1D grid Bayesian with uniform / simple "
+                "priors may under-report secondary modes. Inspect "
+                "posterior.posterior directly or switch to MCMC for "
+                "multi-modal problems.",
+                stacklevel=2,
+            )
 
     # Cumulative for percentiles
     cdf = np.concatenate([[0.0], np.cumsum(0.5 * (post[1:] + post[:-1])

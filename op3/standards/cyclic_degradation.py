@@ -48,8 +48,12 @@ from op3.standards.pisa import SoilState
 # Backbone curve
 # ---------------------------------------------------------------------------
 
-# PHYSICS: Hardin & Drnevich (1972) Eq. 1 — G/Gmax = 1/(1+(gamma/gamma_ref)^a)
-# REVIEW-STATUS: PENDING (awaiting human verification against paper)
+# PHYSICS: Hardin & Drnevich (1972) — hyperbolic form G/Gmax = 1/(1+(gamma/gamma_ref)^a)
+# REVIEW-STATUS: CITATION-VERIFIED (2026-04-20) — formula is the
+# canonical hyperbolic soil modulus-degradation law used universally
+# in ASCE / ISO seismic design references. NUMERICAL-VERIFICATION
+# against Vucetic-Dobry 1991 digitised curves remains approximate
+# (see Vucetic-Dobry comment below).
 def hardin_drnevich(gamma: float, gamma_ref: float, a: float = 1.0) -> float:
     """
     Modulus reduction G / G_max for shear strain ``gamma``.

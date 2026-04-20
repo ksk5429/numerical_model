@@ -190,14 +190,30 @@ def fig_sensor_overlay(output_dir: Path) -> str:
         with open(bayes_json) as f:
             bayes = json.load(f)
     else:
+        # No real Bayesian posterior supplied. Rather than invent a
+        # gaussian with arbitrary mean/variance, raise a visible
+        # UserWarning and fall back to the SSOT design target so at
+        # least the horizontal axis is honest.
+        import warnings as _warnings
+        from op3.field_reference import field_reference_freq
+        _warnings.warn(
+            "viz_tier3.fig_decision_support called without a real "
+            "Bayesian posterior JSON — the posterior panel will show a "
+            "placeholder Gaussian bump. Re-run with bayes_json pointing "
+            "at PHD/ch7/site_a_bayesian_scour_real_mc.json for real data."
+        )
+        _f1_default, _ = field_reference_freq(prefer="stiff")
         bayes = {
-            "f1_Hz": 0.244,
+            "f1_Hz": _f1_default,
             "sigma_Hz": 0.003,
             "posterior": {"scour_grid": list(np.linspace(0, 5, 100)),
                           "pdf": list(np.exp(-((np.linspace(0, 5, 100) - 1.2)**2) / 0.5))},
+            "provenance": "PLACEHOLDER — not a real MC posterior",
         }
 
-    f1_field = bayes.get("f1_Hz", 0.244)
+    from op3.field_reference import field_reference_freq as _freq
+    _default_hz, _ = _freq(prefer="stiff")
+    f1_field = bayes.get("f1_Hz", _default_hz)
     sigma_f1 = bayes.get("sigma_Hz", 0.003)
 
     fig = plt.figure(figsize=(16, 7))

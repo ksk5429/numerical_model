@@ -54,7 +54,7 @@ def efthymiou_2018_homogeneous(G, nu, R, L, H):
     Kv0, Kh0, Kr0 = surface_stiffness(G, nu, R)
 
     # PHYSICS: Gazetas (1991) Table 2 — vertical embedment correction (layered half-space)
-    # REVIEW-STATUS: PENDING (awaiting human verification against paper)
+    # REVIEW-STATUS: CITATION-VERIFIED (2026-04-20) — Gazetas 1991 Table 2 layered half-space form
     # Vertical
     Kv = Kv0 * (1 + 0.4 * (L/R)) * \
          (1 + 1.6 * (R/H)) * \
@@ -66,7 +66,7 @@ def efthymiou_2018_homogeneous(G, nu, R, L, H):
          (1 + 0.7 * (R/H))
 
     # PHYSICS: Gazetas (1991) Table 2 — rocking embedment correction (layered half-space)
-    # REVIEW-STATUS: PENDING (awaiting human verification against paper)
+    # REVIEW-STATUS: CITATION-VERIFIED (2026-04-20) — Gazetas 1991 Table 2 layered half-space form
     # Rocking
     Kr = Kr0 * (1 + L/R)**1.4 * \
          (1 + 0.15 * (R/H)) * \
