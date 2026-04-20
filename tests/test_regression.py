@@ -79,8 +79,12 @@ class TestGazetasSnapshot:
         assert abs(K[5, 5] - 4.100096e+10) / 4.100096e+10 < RTOL
 
     def test_coupling_K04(self):
+        """Snapshot of Gazetas coupling K[0,4]. Sign flipped 2026-04-20
+        to match the Op^3 unified convention (K[0,4] < 0, K[1,3] > 0).
+        Magnitude is unchanged; only the sign moved."""
         K = gazetas_full_6x6(radius_m=4.0, embedment_m=9.3, G=42e6, nu=0.35)
-        assert abs(K[0, 4] - 5.370202e+09) / 5.370202e+09 < RTOL
+        expected = -5.370202e+09
+        assert abs(K[0, 4] - expected) / abs(expected) < RTOL
 
 
 # ---------------------------------------------------------------------------

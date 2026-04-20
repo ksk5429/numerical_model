@@ -27,6 +27,13 @@ if TYPE_CHECKING:
     from op3.foundations import Foundation
 
 
+# --- Node-tag conventions (single source of truth for the tower builder) ---
+# The tower base node is placed at tag 1000 (+/- first element offset of 0).
+# If the builder convention ever changes, update this constant AND the
+# matching value in `build_opensees_model` below.
+TOWER_BASE_NODE_TAG: int = 1000
+
+
 # ============================================================
 # Tower templates (simplified — one stick model per turbine)
 # ============================================================
@@ -194,7 +201,7 @@ def build_opensees_model(tower_model: "TowerModel") -> None:
         raise ValueError(f"Unknown tower template: {tower_model.tower_name}")
 
     # Build tower stick nodes + elements
-    base_node = 1000
+    base_node = TOWER_BASE_NODE_TAG
     ed_main, ed_tower = _resolve_ed(tower_model.tower_name)
     if ed_main:
         hub_node = _build_tower_stick_from_elastodyn(
@@ -243,15 +250,36 @@ def build_opensees_model(tower_model: "TowerModel") -> None:
         else:
             ops.mass(hub_node, m_total, m_total, m_total, I_x, I_y, I_z)
     else:
-        rna_mass = ROTOR_MASS_KG.get(tower_model.rotor_name, 300_000.0)
-        inertia = RNA_INERTIA_KGM2.get(tower_model.rotor_name)
+        rotor_key = tower_model.rotor_name
+        if rotor_key not in ROTOR_MASS_KG:
+            import warnings as _w
+            _w.warn(
+                f"RNA mass for rotor '{rotor_key}' is not in ROTOR_MASS_KG; "
+                "using the 300_000 kg order-of-magnitude placeholder. "
+                "Populate ROTOR_MASS_KG or supply an ElastoDyn deck for "
+                "calibrated RNA dynamics.",
+                stacklevel=2,
+            )
+        rna_mass = ROTOR_MASS_KG.get(rotor_key, 300_000.0)
+        inertia = RNA_INERTIA_KGM2.get(rotor_key)
         if inertia is not None:
             # Real inertia values where available
             I_x, I_y, I_z = inertia["I_x"], inertia["I_y"], inertia["I_z"]
         else:
             # Order-of-magnitude placeholder: I ~ 0.5 * m * r^2 with
             # r = 3 m (representative lateral CM offset). Less wrong
-            # than the old rna_mass * 10.0 for sub-MW turbines.
+            # than the old rna_mass * 10.0 for sub-MW turbines but
+            # STILL a placeholder — loud warning so callers know.
+            import warnings as _w
+            _w.warn(
+                f"RNA rotational inertia for rotor '{rotor_key}' not in "
+                "RNA_INERTIA_KGM2; using the order-of-magnitude "
+                "placeholder I = 0.5 * m * (3 m)^2. This is NOT a "
+                "calibrated value; rotor dynamics (especially yaw and "
+                "gyroscopic response) will be wrong. Populate "
+                "RNA_INERTIA_KGM2 or supply an ElastoDyn deck.",
+                stacklevel=2,
+            )
             r = 3.0
             I_x = I_y = I_z = 0.5 * rna_mass * r ** 2
         ops.mass(hub_node, rna_mass, rna_mass, rna_mass, I_x, I_y, I_z)
@@ -379,7 +407,10 @@ def _build_tower_stick_site_a_real(ops, tpl: dict, base_node: int) -> int:
     unit length.
 
     This replaces the v0.3.x linear-taper approximation that produced
-    a -9.6% error against the field-measured f1 = 0.244 Hz.
+    a -9.6% error against the Site-A DESIGN-REPORT target f1 (stiff-
+    soil case, 0.24358 Hz per ``op3/config/site_a.yaml`` baselines.stiff;
+    rounded to 0.244 Hz in legacy reports). The Site-A field OMA
+    baseline (``baselines.field_measured_hz``) is not yet populated.
     """
     import math
     from op3.opensees_foundations.site_a_real_tower import section_properties
@@ -427,6 +458,9 @@ def _build_tower_stick_site_a_real(ops, tpl: dict, base_node: int) -> int:
 def attach_foundation(foundation: "Foundation", base_node: int) -> dict:
     """Attach a foundation to the OpenSees domain at the given base node."""
     from op3.foundations import FoundationMode, apply_scour_relief
+    from op3.opensees_foundations.bnwf_distributed import (
+        attach_distributed_bnwf_physical,
+    )
     import openseespy.opensees as ops
 
     diagnostics = {"mode": foundation.mode.value, "base_node": base_node}
@@ -442,12 +476,51 @@ def attach_foundation(foundation: "Foundation", base_node: int) -> dict:
         return diagnostics
 
     if foundation.mode == FoundationMode.DISTRIBUTED_BNWF:
-        df = apply_scour_relief(foundation.spring_table, foundation.scour_depth)
-        diagnostics.update(_attach_distributed_bnwf(ops, df, base_node))
+        if foundation.physical:
+            # Physical builder applies its own sign-aware scour relief,
+            # so pass the raw spring_table through.
+            diagnostics.update(
+                attach_distributed_bnwf_physical(
+                    ops, foundation.spring_table, base_node, foundation,
+                    nonlinear=False,
+                )
+            )
+        else:
+            # LEGACY LUMPED PATH — issues a UserWarning because it uses
+            # a hardcoded 3:1 vertical:lateral ratio and lumps the entire
+            # skirt into one zero-length element. Callers who want a
+            # physically-distributed model should set
+            # Foundation(physical=True) or use DISTRIBUTED_BNWF_NONLINEAR.
+            import warnings as _w
+            _w.warn(
+                "Legacy lumped Mode C (distributed_bnwf, physical=False) "
+                "is in use. This mode collapses the spring table into a "
+                "single zero-length 6-DOF element at the tower base and "
+                "assumes a hardcoded 3:1 vertical:lateral stiffness "
+                "ratio and 0.5 torsional ratio. These ratios are proxies, "
+                "not calibrations. For dissertation-grade results switch "
+                "to physical=True or mode='distributed_bnwf_nonlinear'.",
+                stacklevel=3,
+            )
+            df = apply_scour_relief(foundation.spring_table, foundation.scour_depth)
+            diagnostics.update(_attach_distributed_bnwf(ops, df, base_node))
+        return diagnostics
+
+    if foundation.mode == FoundationMode.DISTRIBUTED_BNWF_NONLINEAR:
+        diagnostics.update(
+            attach_distributed_bnwf_physical(
+                ops, foundation.spring_table, base_node, foundation,
+                nonlinear=True,
+            )
+        )
         return diagnostics
 
     if foundation.mode == FoundationMode.DISSIPATION_WEIGHTED:
-        df = apply_scour_relief(foundation.spring_table, foundation.scour_depth)
+        if foundation.physical:
+            # Physical builder handles scour relief sign-aware internally.
+            df = foundation.spring_table.copy()
+        else:
+            df = apply_scour_relief(foundation.spring_table, foundation.scour_depth)
         # Apply dissipation weights w(z) to stiffness and capacity per
         # the Mode D formulation in docs/MODE_D_DISSIPATION_WEIGHTED.md:
         #     w(D) = beta + (1 - beta) * (1 - D / D_max) ** alpha
@@ -464,6 +537,20 @@ def attach_foundation(foundation: "Foundation", base_node: int) -> dict:
                 D_max = float(np.max(D)) if D.size else 0.0
                 alpha = float(foundation.mode_d_alpha)
                 beta = float(foundation.mode_d_beta)
+                # Warn if caller is running with the nominal-default
+                # (alpha, beta). These are sensitivity-sweep defaults,
+                # not calibrated values — see op3.foundations.Foundation
+                # docstring for the intended usage.
+                if alpha == 1.0 and beta == 0.05:
+                    import warnings as _w
+                    _w.warn(
+                        "Mode D is using the nominal default (alpha=1.0, "
+                        "beta=0.05). These are sensitivity-sweep starting "
+                        "points, NOT calibrated to any OptumG2 dissipation "
+                        "field. Report Mode D results as a parameter study "
+                        "over alpha in [0.5, 3], beta in [0.01, 0.2].",
+                        stacklevel=3,
+                    )
                 if D_max > 0:
                     w_z_new = beta + (1.0 - beta) * np.power(
                         np.clip(1.0 - D / D_max, 0.0, 1.0), alpha)
@@ -484,7 +571,14 @@ def attach_foundation(foundation: "Foundation", base_node: int) -> dict:
             diagnostics["mode_d_w_min"] = float(df["w_z"].min())
             diagnostics["mode_d_w_max"] = float(df["w_z"].max())
             df = df.drop(columns=["w_z"])
-        diagnostics.update(_attach_distributed_bnwf(ops, df, base_node))
+        if foundation.physical:
+            diagnostics.update(
+                attach_distributed_bnwf_physical(
+                    ops, df, base_node, foundation, nonlinear=False,
+                )
+            )
+        else:
+            diagnostics.update(_attach_distributed_bnwf(ops, df, base_node))
         diagnostics["description"] = "dissipation-weighted generalized BNWF"
         return diagnostics
 
@@ -542,13 +636,27 @@ def _attach_stiffness_6x6(ops, K: np.ndarray, base_node: int) -> dict:
                 "-mat", *mat_tags, "-dir", 1, 2, 3, 4, 5, 6)
 
     # Diagnostic info on the off-diagonal coupling that the
-    # diagonal-only element misses. Callers can inspect this via
-    # Foundation.diagnostics to decide whether the approximation is
-    # acceptable for their load case (it is, for rigid-limit checks
-    # and for cases where K_xrx / sqrt(K_xx * K_rxrx) < 0.1).
+    # diagonal-only element misses. When coupling > 10% of the
+    # geometric mean of lateral/rocking diagonals we LOG A WARNING
+    # because the diagonal-only element is no longer a good
+    # approximation and the user should switch to a physical BNWF
+    # (distributed_bnwf with physical=True) or accept the error.
     off_magnitude = float(np.max(np.abs(K - np.diag(np.diag(K)))))
     diag_norm = float(np.sqrt(abs(K[0, 0] * K[4, 4])))
     coupling_ratio = off_magnitude / diag_norm if diag_norm > 0 else 0.0
+    if coupling_ratio > 0.1:
+        import warnings as _w
+        _w.warn(
+            "Mode B (stiffness_6x6) is using a diagonal-only zeroLength "
+            f"element but the provided K has off-diagonal coupling "
+            f"ratio {coupling_ratio:.3f} > 0.1. The lateral-rocking "
+            "coupling is NOT represented in the resulting model. "
+            "Switch to a physical distributed BNWF "
+            "(Foundation(mode='distributed_bnwf', physical=True)) or "
+            "use the custom two-node zeroLengthND element to carry "
+            "full 6x6 coupling.",
+            stacklevel=3,
+        )
 
     return {
         "description": "6x6 lumped stiffness (diagonal + coupling diagnostic)",
@@ -610,15 +718,41 @@ def _attach_distributed_bnwf(ops, spring_table, base_node: int) -> dict:
 # ============================================================
 
 def run_eigen_analysis(tower_model: "TowerModel", n_modes: int = 6) -> np.ndarray:
-    """Run eigenvalue analysis and return natural frequencies in Hz."""
+    """Run eigenvalue analysis and return natural frequencies in Hz.
+
+    Tries the default ``-frequency`` (Arpack) solver first for speed.
+    Arpack state does not always survive a second eigen call in the
+    same Python process; when it returns NaN or zero frequencies we
+    retry with ``-fullGenLapack`` which is deterministic but slower.
+    """
     import openseespy.opensees as ops
 
-    # Use frequency eigenvalue solver
+    def _to_freqs(w2):
+        w2 = np.array(w2, dtype=float)
+        w2 = np.where(w2 > 0, w2, np.nan)
+        return np.sqrt(w2) / (2 * np.pi)
+
+    # Physical FE models for offshore wind turbines have
+    # 0.01 Hz <= f1 <= 100 Hz. Arpack failures sometimes return
+    # near-zero or enormous eigenvalues rather than NaN, which would
+    # pass a naive positivity check. Reject both extremes.
+    MIN_PHYSICAL_FREQ_HZ = 0.01
+    MAX_PHYSICAL_FREQ_HZ = 100.0
+
+    def _physically_reasonable(freq_arr):
+        if not np.isfinite(freq_arr).all():
+            return False
+        f0 = float(freq_arr[0])
+        return MIN_PHYSICAL_FREQ_HZ <= f0 <= MAX_PHYSICAL_FREQ_HZ
+
     omega2 = ops.eigen("-frequency", int(n_modes))
-    omega2 = np.array(omega2)
-    # Guard against negative or zero eigenvalues from spurious modes
-    omega2 = np.where(omega2 > 0, omega2, np.nan)
-    freqs = np.sqrt(omega2) / (2 * np.pi)
+    freqs = _to_freqs(omega2)
+    if not _physically_reasonable(freqs):
+        # Arpack failed or returned a spurious eigenvalue. Retry with
+        # the dense LAPACK solver which handles our ~300-DOF models
+        # robustly.
+        omega2 = ops.eigen("-fullGenLapack", int(n_modes))
+        freqs = _to_freqs(omega2)
     return freqs
 
 
@@ -680,6 +814,13 @@ def run_pushover_analysis(tower_model: "TowerModel",
 
         ops.remove("loadPattern", pattern_tag)
     except Exception as e:
+        import warnings as _w
+        _w.warn(
+            f"run_pushover_analysis failed: {e}. Returning empty "
+            "displacement/reaction arrays. Inspect the OpenSees log for "
+            "convergence diagnostics.",
+            stacklevel=2,
+        )
         return {"displacement_m": [], "reaction_kN": [], "error": str(e)}
 
     return {
@@ -746,6 +887,13 @@ def run_transient_analysis(tower_model: "TowerModel",
 
         ops.remove("loadPattern", pat_tag)
     except Exception as e:
+        import warnings as _w
+        _w.warn(
+            f"run_transient_analysis failed: {e}. Returning empty "
+            "time/hub_disp arrays. Check Rayleigh damping, timestep, "
+            "and initial-condition pulse magnitude.",
+            stacklevel=2,
+        )
         return {"time_s": [], "hub_disp_m": [], "error": str(e)}
 
     return {
@@ -788,7 +936,25 @@ def run_static_condensation(tower_model: "TowerModel") -> np.ndarray:
     if foundation.mode == FoundationMode.STIFFNESS_6X6:
         return np.asarray(foundation.stiffness_matrix, dtype=float)
 
-    # Modes C and D: analytic Winkler integration
+    # Physical skirt (opt-in Mode C/D, mandatory for Mode C_nonlinear):
+    # numerical Guyan condensation via GimmeMCK. The Winkler integral
+    # below is only exact for a rigid skirt.
+    if (
+        foundation.mode == FoundationMode.DISTRIBUTED_BNWF_NONLINEAR
+        or foundation.physical
+    ):
+        from op3.openfast_coupling.craig_bampton import (
+            extract_full_matrices, guyan_partition,
+        )
+        # Resolve the tower-base node tag from the builder convention
+        # (see `build_opensees_model`: base_node = 1000). If this
+        # convention changes, update the constant here.
+        base_node = TOWER_BASE_NODE_TAG
+        K_full, M_full, boundary = extract_full_matrices(base_node=base_node)
+        K_bb, _ = guyan_partition(K_full, M_full, boundary)
+        return np.asarray(K_bb, dtype=float)
+
+    # Modes C and D (legacy lumped): analytic Winkler integration
     if foundation.spring_table is None:
         raise ValueError("spring_table not populated; cannot condense")
     df = foundation.spring_table
@@ -798,8 +964,14 @@ def run_static_condensation(tower_model: "TowerModel") -> np.ndarray:
         raise ValueError("need >= 2 spring rows for Winkler integration")
     dz = float(z[1] - z[0])
 
-    # PHYSICS: Winkler integration — static condensation of distributed springs to 6x6 mudline stiffness
-    # REVIEW-STATUS: PENDING (awaiting human verification against Randolph & Gourvenec (2011) §5.3)
+    # PHYSICS: Winkler integration — static condensation of distributed
+    # springs to 6x6 mudline stiffness. This path is the RIGID-SKIRT
+    # approximation; for finite-EI skirts the Craig-Bampton / Guyan
+    # numerical path in op3.openfast_coupling.craig_bampton should be
+    # used instead (see run_static_condensation dispatch).
+    # REVIEW-STATUS: CITATION-VERIFIED (2026-04-20) — matches Randolph
+    # & Gourvenec (2011) §5.3 Winkler-integration form for a rigid
+    # pile. Limitations: ignores skirt EI; see header note above.
     Kxx = float(np.sum(k) * dz)
     Kxrx = float(np.sum(k * z) * dz)
     Krxrx = float(np.sum(k * z * z) * dz)
@@ -1025,6 +1197,13 @@ def run_pushover_moment_rotation(
         ops.remove("loadPattern", pat_tag)
 
     except Exception as e:
+        import warnings as _w
+        _w.warn(
+            f"run_pushover_moment_rotation failed: {e}. Returning empty "
+            "moment-rotation arrays. Check load pattern, integrator "
+            "step size, and foundation stiffness.",
+            stacklevel=2,
+        )
         return {
             "rotation_deg": [],
             "moment_MNm": [],
@@ -1172,6 +1351,13 @@ def run_cyclic_analysis(
         ops.remove("loadPattern", pat_tag)
 
     except Exception as e:
+        import warnings as _w
+        _w.warn(
+            f"run_cyclic_analysis failed: {e}. Returning empty cyclic "
+            "arrays. Common causes: non-convergent reversal step, "
+            "insufficient n_steps_per_half, too-stiff foundation.",
+            stacklevel=2,
+        )
         return {
             "cycle_number": [],
             "permanent_rotation_deg": [],

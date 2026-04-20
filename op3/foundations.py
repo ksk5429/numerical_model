@@ -60,11 +60,18 @@ import pandas as pd
 
 
 class FoundationMode(str, Enum):
-    """The four Op^3 foundation representations."""
+    """The five Op^3 foundation representations.
+
+    The first four are the original v1.0 fidelity ladder (Modes A-D).
+    ``distributed_bnwf_nonlinear`` (v1.1+) is the blueprint Q1(a) primary:
+    a physically-distributed skirt column with per-depth PySimple1/
+    TzSimple1 backbones.
+    """
     FIXED = "fixed"
     STIFFNESS_6X6 = "stiffness_6x6"
     DISTRIBUTED_BNWF = "distributed_bnwf"
     DISSIPATION_WEIGHTED = "dissipation_weighted"
+    DISTRIBUTED_BNWF_NONLINEAR = "distributed_bnwf_nonlinear"
 
 
 @dataclass
@@ -84,10 +91,53 @@ class Foundation:
     # Dissipation weights (Mode D only)
     dissipation_weights: Optional[pd.DataFrame] = None
     # Mode D weighting parameters: w = beta + (1-beta) * (1 - D/D_max) ** alpha
+    # --- NOT a calibration ---
+    # ``mode_d_alpha`` and ``mode_d_beta`` are SENSITIVITY-SWEEP parameters,
+    # not fitted values. The pair (alpha=1.0, beta=0.05) is a nominal
+    # starting point chosen for dimensional convenience (linear shape
+    # function with a 5% floor so zero-dissipation zones retain numerical
+    # stiffness). Users are expected to run a parameter study over alpha
+    # in [0.5, 3] and beta in [0.01, 0.2] and report sensitivities. See
+    # docs/MODE_D_DISSIPATION_WEIGHTED.md for the intended usage pattern.
+    # Reference calibration against OptumG2 plastic-dissipation fields
+    # remains future work (blueprint Week 11).
     mode_d_alpha: float = 1.0
     mode_d_beta: float = 0.05
     # Scour depth applied at build time
     scour_depth: float = 0.0
+    # --- Physical-skirt geometry knobs (Modes C/D opt-in, C_nonlinear required) ---
+    # Bucket outer diameter at skirt. Defaults to SiteA 4 MW reference (D=8 m).
+    diameter_m: float = 8.0
+    # Skirt embed length below mudline. If None, derived from
+    # max(abs(depth_m)) of the spring table.
+    skirt_length_m: Optional[float] = None
+    # Skirt wall thickness (steel tube).
+    skirt_thickness_m: float = 0.025
+    # Opt-in flag: when True for Mode C / D, build the new physical
+    # distributed-skirt model instead of the legacy lumped zero-length.
+    # DISTRIBUTED_BNWF_NONLINEAR always uses the physical model.
+    physical: bool = False
+    # --- Physical-skirt PROXY knobs ---
+    # The following ratios set base / shaft boundary conditions when an
+    # OptumG2-calibrated base probe / t-z axial probe are not yet
+    # available. Leaving ALL of them at None triggers a UserWarning at
+    # attach time and falls back to the historical defaults below.
+    # When the OptumG2 base probe and t-z axial probe are wired in
+    # (blueprint Week 5) these will become required inputs.
+    #
+    # base_H_stiffness_fraction:  k_H_base / integrated_k_lateral
+    #                             (default 0.1 — rigid-base proxy)
+    # base_V_to_H_ratio:          k_V_base / k_H_base  (default 3.0)
+    # shaft_t_to_p_ratio:         t_ult / p_ult        (default 0.5)
+    # shaft_kz_to_kx_ratio:       k_vertical / k_lateral (default 0.5)
+    # missing_pult_fallback_factor: p_ult = factor * k_ini when p_ult
+    #                             column is absent from the spring table
+    #                             (default 10.0)
+    base_H_stiffness_fraction: Optional[float] = None
+    base_V_to_H_ratio: Optional[float] = None
+    shaft_t_to_p_ratio: Optional[float] = None
+    shaft_kz_to_kx_ratio: Optional[float] = None
+    missing_pult_fallback_factor: Optional[float] = None
     # Provenance: where did the data come from
     source: str = "analytical"
     # Diagnostic info filled at attach time
@@ -134,6 +184,10 @@ def build_foundation(
     scour_depth: float = 0.0,
     mode_d_alpha: float = 1.0,
     mode_d_beta: float = 0.05,
+    diameter_m: float = 8.0,
+    skirt_length_m: Optional[float] = None,
+    skirt_thickness_m: float = 0.025,
+    physical: bool = False,
 ) -> Foundation:
     """Construct a Foundation handle ready for the composer.
 
@@ -176,6 +230,10 @@ def build_foundation(
         scour_depth=scour_depth,
         mode_d_alpha=mode_d_alpha,
         mode_d_beta=mode_d_beta,
+        diameter_m=diameter_m,
+        skirt_length_m=skirt_length_m,
+        skirt_thickness_m=skirt_thickness_m,
+        physical=physical,
     )
 
     if mode_enum == FoundationMode.FIXED:
@@ -214,6 +272,18 @@ def build_foundation(
         foundation.spring_table = df
         foundation.dissipation_weights = pd.read_csv(ogx_dissipation)
         foundation.source = f"spring: {spring_profile}, dissipation: {ogx_dissipation}"
+        return foundation
+
+    if mode_enum == FoundationMode.DISTRIBUTED_BNWF_NONLINEAR:
+        if spring_profile is None:
+            raise ValueError(
+                "Mode distributed_bnwf_nonlinear requires spring_profile argument"
+            )
+        df = pd.read_csv(spring_profile)
+        foundation.spring_table = df
+        # Physical is implicit for the nonlinear mode.
+        foundation.physical = True
+        foundation.source = f"CSV: {spring_profile} (PySimple1/TzSimple1 backbones)"
         return foundation
 
     raise RuntimeError(f"Unreachable — mode {mode_enum} not handled")

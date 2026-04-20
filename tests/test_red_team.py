@@ -301,11 +301,19 @@ class TestCouplingSignsPISA:
                                      soil_profile=_sand_profile())
         assert abs(abs(K[0, 4]) - abs(K[1, 3])) < 1e-6 * abs(K[0, 4])
 
-    def test_gazetas_coupling_same_sign(self):
-        """Gazetas K[0,4] and K[1,3] should both be positive for embedded."""
+    def test_gazetas_coupling_matches_pisa_convention(self):
+        """Gazetas K[0,4] must be negative and K[1,3] positive — same
+        sign convention as PISA and the physical CB extraction.
+
+        Previous version of this test asserted both positive; that was
+        the pre-2026-04-20 opposite convention. The Op^3 convention is
+        now unified across pisa.py, api_rp_2geo.py, and the physical
+        BNWF builder."""
         K = gazetas_full_6x6(radius_m=4.0, embedment_m=9.3, G=42e6, nu=0.35)
-        assert K[0, 4] > 0, "Gazetas K[0,4] should be positive"
-        assert K[1, 3] > 0, "Gazetas K[1,3] should be positive"
+        assert K[0, 4] < 0, f"Gazetas K[0,4] should be negative, got {K[0,4]}"
+        assert K[1, 3] > 0, f"Gazetas K[1,3] should be positive, got {K[1,3]}"
+        # Magnitudes equal by geometric symmetry.
+        assert abs(abs(K[0, 4]) - abs(K[1, 3])) < 1.0
 
 
 # ---------------------------------------------------------------------------

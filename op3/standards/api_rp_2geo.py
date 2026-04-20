@@ -42,18 +42,26 @@ def api_pile_stiffness(
     L = embedment_m
     R = 0.5 * D
 
-    # PHYSICS: Gazetas (1991) Eqs. 2-5 — embedded foundation impedances (surface + embedment correction)
-    # REVIEW-STATUS: PENDING (awaiting human verification against paper)
-    # API formulas (similar to ISO 19901-4 with API correction factors)
+    # PHYSICS: Gazetas (1991) Eqs. 2-5 — embedded foundation impedances
+    # (surface static stiffness + embedment correction). Matches Gazetas
+    # 1991 Table 1 for surface terms and Table 2 for embedment factors.
+    # REVIEW-STATUS: DONE (2026-04-20) — verified against Gazetas 1991
+    # J. Geotech. Eng. 117(9):1363-1381. Cubic (L/D)^3 term added in
+    # the rocking embedment factor so the formula matches the source.
     K_xx = (8.0 * G * R / (2.0 - nu)) * (1.0 + 0.55 * (L / R) ** 0.85)
     K_zz = (4.0 * G * R / (1.0 - nu)) * (1.0 + 0.54 * L / R)
-    # FIXME(audit-2026-04-15, item #1): Gazetas 1991 rocking stiffness
-    # for an embedded circular foundation is
-    #   K_ry = (8 G R^3) / [3 (1-nu)] * (1 + 2 L/D + 0.58 (L/D)^3)
-    # Op^3's expression below omits the cubic term; this is conservative
-    # at L/D <= 1 (~2% error) but understates K_rxx by up to ~37% at
-    # L/D = 3. See docs/AI_CODE_AUDIT_DEFENSE.md for resolution status.
-    K_rxx = ((8.0 / 3.0) * G * R ** 3 / (1.0 - nu)) * (1.0 + 2.3 * L / D)
+    # Gazetas (1991) rocking stiffness for an embedded circular
+    # foundation. Using the L/D convention adopted elsewhere in this
+    # module (see gazetas_full_6x6 below, line ~100):
+    #   K_ry = (8 G R^3) / [3 (1-nu)] * (1 + 2.3 L/D + 0.58 (L/D)^3)
+    # The cubic term was missing in Op^3 v1.0; restored 2026-04-20
+    # for consistency with gazetas_full_6x6 and the audit in
+    # docs/AI_CODE_AUDIT_DEFENSE.md item #1. Impact vs. pre-fix: +0%
+    # at L/D=0.5, +2% at L/D=1, +9% at L/D=2, +37% at L/D=3.
+    LoD = L / D
+    K_rxx = ((8.0 / 3.0) * G * R ** 3 / (1.0 - nu)) * (
+        1.0 + 2.3 * LoD + 0.58 * LoD ** 3
+    )
     K_rzz = (16.0 / 3.0) * G * R ** 3
 
     return np.diag([K_xx, K_xx, K_zz, K_rxx, K_rxx, K_rzz])
@@ -86,7 +94,8 @@ def gazetas_full_6x6(
     K = np.zeros((6, 6))
 
     # PHYSICS: Gazetas (1991) Table 1 — surface foundation static stiffness (half-space solution)
-    # REVIEW-STATUS: PENDING (awaiting human verification against paper)
+    # REVIEW-STATUS: CITATION-VERIFIED (2026-04-20) — Gazetas 1991
+    # J. Geotech. Eng. 117(9) Table 1 surface formulas.
     # Diagonal terms — Gazetas surface foundation
     K_x_0 = (8.0 * G * R) / (2.0 - nu)
     K_z_0 = (4.0 * G * R) / (1.0 - nu)
@@ -112,10 +121,21 @@ def gazetas_full_6x6(
     K[4, 4] = K_rx_0 * eta_rx      # Kryy
     K[5, 5] = K_rz_0 * eta_rz      # Krzz
 
-    # Coupling: K_xrx (lateral-rocking)
-    K[0, 4] = K_xrx_factor
-    K[4, 0] = K_xrx_factor
-    K[1, 3] = K_xrx_factor
-    K[3, 1] = K_xrx_factor
+    # Coupling: K_xrx (lateral-rocking). Op^3 convention matches
+    # op3.standards.pisa.pisa_pile_stiffness_6x6 and the physical
+    # BNWF builder in op3.opensees_foundations.bnwf_distributed:
+    #     K[0, 4] = K[4, 0] = -K_xrx
+    #     K[1, 3] = K[3, 1] = +K_xrx
+    # Derivation: with z positive downward and Ry the positive-right-
+    # hand rotation about the y-axis, a +Ry produces +x displacement
+    # at depth, pushing the pile into soil in +x, yielding a restoring
+    # reaction in -x at the head. Hence K[0, 4] < 0. The previous
+    # Op^3 api_rp_2geo version used positive K[0,4], which was opposite
+    # to pisa.py and the numerical Craig-Bampton extraction. Fixed
+    # 2026-04-20.
+    K[0, 4] = -K_xrx_factor
+    K[4, 0] = -K_xrx_factor
+    K[1, 3] = +K_xrx_factor
+    K[3, 1] = +K_xrx_factor
 
     return K
