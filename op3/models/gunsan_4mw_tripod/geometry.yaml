@@ -1,0 +1,52 @@
+# =============================================================================
+# Gunsan 4.2 MW OWT Tripod -- geometry (public-only)
+# =============================================================================
+# Values below are drawn from Kim 2024 GEOTEC and the ProjA design
+# report values verified in op3/config/site_a.yaml. Proprietary
+# dimensions marked <REDACTED> are loaded at runtime via
+# op3.data_sources when the PHD tree is available.
+# =============================================================================
+
+tripod:
+  n_buckets: 3
+  bucket_diameter_m: 8.0          # D, verified (Kim 2024 LNCE 395, ProjA p.12)
+  bucket_skirt_length_m: 9.3      # L, public estimate (Kim 2024; redacted in SSOT)
+  bucket_skirt_thickness_m: 0.020 # 20 mm, verified (ProjA report)
+
+  # Tripod footprint (symmetric 3-bucket)
+  tripod_radial_distance_m: 11.58   # sqrt(10.029^2 + 5.79^2) per ProjA tripod_input
+  tripod_angular_spacing_deg: 120.0
+
+  # Elevations (MSL = 0)
+  mudline_z_m: -8.2
+  transition_piece_z_m: 23.6        # Tower base at z = +23.6 m above mudline
+
+  # Spine-with-ribs topology (used by PR #5 topology-aware SSI only)
+  num_ribs_per_bucket: 4
+
+tower:
+  template_name: "site_a_rt1_tower"  # Op^3 built-in; uses real 27-segment schedule
+                                     # from PHD/tower_segments when OP3_PHD_ROOT set
+  hub_height_m: 95.0
+  base_elev_above_mudline_m: 31.8    # mudline(-8.2) -> base(23.6) = 31.8 m
+
+rna:
+  # UNISON U136 / 4.2 MW rotor + nacelle.
+  # Total mass 338,000 kg (169 t nacelle + 110.5 t rotor + 58.5 t blades)
+  # per public Unison datasheet.
+  total_mass_kg: 338000.0
+  template_name: "ref_4mw_owt"
+
+ssi_interface:
+  # Scour-dependent head-K CSVs derived from OptumGX simulations.
+  # The legacy ``Scour_Stiffness_Matrix_*.csv`` files are per-depth
+  # spring profiles (scour_depth, node_depth, k_py, p_ult_py, k_tz,
+  # t_ult_tz), NOT pre-condensed 6x6 matrices.
+  #
+  # PR #4 uses a rigid baseline (Stiffness6x6.rigid()) — f1 is an
+  # UPPER BOUND. A topology-aware Tripod SSI (spine-with-ribs)
+  # that consumes these spring profiles lands in PR #5.
+  scour_spring_csv_master: "../../../data/fem_results/Scour_Stiffness_Matrix_Master.csv"
+  scour_spring_csv_smoothed: "../../../data/fem_results/Scour_Stiffness_Matrix_Smoothed.csv"
+  lid_stiffness_csv: "../../../data/fem_results/opensees_lid_stiffness.csv"
+  spring_profile_csv: "../../../data/fem_results/opensees_spring_stiffness.csv"

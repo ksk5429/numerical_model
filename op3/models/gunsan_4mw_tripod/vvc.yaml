@@ -1,0 +1,246 @@
+# =============================================================================
+# Gunsan 4.2 MW OWT Tripod -- V&V&C dossier
+# =============================================================================
+# Status values:
+#   RED     -- metric not yet evaluated or failing acceptance
+#   YELLOW  -- metric passing but provenance incomplete
+#   GREEN   -- metric passing at target accuracy
+# =============================================================================
+
+dossier:
+  model: "gunsan_4mw_tripod"
+  api_version: "v1.1"
+  created: "2026-04-20 (PR #4)"
+  overall_status: "YELLOW"
+  notes: >
+    PR #4 scaffolds the Tripod type + dossier skeleton. Validation
+    against the design-report f1 range [0.24016, 0.24358] Hz requires
+    a tripod-topology-aware SSI (spine-with-ribs port of the legacy
+    v1 physics) which lands in PR #5. PR #4 provides only a rigid-
+    baseline UPPER BOUND (fixed-base f1 ~ 0.317 Hz on the public
+    geometry + built-in site_a_rt1_tower template).
+
+# ---------------------------------------------------------------------------
+# (1) CLASSIFICATION
+# ---------------------------------------------------------------------------
+classification:
+  status: "YELLOW"
+  dnv_a204_level: "M2 (predictive digital twin, once SSI calibrated)"
+  asme_vv40_tier: >
+    Level 3 targeted (decisions rely on synthetic MC database); currently
+    Level 2 (benchmark consistency against centrifuge Jeong 2021).
+  notes: >
+    This is the dissertation centrepiece and targets Level 3 per the
+    blueprint Week 1 classification memo. The jump to Level 3 is
+    conditional on the PR #5 spine-with-ribs SSI landing + field OMA
+    baseline being archived.
+
+# ---------------------------------------------------------------------------
+# (2) CODE VERIFICATION
+# ---------------------------------------------------------------------------
+code_verification:
+  status: "GREEN"
+  items:
+    - name: "Tripod.from_gunsan_4mw_spec returns expected geometry"
+      test: "tests/test_model_gunsan_4mw_tripod.py::TestTripodFactory::test_from_gunsan_4mw_spec"
+      status: "GREEN"
+    - name: "Tripod.from_yaml loads dossier"
+      test: "tests/test_model_gunsan_4mw_tripod.py::TestTripodFactory::test_from_yaml_matches_dossier"
+      status: "GREEN"
+    - name: "Tripod topology_summary + bucket_positions"
+      test: "tests/test_model_gunsan_4mw_tripod.py::TestTripodFactory::test_topology_summary_and_positions"
+      status: "GREEN"
+    - name: "Tripod as_legacy_foundation bridges to composer"
+      test: "tests/test_model_gunsan_4mw_tripod.py::TestComposerIntegration::test_build_tower_model"
+      status: "GREEN"
+
+# ---------------------------------------------------------------------------
+# (3) CALCULATION VERIFICATION
+# ---------------------------------------------------------------------------
+calc_verification:
+  status: "RED"
+  items:
+    - name: "Spine-with-ribs eigen GCI (mesh refinement)"
+      target: "GCI < 5% on f1 from 3 mesh densities"
+      status: "NOT-STARTED"
+      blocker: "Requires PR #5 topology-aware SSI"
+    - name: "SSI K tripod assembly vs single-bucket K (analytical check)"
+      target: "K_tripod_HH / K_bucket_HH == 3 (symmetric)"
+      status: "NOT-STARTED"
+      blocker: "Requires PR #5"
+
+# ---------------------------------------------------------------------------
+# (4) CONCEPTUAL MODEL
+# ---------------------------------------------------------------------------
+conceptual_model:
+  status: "YELLOW"
+  items:
+    - name: "Tripod origin is transition-piece centroid"
+      status: "GREEN"
+    - name: "Bucket positions at 120 symmetric, R = 11.58 m"
+      status: "GREEN"
+    - name: "Mudline at -8.2 m (Gunsan water depth)"
+      status: "GREEN"
+    - name: "Sign convention K[0,4]<0, K[1,3]>0 (inherited from op3)"
+      status: "BLOCKED"
+      blocker: "Rigid SSI is diagonal; off-diagonal sign test needs PR #5 SSI"
+
+# ---------------------------------------------------------------------------
+# (5) INPUT PEDIGREE
+# ---------------------------------------------------------------------------
+input_pedigree:
+  status: "YELLOW"
+  items:
+    - field: "bucket diameter (8.0 m)"
+      source: "ProjA design report + Kim 2024 GEOTEC LNCE 395"
+      status: "GREEN"
+    - field: "skirt length (9.3 m public estimate)"
+      source: "Kim 2024 public value; proprietary refinement via OP3_PHD_ROOT"
+      status: "YELLOW"
+    - field: "tripod radial distance (11.58 m)"
+      source: "ProjA tripod_input.txt: sqrt(10.029^2 + 5.79^2)"
+      status: "GREEN"
+    - field: "design-report f1 (0.24016 / 0.24358 Hz)"
+      source: "ProjA structural calc report via op3/config/site_a.yaml baselines"
+      status: "GREEN"
+    - field: "field OMA baseline"
+      source: "PENDING archival; see site.yaml notes"
+      status: "RED"
+    - field: "soil profile"
+      source: "3-layer public summary of Jeong 2021 Saemangeum"
+      status: "YELLOW"
+
+# ---------------------------------------------------------------------------
+# (6) VALIDATION METRICS
+# ---------------------------------------------------------------------------
+# Two tracks:
+#   - UPPER BOUND (rigid SSI) — PR #4 validation; f1 bounds above 0.317 Hz.
+#   - COUPLED (spine-with-ribs SSI) — PR #5 target; f1 in [0.240, 0.244].
+# ---------------------------------------------------------------------------
+validation:
+  status: "YELLOW"
+  metrics:
+    - name: "f1_Hz_rigid_upper_bound"
+      description: "First fore-aft f1, rigid Stiffness6x6 SSI, tripod + tower + RNA"
+      reference_value: 0.317
+      reference_source: >
+        Op^3 built-in: nrel_5mw_baseline-style RNA on site_a_rt1_tower
+        with fixed-base gives f1 = 0.317 Hz. This is the UPPER BOUND
+        only (true Gunsan f1 with SSI is 0.240-0.244 Hz).
+      acceptance_tolerance_pct: 3.0
+      current_value: 0.317
+      current_error_pct: 0.0
+      test: "tests/test_model_gunsan_4mw_tripod.py::TestValidationEigen::test_f1_rigid_upper_bound"
+      status: "GREEN"
+      notes: "Upper-bound sanity check; not a validation against real Gunsan f1."
+
+    - name: "f1_Hz_below_rigid_with_SSI"
+      description: "Any SSI strategy must give f1 below the rigid upper bound"
+      reference_value: 0.317
+      reference_source: "Physical constraint: adding foundation flexibility can only lower f1"
+      acceptance_tolerance_pct: null
+      test: "tests/test_model_gunsan_4mw_tripod.py::TestValidationEigen::test_SSI_reduces_f1_below_rigid"
+      status: "BLOCKED"
+      blocker: "Requires PR #5 spine-with-ribs SSI to test"
+
+    - name: "f1_Hz_design_report_coupled"
+      description: "First fore-aft f1, spine-with-ribs SSI, vs ProjA design-report targets"
+      reference_value_range: [0.24016, 0.24358]
+      reference_source: "ProjA structural calc (soft / stiff soil envelope)"
+      acceptance_tolerance_pct: 3.0
+      current_value: null
+      status: "BLOCKED"
+      blocker: "PR #5 target. Requires port of legacy v1 spine-with-ribs physics."
+
+    - name: "centrifuge_scour_sensitivity"
+      description: "Normalised f_n/f_n0 vs S/D matches Jeong 2021 T1/T2/T3"
+      reference_source: "Jeong 2021 Wind Energy 24(5):515-529"
+      acceptance_tolerance_pct: 5.0
+      status: "BLOCKED"
+      blocker: "Requires scour-swept SSI (PR #5 with Scour_Stiffness_Matrix_Master.csv)"
+
+    - name: "field_oma_baseline"
+      description: "First fore-aft f1 matches archived OMA baseline"
+      reference_source: "PENDING archival (op3/config/site_a.yaml baselines.field_measured_hz)"
+      status: "PENDING-DATA"
+
+# ---------------------------------------------------------------------------
+# (7) SENSITIVITY
+# ---------------------------------------------------------------------------
+sensitivity:
+  status: "RED"
+  items:
+    - name: "Sobol on (phi, E_50, scour_depth, gamma, wind_wave_params)"
+      target: "12-parameter sweep per blueprint Week 11"
+      status: "NOT-STARTED"
+
+# ---------------------------------------------------------------------------
+# (8) APPLICABILITY
+# ---------------------------------------------------------------------------
+applicability:
+  status: "GREEN"
+  envelope:
+    water_depth_m_range: [5.0, 20.0]
+    bucket_diameter_m_range: [4.0, 12.0]
+    skirt_aspect_ratio_LD_range: [0.3, 2.0]
+  notes: "Within centrifuge-validated Saemangeum sand envelope."
+
+# ---------------------------------------------------------------------------
+# (9) STANDARDS
+# ---------------------------------------------------------------------------
+standards:
+  status: "RED"
+  items:
+    - standard: "DNV-ST-0126 (2024)"
+      section: "§9 SSI + §13 scour"
+      status: "NOT-STARTED"
+    - standard: "IEC 61400-3-1:2019"
+      section: "DLC 1.2, 1.6, 6.1"
+      status: "NOT-STARTED"
+    - standard: "DNV-RP-C212"
+      section: "p-y cyclic degradation"
+      status: "NOT-STARTED"
+
+# ---------------------------------------------------------------------------
+# KNOWN LIMITATIONS
+# ---------------------------------------------------------------------------
+limitations:
+  - id: "head_stiffness_is_rigid_upper_bound_only"
+    severity: "HIGH"
+    description: >
+      PR #4 ships only the rigid Stiffness6x6 SSI baseline. Real
+      Gunsan f1 (0.240-0.244 Hz design-report) requires foundation
+      flexibility that the rigid SSI cannot represent.
+    future_fix: >
+      PR #5 ports the legacy spine-with-ribs topology from
+      docs/manuscripts/current/ch4_1_optumgx_opensees_revised/
+      2_opensees_models/opensees_spine_ribs_scour_validation_v1.py
+      into a topology-aware TripodSpineRibs SSI strategy. That
+      strategy will read per-depth springs from
+      data/fem_results/Scour_Stiffness_Matrix_Master.csv + lid
+      stiffness from opensees_lid_stiffness.csv + tip QzSimple1
+      from the OptumGX tip parameters (via SSOT).
+    blocks_metrics:
+      - f1_Hz_design_report_coupled
+      - f1_Hz_below_rigid_with_SSI
+      - centrifuge_scour_sensitivity
+
+  - id: "field_oma_baseline_pending"
+    severity: "MEDIUM"
+    description: >
+      The design-report targets (0.24016 / 0.24358 Hz) serve as the
+      primary validation reference until the field OMA record is
+      archived. Claims labelled "field measured" in legacy Op^3
+      code refer to the rounded design-report mean (0.244 Hz), not
+      an OMA measurement — fixed by op3/field_reference.py.
+    future_fix: >
+      Populate op3/config/site_a.yaml baselines.field_measured_hz
+      and rebuild the dossier to flip f1_Hz_oma_baseline to GREEN.
+
+  - id: "proprietary_skirt_length"
+    severity: "LOW"
+    description: >
+      bucket_skirt_length_m = 9.3 in geometry.yaml is a PUBLIC
+      ESTIMATE from Kim 2024. The authoritative value is in the
+      ProjA design report and is loaded at runtime via OP3_PHD_ROOT.
+    future_fix: "Document via_PHD_ROOT override in tests + build.py."

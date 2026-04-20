@@ -1,0 +1,49 @@
+# =============================================================================
+# Gunsan 4.2 MW OWT Tripod -- soil profile (public summary)
+# =============================================================================
+# Saemangeum silty sand, ~8 m water depth. Full CPT profile with
+# layered Gs, phi, su is proprietary (KEPCO field survey). The
+# public summary below tracks the Kim 2024 / Jeong 2021 centrifuge-
+# test soil characterisation.
+#
+# For the PR #5 topology-aware Tripod SSI, the per-depth spring
+# profile from
+#   data/fem_results/Scour_Stiffness_Matrix_Master.csv
+# (op3-public) encodes the OptumGX-derived k_py and k_tz at each
+# depth station, which is the working path for calibrated analyses.
+# =============================================================================
+
+layers:
+  - depth_m: 0.0
+    G_Pa: 32.0e6        # Saemangeum loose-to-medium sand at mudline
+    su_or_phi: 32.0     # phi' estimate (Jeong 2021 T2 loose case)
+    soil_type: "silty_sand"
+    notes: "Upper silty sand, phi' approx 32 deg (Saemangeum)"
+
+  - depth_m: 4.5
+    G_Pa: 50.0e6
+    su_or_phi: 34.0
+    soil_type: "silty_sand"
+    notes: "Medium-dense sand"
+
+  - depth_m: 9.0
+    G_Pa: 75.0e6
+    su_or_phi: 35.0
+    soil_type: "silty_sand"
+    notes: "Denser sand at skirt tip (9.3 m)"
+
+provenance:
+  status: "PUBLIC-SUMMARY"
+  primary_source: >
+    Jeong, Y.-H., Ko, K.-W., Kim, D.-S., Kim, J.-H. (2021) "Centrifuge
+    modelling of behaviour of offshore wind turbine with tripod
+    suction bucket foundation under scour conditions." Wind Energy
+    24(5), 515-529. doi:10.1002/we.2586
+  corroborating_sources:
+    - "Barari, A. et al. (2021). HSsmall / UBC3D-PLM analysis of Saemangeum sand. Applied Ocean Research. doi:10.1016/j.apor.2021.102864"
+    - "Kim, K.-S. et al. (2024). Scour x tripod LNCE 395 (GEOTEC 2023)."
+  comments: >
+    This public summary is a 3-layer abstraction of the full CPT.
+    For calibrated analyses prefer the PR #5 path that reads
+    per-depth springs from data/fem_results/Scour_Stiffness_Matrix_*.csv
+    (derived from OptumGX runs in F:/FEM/OPTUM).

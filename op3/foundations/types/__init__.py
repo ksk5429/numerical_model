@@ -12,7 +12,7 @@ Status
 +================+============+=========================================+
 | Monopile       | skeleton   | nrel_5mw_oc3_monopile (YELLOW, PR #2)   |
 | Jacket         | skeleton   | nrel_5mw_oc4_jacket (YELLOW, PR #3)     |
-| Tripod         | planned    | gunsan_4mw_tripod                       |
+| Tripod         | skeleton   | gunsan_4mw_tripod (YELLOW, PR #4)       |
 | SuctionBucket  | planned    | —                                       |
 +----------------+------------+-----------------------------------------+
 
@@ -25,8 +25,10 @@ from __future__ import annotations
 
 from op3.foundations.types.jacket import Jacket
 from op3.foundations.types.monopile import Monopile
+from op3.foundations.types.tripod import Tripod
 
 __all__ = [
     "Jacket",
     "Monopile",
+    "Tripod",
 ]

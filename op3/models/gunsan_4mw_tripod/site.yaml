@@ -1,0 +1,95 @@
+# =============================================================================
+# Gunsan 4.2 MW OWT Tripod Suction Bucket -- site metadata
+# =============================================================================
+# KEPCO demonstration site at Gunsan, South Korea. 4.2 MW turbine
+# (UNISON U136, rotor D=136 m, hub height 95 m) on a 3-bucket
+# tripod suction-caisson foundation. Designed by Hyundai E&C + MMB,
+# operated by KEPCO Research Institute (KEPRI).
+#
+# PRIVACY: proprietary dimensions (skirt length, per-segment tower
+# wall schedule, nacelle mass, SubDyn 6x6 K) are NOT included in
+# this dossier. They are loaded at runtime from op3.data_sources
+# when the OP3_PHD_ROOT env var points at the author's PHD data
+# tree (F:/TREE_OF_THOUGHT/PHD by default).
+#
+# This dossier therefore has two status tracks:
+#   1. PUBLIC path  -- geometry from published Kim 2024 / Kim 2025,
+#                      rigid-base SSI; f1 is an UPPER BOUND only
+#                      (fixed-base baseline).
+#   2. PRIVATE path -- with OP3_PHD_ROOT set, loads the SSOT tower
+#                      segments + proprietary skirt length; enables
+#                      full-coupled SSI validation in PR #5.
+# =============================================================================
+
+site:
+  id: "GUNSAN-4MW-TRIPOD"
+  label: "Gunsan 4.2 MW OWT (UNISON U136, KEPCO Demo)"
+  description: >
+    Gunsan Offshore Demonstration Wind Farm unit. Tripod suction-
+    bucket foundation in Saemangeum silty sand, ~8 m water depth.
+    Structural drawings, BOM, OMA, and CPT data provided by
+    KEPRI/MMB/Unison under the KEPCO research agreement.
+
+  water_depth_m: 8.2
+  msl_z_m: 0.0
+  mudline_z_m: -8.2
+  tower_base_z_m: 23.6   # Tower base elevation above mudline (transition piece)
+
+  coordinates:
+    # Site coordinates are proprietary; only the site identifier is
+    # released publicly.
+    note: "Site coordinates NOT released."
+
+  location:
+    country: "Republic of Korea"
+    region: "Saemangeum / Gunsan offshore"
+    water_body: "Yellow Sea"
+
+  operational_history:
+    commissioning: "2017-2019 (KEPCO Research Institute demo)"
+    monitoring: "Accelerometer + strain gauge (WTOW-Tbt-ZVib / NSBnd, 1500 Hz / 500 Hz)"
+    field_oma_baseline_populated: false
+    notes: >
+      Field OMA baseline is NOT populated in the public dossier as
+      of PR #4. Design-report target frequencies below serve as the
+      primary reference until the OMA record is archived.
+
+references:
+  # User's own prior work (PUBLIC, peer-reviewed):
+  - citation: "Kim, K.-S. et al. (2024). Effect of Scour Depth on Natural Frequency of Offshore Wind Turbine with Tripod Suction Bucket Foundation. Springer LNCE 395 (GEOTEC 2023), 2745-2758."
+    doi: "10.1007/978-981-99-9222-5_186"
+    used_for: "Tripod geometry, scour sensitivity benchmark"
+  - citation: "Kim, K.-S., Oh, J.-S., Kim, S.-R., Kim, D.-J. (2025). Investigating scour impacts on natural frequency changes and sensitivity in offshore wind turbine with tripod suction bucket foundations in sand. Ocean Engineering."
+    doi: "pending assignment"
+    used_for: "Companion paper; f1 range and scour power-law fit"
+  # Upstream validation data (PUBLIC):
+  - citation: "Jeong, Y.-H., Ko, K.-W., Kim, D.-S., Kim, J.-H. (2021). Centrifuge modelling of behaviour of offshore wind turbine with tripod suction bucket foundation under scour conditions. Wind Energy 24(5), 515-529."
+    doi: "10.1002/we.2586"
+    used_for: "KAIST centrifuge benchmark on Saemangeum sand"
+  - citation: "Barari, A. et al. (2021). HSsmall / UBC3D-PLM analysis of Saemangeum sand under cyclic loading. Applied Ocean Research."
+    doi: "10.1016/j.apor.2021.102864"
+    used_for: "Soil constitutive calibration"
+
+design_report_targets:
+  # From the ProjA structural calculation report (proprietary) via
+  # op3/config/site_a.yaml baselines.{soft,stiff}. These are the
+  # targets for SSI-calibrated validation in PR #5.
+  f1_soft_soil_Hz: 0.24016
+  f1_stiff_soil_Hz: 0.24358
+  notes: >
+    These are DESIGN-REPORT targets, NOT field OMA measurements.
+    The field-measured baseline is pending archival. Any caption
+    or paper that labels these as "field measured" is incorrect
+    (see op3/field_reference.py for the SSOT).
+
+private_data_pointers:
+  # These paths are resolved at runtime via op3.data_sources.get_phd_path.
+  # They are NOT bundled in the public repo.
+  ssot_file: "PHD/SSOT_REAL_FINAL.txt"
+  parameters_xlsx: "PHD/OpenSees_Master_Parameters_Global.xlsx"
+  tower_segments_csv: "PHD/tower_segments.csv"
+  optumgx_root: "F:/FEM/OPTUM"
+  notes: >
+    If OP3_PHD_ROOT is unset or the files are absent, the dossier
+    falls back to the public geometry + rigid SSI baseline and
+    emits a op3.data_sources UserWarning.
