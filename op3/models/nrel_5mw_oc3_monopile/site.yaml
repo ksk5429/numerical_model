@@ -1,0 +1,37 @@
+# =============================================================================
+# NREL 5MW OC3 Phase I Monopile -- site metadata
+# =============================================================================
+# Provenance: OC3 Phase I definition (Jonkman et al. 2010,
+# NREL/TP-500-47535), IEA Wind OC3 participant benchmark.
+#
+# This dossier is the **skeleton** established in PR #1 for the new
+# op3.foundations.types API. V&V metrics in vvc.yaml are initially RED;
+# they flip to GREEN as validation scripts reproduce published
+# reference values.
+# =============================================================================
+
+site:
+  id: "NREL-5MW-OC3-MONOPILE"
+  label: "NREL 5MW OC3 Phase I (Jonkman 2010)"
+  description: >
+    IEA Wind OC3 Phase I monopile benchmark. 20 m water depth, 5 MW
+    turbine on a steel monopile with simplified soil response (apparent
+    fixity originally, layered soil in later phases). Used here as the
+    smallest well-published monopile reference for the
+    op3.foundations.types.Monopile skeleton.
+
+  water_depth_m: 20.0
+  msl_z_m: 0.0          # Mean sea level reference
+  mudline_z_m: -20.0    # Seabed elevation
+  tower_base_z_m: 10.0  # Top of monopile / bottom of tower
+
+  coordinates:
+    note: "Reference turbine; no physical coordinates."
+
+references:
+  - citation: "Jonkman, J. (2010). Definition of the Floating System for Phase IV of OC3. NREL/TP-500-47535."
+    doi: "10.2172/979456"
+    used_for: "Monopile geometry, tower definition"
+  - citation: "Passon, P. et al. (2008). OC3 - Benchmark Exercise of Aero-Elastic Offshore Wind Turbine Codes. J. Phys. Conf. Ser. 75."
+    doi: "10.1088/1742-6596/75/1/012071"
+    used_for: "First fore-aft natural frequency reference"

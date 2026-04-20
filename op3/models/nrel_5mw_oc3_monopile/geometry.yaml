@@ -1,0 +1,30 @@
+# =============================================================================
+# NREL 5MW OC3 Phase I Monopile -- geometry
+# =============================================================================
+# Provenance: Jonkman 2010 NREL/TP-500-47535 monopile definition.
+# Simplified: constant diameter and thickness (OC3 Phase I uses a
+# uniform tube; later phases introduced stepped walls).
+# =============================================================================
+
+monopile:
+  diameter_m: 6.0          # Outer diameter
+  wall_thickness_m: 0.060  # Constant wall thickness
+  embed_length_m: 36.0     # Depth below mudline
+  stub_length_m: 30.0      # Above-mudline protrusion
+                           #   = water_depth (20) + stub above MSL (10)
+  material:
+    E_Pa: 2.1e11
+    G_Pa: 8.1e10
+    rho_kg_m3: 8500.0      # Effective density incl. secondary steel
+
+tower:
+  # OC3 uses the NREL 5MW offshore tower variant; loaded at runtime
+  # by op3.composer via tower='nrel_5mw_oc3_tower'.
+  template_name: "nrel_5mw_oc3_tower"
+  hub_height_m: 90.0
+  base_elev_above_mudline_m: 30.0   # tower base at z = +10 m above MSL
+
+rna:
+  # Rotor-Nacelle Assembly: NREL 5MW baseline.
+  total_mass_kg: 350000.0   # 110 000 rotor + 240 000 nacelle
+  template_name: "nrel_5mw_baseline"

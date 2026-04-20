@@ -1,0 +1,163 @@
+# =============================================================================
+# NREL 5MW OC3 Monopile -- Verification / Validation / Calibration dossier
+# =============================================================================
+# Status values:
+#   RED     -- metric not yet evaluated or failing acceptance threshold
+#   YELLOW  -- metric passing but provenance / uncertainty incomplete
+#   GREEN   -- metric passing at target accuracy with documented provenance
+#
+# A dossier is GREEN overall only when every metric is GREEN. Until then
+# the model must NOT be used in dissertation results chapters.
+# =============================================================================
+
+dossier:
+  model: "nrel_5mw_oc3_monopile"
+  api_version: "v1.1"
+  created: "2026-04-20"
+  overall_status: "RED"
+  notes: >
+    PR #1 scaffolds the new op3.foundations.types API. Acceptance
+    metrics below are placeholders for the validation work that lands
+    in PR #2 (PISA calibration) and PR #3 (physical-BNWF comparison).
+
+# ---------------------------------------------------------------------------
+# (1) CLASSIFICATION -- DNV-RP-A204 / ASME V&V 40
+# ---------------------------------------------------------------------------
+classification:
+  status: "YELLOW"
+  dnv_a204_level: "M1 (reference digital representation)"
+  asme_vv40_tier: "Level 2 (published-benchmark validation)"
+  notes: "Documented in PR #1; no independent reviewer sign-off yet."
+
+# ---------------------------------------------------------------------------
+# (2) CODE VERIFICATION -- MMS / unit tests
+# ---------------------------------------------------------------------------
+code_verification:
+  status: "RED"
+  items:
+    - name: "Monopile.from_oc3_spec returns expected geometry"
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::test_from_oc3_spec"
+      status: "GREEN"
+    - name: "Monopile as_legacy_foundation produces STIFFNESS_6X6"
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::test_as_legacy_foundation"
+      status: "GREEN"
+    - name: "Composer eigen pipeline accepts Monopile-derived Foundation"
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::test_compose_tower_model_accepts_monopile"
+      status: "GREEN"
+
+# ---------------------------------------------------------------------------
+# (3) CALCULATION VERIFICATION -- grid convergence / tolerances
+# ---------------------------------------------------------------------------
+calc_verification:
+  status: "RED"
+  items:
+    - name: "PISA n_segments GCI"
+      target: "GCI < 5% on f1 from n_segments in {25, 50, 100}"
+      status: "NOT-STARTED"
+    - name: "Eigen solver tolerance"
+      target: "fullGenLapack vs Arpack agreement within 0.5% on f1..f3"
+      status: "NOT-STARTED"
+
+# ---------------------------------------------------------------------------
+# (4) CONCEPTUAL MODEL -- interface conventions, boundary conditions
+# ---------------------------------------------------------------------------
+conceptual_model:
+  status: "RED"
+  items:
+    - name: "Head stiffness sign convention matches Op^3 unified (K[0,4]<0, K[1,3]>0)"
+      status: "NOT-STARTED"
+    - name: "Mass / RNA offset consistent with NREL 5MW baseline"
+      status: "NOT-STARTED"
+
+# ---------------------------------------------------------------------------
+# (5) INPUT PEDIGREE
+# ---------------------------------------------------------------------------
+input_pedigree:
+  status: "YELLOW"
+  items:
+    - field: "monopile geometry"
+      source: "Jonkman 2010 NREL/TP-500-47535"
+      status: "GREEN"
+    - field: "soil profile"
+      source: "PLACEHOLDER (see soil.yaml)"
+      status: "RED"
+
+# ---------------------------------------------------------------------------
+# (6) VALIDATION METRICS
+# ---------------------------------------------------------------------------
+# Published reference values the model must reproduce within the given
+# acceptance tolerance. The ``current_value`` field is populated by
+# the validation script in tests/ and reviewed by a human before a
+# metric is marked GREEN.
+# ---------------------------------------------------------------------------
+validation:
+  status: "YELLOW"
+  metrics:
+    - name: "f1_Hz_oc3_coupled"
+      description: "First fore-aft natural frequency, rigid SSI, OC3 monopile + tower + RNA"
+      reference_value: 0.276
+      reference_source: "Passon 2008 / OC3 Phase I benchmark"
+      acceptance_tolerance_pct: 5.0
+      current_value: 0.2815
+      current_error_pct: 2.0
+      test: "tests/test_model_nrel_5mw_oc3_monopile.py::test_f1_matches_oc3_phase1_coupled"
+      status: "GREEN"
+      notes: >
+        PR #1: rigid Stiffness6x6 SSI via legacy _attach_stiffness_6x6
+        (ground at origin, tower base at +10 m). PR #2 will tighten
+        the tolerance to 2% after adding a topology-aware interface
+        node at z = +10 m.
+
+    - name: "f1_Hz_fixed_base"
+      description: "First fore-aft natural frequency, tower truly clamped at its base (z=+10m)"
+      reference_value: 0.324
+      reference_source: "NREL 5MW onshore baseline (Jonkman 2009 NREL/TP-500-38060)"
+      acceptance_tolerance_pct: 2.0
+      current_value: null
+      status: "BLOCKED"
+      notes: >
+        Requires SSI that attaches rigidly at the tower-base node
+        (not at origin). Deferred to PR #2.
+
+    - name: "K_head_lateral_N_per_m"
+      description: "Head stiffness K[0,0] from PISA-derived 6x6 on OC3 Phase II/III soil"
+      reference_value: null   # To be computed from published depth-function baseline
+      reference_source: "TBD (PISA Burd 2020 depth-function fit to OC3 soil)"
+      acceptance_tolerance_pct: 10.0
+      current_value: null
+      status: "NOT-STARTED"
+      notes: "Requires real OC3 soil profile (see soil.yaml provenance)."
+
+# ---------------------------------------------------------------------------
+# (7) SENSITIVITY / UNCERTAINTY QUANTIFICATION
+# ---------------------------------------------------------------------------
+sensitivity:
+  status: "RED"
+  items:
+    - name: "Sobol indices on soil G, phi, D, t"
+      target: "sum(S_T) <= 1.1 on f1"
+      status: "NOT-STARTED"
+
+# ---------------------------------------------------------------------------
+# (8) APPLICABILITY ENVELOPE
+# ---------------------------------------------------------------------------
+applicability:
+  status: "GREEN"
+  envelope:
+    diameter_m_range: [4.0, 10.0]
+    embed_length_m_range: [20.0, 50.0]
+    LD_ratio_range: [4.0, 8.0]
+  notes: "Within published monopile-OWT geometry range."
+
+# ---------------------------------------------------------------------------
+# (9) STANDARDS CONFORMANCE
+# ---------------------------------------------------------------------------
+standards:
+  status: "RED"
+  items:
+    - standard: "DNV-ST-0126 (2024)"
+      section: "§9 SSI representation"
+      status: "NOT-STARTED"
+    - standard: "IEC 61400-3-1:2019"
+      section: "DLC 1.2, 1.6, 6.1"
+      status: "NOT-STARTED"

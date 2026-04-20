@@ -1,55 +1,32 @@
 """
-Op^3 foundation module factory.
+LEGACY Op^3 foundation factory (frozen at v1.0).
 
-This module exposes the four OpenSeesPy foundation representations that
-differ in fidelity from "fixed base" (Mode A) to "dissipation-weighted
-generalized BNWF" (Mode D). All four modes share the same tower
-interface, so they can be swapped at runtime with a single flag.
+This module is the original ``op3.foundations`` module moved verbatim
+into a submodule of the new ``op3.foundations`` package. The public
+API (``Foundation``, ``FoundationMode``, ``build_foundation``,
+``apply_scour_relief``, ``foundation_from_pisa``) is preserved for
+backwards compatibility and re-exported by ``op3.foundations.__init__``.
 
-The OpenSeesPy code that actually builds the springs and zero-length
-elements lives in `op3.opensees_foundations.*`. This module is a thin
-factory that picks the right builder based on the mode name.
+A :class:`DeprecationWarning` is emitted when ``build_foundation`` or
+``FoundationMode`` is used, pointing to the new
+:mod:`op3.foundations.types` API (``Monopile``, ``Tripod``, ``Jacket``,
+``SuctionBucket``) introduced in v1.1+. The legacy path will remain
+functional until the next major version bump.
 
-The geotechnical/structural integration is the key contribution here:
-the CSV schema produced by OptumGX (bearing capacity envelopes, contact
-pressures, plastic dissipation fields) maps directly into the spring
-parameters consumed by OpenSeesPy. Each mode uses a different subset of
-this mapping.
+The four original modes (A/B/C/D) represent **SSI fidelity levels**
+(fixed / 6x6 / lumped-BNWF / dissipation-weighted BNWF) — they are
+NOT foundation types. The new API separates the axes:
 
-Mode A (fixed):
-    Does not use any OptumGX data. Fixes the tower base with `fix` on
-    all six DOF.
+    FoundationType (Monopile, Tripod, Jacket, ...) x
+    SSIStrategy   (Fixed, Stiffness6x6, BNWFLumped, BNWFPhysical, CraigBampton)
 
-Mode B (stiffness_6x6):
-    Reads a 6x6 stiffness matrix from CSV and attaches it as a single
-    zeroLength element at the tower base. The matrix is typically
-    derived from OpenSeesPy Mode C or D via static condensation.
-
-Mode C (distributed_bnwf):
-    Reads depth-resolved spring stiffness and ultimate resistance from
-    `opensees_spring_stiffness.csv` (produced by OptumGX) and builds
-    a chain of lateral p-y and vertical t-z springs along the bucket
-    skirt. Applies a stress-correction relief factor for scour.
-
-Mode D (dissipation_weighted):
-    Extends Mode C with a depth-dependent participation factor w(z)
-    derived from the plastic dissipation field at collapse. This is
-    the generalized cavity expansion framework of Appendix A of the
-    dissertation.
-
-Example
--------
-
->>> from op3 import build_foundation
->>> f = build_foundation(
-...     mode='distributed_bnwf',
-...     spring_profile='data/fem_results/opensees_spring_stiffness.csv',
-...     scour_depth=1.5,
-... )
->>> f.attach_to_opensees(base_node=1000)  # called by the composer
+Concrete foundation topologies with their own mass, geometry, and
+coupling interface now live under :mod:`op3.foundations.types`; SSI
+strategies live under :mod:`op3.ssi`.
 """
 from __future__ import annotations
 
+import warnings
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
@@ -60,12 +37,18 @@ import pandas as pd
 
 
 class FoundationMode(str, Enum):
-    """The five Op^3 foundation representations.
+    """The five Op^3 foundation representations (LEGACY, frozen at v1.0).
 
     The first four are the original v1.0 fidelity ladder (Modes A-D).
     ``distributed_bnwf_nonlinear`` (v1.1+) is the blueprint Q1(a) primary:
     a physically-distributed skirt column with per-depth PySimple1/
     TzSimple1 backbones.
+
+    **Deprecation notice (v1.1+):** these values represent SSI fidelity
+    levels, not foundation types. New code should use the type/SSI
+    split under :mod:`op3.foundations.types` and :mod:`op3.ssi`. The
+    legacy ``build_foundation(mode=...)`` path remains functional
+    throughout v1.x.
     """
     FIXED = "fixed"
     STIFFNESS_6X6 = "stiffness_6x6"
@@ -188,14 +171,24 @@ def build_foundation(
     skirt_length_m: Optional[float] = None,
     skirt_thickness_m: float = 0.025,
     physical: bool = False,
+    _suppress_deprecation_warning: bool = False,
 ) -> Foundation:
-    """Construct a Foundation handle ready for the composer.
+    """Construct a Foundation handle ready for the composer (LEGACY API).
+
+    **Deprecated (v1.1+):** use :mod:`op3.foundations.types` and
+    :mod:`op3.ssi` for new code. Example:
+
+    >>> from op3.foundations.types import Monopile
+    >>> from op3.ssi import Stiffness6x6
+    >>> mono = Monopile.from_oc3_spec(soil_profile=...)
+    >>> mono.with_ssi(Stiffness6x6(K=mono.head_stiffness_6x6()))
 
     Parameters
     ----------
     mode : str
         One of 'fixed', 'stiffness_6x6', 'distributed_bnwf',
-        'dissipation_weighted'. Case-insensitive.
+        'dissipation_weighted', 'distributed_bnwf_nonlinear'.
+        Case-insensitive.
     spring_profile : str or Path, optional
         Path to a CSV with columns (depth_m, k_ini_kN_per_m,
         p_ult_kN_per_m, spring_type). Required for Modes C and D.
@@ -211,12 +204,22 @@ def build_foundation(
         resistance scaling.
     scour_depth : float, default 0.0
         Scour depth in meters. Affects Modes B, C, D.
-
-    Returns
-    -------
-    Foundation
-        An opaque handle the composer can attach to an OpenSees model.
+    _suppress_deprecation_warning : bool
+        Internal flag used by ``op3.foundations.types`` adapters to
+        avoid spurious deprecation noise on the back-compat bridge.
     """
+    if not _suppress_deprecation_warning:
+        warnings.warn(
+            "op3.foundations.build_foundation (and FoundationMode) are "
+            "frozen at v1.0 and will be removed in v2.0. Use the new "
+            "type/SSI split: op3.foundations.types.{Monopile,Tripod,"
+            "Jacket,SuctionBucket} + op3.ssi.{Fixed,Stiffness6x6,"
+            "BNWFLumped,BNWFPhysical,CraigBampton}. See "
+            "op3/models/<name>/build.py for reference use.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
     try:
         mode_enum = FoundationMode(mode.lower())
     except ValueError:
@@ -358,4 +361,3 @@ def foundation_from_pisa(
         f"L={embed_length_m} m, {len(soil_profile)} soil layers"
     )
     return foundation
-

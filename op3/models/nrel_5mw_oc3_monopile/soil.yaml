@@ -1,0 +1,39 @@
+# =============================================================================
+# NREL 5MW OC3 Phase I Monopile -- soil profile
+# =============================================================================
+# Provenance: OC3 Phase I did NOT specify soil (apparent-fixity
+# boundary at 4.5 D below mudline). Later OC participants used a
+# representative dense sand profile. The two-layer profile below is a
+# PLACEHOLDER for PISA-strategy development; validation against the
+# apparent-fixity f1 target requires a rigid K matrix, not this soil.
+#
+# When the OC3 Phase II / III soil definition is wired in, update both
+# ``layers`` and the vvc.yaml validation.soil-derived metrics.
+# =============================================================================
+
+layers:
+  - depth_m: 0.0
+    G_Pa: 50.0e6       # Small-strain shear modulus (dense sand proxy)
+    su_or_phi: 35.0    # Friction angle (deg)
+    soil_type: "sand"
+    notes: "placeholder"
+
+  - depth_m: 18.0
+    G_Pa: 120.0e6
+    su_or_phi: 36.0
+    soil_type: "sand"
+    notes: "placeholder"
+
+  - depth_m: 36.0
+    G_Pa: 150.0e6
+    su_or_phi: 36.0
+    soil_type: "sand"
+    notes: "placeholder (skirt-tip layer)"
+
+provenance:
+  status: "PLACEHOLDER"
+  intended_source: "OC3 Phase II / III soil definition (NREL/TP-5000-48191)"
+  comments: >
+    v1.1 PR #1 ships this file so the dossier directory structure is
+    complete. Replace with a cited, validated profile before running
+    the PISA strategy against this model.
