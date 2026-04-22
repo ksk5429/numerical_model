@@ -23,7 +23,7 @@ pyyaml>=6.0
 openseespy>=3.7
 
 # Statistics and simple ML
-scikit-learn>=1.3
+scikit-learn>=1.8.0
 
 # Bibliography validation (for CI)
 pybtex>=0.24
